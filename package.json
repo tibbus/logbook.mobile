@@ -1,0 +1,28 @@
+{
+  "name": "MyCarBioApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "moment": "^2.13.0",
+    "ramda": "^0.21.0",
+    "react": "^0.14.8",
+    "react-native": "^0.23.0",
+    "react-native-router-flux": "^3.22.8",
+    "react-native-vector-icons": "^1.3.4",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.1",
+    "redux-thunk": "^2.0.1",
+    "underscore.string": "^3.3.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-decorators": "^6.6.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-react-native": "^1.5.7"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
