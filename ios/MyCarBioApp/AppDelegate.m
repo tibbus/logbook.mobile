@@ -11,20 +11,7 @@
 
 #import "RCTRootView.h"
 
-//  AppDelegate.m
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-
 @implementation AppDelegate
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                                openURL:url
-                                                      sourceApplication:sourceApplication
-                                                             annotation:annotation
-                  ];
-  // Add any custom logic here.
-  return handled;
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -60,8 +47,6 @@
                                                       moduleName:@"MyCarBioApp"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
@@ -70,6 +55,5 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
-
 
 @end
