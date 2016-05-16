@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 })
 
 @connect(stateToProps)
-export class EventEntrySnapshot extends Component {
+export class StatusEntrySnapshot extends Component {
 
   render () {
     const { user } = this.props

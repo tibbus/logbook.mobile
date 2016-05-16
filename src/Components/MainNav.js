@@ -2,7 +2,9 @@ import React, {
   Component,
   Navigator
 } from 'react-native'
-import { Home, MainNavBar, TimelineForm } from './'
+import { MainNavBar } from './'
+import { Home } from './Scenes'
+import { CarForm } from './Cars'
 
 const configureScene = ({ sceneConfig } = {}) => {
   if (sceneConfig) {
@@ -21,8 +23,8 @@ export class MainNav extends Component {
       case 'home':
         return (<Home {...props} />)
 
-      case 'timeline:create':
-        return (<TimelineForm />)
+      case 'car:create':
+        return (<CarForm />)
 
       default:
         return (<Home {...props} />)

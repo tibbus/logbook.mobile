@@ -2,7 +2,7 @@ import React, {
   Component,
   StyleSheet
 } from 'react-native'
-import { BackScene } from '../'
+import { BackScene } from '../Scenes'
 import { CommentInput } from './'
 
 const styles = StyleSheet.create({

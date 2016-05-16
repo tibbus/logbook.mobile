@@ -4,10 +4,10 @@ import React, {
   Text
 } from 'react-native'
 import { connect } from 'react-redux'
-import { IdentityOIDC } from './IdentityOIDC'
-import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../Actions/Types'
-import { getEnvironment } from '../API/environments'
-import { setUserProfile } from '../Actions/user'
+import { IdentityOIDC } from '../Auth'
+import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types'
+import { getEnvironment } from '../../API/environments'
+import { setUserProfile } from '../../Actions/user'
 
 const stateToProps = ({ user }) => ({ user })
 
@@ -38,10 +38,12 @@ export class SignIn extends Component {
     dispatch(setUserProfile())
   }
 
-  authError () {
+  authError (error) {
     const { dispatch } = this.props
 
     dispatch({ type: SET_AUTH_ERROR })
+
+    if (error === 'cancelled') return
     Alert.alert('Authentication failed')
   }
 

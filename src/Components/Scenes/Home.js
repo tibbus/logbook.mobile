@@ -6,11 +6,11 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { CommentsSnapshot, CommentCreate } from './Comments'
-import { EventEntrySnapshot } from './EventEntry'
-import { getEvent } from './Events'
+import { CommentsSnapshot, CommentCreate } from '../Comments'
+import { StatusEntrySnapshot } from '../StatusEntry'
+import { getStatus } from '../Statuses'
 
-const stateToProps = ({ timelines }) => ({ timelines })
+const stateToProps = ({ cars }) => ({ cars })
 
 @connect(stateToProps)
 export class Home extends Component {
@@ -18,14 +18,14 @@ export class Home extends Component {
   constructor () {
     super(...arguments)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const { timelines = [] } = this.props
+    const { cars = [] } = this.props
     this.state = {
-      timelines,
-      dataSource: ds.cloneWithRows(timelines)
+      cars,
+      dataSource: ds.cloneWithRows(cars)
     }
   }
 
-  addTimeline () {
+  addCar () {
     const { parentNav } = this.props
 
     parentNav
@@ -40,18 +40,18 @@ export class Home extends Component {
   renderEmpty () {
     return (
       <View style={styles.container}>
-        <Icon.Button name='plus' onPress={this.addTimeline.bind(this)}>
-          Add a timeline
+        <Icon.Button name='plus' onPress={this.addCar.bind(this)}>
+          Add a car
         </Icon.Button>
       </View>
     )
   }
 
-  componentWillReceiveProps ({ timelines }) {
-    if (timelines !== this.props.timelines) {
+  componentWillReceiveProps ({ cars }) {
+    if (cars !== this.props.cars) {
       this.setState({
-        timelines,
-        dataSource: this.state.dataSource.cloneWithRows(timelines)
+        cars,
+        dataSource: this.state.dataSource.cloneWithRows(cars)
       })
     }
   }
@@ -72,7 +72,7 @@ export class Home extends Component {
     const { comments } = data
     return (
       <View style={styles.row}>
-        {getEvent(data)}
+        {getStatus(data)}
         <CommentsSnapshot
           style={styles.commentsSnapshot}
           onPress={this.addComment.bind(this)}
@@ -81,14 +81,14 @@ export class Home extends Component {
     )
   }
 
-  renderTimeline () {
+  renderCar () {
     return (
       <View style={styles.container}>
         <ListView
           contentContainerStyle={{ justifyContent: 'center' }}
           style={styles.container}
           dataSource={this.state.dataSource}
-          renderHeader={() => <EventEntrySnapshot />}
+          renderHeader={() => <StatusEntrySnapshot />}
           renderRow={this.renderRow.bind(this)}
         />
       </View>
@@ -96,10 +96,10 @@ export class Home extends Component {
   }
 
   render () {
-    const { timelines } = this.props
+    const { cars } = this.props
 
-    if (timelines.length) {
-      return this.renderTimeline()
+    if (cars.length) {
+      return this.renderCar()
     } else {
       return this.renderEmpty()
     }

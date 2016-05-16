@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export class TimelineForm extends Component {
+export class CarForm extends Component {
 
   constructor () {
     super(...arguments)
@@ -27,7 +27,7 @@ export class TimelineForm extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Timeline</Text>
+        <Text>Car</Text>
         <TextInput style={{height: 40, borderColor: 'gray', margin: 10, padding: 10, borderWidth: 1}}
           placeholder='Car Registration'
           onChangeText={(text) => this.setState({text})}

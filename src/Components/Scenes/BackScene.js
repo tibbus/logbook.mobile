@@ -31,12 +31,13 @@ export const actionButton = ({
 export const BackScene = ({
   children,
   onBack,
-  style
+  style,
+  title = 'title'
 }) => (
   <View style={style}>
     <View style={styles.statusBar}>
       <Icon.Button name='chevron-left' onPress={onBack} style={styles.statusInner}>Back</Icon.Button>
-      <Text style={styles.statusInner}>Title</Text>
+      <Text style={styles.statusInner}>{title}</Text>
     </View>
     {children}
   </View>

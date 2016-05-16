@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export const Event = ({
+export const Status = ({
   profileImg,
   commentCount,
   likeCount,

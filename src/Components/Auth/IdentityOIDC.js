@@ -1,13 +1,9 @@
 import React, {
-  StyleSheet,
   WebView
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { paramsToObject, objKeysToCamel } from '../Utils'
-
-const styles = StyleSheet.create({
-
-})
+import { BackScene } from '../Scenes'
+import { paramsToObject, objKeysToCamel } from '../../Utils'
 
 const getBearer = (url = '') => {
   const split = url.split('#')
@@ -73,16 +69,17 @@ const AuthView = props => {
   } = props
 
   return (
-    <WebView
-      automaticallyAdjustContentInsets={Boolean(false)}
-      style={styles.webView}
-      source={{ uri }}
-      javaScriptEnabled={Boolean(true)}
-      domStorageEnabled={Boolean(true)}
-      decelerationRate='normal'
-      onNavigationStateChange={(nav) => checkState({ uri: props.uri, nav, onAuthSuccess, onAuthError })}
-      startInLoadingState={Boolean(true)}
-      scalesPageToFit={Boolean(true)} />
+    <BackScene style={{ flex: 1 }} title='Sign In' onBack={() => onAuthError('cancelled')}>
+      <WebView
+        automaticallyAdjustContentInsets={Boolean(false)}
+        source={{ uri }}
+        javaScriptEnabled={Boolean(true)}
+        domStorageEnabled={Boolean(true)}
+        decelerationRate='normal'
+        onNavigationStateChange={(nav) => checkState({ uri: props.ur, nav, onAuthSuccess, onAuthError })}
+        startInLoadingState={Boolean(true)}
+        scalesPageToFit={Boolean(false)} />
+    </BackScene>
   )
 }
 export const IdentityOIDC = props => {
@@ -99,4 +96,3 @@ export const IdentityOIDC = props => {
     <AuthButton onPress={attemptAuth} />
   )
 }
-

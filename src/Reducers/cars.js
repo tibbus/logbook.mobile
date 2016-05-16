@@ -1,7 +1,7 @@
 import { comments } from './comments'
 import { ADD_COMMENT } from '../Actions/Types'
 
-const mockEvent = {
+const mockStatus = {
   id: 1,
   type: 'Added Tyres',
   text: 'I love my new tyres and that',
@@ -18,15 +18,15 @@ const mockEvent = {
   }]
 }
 
-const initialState = [1, 2, 3, 4, 5, 6, 7, 8].map(() => mockEvent)
+const initialState = [1, 2, 3, 4, 5, 6, 7, 8].map(() => mockStatus)
 
-const timeline = (state, action) => {
-  const { type, timelineId } = action
+const car = (state, action) => {
+  const { type, carId } = action
 
   switch (type) {
 
     case ADD_COMMENT:
-      if (timelineId === state.id) {
+      if (carId === state.id) {
         return Object.assign(
           {},
           state,
@@ -40,12 +40,12 @@ const timeline = (state, action) => {
   }
 }
 
-export const timelines = (state = initialState, action) => {
+export const cars = (state = initialState, action) => {
   const { type } = action
 
   switch (type) {
     case ADD_COMMENT:
-      return state.map(tl => timeline(tl, action))
+      return state.map(tl => car(tl, action))
 
     default:
       return state

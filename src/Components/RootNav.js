@@ -3,9 +3,9 @@ import React, {
   Navigator
 } from 'react-native'
 import {
-  MainNav,
-  SignIn
+  MainNav
 } from './'
+import { SignIn } from './Scenes'
 import { connect } from 'react-redux'
 
 const configureScene = ({ sceneConfig, id } = {}) => {
@@ -25,8 +25,8 @@ export class RootNav extends Component {
 
   renderScene (route, navigator) {
     const { user: { token } } = this.props
-    const { id = 'main', component } = route
-    const routeId = token ? id : null
+    const { id = 'main', component, requiresAuth = true } = route
+    const routeId = (requiresAuth && !token) ? null : id
 
     switch (routeId) {
 

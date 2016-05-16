@@ -1,17 +1,17 @@
 import React from 'react-native'
-import { Event } from './Event'
+import { Status } from './Status'
 
-export const getEvent = (props = {}) => {
+export const getStatus = (props = {}) => {
   const { type } = props
 
   switch (type) {
     default:
       return (
-        <Event {...props} />
+        <Status {...props} />
       )
   }
 }
 
 export {
-  Event
+  Status
 }

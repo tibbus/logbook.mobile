@@ -3,7 +3,7 @@ import React, {
   View
 } from 'react-native'
 
-export const EventEntry = ({
+export const StatusEntry = ({
   text,
   type
 }) => (
