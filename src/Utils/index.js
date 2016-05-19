@@ -1,7 +1,10 @@
 import { camelize } from 'underscore.string'
 import {
     curry,
+    head,
+    isEmpty,
     keys,
+    tail,
     map,
     values,
     zipObj
@@ -21,3 +24,16 @@ export const paramsToObject = (params = []) => (
     return acc
   }, { })
 )
+
+export const replaceParams = (str, obj = {}) => {
+  const helper = (acc, keys) => {
+    if (isEmpty(keys)) return acc
+
+    const next = head(keys)
+    const val = obj[next]
+    return helper(acc.replace(new RegExp(`\{${next}\}`, 'ig'), val), tail(keys))
+  }
+
+  const keys = Object.keys(obj)
+  return helper(str, keys)
+}
