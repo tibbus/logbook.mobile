@@ -1,13 +1,23 @@
 import { store } from '../App'
-import { getEnvironment } from './environments'
+import { getEnvironment } from './config'
+import { replaceParams } from '../Utils'
 
-export const fetcher = (uri, method) => (request = {}) => {
+const getUrl = (uri, uriParams = {}) => {
+  const env = getEnvironment()
+  if (uriParams) {
+    return env + replaceParams(uri, uriParams)
+  }
+
+  return env + uri
+}
+
+export const fetcher = (uri, method = 'GET') => (request = {}, uriParams) => {
   const { user } = store.getState()
   const { token = {} } = user
   const { tokenType, accessToken } = token
   const Authorization = `${tokenType} ${accessToken}`
   const { headers = {} } = request
-  const url = getEnvironment() + uri
+  const url = getUrl(uri, uriParams)
   const requestObject = {
     method,
     ...request,
@@ -22,4 +32,3 @@ export const fetcher = (uri, method) => (request = {}) => {
 export const getUser = fetcher('identity/connect/userinfo')
 
 export const endSession = fetcher('identity/connect/endsession')
-

@@ -1,4 +1,5 @@
 const CURRENT_ENV = 'dev'
+const API_VERSION = 1
 
 const environments = {
   dev: {
@@ -7,9 +8,10 @@ const environments = {
   }
 }
 
-export const getEnvironment = () => {
-  const { secure, uri } = environments[CURRENT_ENV]
+export const getEnvironment = env => {
+  const { secure, uri } = environments[env || CURRENT_ENV]
   const protocol = secure ? 'https' : 'http'
   return `${protocol}://${uri}/`
 }
 
+export const api = `api/${API_VERSION}/`

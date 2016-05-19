@@ -6,7 +6,7 @@ import React, {
 import { connect } from 'react-redux'
 import { IdentityOIDC } from '../Auth'
 import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types'
-import { getEnvironment } from '../../API/environments'
+import { getEnvironment } from '../../API/config'
 import { setUserProfile } from '../../Actions/user'
 
 const stateToProps = ({ user }) => ({ user })
