@@ -1,44 +1,59 @@
 import React, {
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+export const BackScene = ({
+  children,
+  onBack,
+  onAction,
+  style,
+  title = 'title',
+  actionName = 'Go'
+}) => (
+  <View style={style}>
+    <View style={styles.statusBar}>
+      <TouchableHighlight style={styles.button} onPress={onBack}>
+        <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
+      </TouchableHighlight>
+      <View style={styles.title}><Text>{title}</Text></View>
+      {onAction ? (
+        <TouchableHighlight style={styles.button} onPress={onAction}>
+          <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' /></View>
+        </TouchableHighlight>
+      ) : <View style={styles.button} />}
+    </View>
+    {children}
+  </View>
+)
 
 const styles = StyleSheet.create({
   statusBar: {
     alignItems: 'center',
-    alignSelf: 'flex-start',
     justifyContent: 'center',
+
     height: 40,
     flexDirection: 'row'
   },
   statusInner: {
     flex: 1
+  },
+  title: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  button: {
+    alignItems: 'center',
+    width: 40,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  flexRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 })
-
-export const actionButton = ({
-  onAction
-}) => {
-  if (onAction) {
-
-  } else {
-
-  }
-}
-
-export const BackScene = ({
-  children,
-  onBack,
-  style,
-  title = 'title'
-}) => (
-  <View style={style}>
-    <View style={styles.statusBar}>
-      <Icon.Button name='chevron-left' onPress={onBack} style={styles.statusInner}>Back</Icon.Button>
-      <Text style={styles.statusInner}>{title}</Text>
-    </View>
-    {children}
-  </View>
-)

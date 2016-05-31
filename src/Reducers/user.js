@@ -13,8 +13,8 @@ const initialState = {
   profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png'
 }
 
-export const user = (state = initialState, message) => {
-  const { type, user, token } = message
+export const user = (state = initialState, action) => {
+  const { type, user, token } = action
 
   switch (type) {
     case INVALIDATE_USER:
@@ -27,12 +27,15 @@ export const user = (state = initialState, message) => {
       return {
         ...state,
         token,
-        attemptingOIDC: false
+        authError: false,
+        attemptingOIDC: !!state.user
       }
     case SET_AUTH_ERROR:
+      const { error } = action
       return {
         ...state,
-        attemptingOIDC: false
+        attemptingOIDC: false,
+        authError: error
       }
     case ATTEMPT_OIDC_AUTH:
       return {
@@ -43,7 +46,8 @@ export const user = (state = initialState, message) => {
       return {
         ...state,
         ...user,
-        token: state.token
+        token: state.token,
+        attemptingOIDC: !!state.token
       }
     default:
       return state

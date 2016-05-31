@@ -2,9 +2,7 @@ import React, {
   Component,
   Navigator
 } from 'react-native'
-import { MainNavBar } from './'
-import { Home } from './Scenes'
-import { CarForm } from './Cars'
+import { CarsNav, MainNavBar } from './'
 
 const configureScene = ({ sceneConfig } = {}) => {
   if (sceneConfig) {
@@ -18,16 +16,13 @@ export class MainNav extends Component {
 
   renderScene (route, navigator) {
     const { id } = route
-    const props = { navigator, parentNav: this.props.navigator }
+    const props = { navigator, rootNav: this.props.navigator }
     switch (id) {
       case 'home':
-        return (<Home {...props} />)
-
-      case 'car:create':
-        return (<CarForm />)
+        return (<CarsNav {...props} style={{flex: 1}} />)
 
       default:
-        return (<Home {...props} />)
+        return (<CarsNav {...props} style={{flex: 1}} />)
     }
   }
 
@@ -37,6 +32,7 @@ export class MainNav extends Component {
         initialRoute={{ id: 'home' }}
         navigationBar={<MainNavBar />}
         configureScene={configureScene}
+        sceneStyles={{flex: 1}}
         renderScene={this.renderScene.bind(this)}
        />
     )

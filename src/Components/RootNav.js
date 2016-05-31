@@ -24,9 +24,10 @@ const configureScene = ({ sceneConfig, id } = {}) => {
 export class RootNav extends Component {
 
   renderScene (route, navigator) {
-    const { user: { token } } = this.props
+    const { dispatch, user } = this.props
+    const { token } = user
     const { id = 'main', component, requiresAuth = true } = route
-    const routeId = (requiresAuth && !token) ? null : id
+    const routeId = (requiresAuth && (!token || !user.id)) ? null : id
 
     switch (routeId) {
 
@@ -37,7 +38,7 @@ export class RootNav extends Component {
         return component
 
       default:
-        return (<SignIn navigator={navigator} />)
+        return (<SignIn navigator={navigator} user={user} dispatch={dispatch} />)
 
     }
   }
@@ -48,6 +49,7 @@ export class RootNav extends Component {
         initialRoute={{}}
         configureScene={configureScene}
         renderScene={this.renderScene.bind(this)}
+        sceneStyle={{paddingTop: 20}}
        />
     )
   }

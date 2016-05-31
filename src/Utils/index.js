@@ -1,14 +1,15 @@
 import { camelize } from 'underscore.string'
 import {
-    curry,
-    head,
-    isEmpty,
-    keys,
-    tail,
-    map,
-    values,
-    zipObj
+  curry,
+  head,
+  isEmpty,
+  keys,
+  tail,
+  map,
+  values,
+  zipObj
 } from 'ramda'
+import moment from 'moment'
 
 export const mapKeys = curry((fn, obj) => zipObj(map(fn, keys(obj)), values(obj)))
 
@@ -25,13 +26,19 @@ export const paramsToObject = (params = []) => (
   }, { })
 )
 
-export const replaceParams = (str, obj = {}) => {
+export const timeAgo = (latest, previous) => {
+  const latestMoment = moment(latest)
+  const previousMoment = moment(previous)
+  return previousMoment.from(latestMoment)
+}
+
+export const replaceParams = (str, obj = {}, modifier = param => param) => {
   const helper = (acc, keys) => {
     if (isEmpty(keys)) return acc
 
     const next = head(keys)
     const val = obj[next]
-    return helper(acc.replace(new RegExp(`\{${next}\}`, 'ig'), val), tail(keys))
+    return helper(acc.replace(new RegExp(`\{${next}\}`, 'ig'), modifier(val)), tail(keys))
   }
 
   const keys = Object.keys(obj)
