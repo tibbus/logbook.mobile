@@ -15,7 +15,6 @@ const getBearer = (url = '') => {
 
     const params = split[1].split('&')
     const token = objKeysToCamel(paramsToObject(params))
-    console.log(token)
     const { error, idToken } = token
 
     if (error) {
@@ -31,7 +30,7 @@ const getBearer = (url = '') => {
 const AuthButton = ({
   onPress
 }) => (
-  <Icon.Button name='facebook' onPress={onPress}>Sign In</Icon.Button>
+  <Icon.Button name='sign-in' onPress={onPress}>Sign In</Icon.Button>
 )
 
 const nonce = (new Date()).getTime()

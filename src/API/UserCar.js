@@ -1,4 +1,8 @@
 import { fetcher } from './fetch'
-import { api } from '../config'
+import { api } from './config'
 
-export const createCar = fetcher(api + 'user/{userId}/usercar/registration/{registration}')
+const baseUri = api + 'user/{userId}/usercar/'
+
+export const getUserCars = fetcher(baseUri + 'details={details}')
+export const createUserCar = fetcher(baseUri + 'registration/{registration}', 'POST')
+export const deleteUserCar = fetcher(baseUri + '{userCarId}')

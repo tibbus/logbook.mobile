@@ -14,4 +14,4 @@ export const getEnvironment = env => {
   return `${protocol}://${uri}/`
 }
 
-export const api = `api/${API_VERSION}/`
+export const api = `api/v${API_VERSION}/`
