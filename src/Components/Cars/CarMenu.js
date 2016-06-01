@@ -1,3 +1,4 @@
+import React from 'react-native'
 import { ListSelect } from '../ListSelect'
 
 const getOptions = () => {
