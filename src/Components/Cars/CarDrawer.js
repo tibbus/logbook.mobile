@@ -2,7 +2,7 @@ import React, {
   StyleSheet
 } from 'react-native'
 import Drawer from 'react-native-drawer'
-import { CarDetails, CarMenu } from './'
+import { CarDetails, CarMenu, CarMOTHistory } from './'
 import { Timeline } from '../Scenes/Timeline'
 
 export const CarDrawer = ({
@@ -10,24 +10,32 @@ export const CarDrawer = ({
   dispatch,
   rootNav
 }) => {
-  const { carInfo } = car
+  const { carInfo, mot } = car
   const onBack = () => rootNav.pop()
 
   let drawer
 
-  const takeAction = (selected) => {
+  const getActionComponent = selected => {
     const { value } = selected
     const props = { carInfo, onBack }
-    drawer.close()
 
     switch (value) {
+      case 'mot':
+        return (<CarMOTHistory onBack={onBack} mot={mot} />)
+
       default:
-        return rootNav
-          .push({
-            component: (<CarDetails {...props} />),
-            id: 'modal'
-          })
+        return (<CarDetails {...props} />)
     }
+  }
+
+  const takeAction = selected => {
+    drawer.close()
+    const component = getActionComponent(selected)
+    rootNav
+     .push({
+       component,
+       id: 'modal'
+     })
   }
 
   return (
