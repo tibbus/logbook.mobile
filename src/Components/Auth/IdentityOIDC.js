@@ -3,20 +3,14 @@ import React, {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { BackScene } from '../Scenes'
-import { paramsToObject, objKeysToCamel } from '../../Utils'
+import { hashToObj } from '../../Utils'
 
 const getBearer = (url = '') => {
-  const split = url.split('#')
-
   return new Promise((resolve, reject) => {
-    if (split.length !== 2) {
-      return
-    }
+    const token = hashToObj(url)
+    if (!token) return
 
-    const params = split[1].split('&')
-    const token = objKeysToCamel(paramsToObject(params))
     const { error, idToken } = token
-
     if (error) {
       return reject(error)
     }

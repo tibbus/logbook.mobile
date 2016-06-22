@@ -1,4 +1,4 @@
-import { camelize } from 'underscore.string'
+import { camelize, decapitalize } from 'underscore.string'
 import {
   curry,
   head,
@@ -15,6 +15,8 @@ export const mapKeys = curry((fn, obj) => zipObj(map(fn, keys(obj)), values(obj)
 
 export const objKeysToCamel = mapKeys(camelize)
 
+export const objKeysToDecap = mapKeys(decapitalize)
+
 export const paramsToObject = (params = []) => (
   params.reduce((acc = {}, param = '') => {
     const split = param.split('=')
@@ -25,6 +27,21 @@ export const paramsToObject = (params = []) => (
     return acc
   }, { })
 )
+
+const urlToObj = (splitter: String) => (url: String) => {
+  const split = url.split(splitter)
+
+  if (split.length !== 2) {
+    return false
+  }
+  const params = split[1].split('&')
+
+  return objKeysToCamel(paramsToObject(params))
+}
+
+export const paramsToObj = urlToObj('?')
+
+export const hashToObj = urlToObj('#')
 
 export const timeAgo = (latest, previous) => {
   const latestMoment = moment(latest)

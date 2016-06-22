@@ -8,7 +8,8 @@ import { Timeline } from '../Scenes/Timeline'
 export const CarDrawer = ({
   car,
   dispatch,
-  rootNav
+  rootNav,
+  user
 }) => {
   const { carInfo, mot } = car
   const onBack = () => rootNav.pop()
@@ -49,7 +50,7 @@ export const CarDrawer = ({
       styles={drawerStyles}
       negotiatePan={Boolean(true)}
       tweenHandler={Drawer.tweenPresets.parallax}>
-      <Timeline car={car} rootNav={rootNav} />
+      <Timeline car={car} rootNav={rootNav} user={user} />
     </Drawer>
   )
 }

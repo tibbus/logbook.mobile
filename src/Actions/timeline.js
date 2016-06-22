@@ -1,9 +1,11 @@
 import {
   ADD_TIMELINE,
+  ADD_TIMELINE_IMAGE,
   ADD_TIMELINE_STATUS
 } from './Types'
 import { getTimeline } from '../API/Timeline'
 import { createStatus } from '../API/Status'
+import { createImage } from '../API/Image'
 
 export const setCarTimeline = ({
   carInfoId
@@ -19,12 +21,12 @@ export const setCarTimeline = ({
         })
       })
       .catch(e => {
-        console.info(e)
+        // TODO Handle timeline init failure
       })
   }
 }
 
-const addStatusAction = (carInfoId, details, pending) => ({
+const addStatus = (carInfoId, details, pending) => ({
   carInfoId,
   type: ADD_TIMELINE_STATUS,
   data: {
@@ -42,11 +44,48 @@ export const addCarTimelineStatus = ({
   const request = { body }
 
   return dispatch => {
-    dispatch(details => dispatch(addStatusAction(carInfoId, body, true)))
+    dispatch(details => dispatch(addStatus(carInfoId, body, true)))
     createStatus(request, { carInfoId })
       .then(details => {
-        dispatch(addStatusAction(carInfoId, details))
+        dispatch(addStatus(carInfoId, details))
       })
       .catch(console.info)
+  }
+}
+
+const addImage = (carInfoId, details, pending) => ({
+  carInfoId,
+  type: ADD_TIMELINE_IMAGE,
+  data: {
+    type: 'Image',
+    details
+  },
+  pending
+})
+
+export const addCarTimelineImage = ({
+  carInfoId,
+  description = '',
+  image,
+  location = ''
+}) => {
+  const { uri, ext = '', id } = image
+  const extLower = ext.toLowerCase()
+  const type = `image/${extLower}`
+  const name = `${id}.${extLower}`
+  const request = {
+    body: {
+      description,
+      location,
+      files: { uri, type, name },
+      topics: []
+    }
+  }
+
+  return dispatch => {
+    // TODO handle image create error
+    createImage(request, { carInfoId })
+      .then(data => dispatch(addImage(carInfoId, data)))
+      .catch(console.error)
   }
 }

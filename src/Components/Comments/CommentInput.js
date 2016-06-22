@@ -25,7 +25,6 @@ export const CommentInput = ({
   <View style={styles.container}>
     <TextInput placeholder='Comment...' style={styles.input}
       onSubmitEditing={onSubmitEditing} />
-    <Icon.Button name='plus' onPress={() => console.info('pie')}>Ok</Icon.Button>
+    <Icon.Button name='plus' onPress={() => {}}>Ok</Icon.Button>
   </View>
 )
-

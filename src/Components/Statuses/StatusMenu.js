@@ -9,10 +9,10 @@ const getOptions = () => {
         description: 'Actions'
       },
       options: [{
-        description: 'Edit Status',
+        description: 'Edit Post',
         value: 'edit'
       }, {
-        description: 'Delete Status',
+        description: 'Delete Post',
         value: 'delete'
       }]
     }

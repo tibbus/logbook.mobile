@@ -11,29 +11,42 @@ const getUrl = (uri, uriParams = {}) => {
   return env + uri
 }
 
-const stringifyBody = (request = {}) => {
+const customParams = (files, request) => {
   const { body } = request
-  if (body) {
-    return { ...request, body: JSON.stringify(body) }
+  if (files) {
+    const keys = Object.keys(body)
+    const formData = new global.FormData()
+
+    keys.forEach(key => formData.append(key, body[key]))
+    return {
+      body: formData,
+      customHeaders: {}
+    }
   }
 
-  return request
+  return {
+    body: JSON.stringify(body),
+    customHeaders: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }
 }
 
-export const fetcher = (uri, method = 'GET') => (request = {}, uriParams) => {
+export const fetcher = (uri, method = 'GET', files = false) => (request = {}, uriParams) => {
   const { user } = store.getState()
   const { token = {}, id } = user
   const { tokenType, accessToken } = token
   const Authorization = `${tokenType} ${accessToken}`
   const { headers = {} } = request
   const url = getUrl(uri, Object.assign({}, uriParams, { userId: id }))
-  console.info(url)
+
+  const { body, customHeaders } = customParams(files, request)
   const requestObject = {
     method,
-    ...stringifyBody(request),
+    body,
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      ...customHeaders,
       ...headers,
       Authorization
     }
@@ -43,7 +56,7 @@ export const fetcher = (uri, method = 'GET') => (request = {}, uriParams) => {
     .fetch(url, requestObject)
     .then(response => {
       const type = response.headers.get('content-type')
-      console.info(type)
+
       if (!response.ok) {
         throw new Error('Bad Response')
       }

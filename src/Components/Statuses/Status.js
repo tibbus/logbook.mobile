@@ -5,18 +5,20 @@ import React, {
   TouchableHighlight,
   View
 } from 'react-native'
+import { FitImage } from '../Image'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export const Status = (data = {}) => {
-  const { details = {}, pending, onMenuPress } = data
+  const { details = {}, pending, onMenuPress, user = {} } = data
   const {
     profileImg = 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
     commentCount,
+    contentUris = [],
     likeCount,
     description,
-    timeAgo,
-    name = 'Bob'
+    timeAgo
   } = details
+  const { name } = user
 
   return (
     <View style={[styles.container, pending ? styles.pending : {}]}>
@@ -35,8 +37,19 @@ export const Status = (data = {}) => {
           <Icon name='more-vert' style={styles.moreIcon} />
         </TouchableHighlight>
       </View>
-      <View>
+      <View style={{flex: 1, flexDirection: 'column'}}>
         <Text style={styles.description}>{description}</Text>
+        <View style={styles.imageContainer}>
+          {
+            contentUris.map(uri => (
+              <FitImage
+                key={uri}
+                resizeMode={Image.resizeMode.contain}
+                source={{uri}}
+                style={styles.image} />
+            ))
+          }
+        </View>
       </View>
       <View style={styles.eventFooter}>
         <View style={styles.flex}><Icon name='thumb-up'> {likeCount}</Icon></View>
@@ -93,5 +106,13 @@ const styles = StyleSheet.create({
   },
   flex: {
     flex: 1
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  image: {
+    flex: 1,
+    width: null
   }
 })
