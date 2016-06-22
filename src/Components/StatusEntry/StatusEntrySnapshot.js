@@ -15,12 +15,17 @@ const stateToProps = ({ user }) => ({ user })
 export class StatusEntrySnapshot extends Component {
 
   render () {
-    const { user, onAddStatus } = this.props
+    const {
+      user,
+      onAddStatus,
+      onAddPhoto,
+      onAddVideo
+    } = this.props
     const { profileImg } = user
 
     return (
       <View>
-        <TouchableHighlight onPress={() => onAddStatus()}>
+        <TouchableHighlight onPress={onAddStatus}>
           <View style={styles.container}>
             <Image
               source={{uri: profileImg}}
@@ -29,9 +34,15 @@ export class StatusEntrySnapshot extends Component {
           </View>
         </TouchableHighlight>
         <View style={styles.container}>
-          <View style={styles.button}><Icon name='pencil'> Event</Icon></View>
-          <View style={styles.button}><Icon name='camera'> Photo</Icon></View>
-          <View style={styles.button}><Icon name='film'> Video</Icon></View>
+          <TouchableHighlight style={styles.button} onPress={onAddStatus}>
+            <Icon name='pencil'> Event</Icon>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={onAddPhoto}>
+            <Icon name='camera'> Photo</Icon>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.button} onPress={onAddVideo}>
+            <Icon name='film'> Video</Icon>
+          </TouchableHighlight>
         </View>
       </View>
     )

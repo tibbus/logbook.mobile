@@ -1,5 +1,5 @@
 import { StatusCreate } from './StatusCreate'
-import { updateStatus } from '../../Actions/status'
+import { updateStatus } from '../../Actions/post'
 
 export class StatusEdit extends StatusCreate {
 

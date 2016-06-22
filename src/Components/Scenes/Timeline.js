@@ -8,7 +8,7 @@ import React, {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { setCarTimeline } from '../../Actions/timeline'
-import { deleteStatus } from '../../Actions/status'
+import { deletePost } from '../../Actions/post'
 import { LoadingView } from '../LoadingView'
 import { CommentsSnapshot, CommentCreate } from '../Comments'
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry'
@@ -64,8 +64,9 @@ export class Timeline extends Component {
       })
   }
 
-  addStatus () {
+  addStatus (config = {}) {
     const { dispatch, rootNav } = this.props
+    const { mediaType } = config
 
     rootNav
       .push({
@@ -75,19 +76,20 @@ export class Timeline extends Component {
             carInfoId={this.carInfoId}
             navigator={rootNav}
             dispatch={dispatch}
+            mediaType={mediaType}
             style={styles.container} />
         )
       })
   }
 
-  editStatus (statusId) {
+  editStatus (statusId, mediaType = 'Status') {
     const { dispatch, rootNav, timelines } = this.props
-    console.info(statusId)
+
     const status = getTimeline(timelines, this.carInfoId)
       .find(item => {
         const { type } = item
-        console.info(type)
-        if (type === 'Status' && item.details.id === statusId) {
+
+        if (type === mediaType && item.details.id === statusId) {
           return true
         }
         return false
@@ -110,21 +112,23 @@ export class Timeline extends Component {
       })
   }
 
-  showStatusMenu (details) {
+  showStatusMenu (post) {
+    const { details, type } = post
     const { id } = details
-
-    this.setState({
-      modal: {
-        type: 'StatusMenu',
-        id
-      }
-    })
+    const modal = {
+      type: 'StatusMenu',
+      id,
+      mediaType: type
+    }
+    this.setState({ modal })
   }
 
-  renderRow (data) {
+  renderRow (post) {
+    const { user } = this.props
     const props = {
-      ...data,
-      onMenuPress: this.showStatusMenu.bind(this)
+      ...post,
+      onMenuPress: () => this.showStatusMenu(post),
+      user
     }
     const comments = []
     return (
@@ -144,23 +148,25 @@ export class Timeline extends Component {
     })
   }
 
-  statusAction ({ value }, id) {
+  statusAction ({ value }, id, mediaType) {
     const { dispatch } = this.props
     this.clearModal()
+    console.info(mediaType)
     switch (value) {
       case 'delete':
-        return dispatch(deleteStatus(id, this.carInfoId))
+        return dispatch(deletePost(id, this.carInfoId, mediaType))
 
       default:
-        return this.editStatus(id)
+        return this.editStatus(id, mediaType)
     }
   }
 
-  renderModalContent ({ type, id } = {}) {
+  renderModalContent ({ type, id, mediaType } = {}) {
     switch (type) {
       case 'StatusMenu':
         return (
-          <StatusMenu onSelect={val => this.statusAction(val, id)} />
+          <StatusMenu
+            onSelect={val => this.statusAction(val, id, mediaType)} />
         )
 
       default:
@@ -185,9 +191,20 @@ export class Timeline extends Component {
           style={styles.container}
           dataSource={this.state.dataSource}
           enableEmptySections={Boolean(true)}
-          renderHeader={() => <StatusEntrySnapshot onAddStatus={this.addStatus.bind(this)} />}
+          renderHeader={this.renderHeader.bind(this)}
           renderRow={this.renderRow.bind(this)} />
       </LoadingView>
+    )
+  }
+
+  renderHeader () {
+    const addPhoto = () => this.addStatus({ mediaType: 'image' })
+    const addVideo = () => this.addStatus({ mediaType: 'video' })
+    return (
+      <StatusEntrySnapshot
+        onAddStatus={this.addStatus.bind(this)}
+        onAddPhoto={addPhoto}
+        onAddVideo={addVideo} />
     )
   }
 }

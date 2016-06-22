@@ -1,14 +1,26 @@
 import { getUser } from '../API/fetch'
 import { createUserCar, getUserCars } from '../API/UserCar'
-import { ADD_CAR, SET_USER, SET_USER_CARS, SET_LOADING_STATUS, UNSET_LOADING_STATUS } from './Types'
+import { objKeysToDecap } from '../Utils'
+import {
+  ADD_CAR,
+  SET_USER,
+  SET_USER_CARS,
+  SET_LOADING_STATUS,
+  UNSET_LOADING_STATUS } from './Types'
 
 export const setUserProfile = () => {
   return dispatch => {
     getUser()
-      .then(user => dispatch({
-        type: SET_USER,
-        user
-      }))
+      .then(userDetails => {
+        const user = {
+          ...userDetails,
+          profile: objKeysToDecap(JSON.parse(userDetails.profile))
+        }
+        dispatch({
+          type: SET_USER,
+          user
+        })
+      })
   }
 }
 

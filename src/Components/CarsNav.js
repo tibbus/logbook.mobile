@@ -16,7 +16,7 @@ const configureScene = ({ sceneConfig } = {}) => {
   return Navigator.SceneConfigs.FloatFromRight
 }
 
-const stateToProps = ({ cars, loadingStatus }) => ({ cars, loadingStatus })
+const stateToProps = ({ cars, loadingStatus, user }) => ({ cars, loadingStatus, user })
 
 @connect(stateToProps)
 export class CarsNav extends Component {
@@ -32,13 +32,14 @@ export class CarsNav extends Component {
 
   renderScene (route, navigator) {
     const { id, index = 0 } = route
-    const { cars = [], dispatch } = this.props
+    const { cars = [], dispatch, user = {} } = this.props
     const car = cars[index]
     const props = {
       car,
       dispatch,
       navigator,
-      rootNav: this.props.rootNav
+      rootNav: this.props.rootNav,
+      user: user.profile
     }
 
     switch (id) {
