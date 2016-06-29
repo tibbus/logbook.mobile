@@ -1,7 +1,5 @@
-import React, {
-  Component,
-  Navigator
-} from 'react-native'
+import React, { Component } from 'react'
+import { Navigator } from 'react-native'
 import { CarsNav, MainNavBar } from './'
 
 const configureScene = ({ sceneConfig } = {}) => {

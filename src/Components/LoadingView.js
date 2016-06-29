@@ -1,5 +1,6 @@
-import React, {
-  ActivityIndicatorIOS,
+import React from 'react'
+import {
+  ActivityIndicator,
   View
 } from 'react-native'
 
@@ -10,7 +11,7 @@ export const LoadingView = ({
   style = {}
 }) => (
   <View style={style}>
-    {isLoading ? <ActivityIndicatorIOS animating={Boolean(true)} size='large' /> : null}
+    {isLoading ? <ActivityIndicator animating={Boolean(true)} size='large' /> : null}
     {hideWhileLoading && isLoading ? null : children}
   </View>
 )

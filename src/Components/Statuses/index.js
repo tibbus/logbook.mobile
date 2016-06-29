@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React from 'react'
 import { Status } from './Status'
 export * from './StatusMenu'
 

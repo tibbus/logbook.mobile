@@ -1,4 +1,5 @@
-import React, {
+import React from 'react'
+import {
   Image,
   StyleSheet,
   Text,
@@ -37,9 +38,9 @@ export const Status = (data = {}) => {
           <Icon name='more-vert' style={styles.moreIcon} />
         </TouchableHighlight>
       </View>
-      <View style={{flex: 1, flexDirection: 'column'}}>
+      <View>
         <Text style={styles.description}>{description}</Text>
-        <View style={styles.imageContainer}>
+        <View>
           {
             contentUris.map(uri => (
               <FitImage
@@ -52,7 +53,9 @@ export const Status = (data = {}) => {
         </View>
       </View>
       <View style={styles.eventFooter}>
-        <View style={styles.flex}><Icon name='thumb-up'> {likeCount}</Icon></View>
+        <View style={[styles.flex, { justifyContent: 'center' }]}>
+          <Icon name='thumb-up'> {likeCount}</Icon>
+        </View>
         <Text>
           {commentCount} comments
         </Text>
@@ -110,9 +113,5 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     flexDirection: 'row'
-  },
-  image: {
-    flex: 1,
-    width: null
   }
 })

@@ -1,4 +1,5 @@
-import React, {
+import React from 'react'
+import {
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -16,13 +17,13 @@ export const BackScene = ({
 }) => (
   <View style={style}>
     <View style={styles.statusBar}>
-      <TouchableHighlight style={styles.button} onPress={onBack}>
+      <TouchableHighlight style={[styles.button, { alignItems: 'flex-start', paddingLeft: 10 }]} onPress={onBack}>
         <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
       </TouchableHighlight>
       <View style={styles.title}><Text>{title}</Text></View>
       {onAction ? (
-        <TouchableHighlight style={styles.button} onPress={onAction}>
-          <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' /></View>
+        <TouchableHighlight style={[styles.button, { alignItems: 'flex-end', paddingRight: 10 }]} onPress={onAction}>
+          <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' size={20} /></View>
         </TouchableHighlight>
       ) : <View style={styles.button} />}
     </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    width: 40,
+    width: 70,
     paddingTop: 10,
     paddingBottom: 10
   },

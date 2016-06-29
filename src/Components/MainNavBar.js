@@ -1,6 +1,6 @@
 import Icon from 'react-native-vector-icons/FontAwesome'
-import React, {
-  Component,
+import React, { Component } from 'react'
+import {
   StyleSheet,
   TouchableHighlight,
   View
