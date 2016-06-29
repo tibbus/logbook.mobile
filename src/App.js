@@ -1,6 +1,6 @@
 import React, {
   Component
-} from 'react-native'
+} from 'react'
 import { RootNav } from './Components'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -23,4 +23,3 @@ export class App extends Component {
   }
 
 }
-

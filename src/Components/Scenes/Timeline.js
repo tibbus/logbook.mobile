@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React, { Component } from 'react'
+import {
   ListView,
   Modal,
   StyleSheet,
@@ -178,7 +178,7 @@ export class Timeline extends Component {
     return (
       <LoadingView style={styles.container}
         isLoading={false}>
-        <Modal transparent={Boolean(true)} visible={!!this.state.modal} animationType='slide'>
+        <Modal transparent={Boolean(true)} visible={!!this.state.modal} animationType='fade'>
           <TouchableOpacity onPress={this.clearModal.bind(this)}
             style={{backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, justifyContent: 'center'}}>
             <View style={styles.modal}>
@@ -211,7 +211,6 @@ export class Timeline extends Component {
 
 const styles = StyleSheet.create({
   commentsSnapshot: {
-    flex: 1,
     backgroundColor: '#efefef'
   },
   modal: {
