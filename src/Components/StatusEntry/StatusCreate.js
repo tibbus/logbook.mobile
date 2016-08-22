@@ -7,9 +7,11 @@ import { BackScene } from '../Scenes'
 import { StatusEntry } from './'
 import {
   addCarTimelineImage,
-  addCarTimelineStatus } from '../../Actions/timeline'
+  addCarTimelineStatus,
+  addCarTimelineVideo } from '../../Actions/timeline'
 import MediaPicker from 'react-native-image-picker'
 import { paramsToObj } from '../../Utils'
+import { last } from 'ramda'
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +37,19 @@ const pickMedia = (opts = {}) => {
   })
 }
 
+const getParams = (origURL, uri) => {
+  if (origURL) {
+    return paramsToObj(origURL)
+  }
+
+  const ext = last(uri.split('.'))
+  return {
+    ext,
+    id: 'anonymous',
+    uri
+  }
+}
+
 export class StatusCreate extends Component {
 
   constructor () {
@@ -47,14 +62,16 @@ export class StatusCreate extends Component {
 
     if (mediaType) {
       pickMedia({ mediaType })
-        .then((media) => {
-          const { origURL, uri } = media
-          const params = paramsToObj(origURL)
+        .then((media, f2) => {
+          const { origURL = '', uri = '' } = media
+          const params = getParams(origURL, uri)
 
-          if (!params) return
+          if (!params) {
+            throw new Error('Error: Invalid file')
+          }
 
           this.setState({
-            image: {
+            [mediaType]: {
               uri,
               ...params
             }
@@ -83,7 +100,7 @@ export class StatusCreate extends Component {
   getAction () {
     const { carInfoId } = this.props
     const { description, postType } = this
-    const { image } = this.state
+    const { image, video } = this.state
 
     switch (postType) {
 
@@ -92,6 +109,13 @@ export class StatusCreate extends Component {
           carInfoId,
           description,
           image
+        })
+
+      case 'video':
+        return addCarTimelineVideo({
+          carInfoId,
+          description,
+          video
         })
 
       default:

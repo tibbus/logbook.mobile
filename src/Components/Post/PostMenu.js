@@ -19,6 +19,6 @@ const getOptions = () => {
   ]
 }
 
-export const StatusMenu = props => (
+export const PostMenu = props => (
   <ListSelect {...props} options={getOptions()} />
 )

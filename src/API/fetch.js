@@ -1,4 +1,4 @@
-import { store } from '../App'
+import { store } from '../store'
 import { getEnvironment } from './config'
 import { replaceParams } from '../Utils'
 
