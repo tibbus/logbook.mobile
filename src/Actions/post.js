@@ -1,52 +1,42 @@
 import {
-  deleteStatus as deleteStat,
+  deleteStatus,
   updateStatus as update
 } from '../API/Status'
-import {
-  deleteImage as deleteIm
-} from '../API/Image'
+import { deleteImage } from '../API/Image'
+import { deleteVideo } from '../API/Video'
 
 import {
-  DELETE_IMAGE,
-  DELETE_STATUS,
-  UPDATE_STATUS
+  DELETE_TIMELINE_ITEM,
+  UPDATE_TIMELINE_ITEM
 } from './Types'
 
-export const deleteStatus = (id, carInfoId) => {
-  const post = { id, carInfoId }
-  return dispatch => deleteStat({}, post)
-      .then(() => dispatch({ type: DELETE_STATUS, post }))
-}
-
-export const deleteImage = (id, carInfoId) => {
-  const post = { id, carInfoId }
-
-  return dispatch => deleteIm({}, post)
-      .then(() => dispatch({ type: DELETE_IMAGE, post }))
-}
-
 const deleteMethods = {
-  deleteImage, deleteStatus
+  deleteImage, deleteStatus, deleteVideo
 }
 
-export const deletePost = (id, carInfoId, mediaType = 'Status') => {
-  return deleteMethods[`delete${mediaType}`](id, carInfoId)
+export const deletePost = (id, carInfoId, type = 'Status') => {
+  const item = { id, carInfoId, type }
+  const apiMethod = deleteMethods[`delete${type}`]
+  return dispatch => apiMethod({}, item)
+      .then(() => dispatch({ type: DELETE_TIMELINE_ITEM, item }))
 }
 
-export const updateStatus = (id, carInfoId, status) => {
-  return dispatch => {
-    dispatch({
-      type: UPDATE_STATUS,
-      status: { carInfoId, id },
-      pending: true
-    })
-    update({ body: status }, { id, carInfoId })
-      .then(status => {
-        dispatch({
-          type: UPDATE_STATUS,
-          status
-        })
+export const updateStatus = (id, carInfoId, item) => dispatch => {
+  const details = { id, carInfoId }
+  dispatch({
+    type: UPDATE_TIMELINE_ITEM,
+    item: { details, type: 'Status' },
+    pending: true
+  })
+  update({ body: item }, { id, carInfoId })
+    .then(itemDetails => {
+      dispatch({
+        type: UPDATE_TIMELINE_ITEM,
+        item: {
+          type: 'Status',
+          details: itemDetails
+        }
       })
-      .catch(console.log)
-  }
+    })
+    .catch((...args) => console.log(...args))
 }

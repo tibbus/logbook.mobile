@@ -6,15 +6,43 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import { ListVideo } from '../Video/ListVideo'
 import { FitImage } from '../Image'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-export const Status = (data = {}) => {
-  const { details = {}, pending, onMenuPress, user = {} } = data
+const renderMedia = (type, data) => {
+  const { details, paused = true, onVideoPress } = data
+  const { contentUris } = details
+
+  switch (type) {
+    case 'Image':
+      return contentUris.map(uri => (
+        <FitImage
+          key={uri}
+          resizeMode={Image.resizeMode.contain}
+          source={{uri}}
+          style={styles.image} />
+      ))
+
+    case 'Video':
+      return contentUris.map(uri => (
+        <ListVideo
+          key={uri}
+          paused={paused}
+          uri={uri}
+          onVideoPress={() => onVideoPress(data)} />
+      ))
+
+    default:
+      return null
+  }
+}
+
+export const Post = (data = {}) => {
+  const { details = {}, pending, onMenuPress, type, user = {} } = data
   const {
     profileImg = 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
     commentCount,
-    contentUris = [],
     likeCount,
     description,
     timeAgo
@@ -26,8 +54,7 @@ export const Status = (data = {}) => {
       <View style={styles.eventHeader}>
         <Image
           source={{uri: profileImg}}
-          style={styles.icon}
-        />
+          style={styles.icon} />
         <View style={styles.userDetails}>
           <View style={{flex: 1}}>
             <Text style={styles.name}>{name}</Text>
@@ -41,15 +68,7 @@ export const Status = (data = {}) => {
       <View>
         <Text style={styles.description}>{description}</Text>
         <View>
-          {
-            contentUris.map(uri => (
-              <FitImage
-                key={uri}
-                resizeMode={Image.resizeMode.contain}
-                source={{uri}}
-                style={styles.image} />
-            ))
-          }
+          {renderMedia(type, data)}
         </View>
       </View>
       <View style={styles.eventFooter}>
@@ -75,7 +94,6 @@ const styles = StyleSheet.create({
     height: 40
   },
   container: {
-    flex: 1,
     padding: 10,
     backgroundColor: '#ffffff'
   },

@@ -7,12 +7,16 @@ import {
   View
 } from 'react-native'
 import { connect } from 'react-redux'
-import { setCarTimeline } from '../../Actions/timeline'
+import {
+  pauseVideoAction,
+  playVideoAction,
+  setCarTimeline
+} from '../../Actions/timeline'
 import { deletePost } from '../../Actions/post'
 import { LoadingView } from '../LoadingView'
 import { CommentsSnapshot, CommentCreate } from '../Comments'
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry'
-import { getStatus, StatusMenu } from '../Statuses'
+import { getPost, PostMenu } from '../Post'
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
@@ -123,17 +127,29 @@ export class Timeline extends Component {
     this.setState({ modal })
   }
 
+  playVideo (post) {
+    const { dispatch } = this.props
+    const { details, paused = true } = post
+    const { carInfoId, id } = details
+    const action = paused ? playVideoAction : pauseVideoAction
+
+    dispatch(action(carInfoId, id))
+  }
+
   renderRow (post) {
     const { user } = this.props
+
     const props = {
       ...post,
       onMenuPress: () => this.showStatusMenu(post),
+      onVideoPress: this.playVideo.bind(this),
       user
     }
     const comments = []
+
     return (
       <View style={styles.row}>
-        {getStatus(props)}
+        {getPost(props)}
         <CommentsSnapshot
           style={styles.commentsSnapshot}
           onPress={this.addComment.bind(this)}
@@ -151,7 +167,7 @@ export class Timeline extends Component {
   statusAction ({ value }, id, mediaType) {
     const { dispatch } = this.props
     this.clearModal()
-    console.info(mediaType)
+
     switch (value) {
       case 'delete':
         return dispatch(deletePost(id, this.carInfoId, mediaType))
@@ -165,7 +181,7 @@ export class Timeline extends Component {
     switch (type) {
       case 'StatusMenu':
         return (
-          <StatusMenu
+          <PostMenu
             onSelect={val => this.statusAction(val, id, mediaType)} />
         )
 

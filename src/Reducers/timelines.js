@@ -1,12 +1,12 @@
 import {
   ADD_TIMELINE,
-  ADD_TIMELINE_IMAGE,
-  ADD_TIMELINE_STATUS,
-  DELETE_IMAGE,
-  DELETE_STATUS,
-  UPDATE_STATUS
+  ADD_TIMELINE_ITEM,
+  DELETE_TIMELINE_ITEM,
+  UPDATE_TIMELINE_ITEM,
+  PLAY_TIMELINE_VIDEO,
+  PAUSE_TIMELINE_VIDEO
 } from '../Actions/Types'
-import { statusReducer } from './statuses'
+import { timelineItemReducer } from './statuses'
 import { sort } from 'ramda'
 import moment from 'moment'
 
@@ -39,52 +39,73 @@ const newTimelineItem = (timeline, carInfoId, { data, pending }) => ({
   )
 })
 
-const removeTimelineItem = (action, state, type) => {
-  const { post } = action
+const itemMatch = (item1, { type, id, details = {} }) => (
+  item1.type === type && item1.details.id === (id || details.id)
+)
+
+const removeTimelineItem = (action, state) => {
+  const { item } = action
   const { timeline, carInfoId } = state
 
   return {
     carInfoId,
-    timeline: timeline.filter(item => {
-      if (item.type === type && item.details.id === post.id) {
-        return false
-      }
-      return true
-    })
+    timeline: timeline.filter(item1 => !itemMatch(item1, item))
   }
 }
 
 const timelineReducer = (state = [], action) => {
-  const { type, status } = action
+  const { type, item } = action
   const { timeline, carInfoId } = state
 
   switch (type) {
-
-    case ADD_TIMELINE_IMAGE:
+    case ADD_TIMELINE_ITEM:
       return newTimelineItem(timeline, carInfoId, action)
 
-    case ADD_TIMELINE_STATUS:
-      return newTimelineItem(timeline, carInfoId, action)
+    case DELETE_TIMELINE_ITEM:
+      return removeTimelineItem(action, state)
 
-    case DELETE_IMAGE:
-      return removeTimelineItem(action, state, 'Image')
-
-    case DELETE_STATUS:
-      return removeTimelineItem(action, state, 'Status')
-
-    case UPDATE_STATUS:
+    case UPDATE_TIMELINE_ITEM: {
       return {
         carInfoId,
-        timeline: timeline.map(item => {
-          if (item.type === 'Status' && item.details.id === status.id) {
-            return statusReducer(item, action)
+        timeline: timeline.map(item2 => {
+          if (itemMatch(item2, item)) {
+            return timelineItemReducer(item2, action)
           }
-          return item
+
+          return item2
         })
       }
+    }
+
+    case PLAY_TIMELINE_VIDEO:
+      return {
+        carInfoId,
+        timeline: timeline.map(videoMap(action))
+      }
+
+    case PAUSE_TIMELINE_VIDEO:
+      return {
+        carInfoId,
+        timeline: timeline.map(videoMap(action))
+      }
+
     default:
       return state
   }
+}
+
+const videoMap = action => item => {
+  if (item.type !== 'Video') return item
+
+  if (item.details.id === action.postId) {
+    return timelineItemReducer(item, action)
+  }
+
+  if (item.paused) {
+    return item
+  }
+
+  return timelineItemReducer(item, { ...action, type: PAUSE_TIMELINE_VIDEO })
 }
 
 const mapTimelines = (timelines, action, carInfoId) => timelines.map(timeline => {
@@ -95,7 +116,7 @@ const mapTimelines = (timelines, action, carInfoId) => timelines.map(timeline =>
 })
 
 export const timelines = (state = initialState, action) => {
-  const { carInfoId, type, timeline, status, post } = action
+  const { carInfoId, type, timeline, item } = action
 
   switch (type) {
     case ADD_TIMELINE:
@@ -107,20 +128,20 @@ export const timelines = (state = initialState, action) => {
         }
       ]
 
-    case ADD_TIMELINE_IMAGE:
+    case ADD_TIMELINE_ITEM:
       return mapTimelines(state, action, action.carInfoId)
 
-    case ADD_TIMELINE_STATUS:
+    case DELETE_TIMELINE_ITEM:
+      return mapTimelines(state, action, item.carInfoId)
+
+    case UPDATE_TIMELINE_ITEM:
+      return mapTimelines(state, action, item.details.carInfoId)
+
+    case PLAY_TIMELINE_VIDEO:
       return mapTimelines(state, action, action.carInfoId)
 
-    case DELETE_STATUS:
-      return mapTimelines(state, action, post.carInfoId)
-
-    case DELETE_IMAGE:
-      return mapTimelines(state, action, post.carInfoId)
-
-    case UPDATE_STATUS:
-      return mapTimelines(state, action, status.carInfoId)
+    case PAUSE_TIMELINE_VIDEO:
+      return mapTimelines(state, action, action.carInfoId)
 
     default:
       return state

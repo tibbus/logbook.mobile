@@ -2,15 +2,8 @@ import React, {
   Component
 } from 'react'
 import { RootNav } from './Components'
-import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import * as reducers from './Reducers'
-import thunk from 'redux-thunk'
-
-export const store = createStore(
-  combineReducers(reducers),
-  applyMiddleware(thunk)
-)
+import { store } from './store'
 
 export class App extends Component {
 
