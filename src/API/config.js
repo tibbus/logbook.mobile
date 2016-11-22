@@ -3,7 +3,7 @@ const API_VERSION = 1
 
 const environments = {
   dev: {
-    uri: 'amilatestapi-dev.azurewebsites.net',
+    uri: 'mycarbioservice.azurewebsites.net',
     secure: false
   }
 }
