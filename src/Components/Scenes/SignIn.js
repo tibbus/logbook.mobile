@@ -5,6 +5,7 @@ import {
 import { IdentityOIDC } from '../Auth'
 import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types'
 import { getEnvironment } from '../../API/config'
+import { getIdentityEnvironment } from '../../API/config'
 import { setUserProfile } from '../../Actions/user'
 
 export class SignIn extends Component {
@@ -46,9 +47,9 @@ export class SignIn extends Component {
       <IdentityOIDC
         attemptAuth={() => dispatch({ type: ATTEMPT_OIDC_AUTH })}
         shouldAttempt={user.attemptingOIDC}
-        uri={getEnvironment()}
-        authEndpoint='identity/connect/authorize'
-        clientId='mycarbiomobile'
+        uri={getIdentityEnvironment()}
+        authEndpoint='connect/authorize'
+        clientId='mycarbiowebapp'
         redirectUri={getEnvironment()}
         scopes={['openid']}
         onAuthSuccess={this.authSuccess.bind(this)}

@@ -35,11 +35,11 @@ const customParams = (files, request) => {
 
 export const fetcher = (uri, method = 'GET', files = false) => (request = {}, uriParams) => {
   const { user } = store.getState()
-  const { token = {}, id } = user
-  const { tokenType, accessToken } = token
-  const Authorization = `${tokenType} ${accessToken}`
+  //const { token = {}, id } = user
+  //const { tokenType, accessToken } = token
+  //const Authorization = `${tokenType} ${accessToken}`
   const { headers = {} } = request
-  const url = getUrl(uri, Object.assign({}, uriParams, { userId: id }))
+  const url = getUrl(uri, Object.assign({}, uriParams, { userId: 1 }))
 
   const { body, customHeaders } = customParams(files, request)
   const requestObject = {
@@ -48,7 +48,7 @@ export const fetcher = (uri, method = 'GET', files = false) => (request = {}, ur
     headers: {
       ...customHeaders,
       ...headers,
-      Authorization
+      //Authorization
     }
   }
 
@@ -69,6 +69,6 @@ export const fetcher = (uri, method = 'GET', files = false) => (request = {}, ur
     })
 }
 
-export const getUser = fetcher('identity/connect/userinfo')
+export const getUser = fetcher('api/v1/user')
 
 export const endSession = fetcher('identity/connect/endsession')
