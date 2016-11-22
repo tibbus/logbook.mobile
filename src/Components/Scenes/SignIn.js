@@ -48,7 +48,7 @@ export class SignIn extends Component {
         shouldAttempt={user.attemptingOIDC}
         uri={getEnvironment()}
         authEndpoint='identity/connect/authorize'
-        clientId='mvc6'
+        clientId='mycarbiomobile'
         redirectUri={getEnvironment()}
         scopes={['openid']}
         onAuthSuccess={this.authSuccess.bind(this)}
