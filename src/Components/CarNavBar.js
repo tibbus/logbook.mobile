@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import getStream from 'getstream';
 
 export const CarNavBar = (props) => {
   const {
@@ -33,7 +34,8 @@ export const CarNavBar = (props) => {
       navigator.pop()
     }
   }
-
+  console.log('---------------------------------------------------------------')
+  console.log(getStream);
   return (
     <View style={styles.container}>
       <TouchableHighlight style={[styles.navItem, styles.button]} onPress={() => prev()}>
