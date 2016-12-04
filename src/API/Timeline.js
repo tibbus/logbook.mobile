@@ -1,11 +1,11 @@
 import { fetcher } from './fetch'
 import { api } from './config'
-import getStream from 'getstream';
+import { getStreamApi } from './config'
+import { getFeedData } from './GetStream'
 
 export  const getTimelineToken  =  fetcher(api  +  'feeds/token',  'POST')
 
 const  getOldTimeline  =  fetcher(api  +  'timeline/{carInfoId}')
-const getStreamClient = getStream.connect("8r2y2gbevg9j")
 
 export  const getTimeline  =  (carInfoId)  =>  {
     console.log('get timeline')
@@ -16,19 +16,18 @@ export  const getTimeline  =  (carInfoId)  =>  {
                 // Fetch the token
               getTimelineToken({ body },  {})
                 .then(token =>  {
-                //Call to timeline
-                const carFeed = getStreamClient.feed('car', carInfoId.toString(), token);
-
-                carFeed.get({ limit: 10 })
-                    .then(body => {
-                        console.log(body);
-                        resolve(body);
-                    })
-                    .catch(response => {
+                    console.log(token)
+                
+                    //Call to timeline
+                    getFeedData('car', carInfoId, token.token)
+                    .then(response => {
                         console.log(response);
+                        resolve(response);
                     })
-                        //Get the data and then resolve the data.
-                        console.log(token)
+                    .catch(error => {
+                        console.log(error);
+                    })
+                        
                   })
                   .catch(e  =>  {
                         console.log(e)
