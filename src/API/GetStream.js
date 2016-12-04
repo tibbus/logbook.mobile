@@ -4,6 +4,7 @@ import { getStreamEnvironment } from './config'
 import { getStreamFetchLimit } from './config'
 import { getStreamApiKey } from './config'
 import { replaceParams } from '../Utils'
+import * as _ from 'lodash'
 
 const fetchLimit = getStreamFetchLimit();
 const apiKey = getStreamApiKey();
@@ -16,6 +17,18 @@ getUrl = (uri, uriParams = {}) => {
   return env + uri
 }
 
+formatResponse = (mapToConvert) =>{
+    const formattedData = mapToConvert.map(item => {
+
+        const postObject = _.mapKeys(item.Target, (currentItem, currentKey) => {
+            return _.camelCase(currentKey)
+        });
+        
+        postObject.type = item.object;
+        return postObject;
+    })
+    return formattedData;
+}
 
 export const getFeedData = (feedType, feedId, token) => {
 
@@ -28,10 +41,7 @@ export const getFeedData = (feedType, feedId, token) => {
         }
     })
     .then(response => response.json())
-    .then(jsonResponse => {
-        console.log(jsonResponse)
-        return jsonResponse.results;
-    })
+    .then(jsonResponse => formatResponse(jsonResponse.results))
     .catch(error => {
         console.log(error);
         throw new Error("Error during get stream api call.")
