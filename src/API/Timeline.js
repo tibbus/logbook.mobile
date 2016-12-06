@@ -1,37 +1,36 @@
 import { fetcher } from './fetch'
 import { api } from './config'
+import { getStreamApi } from './config'
+import { getFeedData } from './GetStream'
 
+export  const getTimelineToken  =  fetcher(api  +  'feeds/token',  'POST')
 
-export const getTimelineToken = fetcher(api + 'feeds/token', 'POST',) 
+const  getOldTimeline  =  fetcher(api  +  'timeline/{carInfoId}')
 
-const getOldTimeline = fetcher(api + 'timeline/{carInfoId}')  
+export  const getTimeline  =  (carInfoId)  =>  {
+    console.log('get timeline')
+    const promise   =  new  Promise((resolve,  reject)  =>  {
+        const body  =  { actorId: carInfoId,  actorType: 'car'  }
+        const request  =  {  body  }
+        
+        getTimelineToken({ body },  {})
+        .then(tokenResponse =>  {
+            console.log(tokenResponse)
+        
+            //Call to timeline
+            getFeedData('car', carInfoId, tokenResponse.token)
+            .then(response => {
+                console.log(response);
+                resolve(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+          })
+         .catch(e  =>  {
+                console.log(e)
+          })
+    })
 
-
-export const getTimeline = () => { 
-
-    var promise  = new Promise((resolve, reject) => { 
-
-      const body = {actorId:1, actorType:"user" } 
-      const request = { body } 
-
-      getTimelineToken(request, {}) 
-      .then(data => { 
-
-        console.log(data) 
-        console.log(client) 
-        resolve(data)   
-
-      }) 
-
-      .catch(e => { 
-        console.log(e) 
-
-        // TODO Handle timeline init failure 
-
-      }) 
-    }) 
-
-    //fetcher to get token 
-    //One token available, use fetch to call getstream? 
-    return promise; 
-} 
+    return  promise;
+}

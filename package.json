@@ -15,7 +15,6 @@
     "dns.js": "^1.0.1",
     "domain-browser": "^1.1.7",
     "events": "^1.1.1",
-    "getstream": "^3.5.0",
     "https-browserify": "0.0.1",
     "moment": "^2.13.0",
     "os-browserify": "^0.1.2",

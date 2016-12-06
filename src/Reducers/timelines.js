@@ -11,20 +11,15 @@ import { sort } from 'ramda'
 import moment from 'moment'
 
 const initialState = []
-const sortByCreated = sort(
-  (item, item2) =>
-    (new Date(item2.details.createdDate)).getTime() -
-    (new Date(item.details.createdDate)).getTime())
 
 const modifier = timelineItem => {
-  const { details } = timelineItem
-  const { createdDate } = details
+  const { createdDate } = timelineItem
   const timeAgo = moment(new Date(createdDate)).from(moment())
 
   return {
     ...timelineItem,
     details: {
-      ...details,
+      ...timelineItem,
       timeAgo
     }
   }
@@ -124,7 +119,7 @@ export const timelines = (state = initialState, action) => {
         ...state,
         {
           carInfoId,
-          timeline: sortByCreated(timeline).map(modifier)
+          timeline: timeline.map(modifier)
         }
       ]
 
