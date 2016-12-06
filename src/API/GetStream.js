@@ -4,12 +4,12 @@ import { getStreamEnvironment } from './config'
 import { getStreamFetchLimit } from './config'
 import { getStreamApiKey } from './config'
 import { replaceParams } from '../Utils'
-import * as _ from 'lodash'
+import { mapKeys, camelCase } from 'lodash'
 
 const fetchLimit = getStreamFetchLimit();
 const apiKey = getStreamApiKey();
 
-getUrl = (uri, uriParams = {}) => {
+const getUrl = (uri, uriParams = {}) => {
     const env = getStreamEnvironment()
     if (uriParams) {
         return env + replaceParams(uri, uriParams, encodeURIComponent)
@@ -17,13 +17,13 @@ getUrl = (uri, uriParams = {}) => {
   return env + uri
 }
 
-formatResponse = (mapToConvert) =>{
+const formatResponse = (mapToConvert) =>{
     const formattedData = mapToConvert.map(item => {
 
-        const postObject = _.mapKeys(item.Target, (currentItem, currentKey) => {
-            return _.camelCase(currentKey)
+        const postObject = mapKeys(item.Target, (currentItem, currentKey) => {
+            return camelCase(currentKey)
         });
-        
+
         postObject.type = item.object;
         return postObject;
     })

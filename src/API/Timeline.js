@@ -9,17 +9,16 @@ const  getOldTimeline  =  fetcher(api  +  'timeline/{carInfoId}')
 
 export  const getTimeline  =  (carInfoId)  =>  {
     console.log('get timeline')
-    var  promise   =  new  Promise((resolve,  reject)  =>  {
-      const body  =  { actorId: carInfoId,  actorType: 'car'  }
-      const request  =  {  body  }
-
-        // Fetch the token
-      getTimelineToken({ body },  {})
-        .then(token =>  {
-            console.log(token)
+    const promise   =  new  Promise((resolve,  reject)  =>  {
+        const body  =  { actorId: carInfoId,  actorType: 'car'  }
+        const request  =  {  body  }
+        
+        getTimelineToken({ body },  {})
+        .then(tokenResponse =>  {
+            console.log(tokenResponse)
         
             //Call to timeline
-            getFeedData('car', carInfoId, token.token)
+            getFeedData('car', carInfoId, tokenResponse.token)
             .then(response => {
                 console.log(response);
                 resolve(response);
@@ -28,10 +27,10 @@ export  const getTimeline  =  (carInfoId)  =>  {
                 console.log(error);
             })
           })
-          .catch(e  =>  {
+         .catch(e  =>  {
                 console.log(e)
           })
-        })
+    })
 
     return  promise;
 }
