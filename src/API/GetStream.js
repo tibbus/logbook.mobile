@@ -17,19 +17,6 @@ const getUrl = (uri, uriParams = {}) => {
   return env + uri
 }
 
-const formatResponse = (mapToConvert) =>{
-    const formattedData = mapToConvert.map(item => {
-
-        const postObject = mapKeys(item.Target, (currentItem, currentKey) => {
-            return camelCase(currentKey)
-        });
-
-        postObject.type = item.object;
-        return postObject;
-    })
-    return formattedData;
-}
-
 export const getFeedData = (feedType, feedId, token) => {
 
     const url = getUrl(`${getStreamApi}feed/${feedType}/${feedId}/?limit=${fetchLimit}&api_key=${apiKey}`)
@@ -41,7 +28,12 @@ export const getFeedData = (feedType, feedId, token) => {
         }
     })
     .then(response => response.json())
-    .then(jsonResponse => formatResponse(jsonResponse.results))
+    .then(jsonResponse => {
+        const timelineTimes = jsonResponse.results.map((timelineObject) => {
+            return timelineObject.Target;
+        })
+        return timelineTimes;
+    })
     .catch(error => {
         console.log(error);
         throw new Error("Error during get stream api call.")

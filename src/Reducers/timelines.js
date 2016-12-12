@@ -13,7 +13,7 @@ import moment from 'moment'
 const initialState = []
 
 const modifier = timelineItem => {
-  const { createdDate } = timelineItem
+  const { createdDate } = timelineItem.activityData
   const timeAgo = moment(new Date(createdDate)).from(moment())
 
   return {
