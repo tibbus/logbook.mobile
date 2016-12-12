@@ -39,14 +39,20 @@ const renderMedia = (type, data) => {
 }
 
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, type, user = {} } = data
+  const { details = {}, pending, onMenuPress, type, user = {} } = data;
+  profileImg = '';
+  if(details.carData === undefined || details.carData.image === undefined || details.carData.image === null){
+    profileImg = 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
+  }
+  else{
+    profileImg = details.carData.image;
+  }
   const {
-    profileImg = 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
     commentCount,
     likeCount,
-    description,
+    description = details.activityData.description,
     timeAgo
-  } = details
+  } = details;
   const { name } = user
 
   return (
