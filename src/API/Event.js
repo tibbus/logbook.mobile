@@ -4,8 +4,7 @@ import { api } from './config'
 const uri = api + 'car/{carInfoId}/event'
 const uriIdParam = uri + '/{id}'
 
-export const createStatus = fetcher(uri, 'POST')
-export const getStatuses = fetcher(uri)
-export const getStatus = fetcher(uriIdParam)
-export const updateStatus = fetcher(uriIdParam, 'PUT')
-export const deleteStatus = fetcher(uriIdParam, 'DELETE')
+export const createEvent = fetcher(uri, 'POST')
+export const getEvent = fetcher(uriIdParam)
+export const updateEvent = fetcher(uriIdParam, 'PUT')
+export const deleteEvent = fetcher(uriIdParam, 'DELETE')
