@@ -48,8 +48,8 @@ export const Post = (data = {}) => {
     profileImg = details.carData.image;
   }
   const {
-    commentCount,
-    likeCount,
+    commentCount = (details.socialData === undefined || details.socialData.commentsCount === undefined) ? 0 : details.socialData.commentsCount,
+    likeCount = (details.socialData === undefined || details.socialData.likesCount === undefined) ? 0 : details.socialData.likesCount,
     description = details.activityData.description,
     timeAgo
   } = details;
@@ -79,7 +79,7 @@ export const Post = (data = {}) => {
       </View>
       <View style={styles.eventFooter}>
         <View style={[styles.flex, { justifyContent: 'center' }]}>
-          <Icon name='thumb-up'> {likeCount}</Icon>
+          <Text>{likeCount} <Icon name='thumb-up'/></Text>
         </View>
         <Text>
           {commentCount} comments
