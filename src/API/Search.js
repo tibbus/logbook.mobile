@@ -47,4 +47,14 @@ const executeRequest = (url, body) => {
         },
         body: body    
     })
+    .then(response => {
+        
+        if(response.ok){
+            return response.json()
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        throw new Error("Error during search api call.")
+    })
 }
