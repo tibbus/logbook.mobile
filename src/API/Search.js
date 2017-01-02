@@ -50,11 +50,11 @@ const executeRequest = (url, body) => {
     .then(response => {
         
         if(response.ok){
-            return response.json()
+            return response.json();
         }
     })
     .catch(error => {
         console.log(error);
-        throw new Error("Error during search api call.")
+        throw new Error("Error during search api call.");
     })
 }
