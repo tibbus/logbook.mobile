@@ -1,4 +1,3 @@
-import { fetcher } from './fetch'
 import { getStreamApi } from './config'
 import { getStreamEnvironment } from './config'
 import { getStreamFetchLimit } from './config'
