@@ -4,6 +4,7 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_CAR = 'ADD_CAR'
 export const DELETE_CAR = 'DELETE_CAR'
 export const SET_USER_CARS = 'SET_USER_CARS'
+export const SEARCHED_CAR = 'SEARCHED_CAR'
 
 export const ADD_TIMELINE = 'ADD_TIMELINE'
 export const ADD_TIMELINE_ITEM = 'ADD_TIMELINE_ITEM'

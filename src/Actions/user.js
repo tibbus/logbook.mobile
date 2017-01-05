@@ -1,5 +1,5 @@
 import { getUser } from '../API/fetch'
-import { createUserCar, getUserCars } from '../API/UserCar'
+import { confirmUserCar, getUserCars } from '../API/UserCar'
 import { objKeysToDecap } from '../Utils'
 import {
   ADD_CAR,
@@ -41,9 +41,9 @@ export const updateUserCars = ({
   }
 }
 
-export const addUserCar = ({ userId, registration }) => {
+export const addUserCar = ({ userId, carInfoId }) => {
   return dispatch => (
-    createUserCar({}, { userId, registration })
+    confirmUserCar({}, { userId, carInfoId })
       .then(userCar => {
         dispatch({
           type: ADD_CAR,
