@@ -35,3 +35,6 @@ export const CONFIRM_ACTION = 'CONFIRM_ACTION'
 export const REMOVE_CONFIRM = 'REMOVE_CONFIRM'
 export const SET_FLASH = 'SET_FLASH'
 export const CLEAR_FLASH = 'CLEAR_FLASH'
+
+// Search
+export const SEARCHED_RESULT = 'SEARCHED_RESULT'

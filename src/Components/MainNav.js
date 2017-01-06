@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 import { CarsNav, MainNavBar } from './'
+import { Search } from './Scenes'
 
 const configureScene = ({ sceneConfig } = {}) => {
   if (sceneConfig) {
@@ -18,6 +19,9 @@ export class MainNav extends Component {
     switch (id) {
       case 'home':
         return (<CarsNav {...props} style={{flex: 1}} />)
+      
+      case 'search':
+        return (<Search {...props} style={{flex: 1}} />)
 
       default:
         return (<CarsNav {...props} style={{flex: 1}} />)

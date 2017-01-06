@@ -1,13 +1,13 @@
 import { fetcher } from './fetch'
-import { searchEnvironment, AZURE_SEARCH_API_VERSION, searchIndex, searchApiKey } from './config'
+import { getSearchEnvironment, AZURE_SEARCH_API_VERSION, getSearchIndex, getSearchApiKey } from './config'
 import { replaceParams } from '../Utils'
 
-const apiKey = searchApiKey();
-const searchIndex = searchIndex();
+const apiKey = getSearchApiKey();
+const searchIndex = getSearchIndex();
 
 const getUrl = (searchType, uriParams = { 'api-version': AZURE_SEARCH_API_VERSION }) => {
     
-    const env = searchEnvironment();
+    const env = getSearchEnvironment();
     const uri = `${searchIndex}docs/${searchType}`;
     
     if (uriParams) {
