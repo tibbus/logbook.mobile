@@ -1,7 +1,6 @@
 import {
   ADD_CAR,
   SET_USER_CARS,
-  SEARCHED_CAR,
 } from '../Actions/Types'
 
 const initialState = null
@@ -20,7 +19,7 @@ const initialState = null
 // }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo } = action
+  const { type, userCars } = action
 
   switch (type) {
 
@@ -29,9 +28,6 @@ export const cars = (state = initialState, action) => {
 
     case SET_USER_CARS:
       return userCars
-
-    case SEARCHED_CAR:
-      return carInfo
 
     default:
       return state

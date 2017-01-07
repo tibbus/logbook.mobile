@@ -37,4 +37,4 @@ export const SET_FLASH = 'SET_FLASH'
 export const CLEAR_FLASH = 'CLEAR_FLASH'
 
 // Search
-export const SEARCHED_RESULT = 'SEARCHED_RESULT'
+export const CARS_SEARCHED = 'CARS_SEARCHED'

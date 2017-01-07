@@ -1,16 +1,17 @@
 import { getSearchResult } from '../API/Search'
+import { CARS_SEARCHED } from './Types'
 
-export const searchCars = (searchTerm) => {
+export const searchCars = (searchRequest) => {
     return dispatch => {
-        getSearchResult(searchTerm)
+        getSearchResult(searchRequest.searchTerm)
         .then(searchResult => {
             dispatch({
-                type: SEARCHED_RESULT,
-                searchResult
-            })
+                type: CARS_SEARCHED,
+                value: searchResult.value
+            });
         })
         .catch(error => {
 
-        })
+        });
     }
 }

@@ -5,10 +5,10 @@ import { replaceParams } from '../Utils'
 const apiKey = getSearchApiKey();
 const searchIndex = getSearchIndex();
 
-const getUrl = (searchType, uriParams = { 'api-version': AZURE_SEARCH_API_VERSION }) => {
+const getUrl = (searchType, uriParams = { 'api-version': `${AZURE_SEARCH_API_VERSION}` }) => {
     
     const env = getSearchEnvironment();
-    const uri = `${searchIndex}docs/${searchType}`;
+    const uri = `${searchIndex}docs/${searchType}?api-version=${AZURE_SEARCH_API_VERSION}`;
     
     if (uriParams) {
         return env + replaceParams(uri, uriParams, encodeURIComponent);
@@ -38,15 +38,8 @@ export const getSearchResult = (searchTerm) => {
 
 const executeRequest = (url, body) => {
 
-    return global.fetch(url, {
-        methods: 'post',
-        headers: {
-            'api-key' : apiKey,
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-        },
-        body: body    
-    })
+    const requestDetails = { method: 'POST', body: JSON.stringify(body), headers: {'api-key' : apiKey, 'Accept' : 'application/json','Content-Type' : 'application/json'}};
+    return global.fetch(url, requestDetails)
     .then(response => {
         
         if(response.ok){
