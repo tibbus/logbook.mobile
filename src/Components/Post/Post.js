@@ -7,10 +7,10 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import { ListVideo } from '../Video/ListVideo'
-import { FitImage } from '../Image'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import colours from '../../Utils/colours'
+import { ListVideo } from '../Video/ListVideo';
+import { FitImage } from '../Image';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import colours from '../../Utils/colours';
 
 const renderMedia = (type, data) => {
   const { details, paused = true, onVideoPress } = data
