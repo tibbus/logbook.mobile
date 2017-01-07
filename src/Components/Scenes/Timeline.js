@@ -17,6 +17,7 @@ import { LoadingView } from '../LoadingView'
 import { CommentsSnapshot, CommentCreate } from '../Comments'
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry'
 import { getPost, PostMenu } from '../Post'
+import colours from '../../Utils/colours'
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
@@ -230,11 +231,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#efefef'
   },
   modal: {
-    padding: 30
+    padding: 30,
   },
   container: {
     flex: 1,
-    backgroundColor: '#e2e2e2'
+    //marginLeft: 5,
+    //marginRight: 5,
+    backgroundColor: colours.backgroundBlue,
+  },
+  posts: {
+    marginLeft: 15,
+    marginRight: 15,
   },
   welcome: {
     fontSize: 20,
@@ -247,6 +254,6 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   row: {
-    marginTop: 15
+    marginTop: 10,
   }
 })

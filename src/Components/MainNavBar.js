@@ -5,12 +5,16 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
+import colours from '../Utils/colours'
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: colours.background,
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    borderRadius: 0,
+    borderWidth: 0.5,
+    borderColor: colours.line,
   },
   button: {
     height: 40,
@@ -25,10 +29,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e0e0e0'
+    backgroundColor: colours.backgroundBlue,
   },
   icon: {
-    fontSize: 17
+    fontSize: 20,
   }
 })
 
@@ -54,14 +58,18 @@ export class MainNavBar extends Component {
           <Icon name='home' style={styles.icon} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
+          <Icon name='bell-o' style={styles.icon} />
+        </TouchableHighlight>
+        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
+          <Icon name='plus-square-o' style={styles.icon} />
+        </TouchableHighlight>
+        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
           <Icon name='search' style={styles.icon} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
-          <Icon name='comments' style={styles.icon} />
+          <Icon name='user' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
-          <Icon name='globe' style={styles.icon} />
-        </TouchableHighlight>
+
       </View>
     )
   }
