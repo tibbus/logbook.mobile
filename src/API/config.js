@@ -1,7 +1,7 @@
 const CURRENT_ENV = 'dev'
 const API_VERSION = 1
 const STREAM_API_VERSION = '1.0'
-const AZURE_SEARCH_API_VERSION = '2015-02-28'
+export const AZURE_SEARCH_API_VERSION = '2015-02-28'
 
 const environments = {
   dev: {
