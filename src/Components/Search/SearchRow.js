@@ -21,14 +21,7 @@ const styles = StyleSheet.create({
 });
 
 export const SearchRow = (props) => {
-imageUrl  = '';
-
-if(props.image == null){
-    imageUrl = 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
-} 
-else {
-    imageUrl = props.image;
-}
+  const imageUrl = props.image ? props.image : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png'
   
   return (
   <View style={styles.container}>

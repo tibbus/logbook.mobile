@@ -11,8 +11,7 @@ export class SearchCars extends Component {
     }
 
     render() {
-        const { onSubmit } = this.props;
-        const { search } = this.props;
+        const { onSubmit, search } = this.props;
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
