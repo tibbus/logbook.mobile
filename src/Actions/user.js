@@ -1,12 +1,14 @@
 import { getUser } from '../API/fetch'
 import { confirmUserCar, getUserCars } from '../API/UserCar'
+import { getFollowCount } from '../API/user'
 import { objKeysToDecap } from '../Utils'
 import {
   ADD_CAR,
   SET_USER,
   SET_USER_CARS,
   SET_LOADING_STATUS,
-  UNSET_LOADING_STATUS } from './Types'
+  UNSET_LOADING_STATUS,
+  SET_USER_FOLLOW_COUNT } from './Types'
 
 export const setUserProfile = () => {
   return dispatch => {
@@ -54,4 +56,19 @@ export const addUserCar = ({ userId, carInfoId }) => {
 
       })
   )
+}
+
+export const getUserFollowCount = ({ userId }) => {
+  return dispatch => (
+    getFollowCount({}, { userId })
+      .then(count => {
+        dispatch({ 
+          type: SET_USER_FOLLOW_COUNT,
+          count
+          })
+      })
+      .catch(e => {
+
+      })
+  );
 }

@@ -3,18 +3,20 @@ import {
   INVALIDATE_USER,
   SET_AUTH,
   SET_AUTH_ERROR,
-  SET_USER
+  SET_USER,
+  SET_USER_FOLLOW_COUNT
 } from '../Actions/Types'
 
 const initialState = {
   attemptingOIDC: false,
   name: 'Guest',
   token: null,
-  profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png'
+  profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
+  followCount: 0
 }
 
 export const user = (state = initialState, action) => {
-  const { type, user, token } = action
+  const { type, user, token, count } = action
 
   switch (type) {
     case INVALIDATE_USER:
@@ -48,6 +50,11 @@ export const user = (state = initialState, action) => {
         ...user,
         token: state.token,
         attemptingOIDC: !!state.token
+      }
+    case SET_USER_FOLLOW_COUNT:
+      return {
+        ...state,
+        followCount: count
       }
     default:
       return state

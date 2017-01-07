@@ -25,6 +25,7 @@ export const SET_AUTH_ERROR = 'SET_AUTH_ERROR'
 export const ATTEMPT_OIDC_AUTH = 'ATTEMPT_OIDC_AUTH'
 
 export const SET_USER = 'SET_USER'
+export const SET_USER_FOLLOW_COUNT =  'SET_USER_FOLLOW_COUNT'
 
 // State
 export const SET_LOADING_STATUS = 'SET_LOADING_STATUS'
