@@ -23,7 +23,7 @@ export class Search extends Component {
         const { search } = this.props;
         return (
             <SearchCars onSubmit={searchTerm => dispatch(searchCars({searchTerm}))} search={search} />
-        )        
+        )
     }
 }
 

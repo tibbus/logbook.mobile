@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, ListView, View, Text, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { SearchHeader, SearchRow } from './'
+//import styles
+import background from '../../Themes/background';
 
 
 export class SearchCars extends Component {
@@ -18,7 +20,7 @@ export class SearchCars extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(search)
         }
-        
+
         return (
             <ListView
                 style={styles.container}
@@ -26,6 +28,7 @@ export class SearchCars extends Component {
                 renderRow={(data) => <SearchRow {...data} />}
                 renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                 renderHeader={() => <SearchHeader searchFunction = { onSubmit } /> }
+                enableEmptySections={true}
             />
         )
     }
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
+        backgroundColor: background.color,
     },
     separator: {
         flex: 1,
