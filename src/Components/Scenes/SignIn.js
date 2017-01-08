@@ -50,8 +50,8 @@ export class SignIn extends Component {
         uri={getIdentityEnvironment()}
         authEndpoint='connect/authorize'
         clientId='mycarbiowebapp'
-        redirectUri={getEnvironment()}
-        scopes={['openid']}
+        redirectUri={getIdentityEnvironment()}
+        scopes={['openid', 'profile', 'mycarbioapi']}
         onAuthSuccess={this.authSuccess.bind(this)}
         onAuthError={this.authError.bind(this)}
       />

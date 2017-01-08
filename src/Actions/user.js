@@ -14,7 +14,7 @@ export const setUserProfile = () => {
       .then(userDetails => {
         const user = {
           ...userDetails,
-          profile: objKeysToDecap(JSON.parse(userDetails.profile))
+          //profile: objKeysToDecap(JSON.parse(userDetails.profile))
         }
         dispatch({
           type: SET_USER,

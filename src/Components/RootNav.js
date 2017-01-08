@@ -26,7 +26,7 @@ export class RootNav extends Component {
   renderScene (route, navigator) {
     const { dispatch, user } = this.props
     const { token } = user
-    const { id = 'main', component, requiresAuth = false } = route
+    const { id = 'main', component, requiresAuth = true } = route
     const routeId = (requiresAuth && (!token || !user.id)) ? null : id
 
     switch (routeId) {

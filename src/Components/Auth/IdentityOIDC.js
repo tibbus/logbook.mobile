@@ -51,8 +51,12 @@ const checkState = ({
   if (loading || !url.match(uri)) return
 
   getBearer(url)
-    .then(token => onAuthSuccess(token))
-    .catch(err => onAuthError(err))
+    .then(token => {
+      onAuthSuccess(token);
+    })
+    .catch(err => {
+      onAuthError(err);
+  })
 }
 
 const AuthView = props => {
@@ -70,7 +74,7 @@ const AuthView = props => {
         javaScriptEnabled={Boolean(true)}
         domStorageEnabled={Boolean(true)}
         decelerationRate='normal'
-        onNavigationStateChange={(nav) => checkState({ uri: props.ur, nav, onAuthSuccess, onAuthError })}
+        onNavigationStateChange={(nav) => checkState({ uri: props.uri, nav, onAuthSuccess, onAuthError })}
         startInLoadingState={Boolean(true)}
         scalesPageToFit={Boolean(false)} />
     </BackScene>
