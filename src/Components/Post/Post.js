@@ -10,7 +10,11 @@ import {
 import { ListVideo } from '../Video/ListVideo';
 import { FitImage } from '../Image';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colours from '../../Utils/colours';
+//importing styles
+import background from '../../Themes/background';
+import comments from '../../Themes/comments';
+import icon from '../../Themes/icon';
+import text from '../../Themes/text';
 
 const renderMedia = (type, data) => {
   const { details, paused = true, onVideoPress } = data
@@ -112,8 +116,6 @@ const styles = StyleSheet.create({
     //lineHeight: 10,
     //try not to use letterSpacing - iOS only
     letterSpacing: 0.5,
-    //borderTopWidth: 20,
-    //borderTopColor: 'red',
     paddingTop: 10,
     paddingBottom: 20,
   },
@@ -127,27 +129,27 @@ const styles = StyleSheet.create({
   break: {
     flexDirection: 'row',
     borderBottomWidth: 2,
-    borderBottomColor: colours.backgroundBlue,
+    borderBottomColor: background.color,
   },
   container: {
     padding: 20,
     paddingTop: 20,
-    backgroundColor: '#ffffff'
+    backgroundColor: background.component,
   },
   containerEmpty: {
     padding: 0,
     paddingTop: 0,
-    backgroundColor: '#ffffff'
+    backgroundColor: background.component,
   },
   eventHeader: {
     flexDirection: 'row',
   },
   heartIcon: {
-    color: colours.featureText,
+    color: icon.active,
     fontSize: 20,
   },
   likes: {
-    color: colours.inactive,
+    color: icon.inactive,
     textAlign: 'right',
   },
   userDetails: {
@@ -166,15 +168,13 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   date: {
-    color: colours.secondaryText,
+    color: text.secondaryText,
     textAlign: 'right',
   },
   eventFooter: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    //borderTopWidth: 1,
-    //borderTopColor: '#f5f5f5',
     marginTop: 5,
     paddingTop: 5
   },
@@ -186,13 +186,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   viewComments: {
-    backgroundColor: colours.viewComments,
+    backgroundColor: comments.viewCommentsBgd,
     flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
   },
   viewCommentsText: {
-    color: colours.secondaryText,
+    color: text.secondaryText,
     textAlign: 'center',
   }
 })

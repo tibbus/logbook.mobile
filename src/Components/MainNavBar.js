@@ -1,20 +1,22 @@
-import Icon from 'react-native-vector-icons/FontAwesome'
-import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   TouchableHighlight,
   View
-} from 'react-native'
-import colours from '../Utils/colours'
+} from 'react-native';
+//importing styles
+import navBar from '../Themes/navBar';
+import background from '../Themes/background';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: colours.background,
+    backgroundColor: background.component,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     borderRadius: 0,
     borderWidth: 0.5,
-    borderColor: colours.line,
+    borderColor: navBar.line,
   },
   button: {
     height: 40,
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colours.backgroundBlue,
+    backgroundColor: background.color,
   },
   icon: {
     fontSize: 20,
@@ -66,6 +68,7 @@ export class MainNavBar extends Component {
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
           <Icon name='bell-o' style={styles.icon} />
+        </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
           <Icon name='plus-square-o' style={styles.icon} />
         </TouchableHighlight>
@@ -75,7 +78,6 @@ export class MainNavBar extends Component {
         <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
           <Icon name='user' style={styles.icon} />
         </TouchableHighlight>
-
       </View>
     )
   }
