@@ -66,16 +66,16 @@ export class MainNavBar extends Component {
         <TouchableHighlight style={bgColour('home')} onPress={this.goToHome.bind(this)}>
           <Icon name='home' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
+        <TouchableHighlight style={bgColour('away')}>
           <Icon name='bell-o' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
+        <TouchableHighlight style={bgColour('away')}>
           <Icon name='plus-square-o' style={styles.icon} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('search')} onPress={this.gotoSearch.bind(this)}>
           <Icon name='search' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
+        <TouchableHighlight style={bgColour('away')}>
           <Icon name='user' style={styles.icon} />
         </TouchableHighlight>
       </View>
