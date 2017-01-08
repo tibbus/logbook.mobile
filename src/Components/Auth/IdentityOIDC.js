@@ -51,12 +51,8 @@ const checkState = ({
   if (loading || !url.match(uri)) return
 
   getBearer(url)
-    .then(token => {
-      onAuthSuccess(token);
-    })
-    .catch(err => {
-      onAuthError(err);
-  })
+    .then(token => onAuthSuccess(token))
+    .catch(err => onAuthError(err))
 }
 
 const AuthView = props => {
