@@ -1,6 +1,6 @@
 import {
   ADD_CAR,
-  SET_USER_CARS
+  SET_USER_CARS,
 } from '../Actions/Types'
 
 const initialState = null

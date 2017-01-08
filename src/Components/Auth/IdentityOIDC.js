@@ -70,7 +70,7 @@ const AuthView = props => {
         javaScriptEnabled={Boolean(true)}
         domStorageEnabled={Boolean(true)}
         decelerationRate='normal'
-        onNavigationStateChange={(nav) => checkState({ uri: props.ur, nav, onAuthSuccess, onAuthError })}
+        onNavigationStateChange={(nav) => checkState({ uri: props.uri, nav, onAuthSuccess, onAuthError })}
         startInLoadingState={Boolean(true)}
         scalesPageToFit={Boolean(false)} />
     </BackScene>

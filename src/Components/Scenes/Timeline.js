@@ -1,22 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   ListView,
   Modal,
   StyleSheet,
   TouchableOpacity,
   View
-} from 'react-native'
-import { connect } from 'react-redux'
+} from 'react-native';
+import { connect } from 'react-redux';
 import {
   pauseVideoAction,
   playVideoAction,
   setCarTimeline
-} from '../../Actions/timeline'
-import { deletePost } from '../../Actions/post'
-import { LoadingView } from '../LoadingView'
-import { CommentsSnapshot, CommentCreate } from '../Comments'
-import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry'
-import { getPost, PostMenu } from '../Post'
+} from '../../Actions/timeline';
+import { deletePost } from '../../Actions/post';
+import { LoadingView } from '../LoadingView';
+import { CommentsSnapshot, CommentCreate } from '../Comments';
+import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
+import { getPost, PostMenu } from '../Post';
+//importing styles
+import background from '../../Themes/background';
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
@@ -230,11 +232,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#efefef'
   },
   modal: {
-    padding: 30
+    padding: 30,
   },
   container: {
     flex: 1,
-    backgroundColor: '#e2e2e2'
+    //marginLeft: 5,
+    //marginRight: 5,
+    backgroundColor: background.color,
+  },
+  posts: {
+    marginLeft: 15,
+    marginRight: 15,
   },
   welcome: {
     fontSize: 20,
@@ -247,6 +255,6 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   row: {
-    marginTop: 15
+    marginTop: 10,
   }
 })

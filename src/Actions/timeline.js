@@ -37,10 +37,9 @@ export const setCarTimeline = ({
   carInfoId
 }) => {
   return dispatch => {
-    getTimeline({}, { carInfoId })
+    getTimeline(carInfoId , { carInfoId })
       .then(data => {
-        const { results } = data
-        dispatch(addTimelineAction(carInfoId, results))
+        dispatch(addTimelineAction(carInfoId, data))
       })
       .catch(e => {
         // TODO Handle timeline init failure

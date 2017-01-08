@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+
 export const CarNavBar = (props) => {
   const {
     cars,
@@ -33,7 +34,6 @@ export const CarNavBar = (props) => {
       navigator.pop()
     }
   }
-
   return (
     <View style={styles.container}>
       <TouchableHighlight style={[styles.navItem, styles.button]} onPress={() => prev()}>

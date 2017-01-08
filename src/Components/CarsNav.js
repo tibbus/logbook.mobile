@@ -3,6 +3,7 @@ import { Navigator } from 'react-native'
 import { connect } from 'react-redux'
 import { CarNavBar } from './CarNavBar'
 import { addUserCar, updateUserCars } from '../Actions/user'
+import { getCar } from '../Actions/cars'
 import { CarDrawer, CarCreate, CarsEmpty } from './Cars'
 import { LoadingView } from './LoadingView'
 
@@ -55,7 +56,7 @@ export class CarsNav extends Component {
         component: (
           <CarCreate
             navigator={rootNav}
-            onAction={registration => dispatch(addUserCar({ registration }))} />
+            onAction={registration => dispatch(getCar({ registration }))} />
         )
       })
   }
