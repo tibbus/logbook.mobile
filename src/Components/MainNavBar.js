@@ -1,16 +1,22 @@
-import Icon from 'react-native-vector-icons/FontAwesome'
-import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   TouchableHighlight,
   View
-} from 'react-native'
+} from 'react-native';
+//importing styles
+import navBar from '../Themes/navBar';
+import background from '../Themes/background';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: background.component,
     justifyContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    borderRadius: 0,
+    borderWidth: 0.5,
+    borderColor: navBar.line,
   },
   button: {
     height: 40,
@@ -25,10 +31,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e0e0e0'
+    backgroundColor: background.color,
   },
   icon: {
-    fontSize: 17
+    fontSize: 20,
   }
 })
 
@@ -60,14 +66,17 @@ export class MainNavBar extends Component {
         <TouchableHighlight style={bgColour('home')} onPress={this.goToHome.bind(this)}>
           <Icon name='home' style={styles.icon} />
         </TouchableHighlight>
+        <TouchableHighlight style={bgColour('away')}>
+          <Icon name='bell-o' style={styles.icon} />
+        </TouchableHighlight>
+        <TouchableHighlight style={bgColour('away')}>
+          <Icon name='plus-square-o' style={styles.icon} />
+        </TouchableHighlight>
         <TouchableHighlight style={bgColour('search')} onPress={this.gotoSearch.bind(this)}>
           <Icon name='search' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
-          <Icon name='comments' style={styles.icon} />
-        </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')} onPress={this.goToHome}>
-          <Icon name='globe' style={styles.icon} />
+        <TouchableHighlight style={bgColour('away')}>
+          <Icon name='user' style={styles.icon} />
         </TouchableHighlight>
       </View>
     )
