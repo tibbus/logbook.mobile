@@ -28,7 +28,7 @@ export const Info = (props) => {
         {`Cars ${props.user.carCount} Follows ${props.user.followCount}`}
     </Text>
     <Text style={styles.text}>
-        {`${props.name} ${props.lastName}`}
+        {`${props.user.name}`}
     </Text>
     
   </View>

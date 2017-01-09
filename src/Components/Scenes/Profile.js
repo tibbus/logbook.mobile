@@ -11,7 +11,6 @@ export class Profile extends Component {
     constructor () {
         super(...arguments);
 
-        setUserProfile();
         getUserFollowCount(this.props.user.id);
 
     }

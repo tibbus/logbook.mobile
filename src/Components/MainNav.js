@@ -34,7 +34,7 @@ export class MainNav extends Component {
   render () {
     return (
       <Navigator
-        initialRoute={{ id: 'home' }}
+        initialRoute={{ id: 'profile' }}
         navigationBar={<MainNavBar />}
         configureScene={configureScene}
         sceneStyles={{flex: 1}}

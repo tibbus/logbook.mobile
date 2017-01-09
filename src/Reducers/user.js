@@ -12,7 +12,9 @@ const initialState = {
   name: 'Guest',
   token: null,
   profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
-  followCount: 0
+  coverImg: 'https://images.designtrends.com/wp-content/uploads/2015/11/07122458/Car-Backgrounds.jpg',
+  followCount: 0,
+  carCount: 0
 }
 
 export const user = (state = initialState, action) => {

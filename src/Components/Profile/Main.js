@@ -9,11 +9,10 @@ export class Main extends Component {
     }
 
     render() {
-        imageUrl = this.props.image ? this.props.image : 'https://images.designtrends.com/wp-content/uploads/2015/11/07122458/Car-Backgrounds.jpg'
         const { user } = this.props
         return (
             <View>
-                <Image source={{ uri: imageUrl}} style={styles.photo} />
+                <Image source={{ uri: user.coverImg}} style={styles.photo} />
                 <Info user = {user}/>
             </View>
         )
