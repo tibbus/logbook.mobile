@@ -4,7 +4,8 @@ import {
   SET_AUTH,
   SET_AUTH_ERROR,
   SET_USER,
-  SET_USER_FOLLOW_COUNT
+  SET_USER_FOLLOW_COUNT,
+  SET_USER_CAR_COUNT
 } from '../Actions/Types'
 
 const initialState = {
@@ -57,6 +58,11 @@ export const user = (state = initialState, action) => {
       return {
         ...state,
         followCount: count
+      }
+    case SET_USER_CAR_COUNT:
+      return {
+        ...state,
+        carCount: count
       }
     default:
       return state

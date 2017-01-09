@@ -7,6 +7,12 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: 'center',
   },
+  subContainer: {
+    flex: 1,
+    flexDirection:'row',
+    padding: 12,
+    alignItems: 'center',
+  },
   text: {
     marginLeft: 12,
     fontSize: 16,
@@ -23,10 +29,12 @@ export const Info = (props) => {
   
   return (
   <View style={styles.container}>
-    <Image source={{ uri: imageUrl}} style={styles.photo} />
-    <Text style={styles.text}>
-        {`Cars ${props.user.carCount} Follows ${props.user.followCount}`}
-    </Text>
+    <View style={styles.subContainer}>
+      <Image source={{ uri: imageUrl}} style={styles.photo} />
+      <Text style={styles.text}>
+          {`Cars ${props.user.carCount} Follows ${props.user.followCount}`}
+      </Text>
+    </View>
     <Text style={styles.text}>
         {`${props.user.name}`}
     </Text>

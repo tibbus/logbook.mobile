@@ -8,7 +8,8 @@ import {
   SET_USER_CARS,
   SET_LOADING_STATUS,
   UNSET_LOADING_STATUS,
-  SET_USER_FOLLOW_COUNT } from './Types'
+  SET_USER_FOLLOW_COUNT,
+  SET_USER_CAR_COUNT } from './Types'
 
 export const setUserProfile = () => {
   return dispatch => {
@@ -35,8 +36,10 @@ export const updateUserCars = ({
     getUserCars({}, { userId, details })
       .then(userCars => {
         dispatch({ type: SET_USER_CARS, userCars })
-        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })
+        dispatch({ type: SET_USER_CAR_COUNT,count: userCars.length })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })        
       })
+        
       .catch(() => {
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })
       })
@@ -58,17 +61,18 @@ export const addUserCar = ({ userId, carInfoId }) => {
   )
 }
 
-export const getUserFollowCount = ({ userId }) => {
-  return dispatch => (
-    getFollowCount({}, { userId })
-      .then(count => {
+export const updateUserFollowCount = (id) => {
+  return dispatch => {
+    
+    getFollowCount({}, { id })
+      .then(countResponse => {
         dispatch({ 
           type: SET_USER_FOLLOW_COUNT,
-          count
+          count: countResponse.count
           })
       })
       .catch(e => {
 
       })
-  );
+  };
 }

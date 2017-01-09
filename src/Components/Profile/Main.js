@@ -9,7 +9,8 @@ export class Main extends Component {
     }
 
     render() {
-        const { user } = this.props
+        const { user, carCount } = this.props
+        
         return (
             <View>
                 <Image source={{ uri: user.coverImg}} style={styles.photo} />
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#8E8E8E',
     },
     photo: {
-        height: 40,
-        width: 40,
+        height: 200,
+        width: 500,
   },
 });
