@@ -9,7 +9,7 @@ export class Main extends Component {
     }
 
     render() {
-        const { user, carCount } = this.props
+        const { user, carCount } = this.props;
         
         return (
             <View>

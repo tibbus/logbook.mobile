@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 export const Info = (props) => {
-  const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png'
+  const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
   
   return (
   <View style={styles.container}>

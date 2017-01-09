@@ -35,9 +35,9 @@ export const updateUserCars = ({
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
     getUserCars({}, { userId, details })
       .then(userCars => {
-        dispatch({ type: SET_USER_CARS, userCars })
-        dispatch({ type: SET_USER_CAR_COUNT,count: userCars.length })
-        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })        
+        dispatch({ type: SET_USER_CARS, userCars });
+        dispatch({ type: SET_USER_CAR_COUNT,count: userCars.length });
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });        
       })
         
       .catch(() => {

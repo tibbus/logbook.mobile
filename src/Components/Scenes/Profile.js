@@ -16,7 +16,7 @@ export class Profile extends Component {
         dispatch(updateUserFollowCount(user.id));
 
         if(cars === null){
-            dispatch(updateUserCars())
+            dispatch(updateUserCars());
         }
     }
 
