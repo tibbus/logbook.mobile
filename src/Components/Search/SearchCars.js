@@ -22,6 +22,8 @@ export class SearchCars extends Component {
         }
 
         return (
+          <View style={styles.containerEmpty}>
+          <Text style={styles.subheading}>CARS</Text>
             <ListView
                 style={styles.container}
                 dataSource={this.state.dataSource}
@@ -30,6 +32,7 @@ export class SearchCars extends Component {
                 renderHeader={() => <SearchHeader searchFunction = { onSubmit } /> }
                 enableEmptySections={true}
             />
+          </View>
         )
     }
 }
@@ -41,9 +44,17 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: background.color,
     },
+    containerEmpty: {
+      flex: 1,
+    },
     separator: {
         flex: 1,
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#8E8E8E',
     },
+    subheading: {
+      //marginTop: 100,
+      fontSize: 20,
+      fontWeight: '900',
+    }
 });

@@ -4,6 +4,6 @@ export default {
   featureText: '#000',
   bodyText: '#2a2a2a',
 
-  secondaryHeading: '#585757',
+  secondaryHeading: 'rgba(0,0,0,0.6)',
   secondaryText: 'rgba(0,0,0,0.3)',
 }
