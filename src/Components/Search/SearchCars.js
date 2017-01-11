@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { SearchHeader, SearchRow } from './'
 //import styles
 import background from '../../Themes/background';
-
+import text from '../../Themes/text';
 
 export class SearchCars extends Component {
 
@@ -23,13 +23,14 @@ export class SearchCars extends Component {
 
         return (
           <View style={styles.containerEmpty}>
-          <Text style={styles.subheading}>CARS</Text>
+          <SearchHeader searchFunction = { onSubmit } />
+          <Text style={styles.subHeading}>CARS</Text>
             <ListView
                 style={styles.container}
                 dataSource={this.state.dataSource}
                 renderRow={(data) => <SearchRow {...data} />}
                 renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-                renderHeader={() => <SearchHeader searchFunction = { onSubmit } /> }
+
                 enableEmptySections={true}
             />
           </View>
@@ -52,9 +53,10 @@ const styles = StyleSheet.create({
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#8E8E8E',
     },
-    subheading: {
-      //marginTop: 100,
+    subHeading: {
       fontSize: 20,
       fontWeight: '900',
+      paddingLeft: 30,
+      //color: text.secondaryText,
     }
 });

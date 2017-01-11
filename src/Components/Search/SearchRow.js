@@ -3,16 +3,14 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 //import styles
 import background from '../../Themes/background';
-import navBar from '../../Themes/navBar';
 import text from '../../Themes/text';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    paddingBottom: 5,
+    paddingBottom: 15,
     paddingLeft: 30,
-    //marginRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: background.component,
