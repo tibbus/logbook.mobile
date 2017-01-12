@@ -3,7 +3,7 @@ import {
   SET_USER_CARS,
 } from '../Actions/Types'
 
-const initialState = null
+const initialState = []
 
 // const car = (state, action) => {
 //   const { type, carId } = action
