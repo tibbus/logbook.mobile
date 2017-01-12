@@ -6,8 +6,9 @@ import {
   View
 } from 'react-native';
 //importing styles
-import navBar from '../Themes/navBar';
 import background from '../Themes/background';
+import navBar from '../Themes/navBar';
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
