@@ -14,10 +14,7 @@ export class Profile extends Component {
         const {dispatch, cars, user } = this.props;
 
         dispatch(updateUserFollowCount(user.id));
-
-        if(cars === null){
-            dispatch(updateUserCars());
-        }
+        dispatch(updateUserCars());
     }
 
     render() {
