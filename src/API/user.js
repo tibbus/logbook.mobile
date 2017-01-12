@@ -1,8 +1,8 @@
 import { fetcher } from './fetch'
 import { api } from './config'
 
-const uri = api + 'user';
-const uriId = uri + '/{id}';
+const uri = `${api}user`;
+const uriId = `${uri}/{id}`;
 
 export const createUser = fetcher(uri, 'POST');
 export const getUsers = fetcher(uriId);

@@ -36,7 +36,7 @@ export const Info = (props) => {
       </Text>
     </View>
     <Text style={styles.text}>
-        {`${props.user.name}`}
+        {props.user.name}
     </Text>
     
   </View>
