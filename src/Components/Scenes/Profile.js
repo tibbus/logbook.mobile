@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { View } from 'react-native'
 import { Main } from '../Profile'
+import { CarGarage } from '../Cars'
 import { updateUserFollowCount, updateUserCars } from '../../Actions/user.js'
 
 const stateToProps = ({ user, cars }) => ({ user, cars });
@@ -18,9 +20,12 @@ export class Profile extends Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, cars } = this.props;
         return (
-            <Main user = {user} />
+            <View>
+                <Main user = {user} />
+                <CarGarage cars = {cars} />
+            </View>
         )        
     }
 }
