@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 import { CarsNav, MainNavBar } from './'
-import { Search, Profile } from './Scenes'
+import { Search, Profile, AddCar } from './Scenes'
 
 const configureScene = ({ sceneConfig } = {}) => {
   if (sceneConfig) {
@@ -25,6 +25,12 @@ export class MainNav extends Component {
 
       case 'profile':
         return (<Profile {...props} style={{flex: 1}} />)
+
+      case 'addCar':
+        return(<AddCar {...props} style={{flex:1}}/>)
+      
+      case 'car':
+        return null;
 
       default:
         return (<CarsNav {...props} style={{flex: 1}} />)

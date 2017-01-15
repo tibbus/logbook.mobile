@@ -3,7 +3,6 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
     TouchableHighlight,
     StyleSheet
 } from 'react-native'
@@ -11,15 +10,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 export class CarGarageIcon extends Component {
 
-    shouldComponentUpdate(nextProps, nextState){
-        return false;
-    }
-
     render() {
-        const { car } = this.props;
+        const { car, onPress} = this.props;
         if(!car){
             return (
-                <TouchableHighlight style={styles.carIcon} onPress={() => console.log("Pressed")}>
+                <TouchableHighlight style={styles.carIcon} onPress={onPress}>
                     <Icon name='plus' style={styles.carIcon} />
                 </TouchableHighlight>
             );
@@ -32,9 +27,9 @@ export class CarGarageIcon extends Component {
                     </View>
                     <View style={styles.carInfoIcon}>
                         <Text>{car.carInfo.car.make}</Text>
-                        <TouchableOpacity style={styles.button} onPress={(console.log("Pressed"))}>
+                        <TouchableHighlight style={styles.button} onPress={onPress}>
                                 <Text>Edit Profile</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                     </View>
                     
                 </View>

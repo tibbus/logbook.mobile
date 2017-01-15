@@ -16,25 +16,26 @@ const styles = StyleSheet.create({
   }
 })
 
-export class CarForm extends Component {
+export class RegNoForm extends Component {
 
-  constructor () {
-    super(...arguments)
+  constructor (props) {
+    super(props)
     this.state = {
       text: ''
     }
   }
 
   render () {
-    const { onSubmit } = this.props
+    const { carRegSubmit } = this.props
     return (
       <View style={styles.container}>
-        <Text>Car Registration</Text>
+        <Text>Add your car to your garage</Text>
+        <Text>Enter your Vehical Registration No.</Text>
         <TextInput style={{height: 40, borderColor: 'gray', margin: 10, padding: 10, borderWidth: 1}}
           placeholder='Car Registration'
           onChangeText={(text) => this.setState({text})}
           value={this.state.text} />
-        <Icon.Button name='plus' onPress={() => onSubmit(this.state.text)}>Add</Icon.Button>
+        <Icon.Button name='plus' onPress={() => carRegSubmit(this.state.text)}>Next</Icon.Button>
       </View>
     )
   }

@@ -20,11 +20,11 @@ export class Profile extends Component {
     }
 
     render() {
-        const { user, cars } = this.props;
+        const { user, cars, navigator } = this.props;
         return (
-            <View>
+            <View style={{ flex:1 }}>
                 <Main user = {user} />
-                <CarGarage cars = {cars} />
+                <CarGarage cars = {cars} navigator={navigator} />
             </View>
         )        
     }
