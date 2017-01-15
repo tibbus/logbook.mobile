@@ -46,7 +46,7 @@ export const updateUserCars = ({
   }
 }
 
-export const addUserCar = ({ userId, carInfoId }) => {
+export const addUserCar = (userId, carInfoId) => {
   return dispatch => (
     confirmUserCar({}, { userId, carInfoId })
       .then(userCar => {

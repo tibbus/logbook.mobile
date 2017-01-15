@@ -8,7 +8,7 @@ import {
 import { CarGarageIcon } from './'
 
 
-const createCarGarageIcon = (car, id) => <CarGarageIcon key={id} car={car}/>;
+const createCarGarageIcon = (car, id, navigator) => <CarGarageIcon key={id} car={car} onPress={() => navigator.push({id: 'car'})}/>;
 
 export class CarGarage extends Component {
 
@@ -17,17 +17,17 @@ export class CarGarage extends Component {
     }
 
     render() {
-        const { cars } = this.props;
+        const { cars, navigator } = this.props;
         return (
         <View>
             <Text>GARAGE</Text>
             <ScrollView 
-            automaticallyAdjustContentInsets={false}
-            horizontal={true}
-            style={[styles.scrollView, styles.horizontalScrollView]}>
-                {<CarGarageIcon/>}
-                {cars.map(createCarGarageIcon)}
-            </ScrollView>
+                automaticallyAdjustContentInsets={false}
+                horizontal={true}
+                style={[styles.scrollView, styles.horizontalScrollView]}>
+                    {<CarGarageIcon onPress={() => navigator.push({id: 'addCar'})}/>}
+                    {cars.userCars.map(createCarGarageIcon)}
+            </ScrollView>            
         </View>
         );
     }
@@ -36,7 +36,7 @@ export class CarGarage extends Component {
 var styles = StyleSheet.create({
   scrollView: {
     backgroundColor: '#6A85B1',
-    height: 300,
+    flex: 1,
   },
   horizontalScrollView: {
     height: 200,
