@@ -8,10 +8,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-export const Info = ({carMake, carModel, ownerImage, ownerName}) => (
+export const Info = ({ownerImage, ownerName}) => (
 
     <View style={styles.container}>
-        <Text style={styles.textHeading}>{carMake} {carModel}</Text>
         <View style={styles.subContainer}>
             <Image source={{ uri: ownerImage}} style={styles.photo} />
             <Text style={styles.text}>{ownerName}</Text>

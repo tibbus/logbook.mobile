@@ -12,7 +12,7 @@ export const BackScene = ({
   onBack,
   onAction,
   style,
-  title = 'title',
+  title,
   actionName = 'Go'
 }) => (
   <View style={style}>
@@ -20,7 +20,7 @@ export const BackScene = ({
       <TouchableHighlight style={[styles.button, { alignItems: 'flex-start', paddingLeft: 10 }]} onPress={onBack}>
         <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
       </TouchableHighlight>
-      <View style={styles.title}><Text>{title}</Text></View>
+      { title ? <View style={styles.title}><Text>{title}</Text></View> : <View style={styles.title}></View>}
       {onAction ? (
         <TouchableHighlight style={[styles.button, { alignItems: 'flex-end', paddingRight: 10 }]} onPress={onAction}>
           <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' size={20} /></View>

@@ -5,6 +5,7 @@ import {
   UPDATE_USER_CAR_IMAGES
 } from './Types'
 import { getCarByRegistration, getCarImages } from '../API/Car'
+import { getApiFetchLimit } from '../API/config'
 
 export const getCar = (registration) => {
     return dispatch => {
@@ -20,11 +21,30 @@ export const getCar = (registration) => {
     }
 }
 
-export const getCarTimelineImages = (carInfoId) => {
+const extractImagePost = (imagePost) => {
+    return {
+        description: imagePost.details.description,
+        location: imagePost.details.location,
+        imageUris: imagePost.details.contentUris,
+        createdDate: imagePost.details.createdDate
+    }
+}
+
+export const getCarTimelineImages = (carInfoId, skip = 0) => {
     return dispatch => {
-        getCarImages({}, { carInfoId })
-        .then(images => {
-            dispatch({ type: UPDATE_USER_CAR_IMAGES, userCarImages: { carInfoId:carInfoId, userCarImages:images } });  
+        const takeLimit = getApiFetchLimit();
+        getCarImages({}, { carInfoId, skip, takeLimit})
+        .then(imagePosts => {
+            
+            const posts = imagePosts.results.map(extractImagePost);
+            dispatch({ 
+                type: UPDATE_USER_CAR_IMAGES,
+                carImages: {
+                    carInfoId: carInfoId,
+                    posts: posts
+                },
+                carImagesLoadPending: false 
+            });  
         })
         .catch(error => {
             

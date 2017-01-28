@@ -8,14 +8,12 @@ import {
 const initialState = {
     userCars:[],
     carToConfirm: null,
-    userCarImages: {
-      carInfoId:null,
-      images:[]
-    }  
+    carImages: [],
+    carImagesLoadPending: true,
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, userCarImages } = action
+  const { type, userCars, carInfo, carImages, carImagesLoadPending } = action
 
   switch (type) {
 
@@ -40,7 +38,8 @@ export const cars = (state = initialState, action) => {
      case UPDATE_USER_CAR_IMAGES:
       return {
         ...state,
-        userCarImages: userCarImages
+        carImages: carImages,
+        carImagesLoadPending: carImagesLoadPending
       }   
     default:
       return state

@@ -3,32 +3,48 @@ import { connect } from 'react-redux'
 import { View, Image, StyleSheet } from 'react-native'
 import { Info, Gallery } from '../Cars/Profile'
 import { FitImage } from '../Image'
-import { cars } from '../../Actions/cars.js'
+import { getCarTimelineImages } from '../../Actions/cars.js'
+import { BackScene } from '../Scenes'
 
-const stateToProps = ({ user }) => ({ user });
+const stateToProps = ({ user, cars }) => ({ user, cars });
 
 @connect(stateToProps)
 export class CarProfile extends Component {
 
     constructor () {
         super(...arguments);
+
+        const { car, cars, dispatch } = this.props;
+        if(cars.carImagesLoadPending){
+            dispatch(getCarTimelineImages(car.carInfo.id,0,15))
+        }
     }
 
+    back(navigator) {
+        navigator.pop()
+    }
     render() {
-        const { user, car, carOwner, navigator } = this.props;
+        const { user, car, cars, carOwner, navigator } = this.props;
         const { image } = car.carInfo;
         return (
-            <View style={styles.container}>
-                <FitImage resizeMode={Image.resizeMode.contain} source={{uri:image}} style={styles.photo} />
-                <Info carMake={car.carInfo.car.make} carModel={car.carInfo.car.model} ownerImage={carOwner.profileImage} ownerName={carOwner.name} />
-                
-            </View>
+            <BackScene onBack={() => this.back(navigator)} title = {car.carInfo.car.make + " " + car.carInfo.car.model}>
+                <View style={styles.container}>
+                    <View>
+                        <FitImage resizeMode={Image.resizeMode.contain} source={{uri:image}} style={styles.photo} />
+                        <Info ownerImage={carOwner.profileImage} ownerName={carOwner.name} />
+                    </View>
+                    <View>
+                        <Gallery carImages={cars.carImages} />
+                    </View>
+                </View>
+            </BackScene>
         )        
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 12,
         alignItems: 'center',
         flexDirection: 'column'

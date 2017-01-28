@@ -9,7 +9,7 @@ import { CarGarageIcon } from './'
 
 
 const createCarGarageIcon = function(car, navigator, user) {
-    return <CarGarageIcon key={car} car={car} onPress={() => navigator.push({
+    return <CarGarageIcon key={car.id} car={car} onPress={() => navigator.push({
         id: 'car',
         passProps: {
             car: car,
