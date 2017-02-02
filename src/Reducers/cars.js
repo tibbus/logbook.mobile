@@ -38,8 +38,8 @@ export const cars = (state = initialState, action) => {
      case UPDATE_USER_CAR_IMAGES:
       return {
         ...state,
-        carImages: carImages,
-        carImagesLoadPending: carImagesLoadPending
+        carImages,
+        carImagesLoadPending
       }   
     default:
       return state

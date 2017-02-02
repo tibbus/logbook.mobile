@@ -11,9 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const galleryImage = (imageUri) => <Image source={{ uri: imageUri}} style={styles.photo} />;
 
-const getImageUris = (post) => {
-    return post.imageUris;
-} 
+const getImageUris = (post) => post.imageUris; 
 
 export class Gallery extends Component {
 
