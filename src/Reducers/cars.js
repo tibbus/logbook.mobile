@@ -1,16 +1,19 @@
 import {
   ADD_CAR,
   SET_USER_CARS,
-  SEARCHED_CAR
+  SEARCHED_CAR,
+  UPDATE_USER_CAR_IMAGES
 } from '../Actions/Types'
 
 const initialState = {
     userCars:[],
-    carToConfirm: null  
+    carToConfirm: null,
+    carImages: [],
+    carImagesLoadPending: true,
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo } = action
+  const { type, userCars, carInfo, carImages, carImagesLoadPending } = action
 
   switch (type) {
 
@@ -32,6 +35,12 @@ export const cars = (state = initialState, action) => {
           carToConfirm: carInfo
         }
 
+     case UPDATE_USER_CAR_IMAGES:
+      return {
+        ...state,
+        carImages,
+        carImagesLoadPending
+      }   
     default:
       return state
   }

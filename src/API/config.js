@@ -13,6 +13,7 @@ const environments = {
     getStreamUri: 'https://api.getstream.io',
     getStreamApiKey: '8r2y2gbevg9j',
     getStreamFetchLimit: 10,
+    apiFetchLimit: 20,
     secure: false
   }
 }
@@ -57,6 +58,11 @@ export const getStreamApiKey = env => {
 export const getStreamFetchLimit = env => {
   const { getStreamFetchLimit } = environments[env || CURRENT_ENV]
   return getStreamFetchLimit;
+}
+
+export const getApiFetchLimit = env => {
+  const { apiFetchLimit } = environments[env || CURRENT_ENV]
+  return apiFetchLimit;
 }
 
 export const api = `api/v${API_VERSION}/`

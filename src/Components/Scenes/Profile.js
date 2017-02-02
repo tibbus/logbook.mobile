@@ -24,7 +24,7 @@ export class Profile extends Component {
         return (
             <View style={{ flex:1 }}>
                 <Main user = {user} />
-                <CarGarage cars = {cars} navigator={navigator} />
+                <CarGarage cars = {cars} user = {user} navigator = {navigator} />
             </View>
         )        
     }

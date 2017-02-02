@@ -18,7 +18,7 @@ export class Success extends Component {
       return (
           <View>
             <Text>Success</Text>
-            <Icon name='check-circle-o' style={{size:15, color:'green'}} />
+            <Icon name='check-circle-o' style={{fontSize:15, color:'green'}} />
             <TouchableHighlight onPress={() => console.log('complete')}>
                     <Text>Complete Profile  ></Text>
             </TouchableHighlight>
