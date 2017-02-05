@@ -59,7 +59,7 @@ export class Gallery extends Component {
             <ScrollView 
                 automaticallyAdjustContentInsets={false}
                 style={styles.scrollView}>
-                <View style={{height:200}}>
+                <View style={{height:300}}>
                     <Text>Videos</Text>
                     <ScrollView
                         automaticallyAdjustContentInsets={false}
@@ -70,7 +70,7 @@ export class Gallery extends Component {
                         }
                     </ScrollView>
                     </View>
-                    <View style={{height:200}}>
+                    <View style={{height:300}}>
                     <Text>Photos</Text>
                     <ListView
                         dataSource={this.state.imageDataSource}
@@ -89,7 +89,8 @@ export class Gallery extends Component {
 const styles = StyleSheet.create({
 
     scrollView: {
-        height: 300
+        height: 300,
+        //flex:1
     },
     photo: {
         height: 120,

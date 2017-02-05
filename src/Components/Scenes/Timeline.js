@@ -235,7 +235,8 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   container: {
-    flex: 1,
+    height: 400,
+    //flex: 1,
     //marginLeft: 5,
     //marginRight: 5,
     backgroundColor: background.color,

@@ -4,7 +4,7 @@ import { View, Image, StyleSheet, Text } from 'react-native'
 import { Info, Gallery } from '../Cars/Profile'
 import { FitImage } from '../Image'
 import { getCarTimelineContent } from '../../Actions/cars.js'
-import { BackScene } from '../Scenes'
+import { BackScene, Timeline } from '../Scenes'
 import  ScrollableTabView, { ScrollableTabBar}  from 'react-native-scrollable-tab-view'
 
 
@@ -40,7 +40,7 @@ export class CarProfile extends Component {
                     initialPage={0}
                     renderTabBar={() => <ScrollableTabBar/>}>
                     <Text tabLabel='Overview'>Overview</Text>
-                    <Text tabLabel='Timeline'>Timeline</Text>
+                    <Timeline tabLabel='Timeline' {...this.props} />
                     <Gallery tabLabel='Showcase' carImages={cars.carImages} carVideos={cars.carVideos} />
                     <Text tabLabel='Technical Spec'>Technical Spec</Text>
                     
