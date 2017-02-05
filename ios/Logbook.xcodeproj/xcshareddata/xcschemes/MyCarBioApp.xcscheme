@@ -16,22 +16,22 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "MyCarBioApp.app"
-               BlueprintName = "MyCarBioApp"
-               ReferencedContainer = "container:MyCarBioApp.xcodeproj">
+               BlueprintName = "Logbook"
+               ReferencedContainer = "container:Logbook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForTesting = "NO"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "MyCarBioAppTests.xctest"
-               BlueprintName = "MyCarBioAppTests"
-               ReferencedContainer = "container:MyCarBioApp.xcodeproj">
+               BuildableName = "LogbookTests.xctest"
+               BlueprintName = "LogbookTests"
+               ReferencedContainer = "container:Logbook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,24 +42,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "MyCarBioAppTests.xctest"
-               BlueprintName = "MyCarBioAppTests"
-               ReferencedContainer = "container:MyCarBioApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MyCarBioApp.app"
-            BlueprintName = "MyCarBioApp"
-            ReferencedContainer = "container:MyCarBioApp.xcodeproj">
+            BuildableName = "Logbook.app"
+            BlueprintName = "Logbook"
+            ReferencedContainer = "container:Logbook.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,18 +70,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MyCarBioApp.app"
-            BlueprintName = "MyCarBioApp"
-            ReferencedContainer = "container:MyCarBioApp.xcodeproj">
+            BuildableName = "Logbook.app"
+            BlueprintName = "Logbook"
+            ReferencedContainer = "container:Logbook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
-          <EnvironmentVariable
-             key = "OS_ACTIVITY_MODE"
-             value = "disable"
-             isEnabled = "YES">
-          </EnvironmentVariable>
-       </EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -107,8 +97,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "MyCarBioApp.app"
-            BlueprintName = "MyCarBioApp"
-            ReferencedContainer = "container:MyCarBioApp.xcodeproj">
+            BlueprintName = "Logbook"
+            ReferencedContainer = "container:Logbook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
