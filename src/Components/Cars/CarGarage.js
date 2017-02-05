@@ -51,7 +51,6 @@ export class CarGarage extends Component {
 
 var styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: '#6A85B1',
     flex: 1,
   },
   horizontalScrollView: {

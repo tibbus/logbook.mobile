@@ -2,18 +2,20 @@ import {
   ADD_CAR,
   SET_USER_CARS,
   SEARCHED_CAR,
-  UPDATE_USER_CAR_IMAGES
+  UPDATE_USER_CAR_IMAGES,
+  UPDATE_USER_CAR_VIDEOS,
 } from '../Actions/Types'
 
 const initialState = {
     userCars:[],
     carToConfirm: null,
     carImages: [],
-    carImagesLoadPending: true,
+    carVideos: [],
+    carDataLoadPending: true,
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, carImages, carImagesLoadPending } = action
+  const { type, userCars, carInfo, carImages, carVideos, carDataLoadPending } = action
 
   switch (type) {
 
@@ -39,8 +41,15 @@ export const cars = (state = initialState, action) => {
       return {
         ...state,
         carImages,
-        carImagesLoadPending
-      }   
+        carDataLoadPending
+      }
+
+    case UPDATE_USER_CAR_VIDEOS:
+      return {
+        ...state,
+        carVideos,
+        carDataLoadPending
+      }    
     default:
       return state
   }
