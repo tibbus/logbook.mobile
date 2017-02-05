@@ -74,7 +74,7 @@ export class Gallery extends Component {
                     <Text>Photos</Text>
                     <ListView
                         dataSource={this.state.imageDataSource}
-                        renderRow={(data) => !data ? <Text>No Images</Text> : galleryContent(data.toString(), 'Image')}
+                        renderRow={(data) => !data ? <Text>No Images</Text> : galleryContent(data, 'Image')}
                         renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                         enableEmptySections={true}
                         contentContainerStyle={styles.listImages}

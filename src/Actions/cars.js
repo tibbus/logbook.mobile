@@ -35,7 +35,7 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
     return dispatch => {
         const takeLimit = getApiFetchLimit();
 
-        if(contentType == "Images") {
+        if(contentType === "Images") {
             getCarImages({}, { carInfoId, skip, takeLimit})
             .then(imagePosts => {
                 
@@ -54,7 +54,7 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
             })
         }
 
-        if(contentType == "Videos") {
+        if(contentType === "Videos") {
             getCarVideos({}, { carInfoId, skip, takeLimit})
             .then(videoPosts => {
                 
