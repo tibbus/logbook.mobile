@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Text } from 'react-native'
 import { Info, Gallery } from '../Cars/Profile'
 import { FitImage } from '../Image'
-import { getCarTimelineImages } from '../../Actions/cars.js'
+import { getCarTimelineContent } from '../../Actions/cars.js'
 import { BackScene } from '../Scenes'
+import  ScrollableTabView, { ScrollableTabBar}  from 'react-native-scrollable-tab-view'
+
 
 const stateToProps = ({ user, cars }) => ({ user, cars });
 
@@ -15,8 +17,9 @@ export class CarProfile extends Component {
         super(...arguments);
 
         const { car, cars, dispatch } = this.props;
-        if(cars.carImagesLoadPending){
-            dispatch(getCarTimelineImages(car.carInfo.id,0,15))
+        if(cars.carDataLoadPending){
+            dispatch(getCarTimelineContent(car.carInfo.id, 'Images', 0))
+            dispatch(getCarTimelineContent(car.carInfo.id, 'Videos', 0))
         }
     }
 
@@ -33,9 +36,15 @@ export class CarProfile extends Component {
                         <FitImage resizeMode={Image.resizeMode.contain} source={{uri:image}} style={styles.photo} />
                         <Info ownerImage={carOwner.profileImage} ownerName={carOwner.name} />
                     </View>
-                    <View>
-                        <Gallery carImages={cars.carImages} />
-                    </View>
+                    <ScrollableTabView
+                    initialPage={0}
+                    renderTabBar={() => <ScrollableTabBar/>}>
+                    <Text tabLabel='Overview'>Overview</Text>
+                    <Text tabLabel='Timeline'>Timeline</Text>
+                    <Gallery tabLabel='Showcase' carImages={cars.carImages} carVideos={cars.carVideos} />
+                    <Text tabLabel='Technical Spec'>Technical Spec</Text>
+                    
+                    </ScrollableTabView>
                 </View>
             </BackScene>
         )        
@@ -45,12 +54,12 @@ export class CarProfile extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 12,
+        padding: 5,
         alignItems: 'center',
         flexDirection: 'column'
     },
     photo: {
-        height: 200,
+        height: 150,
         width: 350,
         borderRadius: 5
     },

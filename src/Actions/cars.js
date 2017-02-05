@@ -2,9 +2,10 @@ import {
   SEARCHED_CAR,
   SET_LOADING_STATUS,
   UNSET_LOADING_STATUS,
-  UPDATE_USER_CAR_IMAGES
+  UPDATE_USER_CAR_IMAGES,
+  UPDATE_USER_CAR_VIDEOS
 } from './Types'
-import { getCarByRegistration, getCarImages } from '../API/Car'
+import { getCarByRegistration, getCarImages, getCarVideos } from '../API/Car'
 import { getApiFetchLimit } from '../API/config'
 
 export const getCar = (registration) => {
@@ -21,33 +22,57 @@ export const getCar = (registration) => {
     }
 }
 
-const extractImagePost = (imagePost) => {
+const extractPostDetails = (post) => {
     return {
-        description: imagePost.details.description,
-        location: imagePost.details.location,
-        imageUris: imagePost.details.contentUris,
-        createdDate: imagePost.details.createdDate
+        description: post.details.description,
+        location: post.details.location,
+        contentUris: post.details.contentUris,
+        createdDate: post.details.createdDate
     }
 }
 
-export const getCarTimelineImages = (carInfoId, skip = 0) => {
+export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
     return dispatch => {
         const takeLimit = getApiFetchLimit();
-        getCarImages({}, { carInfoId, skip, takeLimit})
-        .then(imagePosts => {
-            
-            const posts = imagePosts.results.map(extractImagePost);
-            dispatch({ 
-                type: UPDATE_USER_CAR_IMAGES,
-                carImages: {
-                    carInfoId: carInfoId,
-                    posts: posts
-                },
-                carImagesLoadPending: false 
-            });  
-        })
-        .catch(error => {
-            
-        })
+
+        if(contentType == "Images") {
+            getCarImages({}, { carInfoId, skip, takeLimit})
+            .then(imagePosts => {
+                
+                const posts = imagePosts.results.map(extractPostDetails);
+                dispatch({ 
+                    type: UPDATE_USER_CAR_IMAGES,
+                    carImages: {
+                        carInfoId: carInfoId,
+                        posts: posts
+                    },
+                    carImagesLoadPending: false 
+                });  
+            })
+            .catch(error => {
+                
+            })
+        }
+
+        if(contentType == "Videos") {
+            getCarVideos({}, { carInfoId, skip, takeLimit})
+            .then(videoPosts => {
+                
+                const posts = videoPosts.results.map(extractPostDetails);
+                dispatch({ 
+                    type: UPDATE_USER_CAR_VIDEOS,
+                    carVideos: {
+                        carInfoId: carInfoId,
+                        posts: posts
+                    },
+                    carDataLoadPending: false 
+                });  
+            })
+            .catch(error => {
+                
+            })
+        }
+
+        
     }
 }
