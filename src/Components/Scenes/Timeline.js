@@ -209,7 +209,7 @@ export class Timeline extends Component {
           style={styles.container}
           dataSource={this.state.dataSource}
           enableEmptySections={Boolean(true)}
-          renderHeader={this.renderHeader.bind(this)}
+          //renderHeader={this.renderHeader.bind(this)}
           renderRow={this.renderRow.bind(this)} />
       </LoadingView>
     )

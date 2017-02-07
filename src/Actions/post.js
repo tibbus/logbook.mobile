@@ -2,6 +2,7 @@ import {
   deleteStatus,
   updateStatus as update
 } from '../API/Status'
+import { likePost } from '../API/Like'
 import { deleteImage } from '../API/Image'
 import { deleteVideo } from '../API/Video'
 
@@ -40,3 +41,18 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
     })
     .catch((...args) => console.log(...args))
 }
+
+/*export const updateLike = (id, carInfoId, item, userId, likeType) => dispatch => {
+  const details = { id, carInfoId }
+  dispatch({
+    type: UPDATE_TIMELINE_ITEM,
+    item: { details, type: item.type },
+    pending: true
+  });
+  likePost({
+    'PostId': id,
+    'PostType': 'Timeline',
+    'UserId': item.userId 
+  })
+
+}*/
