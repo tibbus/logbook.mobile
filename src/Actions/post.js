@@ -42,7 +42,7 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
     .catch((...args) => console.log(...args))
 }
 
-/*export const updateLike = (id, carInfoId, item, userId, likeType) => dispatch => {
+/*export const updateLike = (id, carInfoId, postType, item, userId, likeType) => dispatch => {
   const details = { id, carInfoId }
   dispatch({
     type: UPDATE_TIMELINE_ITEM,
@@ -51,8 +51,13 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
   });
   likePost({
     'PostId': id,
-    'PostType': 'Timeline',
+    'PostType': postType,
     'UserId': item.userId 
+  })
+  .then(likedItem => {
+    dispatch({
+      type: UPDATE_TIMELINE_ITEM
+    })
   })
 
 }*/
