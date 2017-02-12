@@ -29,7 +29,10 @@ export const getFeedData = (feedType, feedId, token) => {
     .then(response => response.json())
     .then(jsonResponse => {
         const timelineTimes = jsonResponse.results.map((timelineObject) => {
-            return timelineObject.Target;
+            return {
+                ...timelineObject.Target,
+                type: timelineObject.object
+            };
         })
         return timelineTimes;
     })
