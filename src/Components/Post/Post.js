@@ -103,14 +103,6 @@ export const Post = (data = {}) => {
           </View>
         </View>
       </View>
-      <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
-        <View style={styles.viewComments}>
-          <Text style={styles.viewCommentsText}>
-            View {commentCount} comments
-          </Text>
-
-        </View>
-      </View>
     </View>
   )
 }

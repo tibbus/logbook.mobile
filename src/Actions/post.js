@@ -42,6 +42,7 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
     .catch((...args) => console.log(...args))
 }
 
+
 /*export const updateLike = (id, carInfoId, postType, item, userId, likeType) => dispatch => {
   const details = { id, carInfoId }
   dispatch({

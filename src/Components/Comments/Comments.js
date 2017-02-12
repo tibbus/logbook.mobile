@@ -1,27 +1,44 @@
 import React from 'react'
 import {
   TouchableOpacity,
-  View
+  View,
+  Text
 } from 'react-native'
-import { Comment, CommentInputButton } from './'
+import { Comment } from './'
 
-const last = (items = []) => items.length ? [items[0]] : items
-
-export const CommentsSnapshot = ({
-  comments, limit, onPress, style
-}) => (
-  <TouchableOpacity onPress={onPress} style={style}>
+const getViewForMultipleComments = (comments) => {
+  const slicedArray = comments.slice(-2);
+  return (
     <View>
-      {last(comments).map((comment, i) => <Comment key={i} {...comment} />)}
+        <View style={{height: 40, alignItems: 'center', paddingVertical: 10, backgroundColor: '#f5f5f5'}}>
+          <Text>View all {comments.length} Comments.</Text>
+        </View>
+        <View>
+          {
+              slicedArray.map((comment, i) => <Comment key={i} {...comment} />)
+          }
+        </View>
     </View>
-  </TouchableOpacity>
-)
+  )
+}
+
+const getDefaultViewForComments = (comments) => {
+  return (
+    <View>
+      {
+        comments.map((comment, i) => <Comment key={i} {...comment} />)
+      }
+    </View>
+  )
+}
 
 export const Comments = ({
-  comments, limit, onPress
-}) => (
-  <View>
-    {comments.map((comment, i) => <Comment key={i} {...comment} />)}
-    <CommentInputButton onPress={onPress} />
-  </View>
-)
+  comments
+}) => {
+  if(comments.length > 2) {
+    return getViewForMultipleComments(comments)
+  }
+  else {
+    return getDefaultViewForComments(comments)
+  }
+}

@@ -13,10 +13,11 @@ import {
   setCarTimeline
 } from '../../Actions/timeline';
 import { deletePost } from '../../Actions/post';
+import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 import { LoadingView } from '../LoadingView';
-import { CommentsSnapshot, CommentCreate } from '../Comments';
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
 import { getPost, PostMenu } from '../Post';
+import { Comments, CommentInput } from '../Comments';
 //importing styles
 import background from '../../Themes/background';
 
@@ -24,7 +25,9 @@ const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
   return timelineDetails ? timelineDetails.timeline : []
 }
-const stateToProps = ({ timelines }) => ({ timelines })
+
+
+const stateToProps = ({ timelines, comments }) => ({ timelines, comments })
 
 @connect(stateToProps)
 export class Timeline extends Component {
@@ -33,7 +36,7 @@ export class Timeline extends Component {
     super(...arguments)
 
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const { car, dispatch, timelines = [] } = this.props
+    const { car, dispatch, timelines = [], comments = [] } = this.props
     const { carInfo = {} } = car
     this.carInfoId = carInfo.id
 
@@ -51,23 +54,17 @@ export class Timeline extends Component {
 
   componentWillReceiveProps ({ car, timelines = [] }) {
     if (timelines !== this.props.timelines) {
+      const { dispatch } = this.props;
       const timeline = getTimeline(timelines, this.carInfoId)
+      timeline.forEach((timelineItem) => {
+        dispatch(setTimelineComments(timelineItem.activityData.id));
+        dispatch(getTimelineComments(timelineItem.activityData.id))
+      })
+
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(timeline)
+        dataSource: this.state.dataSource.cloneWithRows(timeline)        
       })
     }
-  }
-
-  addComment () {
-    const { rootNav } = this.props
-
-    rootNav
-      .push({
-        id: 'modal',
-        component: (
-          <CommentCreate navigator={rootNav} style={styles.container} />
-        )
-      })
   }
 
   addStatus (config = {}) {
@@ -139,7 +136,7 @@ export class Timeline extends Component {
   }
 
   renderRow (post) {
-    const { user } = this.props
+    const { user, comments, dispatch } = this.props
 
     const props = {
       ...post,
@@ -147,15 +144,30 @@ export class Timeline extends Component {
       onVideoPress: this.playVideo.bind(this),
       user
     }
-    const comments = []
 
+    const filteredComments = comments.find((timelinePostComments) => {
+      return timelinePostComments.timelinePostId === post.activityData.id
+    });
+
+    var postComments = [];
+    if(filteredComments) {
+        postComments = filteredComments.comments.map((postComment) => {
+          return {
+            text: postComment.comment,
+            profileImg: 'https://mycarbiostolocal.blob.core.windows.net/default0/Image/01010001/4d47ecd5-c26a-474c-8001-4587e2365a19/DefaultProfileImage.jpg',
+            timeAgo: postComment.timeAgo
+          };
+        });
+    }
+                      
     return (
       <View style={styles.row}>
         {getPost(props)}
-        <CommentsSnapshot
-          style={styles.commentsSnapshot}
-          onPress={this.addComment.bind(this)}
-          comments={comments} />
+        <Comments comments={postComments} />
+        <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
+          dispatch(addComment(timelinePostId, userId, commentText))}
+
+        } />
       </View>
     )
   }
