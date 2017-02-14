@@ -150,18 +150,7 @@ export class Timeline extends Component {
 
   renderRow (post) {
     const { user, comments, dispatch, likes = [] } = this.props
-    const likedItem = likes.find(element => {
-      if(element.postId === post.activityData.id){
-        return true;
-      }
-      else {
-        return false
-      }
-    });
-    var liked = false;
-    if(likedItem) {
-      liked = true;
-    }
+    const liked = !!likes.find(element => element.postId === post.activityData.id);
     const props = {
       ...post,
       onMenuPress: () => this.showStatusMenu(post),

@@ -3,12 +3,11 @@ import { SET_USER_LIKED_ITEMS } from './Types'
 
 export const getUserLikedPosts = (userId) => dispatch => {
   getLikedPosts({}, {userId})
-  .then(retrievedPostIds => {
-    dispatch({
+  .then(retrievedPostIds => dispatch({
       type: SET_USER_LIKED_ITEMS,
       likedItems: retrievedPostIds.likedItems
-    });
-  })
+    })
+  )
   .catch((...args) => console.log(...args));
 }
 
