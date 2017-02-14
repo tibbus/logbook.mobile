@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListVideo } from '../Video/ListVideo';
 import { FitImage } from '../Image';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome'
 //importing styles
 import background from '../../Themes/background';
 import comments from '../../Themes/comments';
@@ -45,7 +45,7 @@ const renderMedia = (type, data) => {
 }
 
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, type, user = {} } = data;
+  const { details = {}, pending, onMenuPress, onLikePress, type, user = {}, liked } = data;
   profileImg = '';
   if(user === undefined || user.profileImg === undefined ){
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png';
@@ -70,10 +70,6 @@ export const Post = (data = {}) => {
             source={{uri: profileImg}}
             style={styles.icon} />
           <Text style={styles.name}>{name}</Text>
-
-          <TouchableHighlight onPress={() => onMenuPress(details)} underlayColor='#f0f0f0'>
-            <Icon name='more-vert' style={styles.moreIcon} />
-          </TouchableHighlight>
         </View>
       </View>
       <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
@@ -99,7 +95,7 @@ export const Post = (data = {}) => {
         </View>
         <View style={styles.eventFooter}>
           <View style={[styles.flex, { justifyContent: 'center' }]}>
-            <TouchableHighlight><Text style={styles.likes}>{likeCount} <Icon name='favorite-border' style={styles.heartIcon}/></Text></TouchableHighlight>
+            <TouchableHighlight><Text style={styles.likes}>{likeCount} {liked ? <Icon name="heart" style={styles.heartIcon}/> : <Icon name="heart-o" style={styles.likes}/>}</Text></TouchableHighlight>
           </View>
         </View>
       </View>

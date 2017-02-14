@@ -14,6 +14,7 @@ import {
 } from '../../Actions/timeline';
 import { deletePost } from '../../Actions/post';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
+import { getUserLikedPosts } from '../../Actions/like';
 import { LoadingView } from '../LoadingView';
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
 import { getPost, PostMenu } from '../Post';
@@ -27,7 +28,7 @@ const getTimeline = (timelines, carInfoIdArg) => {
 }
 
 
-const stateToProps = ({ timelines, comments }) => ({ timelines, comments })
+const stateToProps = ({ timelines, comments, likes }) => ({ timelines, comments, likes })
 
 @connect(stateToProps)
 export class Timeline extends Component {
@@ -35,15 +36,21 @@ export class Timeline extends Component {
   constructor () {
     super(...arguments)
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    const { car, dispatch, timelines = [], comments = [] } = this.props
-    const { carInfo = {} } = car
-    this.carInfoId = carInfo.id
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const { car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
+    const { carInfo = {} } = car;
+    const { user = {} } = this.props;
+    this.carInfoId = carInfo.id;
+    this.userId = user.id;
 
-    const timeline = getTimeline(timelines, this.carInfoId)
+    const timeline = getTimeline(timelines, this.carInfoId);
 
     if (!timeline.length && this.carInfoId) {
-      dispatch(setCarTimeline({ carInfoId: this.carInfoId }))
+      dispatch(setCarTimeline({ carInfoId: this.carInfoId }));
+    }
+
+    if(!likes.length && this.userId) {
+      dispatch(getUserLikedPosts(this.userId));
     }
 
     this.state = {
@@ -52,13 +59,19 @@ export class Timeline extends Component {
     }
   }
 
-  componentWillReceiveProps ({ car, timelines = [] }) {
+  componentWillReceiveProps ({ car, timelines = [], likes = [] }) {
+    if(likes.length !== this.props.likes.length) {
+      const { dispatch } = this.props;
+      dispatch(getUserLikedPosts(this.userId));
+    }
+
     if (timelines !== this.props.timelines) {
       const { dispatch } = this.props;
-      const timeline = getTimeline(timelines, this.carInfoId)
+      const timeline = getTimeline(timelines, this.carInfoId);
+      
       timeline.forEach((timelineItem) => {
         dispatch(setTimelineComments(timelineItem.activityData.id));
-        dispatch(getTimelineComments(timelineItem.activityData.id))
+        dispatch(getTimelineComments(timelineItem.activityData.id));
       })
 
       this.setState({
@@ -136,13 +149,25 @@ export class Timeline extends Component {
   }
 
   renderRow (post) {
-    const { user, comments, dispatch } = this.props
-
+    const { user, comments, dispatch, likes = [] } = this.props
+    const likedItem = likes.find(element => {
+      if(element.postId === post.activityData.id){
+        return true;
+      }
+      else {
+        return false
+      }
+    });
+    var liked = false;
+    if(likedItem) {
+      liked = true;
+    }
     const props = {
       ...post,
       onMenuPress: () => this.showStatusMenu(post),
       onVideoPress: this.playVideo.bind(this),
-      user
+      user,
+      liked 
     }
 
     const filteredComments = comments.find((timelinePostComments) => {
