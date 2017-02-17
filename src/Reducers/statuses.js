@@ -44,8 +44,6 @@ export const timelineItemReducer = (state = {}, action) => {
       removeLikeTimelineItem.socialData.likesCount -= 1;
       return removeLikeTimelineItem;
 
-
-
     case PLAY_TIMELINE_VIDEO:
       return setStatePaused(state, false)
 
