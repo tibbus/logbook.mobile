@@ -4,7 +4,9 @@ import {
   DELETE_TIMELINE_ITEM,
   UPDATE_TIMELINE_ITEM,
   PLAY_TIMELINE_VIDEO,
-  PAUSE_TIMELINE_VIDEO
+  PAUSE_TIMELINE_VIDEO,
+  REMOVE_USER_LIKED_ITEM,
+  ADD_USER_LIKED_ITEM
 } from '../Actions/Types'
 import { timelineItemReducer } from './statuses'
 import { sort } from 'ramda'
@@ -67,6 +69,30 @@ const timelineReducer = (state = [], action) => {
             return timelineItemReducer(item2, action)
           }
 
+          return item2
+        })
+      }
+    }
+
+    case ADD_USER_LIKED_ITEM : {
+      return {
+        carInfoId,
+        timeline: timeline.map(item2 => {
+          if (item2.activityData.id === action.updatedItem.postId) {
+            return timelineItemReducer(item2, action)
+          }
+          return item2
+        })
+      }
+    }
+
+    case REMOVE_USER_LIKED_ITEM : {
+      return {
+        carInfoId,
+        timeline: timeline.map(item2 => {
+          if (item2.activityData.id === action.updatedItem.postId) {
+            return timelineItemReducer(item2, action)
+          }
           return item2
         })
       }
@@ -137,6 +163,13 @@ export const timelines = (state = initialState, action) => {
 
     case PAUSE_TIMELINE_VIDEO:
       return mapTimelines(state, action, action.carInfoId)
+
+    case ADD_USER_LIKED_ITEM:
+      return mapTimelines(state, action, action.updatedItem.carInfoId)
+
+    case REMOVE_USER_LIKED_ITEM:
+      return mapTimelines(state, action, action.updatedItem.carInfoId)
+
 
     default:
       return state

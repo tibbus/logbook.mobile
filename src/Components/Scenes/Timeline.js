@@ -14,7 +14,7 @@ import {
 } from '../../Actions/timeline';
 import { deletePost } from '../../Actions/post';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
-import { getUserLikedPosts } from '../../Actions/like';
+import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
 import { LoadingView } from '../LoadingView';
 import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
 import { getPost, PostMenu } from '../Post';
@@ -60,7 +60,7 @@ export class Timeline extends Component {
   }
 
   componentWillReceiveProps ({ car, timelines = [], likes = [] }) {
-    if(likes.length !== this.props.likes.length) {
+    if(likes !== this.props.likes) {
       const { dispatch } = this.props;
       dispatch(getUserLikedPosts(this.userId));
     }
@@ -149,14 +149,18 @@ export class Timeline extends Component {
   }
 
   renderRow (post) {
-    const { user, comments, dispatch, likes = [] } = this.props
-    const liked = !!likes.find(element => element.postId === post.activityData.id);
+    const { user, comments, dispatch, likes = [] } = this.props;
+    const { carInfoId }  = post.activityData;
+    const likedItem = likes.find(element => element.postId === post.activityData.id);
+    const liked = !!likedItem;
     const props = {
       ...post,
       onMenuPress: () => this.showStatusMenu(post),
       onVideoPress: this.playVideo.bind(this),
+      onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
+      onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
       user,
-      liked 
+      liked
     }
 
     const filteredComments = comments.find((timelinePostComments) => {

@@ -45,7 +45,7 @@ const renderMedia = (type, data) => {
 }
 
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, type, user = {}, liked } = data;
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, user = {}, liked } = data;
   profileImg = '';
   if(user === undefined || user.profileImg === undefined ){
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png';
@@ -95,7 +95,9 @@ export const Post = (data = {}) => {
         </View>
         <View style={styles.eventFooter}>
           <View style={[styles.flex, { justifyContent: 'center' }]}>
-            <TouchableHighlight><Text style={styles.likes}>{likeCount} {liked ? <Icon name="heart" style={styles.heartIcon}/> : <Icon name="heart-o" style={styles.likes}/>}</Text></TouchableHighlight>
+          {
+            liked ? <TouchableHighlight onPress={onUnlikePress}><Text style={styles.likes}>{likeCount}  <Icon name="heart" style={styles.heartIcon}/></Text></TouchableHighlight> : <TouchableHighlight onPress={onLikePress}><Text style={styles.likes}>{likeCount} <Icon name="heart-o" style={styles.likes}/></Text></TouchableHighlight>
+          }
           </View>
         </View>
       </View>
