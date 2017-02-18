@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   attemptingOIDC: false,
+  authService: '',
   name: 'Guest',
   token: null,
   profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
@@ -45,7 +46,8 @@ export const user = (state = initialState, action) => {
     case ATTEMPT_OIDC_AUTH:
       return {
         ...state,
-        attemptingOIDC: true
+        attemptingOIDC: true,
+        authService: action.authService
       }
     case SET_USER:
       return {

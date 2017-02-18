@@ -45,8 +45,9 @@ export class SignIn extends Component {
 
     return (
       <IdentityOIDC
-        attemptAuth={() => dispatch({ type: ATTEMPT_OIDC_AUTH })}
+        attemptAuth={(authService) => dispatch({ type: ATTEMPT_OIDC_AUTH, authService: authService })}
         shouldAttempt={user.attemptingOIDC}
+        authService={user.authService}
         uri={getIdentityEnvironment()}
         authEndpoint='connect/authorize'
         clientId='mycarbiowebapp'
