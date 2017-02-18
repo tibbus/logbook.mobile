@@ -1,5 +1,5 @@
-import { getUserLikedPosts as getLikedPosts } from '../API/Like'
-import { SET_USER_LIKED_ITEMS } from './Types'
+import { getUserLikedPosts as getLikedPosts, likeItem, unlikeTimelineItem } from '../API/Like'
+import { SET_USER_LIKED_ITEMS, ADD_USER_LIKED_ITEM, REMOVE_USER_LIKED_ITEM } from './Types'
 
 export const getUserLikedPosts = (userId) => dispatch => {
   getLikedPosts({}, {userId})
@@ -11,12 +11,31 @@ export const getUserLikedPosts = (userId) => dispatch => {
   .catch((...args) => console.log(...args));
 }
 
-/*export const likePost = (id, carInfoId, postType, item, userId, likeType) => dispatch => {
-  const details = { id, carInfoId }
-  likePost({
-    'PostId': id,
-    'PostType': postType,
-    'UserId': item.userId 
-  })
+export const likePost = (postId, postType, userId, carInfoId) => dispatch => {
 
-}*/
+  const likeBody = {
+    'PostId': postId,
+    'PostType': postType,
+    'UserId': userId 
+  };
+  likeItem({ body: likeBody })
+  .then(likedPost => {
+    dispatch({
+    type: ADD_USER_LIKED_ITEM,
+    updatedItem: {id: likedPost.id, postId: likedPost.postId, carInfoId: carInfoId}
+  })
+})
+  .catch((...args) => console.log(...args));
+}
+
+export const unlikeTimelinePost = (id, postId, carInfoId) => dispatch => {
+
+  unlikeTimelineItem({}, {id})
+  .then(unlikedPost => {
+    dispatch({
+      type: REMOVE_USER_LIKED_ITEM,
+      updatedItem: {id: id, postId: postId, carInfoId: carInfoId}
+    })
+  })
+  .catch((...args) => console.log(...args))
+};
