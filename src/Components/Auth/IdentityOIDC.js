@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  StatusBar,
   Image,
   WebView,
   View,
@@ -8,7 +9,6 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { BackScene } from '../Scenes'
 import { hashToObj } from '../../Utils'
 
@@ -91,6 +91,8 @@ export const IdentityOIDC = props => {
 
   return (
     <View style={styles.container}>
+    <StatusBar style={styles.statusBar}
+    setHidden='hidden'/>
      <Image
         source={require('../../Assets/Images/SignInPage.jpg')}
         style={styles.image}
@@ -105,11 +107,11 @@ export const IdentityOIDC = props => {
                     <Image style={styles.loginLogo} source={require('../../Assets/Images/FacebookLogo.png')}/>
                   </View>
                   <View>
-                    <Text style={styles.facebookLoginButtonText}>Continue with Facebook</Text>
+                    <Text style={styles.buttonText, styles.facebookLoginButtonText}>Continue with Facebook</Text>
                   </View>
                 </View>
               </TouchableHighlight>
-            
+
               <TouchableHighlight onPress={() => attemptAuth('Google')}>
                 <View style={[styles.loginButton, styles.googleLoginButton]}>
                   <View style={styles.loginLogoView}>
@@ -121,7 +123,7 @@ export const IdentityOIDC = props => {
                 </View>
               </TouchableHighlight>
             </View>
-            <Text style={styles.appLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
+            <Text style={styles.messageLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
           </View>
         </Image>
     </View>
@@ -132,62 +134,70 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  statusBar: {
+    backgroundColor: 'transparent',
+    //barStyle: 'light-content',
+  },
   image: {
     width,
     height,
   },
   contentView:{
-    paddingTop: height - 375
+    paddingTop: height - 380
   },
   loginButtonView:{
-    marginTop: 30
+    marginTop: 50
   },
   loginLogoView: {
     marginLeft: 20,
     marginRight: 20
   },
   loginLogo: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
   loginButton: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: 15,
-    marginHorizontal: 10,
-    borderRadius : 10,
+    justifyContent: "flex-start",
+    marginTop: 10,
+    marginHorizontal: 15,
+    borderRadius : 3,
     flexDirection:'row'
   },
   facebookLoginButton: {
     backgroundColor: "#3C5A96",
   },
   facebookLoginButtonText: {
+    fontWeight: "600",
     color: "#FFF",
-    fontSize: 18,
+    fontSize: 20
   },
   googleLoginButton: {
     backgroundColor: "#FFFFFF"
   },
   googleLoginButtonText: {
-    color: "#000000",
-    fontSize: 18
+    fontWeight: "600",
+    color: 'rgba(0, 0, 0, 0.35)',
+    fontSize: 20
   },
   productName: {
-    fontSize: 30,
-    color: "#FFFFFF",
+    fontSize: 40,
+    fontWeight: "700",
+    color: 'rgba(255, 255, 255, 1.0)',
     marginHorizontal: 35
   },
   productLine: {
     fontSize: 20,
-    color: "#FFFFFF",
+    fontWeight: "600",
+    color: 'rgba(255, 255, 255, 0.6)',
     marginTop: 10,
     marginHorizontal: 35
   },
-  appLine: {
+  messageLine: {
     fontSize: 14,
-    color: "#FFFFFF",
-    marginTop: 15,
+    color: 'rgba(255, 255, 255, 0.4)',
+    marginTop: 25,
     marginHorizontal: 35
   }
 
