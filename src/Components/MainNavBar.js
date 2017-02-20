@@ -62,6 +62,13 @@ export class MainNavBar extends Component {
     })
   }
 
+  gotoAddPost () {
+    const { navigator } = this.props
+    navigator.push({
+      id: 'addPost'
+    })
+  }
+
   render () {
     const { navigator } = this.props
     const routes = navigator.getCurrentRoutes()
@@ -78,7 +85,7 @@ export class MainNavBar extends Component {
           <Icon name='bell-o' style={styles.icon} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')}>
-          <Icon name='plus-square-o' style={styles.icon} />
+          <Icon name='plus-square-o' style={styles.icon} onPress={this.gotoAddPost.bind(this)}/>
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('search')} onPress={this.gotoSearch.bind(this)}>
           <Icon name='search' style={styles.icon} />

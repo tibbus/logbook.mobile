@@ -30,6 +30,7 @@
     "react-native-http": "github:tradle/react-native-http#834492d",
     "react-native-image-picker": "^0.19.2",
     "react-native-level-fs": "^3.0.0",
+    "react-native-modal-dropdown": "^0.4.1",
     "react-native-randombytes": "^2.2.0",
     "react-native-scrollable-tab-view": "^0.7.2",
     "react-native-tcp": "^2.0.4",
