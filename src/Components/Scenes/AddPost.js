@@ -35,7 +35,7 @@ const onGalleryPress = (mediaType) => {
 
     console.log('Response : ', response);
     
-    const { didCancel } = response
+    const { didCancel, error, data, uri, origURL, uri } = response;
     
     if(didCancel) {
       console.log(response);
@@ -52,7 +52,7 @@ const onGalleryPress = (mediaType) => {
 
 const onCameraPress = () => {
   MediaPicker.launchCamera(config, response => {
-    const {didCancel, error, data, uri, origUri, fileName, } = response;
+    const { didCancel, error, data, uri, origURL, uri } = response;
 
     if(didCancel) {
       console.log(response);
@@ -80,11 +80,12 @@ export class AddPost extends Component {
   }
 
   render () {
+    const { navigator } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.headerButtonContainer}>
-            <TouchableHighlight style={styles.headerButton}>
+            <TouchableHighlight style={styles.headerButton} onPress={() => onCancelPress(navigator)}>
                 <Text>Cancel</Text>
             </TouchableHighlight>
           </View>
@@ -114,7 +115,7 @@ export class AddPost extends Component {
             <TouchableHighlight onPress={() => onGalleryPress('video')}>
               <Text>Video</Text>
             </TouchableHighlight>
-            <TouchableHighlight>
+            <TouchableHighlight onPress={() => onCameraPress()}>
               <Text>Camera</Text>
             </TouchableHighlight>
         </View>
