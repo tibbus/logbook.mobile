@@ -6,13 +6,15 @@ import {
   TextInput,
   TouchableHighlight,
   Image,
-  View
+  View,
+  Navigator
 } from 'react-native'
-import { LandingPage } from '../Post/AddPost'
+import { LandingPage, ConfirmPage } from '../Post/AddPost'
 import { updateUserCars } from '../../Actions/user.js'
-import { addCarTimelineImage } from '../../Actions/timeline'
+import { addCarTimelinePost } from '../../Actions/timeline'
+import { updateAddPost, resetAddPost } from '../../Actions/post'
 
-const stateToProps = ({ user, cars }) => ({ user, cars });
+const stateToProps = ({ user, cars, post }) => ({ user, cars, post });
 
 @connect(stateToProps)
 export class AddPost extends Component {
@@ -20,19 +22,76 @@ export class AddPost extends Component {
   constructor (props) {
     super(props)
 
-    const {dispatch, cars, user } = this.props;
-
+    const { dispatch, cars, user } = this.props;          
     if(!cars) {
       dispatch(updateUserCars());
     }
     
   }
 
-  render () {
+  componentWillReceiveProps ({post}) {
+    
+    if(post.publishPending === true) {
+      this.setState({postDetails: post.data});
+    }
+
+    if(post.publishPending === false && post.published === true) {
+      this.props.navigator.push({ id: 'profile' });
+    }
+
+    if(post.publishPending === false && post.published === false) {
+      this.navigator.push({ id: 'postFailed' });
+    }
+  }
+
+  renderScene(route, navigator) {
+    const { id } = route;
     const { dispatch } = this.props;
-    const props = { navigator: this.props.navigator, cars: this.props.cars, user: this.props.user}
+    const props = { navigator: navigator, rootNav: this.props.navigator, cars: this.props.cars, user: this.props.user}
+    this.navigator = navigator;
+
+    switch(id) {
+      case 'composePost':
+        return (
+          <LandingPage {...props} 
+            onNextClick={(postDetails) => {
+              dispatch(updateAddPost(postDetails))
+              navigator.push({ id: 'confirmPost' })
+            }}/>
+        )
+      case 'confirmPost':
+        const postDetails = {postDetails: this.state.postDetails};
+        return (
+          <ConfirmPage {...props} {...postDetails}
+            onCancelClick={() => {
+              dispatch(resetAddPost())
+              this.props.navigator.pop()
+            }}
+            onPostClick={(postDetails) => dispatch(addCarTimelinePost(postDetails))} />
+        )
+      case 'postSuccess':
+        return (
+         <View><Text>Success</Text></View> 
+        )
+
+      case 'postFailed':
+        return (
+         <View><Text>Failed</Text></View> 
+        )
+
+      default:
+        return (
+          <LandingPage {...props} 
+            onNextClick={(postDetails) => dispatch(updateAddPost(postDetails))}/>
+        )
+    }
+  }
+
+  render () {
     return (
-      <LandingPage {...props} onPostClick={(postDetails) => dispatch(addCarTimelineImage({postDetails}))}/>
-    )
+      <Navigator
+        style={{ flex:1 }}
+        initialRoute={{ id: 'composePost' }}
+        renderScene={ this.renderScene.bind(this) } />)
   }
 }

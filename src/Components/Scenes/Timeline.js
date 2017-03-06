@@ -60,10 +60,11 @@ export class Timeline extends Component {
   }
 
   componentWillReceiveProps ({ car, timelines = [], likes = [] }) {
-    if(likes !== this.props.likes) {
+    //Commenting to prevent ddos :D
+    /*if(likes !== this.props.likes) {
       const { dispatch } = this.props;
       dispatch(getUserLikedPosts(this.userId));
-    }
+    }*/
 
     if (timelines !== this.props.timelines) {
       const { dispatch } = this.props;

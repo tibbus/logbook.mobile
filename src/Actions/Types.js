@@ -50,3 +50,8 @@ export const CLEAR_FLASH = 'CLEAR_FLASH'
 
 // Search
 export const CARS_SEARCHED = 'CARS_SEARCHED'
+
+//POST
+export const POST_PUBLISHED = 'POST_PUBLISHED'
+export const UPDATE_POST = 'UPDATE_POST'
+export const RESET_POST = 'RESET_POST'
