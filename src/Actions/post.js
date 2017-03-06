@@ -7,7 +7,9 @@ import { deleteVideo } from '../API/Video'
 
 import {
   DELETE_TIMELINE_ITEM,
-  UPDATE_TIMELINE_ITEM
+  UPDATE_TIMELINE_ITEM,
+  UPDATE_POST,
+  RESET_POST
 } from './Types'
 
 const deleteMethods = {
@@ -39,4 +41,17 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
       })
     })
     .catch((...args) => console.log(...args))
+}
+
+export const updateAddPost = (data) => dispatch => {
+  dispatch({
+    type: UPDATE_POST,
+    item: {data}
+  });
+}
+
+export const resetAddPost = () => dispatch => {
+  dispatch({
+    type: RESET_POST
+  });
 }
