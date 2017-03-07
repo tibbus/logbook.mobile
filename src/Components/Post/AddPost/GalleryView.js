@@ -3,13 +3,18 @@ import {
   StyleSheet,
   View,
   ListView,
-  Image
+  Image,
+  Text,
+  TouchableHighlight
 } from 'react-native'
 import { FitImage }  from '../../Image'
 
-export const getGalleryView = (galleryDataSource) => {
+export const getGalleryView = (galleryDataSource, onAddMediaClick) => {
   return (
-    <View>
+    <View style={styles.galleryContainer}>
+        {
+            (galleryDataSource.getRowCount() > 0 && galleryDataSource.getRowCount() < 3) ? showAddMedia(onAddMediaClick) : null              
+        }
         <ListView
         horizontal={true}
         style={{flex:1}}
@@ -32,6 +37,14 @@ const galleryContent = (data) => {
     }
 }
 
+const showAddMedia = (onAddMediaClick) => {
+  return (
+    <TouchableHighlight onPress={onAddMediaClick}>
+      <Text>Add Media</Text>
+    </TouchableHighlight>
+  )
+}
+
 const styles = StyleSheet.create({
     postPhoto: {
         height: 120,
@@ -40,4 +53,8 @@ const styles = StyleSheet.create({
         padding: 5,
         margin: 3
     },
+    galleryContainer: {
+        flex: 1,
+        flexDirection: 'row'
+    }
 })

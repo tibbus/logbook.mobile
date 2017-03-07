@@ -66,10 +66,10 @@ export class LandingPage extends Component {
   showMenuBar() {
       return (
           <View style={styles.contentContainer}>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={this.onImageGalleryPress.bind(this)}>
+              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => this.onGalleryPress('image')}>
                 <Text>Image</Text>
               </TouchableHighlight>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={this.onVideoGalleryPress.bind(this)}>
+              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => this.onGalleryPress('video')}>
                 <Text>Video</Text>
               </TouchableHighlight>
               <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => onCameraPress()}>
@@ -90,9 +90,9 @@ export class LandingPage extends Component {
       )
   }
 
-  onImageGalleryPress() {
-    const opts = { mediaType: 'photo' }
-    const title = 'Photos'
+  onGalleryPress(type) {
+    const opts = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video'};
+    const title = type === 'image' ? 'Photos' : 'Videos'
     const config = { ...opts, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
 
     MediaPicker.launchImageLibrary(config, (response) => {
@@ -116,53 +116,12 @@ export class LandingPage extends Component {
       const contentData = {
           id: params.id,
           extension: params.ext,
-          type: 'image',
+          type: type === 'image' ? 'image' : 'video',
           uri: uri
       }
 
-      this.addPost.postType = 'image';
-      this.addPost.content.contentType = 'image';
-      this.addPost.content.data.push(contentData);
-      this.addPost.canAddContent = false;
-
-      this.setState({
-          contentDataSource: this.state.contentDataSource.cloneWithRows(this.addPost.content.data)        
-      });
-    })
-  }
-
-  onVideoGalleryPress() {
-    const opts = { mediaType: 'video' }
-    const title = 'Videos'
-    const config = { ...opts, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
-
-    MediaPicker.launchImageLibrary(config, (response) => {
-    
-      const { didCancel, error, data, uri = '', origURL = ''} = response;
-      
-      if(didCancel) {
-        console.log(response);
-      }
-
-      if(error) {
-        console.log(response);
-      }
-
-      const params = getParams(origURL, uri)
-
-      if(!params) {
-        throw new Error('Error: Invalid file.')
-      }
-      
-      const contentData = {
-          id: params.id,
-          extension: params.ext,
-          type: 'image',
-          uri: uri
-      }
-
-      this.addPost.postType = 'video';
-      this.addPost.content.contentType = 'video';
+      this.addPost.postType = type === 'image' ? 'image' : 'video';
+      this.addPost.content.contentType = type === 'image' ? 'image' : 'video';
       this.addPost.content.data.push(contentData);
       this.addPost.canAddContent = false;
 
@@ -213,8 +172,8 @@ export class LandingPage extends Component {
             {getStatusView(true, (text) => {this.addPost.description = text}, "")}
           <View style={{flex:1, borderBottomWidth: 2, borderBottomColor: '#000000'}}>
           </View>
-            {getTagsView(this.state.tagsDataSource)}
-            {getGalleryView(this.state.contentDataSource)}
+            {getTagsView(this.state.tagsDataSource)}            
+            {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
             {
                 this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
             }
@@ -271,5 +230,5 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
-  },
+  }
 })
