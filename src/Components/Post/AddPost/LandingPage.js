@@ -107,6 +107,10 @@ export class LandingPage extends Component {
         console.log(response);
       }
 
+      if(!origURL && !uri) {
+        return;
+      }
+  
       const params = getParams(origURL, uri)
 
       if(!params) {
