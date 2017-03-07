@@ -21,10 +21,7 @@ const customParams = (files, request) => {
 
     keys.forEach(key => {
 
-      if(key === 'files') {
-        body[key].forEach(item => formData.append(key, item));
-      }
-      else if(key === 'topics') {
+      if(key === 'files' || key === 'topics') {
         body[key].forEach(item => formData.append(key, item));
       }
       else {

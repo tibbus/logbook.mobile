@@ -91,9 +91,9 @@ export class LandingPage extends Component {
   }
 
   onGalleryPress(type) {
-    const opts = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video'};
+    const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video'};
     const title = type === 'image' ? 'Photos' : 'Videos'
-    const config = { ...opts, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
+    const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
 
     MediaPicker.launchImageLibrary(config, (response) => {
     
@@ -201,8 +201,13 @@ const getParams = (origURL, uri) => {
 
 const getCarOptions = (cars) => {
     const carOptions = cars.map((car) => {
-        const carDetails = {id: car.carInfo.id, model: car.carInfo.car.model, make: car.carInfo.car.make, yearOfManufacture: car.carInfo.car.yearOfManufacture, image: car.carInfo.image}
-        return carDetails;
+        return {
+          id: car.carInfo.id, 
+          model: car.carInfo.car.model, 
+          make: car.carInfo.car.make, 
+          yearOfManufacture: car.carInfo.car.yearOfManufacture, 
+          image: car.carInfo.image
+        }
     });
 
     return carOptions;
