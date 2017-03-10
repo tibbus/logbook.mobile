@@ -1,8 +1,6 @@
 import { getTimeline } from '../API/Timeline'
 
-export const getUserFeed = ({
-  userId
-}) => {
+export const getUserFeed = (userId) => {
   return dispatch => {
     getTimeline('user', userId , { userId })
       .then(data => {

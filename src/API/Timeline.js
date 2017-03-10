@@ -34,4 +34,3 @@ export  const getTimeline  =  (type, carInfoId)  =>  {
 
     return  promise;
 }
-s

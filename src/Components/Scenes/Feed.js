@@ -6,6 +6,9 @@ import {
 import { connect } from 'react-redux';
 import { getUserFeed } from '../../Actions/feed'
 
+const stateToProps = ({ user }) => ({ user });
+
+@connect(stateToProps)
 export class Feed extends Component {
     
     constructor(props) {
