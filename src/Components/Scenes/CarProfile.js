@@ -17,9 +17,9 @@ export class CarProfile extends Component {
         super(...arguments);
 
         const { car, cars, dispatch } = this.props;
-        if(cars.carDataLoadPending){
-            dispatch(getCarTimelineContent(car.carInfo.id, 'Images', 0))
-            dispatch(getCarTimelineContent(car.carInfo.id, 'Videos', 0))
+        if((cars.browsingCars.length === 0) || (!cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id ))){
+            dispatch(getCarTimelineContent(car.carInfo, 'Images', 0))
+            dispatch(getCarTimelineContent(car.carInfo, 'Videos', 0))
         }
     }
 
@@ -29,12 +29,13 @@ export class CarProfile extends Component {
     render() {
         const { user, car, cars, carOwner, navigator } = this.props;
         const { image } = car.carInfo;
+        const owned = !!cars.userCars.find(userCar => userCar.carInfo.id === car.id);
         return (
             <BackScene onBack={() => this.back(navigator)} title = {car.carInfo.car.make + " " + car.carInfo.car.model}>
                 <View style={styles.container}>
                     <View>
                         <FitImage resizeMode={Image.resizeMode.contain} source={{uri:image}} style={styles.photo} />
-                        <Info ownerImage={carOwner.profileImage} ownerName={carOwner.name} />
+                        <Info ownerImage={carOwner.profileImage} ownerName={carOwner.name} owned={owned}/>
                     </View>
                     <ScrollableTabView
                     initialPage={0}

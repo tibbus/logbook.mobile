@@ -2,10 +2,10 @@ import {
   SEARCHED_CAR,
   SET_LOADING_STATUS,
   UNSET_LOADING_STATUS,
-  UPDATE_USER_CAR_IMAGES,
-  UPDATE_USER_CAR_VIDEOS
+  UPDATE_USER_CAR_CONTENT,
+  FOLLOW_CAR
 } from './Types'
-import { getCarByRegistration, getCarImages, getCarVideos } from '../API/Car'
+import { getCarByRegistration, getCarImages, getCarVideos, followCar, unfollowCar } from '../API/Car'
 import { getApiFetchLimit } from '../API/config'
 
 export const getCar = (registration) => {
@@ -31,22 +31,22 @@ const extractPostDetails = (post) => {
     }
 }
 
-export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
+export const getCarTimelineContent = (carInfo, contentType, skip = 0) => {
     return dispatch => {
         const takeLimit = getApiFetchLimit();
-
+        const { id } = carInfo;
         if(contentType === "Images") {
-            getCarImages({}, { carInfoId, skip, takeLimit})
+            getCarImages({}, { carInfoId: id, skip, takeLimit})
             .then(imagePosts => {
                 
                 const posts = imagePosts.results.map(extractPostDetails);
                 dispatch({ 
-                    type: UPDATE_USER_CAR_IMAGES,
-                    carImages: {
-                        carInfoId: carInfoId,
-                        posts: posts
-                    },
-                    carImagesLoadPending: false 
+                    type: UPDATE_USER_CAR_CONTENT,
+                    carContent: {
+                        type: 'Images',
+                        carInfo: carInfo,
+                        content: posts,  
+                    } 
                 });  
             })
             .catch(error => {
@@ -55,17 +55,16 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
         }
 
         if(contentType === "Videos") {
-            getCarVideos({}, { carInfoId, skip, takeLimit})
+            getCarVideos({}, { carInfoId: id, skip, takeLimit})
             .then(videoPosts => {
-                
                 const posts = videoPosts.results.map(extractPostDetails);
                 dispatch({ 
-                    type: UPDATE_USER_CAR_VIDEOS,
-                    carVideos: {
-                        carInfoId: carInfoId,
-                        posts: posts
+                    type: UPDATE_USER_CAR_CONTENT,
+                    carContent: {
+                        type: 'Videos',
+                        carInfo: carInfo,
+                        content: posts,
                     },
-                    carDataLoadPending: false 
                 });  
             })
             .catch(error => {
@@ -74,5 +73,41 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
         }
 
         
+    }
+}
+
+export const followCar = (userId, carInfoId) => {
+    return dispatch => {
+        followCar({}, { userId, carInfoId })
+        .then(data => {
+            dispatch({ 
+                type: FOLLOW_CAR, 
+                followContent: {
+                    carInfoId: carInfoId,
+                    following: true
+                } 
+            });  
+        })
+        .catch(error => {
+
+        })
+    }
+}
+
+export const unFollowCar = (userId, carInfoId) => {
+    return dispatch => {
+        unFollowCar({}, { userId, carInfoId })
+        .then(data => {
+            dispatch({ 
+                type: FOLLOW_CAR, 
+                followContent: {
+                    carInfoId: carInfoId,
+                    following: false
+                } 
+            });  
+        })
+        .catch(error => {
+
+        })
     }
 }
