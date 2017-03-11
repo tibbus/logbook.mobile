@@ -5,7 +5,7 @@ import {
   UPDATE_USER_CAR_CONTENT,
   FOLLOW_CAR
 } from './Types'
-import { getCarByRegistration, getCarImages, getCarVideos, followCar, unfollowCar } from '../API/Car'
+import { getCarByRegistration, getCarImages, getCarVideos, followCar as followCarApi, unfollowCar } from '../API/Car'
 import { getApiFetchLimit } from '../API/config'
 
 export const getCar = (registration) => {
@@ -78,7 +78,7 @@ export const getCarTimelineContent = (carInfo, contentType, skip = 0) => {
 
 export const followCar = (userId, carInfoId) => {
     return dispatch => {
-        followCar({}, { userId, carInfoId })
+        followCarApi({}, { userId, carInfoId })
         .then(data => {
             dispatch({ 
                 type: FOLLOW_CAR, 

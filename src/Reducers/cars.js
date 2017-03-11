@@ -3,6 +3,7 @@ import {
   SET_USER_CARS,
   SEARCHED_CAR,
   UPDATE_USER_CAR_CONTENT,
+  FOLLOW_CAR
   
 } from '../Actions/Types'
 
