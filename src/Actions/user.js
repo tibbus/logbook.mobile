@@ -65,19 +65,24 @@ export const addUserCar = (userId, carInfoId) => {
 
 export const updateUserFollowCount = (id) => {
   return dispatch => {
-    
-    getFollowCount({}, { id })
-      .then(countResponse => {
-        dispatch({ 
-          type: SET_USER_FOLLOW_COUNT,
-          count: countResponse.count
-          })
-      })
-      .catch(e => {
 
+    const body  =  { actorId: id,  actorType: 'user'  }
+    getGetStreamToken({ body }, {})
+    .then(tokenResponse => {
+
+      getUserFollowing(tokenResponse.token, id)
+      .then(userFollowingFeeds => {
+        console.log(userFollowingFeeds)
+        dispatch({
+          type: SET_USER_FOLLOW_COUNT,
+          count: userFollowingFeeds.length
+        })
       })
-  };
-}
+      .catch(args => console.log(args))
+    })
+    .catch(args => console.log(args))
+  }
+};
 
 
 
