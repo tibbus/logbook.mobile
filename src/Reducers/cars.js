@@ -2,9 +2,9 @@ import {
   ADD_CAR,
   SET_USER_CARS,
   SEARCHED_CAR,
-  UPDATE_USER_CAR_CONTENT,
-  FOLLOW_CAR
-  
+  UPDATE_BROWSING_CAR_CONTENT,
+  SET_BROWSING_CAR,
+  FOLLOW_CAR  
 } from '../Actions/Types'
 
 /*
@@ -55,44 +55,66 @@ const updateCarFollowFlag = (state, followContent) => {
 
   return state;
 }
+
+const setBrowsingCar = (state, carInfo) => {
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfo.id)
+
+  if(car) {
+    return state;
+  }
+  else {
+    const newCar = {
+      ...carInfo,
+      carImages: {
+        content: [],
+        loadPending: true
+      },
+      carVideos: {
+        content: [],
+        loadPending: true
+      },
+      followed: false
+    }
+    state.browsingCars.push(newCar);
+
+    return {...state};
+  }
+}
 const updateBrowsingCarContent = (state, carContent) => {
-  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfo.id);
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfoId);
 
   if(car) {
     if(carContent.type === 'Images') {
 
       if(car.carImages) {
-        car.carImages.content.push(carContent.content);
+        if(!carContent.content.length === 0) {
+          car.carImages.content.push(carContent.content)
+        }  
         car.carImages.loadPending = false;
       }
       else {
         Object.assign(car, getCarImageContent(carContent));
       }
+
     }
     else {
 
       if(car.carVideos) {
-        car.carVideos.content.push(carContent.content);
+        if(!carContent.content.length === 0) {
+          car.carVideos.content.push(carContent.content);
+        }        
         car.carVideos.loadPending = false;
       }
       else {
         Object.assign(car, getCarVideoContent(carContent));
       }
+
     }
 
-    return state;
+    return {...state};
   }
   else {
-    if(carContent.type === 'Images') {
-      const car = getCarImageContent(carContent);
-      state.browsingCars.push(car);
-      return state;
-    }
-    else {
-      const car = getCarVideoContent(carContent);
-      state.browsingCars.push(car);
-      return state;
-    }
+    return {...state}
   }
 }
 
@@ -119,8 +141,11 @@ export const cars = (state = initialState, action) => {
           carToConfirm: carInfo
         }
 
-     case UPDATE_USER_CAR_CONTENT:
+    case UPDATE_BROWSING_CAR_CONTENT:
       return updateBrowsingCarContent(state, carContent)
+
+    case SET_BROWSING_CAR:
+      return setBrowsingCar(state, carInfo)
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent)
