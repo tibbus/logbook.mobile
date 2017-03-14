@@ -34,14 +34,16 @@ export class CarProfile extends Component {
         
         const { dispatch, car, carInfoId } = this.props;
         let browsingCarId = 0;
-        car ? browsingCarId = car.carInfoId.id : browsingCarId = carInfoId;
+        car ? browsingCarId = car.carInfo.id : browsingCarId = carInfoId;
         browsingCar = cars.browsingCars.find(item => item.carInfo.id === browsingCarId);
 
-        if(browsingCar.carImages.loadPending) {
-            dispatch(getCarTimelineContent(browsingCarId, 'Images', 0));
-        }
-        if(browsingCar.carVideos.loadPending) {
-            dispatch(getCarTimelineContent(browsingCarId, 'Videos', 0));
+        if(browsingCar) {
+            if(browsingCar.carImages.loadPending) {
+                dispatch(getCarTimelineContent(browsingCarId, 'Images', 0));
+            }
+            if(browsingCar.carVideos.loadPending) {
+                dispatch(getCarTimelineContent(browsingCarId, 'Videos', 0));
+            }
         }
     }
 
@@ -53,7 +55,7 @@ export class CarProfile extends Component {
 
         let browsingCar;
         if(car) {
-            browsingCar = cars.browsingCars.find(item => item.carinfo.id === car.id)
+            browsingCar = cars.browsingCars.find(item => item.carInfo.id === car.id)
 
             if(!browsingCar){
                 return (

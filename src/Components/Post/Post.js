@@ -45,13 +45,13 @@ const renderMedia = (type, data) => {
 }
 
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, user = {}, liked } = data;
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked } = data;
   profileImg = '';
-  if(user === undefined || user.profileImg === undefined ){
-    profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png';
+  if(carOwner === undefined || carOwner.profileImg === undefined ){
+    profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
   }
   else{
-    profileImg = user.profileImg;
+    profileImg = carOwner.profileImg;
   }
   const {
     commentCount = (details.socialData === undefined || details.socialData.commentsCount === undefined) ? 0 : details.socialData.commentsCount,
@@ -60,12 +60,12 @@ export const Post = (data = {}) => {
     timeAgo,
     interests = details.activityData.topics
   } = details;
-  const { name } = user
+  const { name } = carOwner
 
   return (
     <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
       <View style={[styles.container, pending ? styles.pending : {}]}>
-        <View style={[styles.userDetails, styles.eventHeader]}>
+        <View style={[styles.carOwnerDetails, styles.eventHeader]}>
           <Image
             source={{uri: profileImg}}
             style={styles.icon} />
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     color: icon.inactive,
     textAlign: 'right',
   },
-  userDetails: {
+  carOwnerDetails: {
     flex: 1,
     paddingLeft: 5,
     paddingRight: 5,

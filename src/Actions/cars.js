@@ -31,11 +31,8 @@ export const getCar = (registration) => {
 export const getCarById = (carInfoId) => {
     return dispatch => {
         getCarByIdApi({}, { carInfoId })
-        .then(carInfo => {
-            dispatch({ 
-                type: SET_BROWSING_CAR,
-                carInfo:  carInfo
-            });  
+        .then(carResponse => {
+            dispatch(setBrowsingCar(carResponse.carInfo)) 
         })
         .catch(error => {
             console.log(error);
@@ -52,11 +49,13 @@ const extractPostDetails = (post) => {
     }
 }
 
-export const setBrowsingCar = (carinfo) => {
-    dispatch({ 
-        type: SET_BROWSING_CAR,
-        carInfo:  carInfo
-    });  
+export const setBrowsingCar = (carInfo) => { 
+    return dispatch => {
+        dispatch({ 
+            type: SET_BROWSING_CAR,
+            carInfo:  carInfo
+        });  
+    }
 }
 
 export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
