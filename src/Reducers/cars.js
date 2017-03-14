@@ -10,6 +10,11 @@ import {
 /*
 browsingCars:[
   {
+    ownerInfo: {
+      id: 1,
+      name: '',
+      profilePicture: ''
+    },
     carInfo: {},
     carImages: {
       content: [],
@@ -29,26 +34,6 @@ const initialState = {
     browsingCars: [],
 }
 
-const getCarImageContent = (carContent) => {
-    return {
-      carInfo: carContent.carInfo,
-      carImages: {
-        content: carContent.content,
-        loadPending: false
-      }
-    };
-}
-
-const getCarVideoContent = (carContent) => {
-    return {
-      carInfo: carContent.carInfo,
-      carVideos: {
-        content: carContent.content,
-        loadPending: false
-      }
-    };
-}
-
 const updateCarFollowFlag = (state, followContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followContent.carInfoId);
   car.followed = followContent.following;
@@ -64,7 +49,7 @@ const setBrowsingCar = (state, carInfo) => {
   }
   else {
     const newCar = {
-      ...carInfo,
+      carInfo: carInfo,
       carImages: {
         content: [],
         loadPending: true
@@ -87,9 +72,7 @@ const updateBrowsingCarContent = (state, carContent) => {
     if(carContent.type === 'Images') {
 
       if(car.carImages) {
-        if(!carContent.content.length === 0) {
-          car.carImages.content.push(carContent.content)
-        }  
+        car.carImages.content = car.carImages.content.concat(carContent.content);
         car.carImages.loadPending = false;
       }
       else {
@@ -100,15 +83,12 @@ const updateBrowsingCarContent = (state, carContent) => {
     else {
 
       if(car.carVideos) {
-        if(!carContent.content.length === 0) {
-          car.carVideos.content.push(carContent.content);
-        }        
+        car.carVideos.content = car.carVideos.concat(carContent.content);
         car.carVideos.loadPending = false;
       }
       else {
         Object.assign(car, getCarVideoContent(carContent));
       }
-
     }
 
     return {...state};
