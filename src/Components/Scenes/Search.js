@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { SearchCars } from '../Search'
 import { searchCars } from '../../Actions/search.js'
+import { getCarById } from '../../Actions/cars.js'
 import {
   ListView,
   Text,
@@ -21,8 +22,12 @@ export class Search extends Component {
     render() {
         const { dispatch } = this.props;
         const { search } = this.props;
+        const { navigator } = this.props; 
         return (
-            <SearchCars onSubmit={searchTerm => dispatch(searchCars({searchTerm}))} search={search} />
+            <SearchCars 
+                onSubmit={searchTerm => dispatch(searchCars({searchTerm}))} 
+                search={search}
+                navigator={navigator}/>
         )
     }
 }

@@ -453,7 +453,12 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+<<<<<<< HEAD
 						DevelopmentTeam = QBQH89ANK2;
+=======
+						DevelopmentTeam = 8TWV767L8U;
+						ProvisioningStyle = Automatic;
+>>>>>>> a97f2e51053deafc11d4ed62ac48230184e89ecb
 					};
 				};
 			};
@@ -765,7 +770,7 @@
 					"$(SRCROOT)/../node_modules/react-native-video",
 				);
 				INFOPLIST_FILE = MyCarBioApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -794,7 +799,7 @@
 					"$(SRCROOT)/../node_modules/react-native-video",
 				);
 				INFOPLIST_FILE = MyCarBioApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",

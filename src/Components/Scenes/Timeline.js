@@ -60,10 +60,11 @@ export class Timeline extends Component {
   }
 
   componentWillReceiveProps ({ car, timelines = [], likes = [] }) {
-    if(likes !== this.props.likes) {
+    //Commenting to prevent ddos :D
+    /*if(likes !== this.props.likes) {
       const { dispatch } = this.props;
       dispatch(getUserLikedPosts(this.userId));
-    }
+    }*/
 
     if (timelines !== this.props.timelines) {
       const { dispatch } = this.props;
@@ -149,7 +150,7 @@ export class Timeline extends Component {
   }
 
   renderRow (post) {
-    const { user, comments, dispatch, likes = [] } = this.props;
+    const { user, carOwner, comments, dispatch, likes = [] } = this.props;
     const { carInfoId }  = post.activityData;
     const likedItem = likes.find(element => element.postId === post.activityData.id);
     const liked = !!likedItem;
@@ -159,7 +160,7 @@ export class Timeline extends Component {
       onVideoPress: this.playVideo.bind(this),
       onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
       onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
-      user,
+      carOwner,
       liked
     }
 

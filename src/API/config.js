@@ -5,6 +5,7 @@ export const AZURE_SEARCH_API_VERSION = '2015-02-28'
 
 const environments = {
   dev: {
+    //uri: 'amilapc.com',
     uri: 'mycarbioservice.azurewebsites.net',
     authUri: 'mycarbioidentity.azurewebsites.net',
     searchUri: 'https://mycarbiosearch.search.windows.net/indexes/',
