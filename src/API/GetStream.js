@@ -31,7 +31,7 @@ export const getFeedData = (feedType, feedId, token) => {
 
     const url = getUrl(`${getStreamApi}feed/${feedType}/${feedId}/?limit=${fetchLimit}&api_key=${apiKey}`)
     
-    return global.fetch(url, getHeaders())
+    return global.fetch(url, getHeaders(token))
     .then(response => response.json())
     .then(jsonResponse => {
         const timelineTimes = jsonResponse.results.map((timelineObject) => {

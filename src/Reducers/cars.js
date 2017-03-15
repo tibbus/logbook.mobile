@@ -2,14 +2,19 @@ import {
   ADD_CAR,
   SET_USER_CARS,
   SEARCHED_CAR,
-  UPDATE_USER_CAR_CONTENT,
-  FOLLOW_CAR
-  
+  UPDATE_BROWSING_CAR_CONTENT,
+  SET_BROWSING_CAR,
+  FOLLOW_CAR  
 } from '../Actions/Types'
 
 /*
 browsingCars:[
   {
+    ownerInfo: {
+      id: 1,
+      name: '',
+      profilePicture: ''
+    },
     carInfo: {},
     carImages: {
       content: [],
@@ -29,50 +34,63 @@ const initialState = {
     browsingCars: [],
 }
 
-const getCarImageContent = (carContent) => {
-    return {
-      carInfo: carContent.carInfo,
-      carImages: {
-        content: carContent.content,
-        loadPending: false
-      }
-    };
-}
-
-const getCarVideoContent = (carContent) => {
-    return {
-      carInfo: carContent.carInfo,
-      carVideos: {
-        content: carContent.content,
-        loadPending: false
-      }
-    };
-}
-
 const updateCarFollowFlag = (state, followContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followContent.carInfoId);
   car.followed = followContent.following;
 
   return state;
 }
+
+const setBrowsingCar = (state, carInfo) => {
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfo.id)
+
+  if(car) {
+    return state;
+  }
+
+  const newCar = {
+    carInfo: carInfo,
+    carImages: {
+      content: [],
+      loadPending: true
+    },
+    carVideos: {
+      content: [],
+      loadPending: true
+    },
+    followed: false
+  }
+  state.browsingCars.push(newCar);
+
+  return {...state};
+}
 const updateBrowsingCarContent = (state, carContent) => {
-  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfo.id);
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfoId);
 
   if(car) {
     if(carContent.type === 'Images') {
 
       if(car.carImages) {
-        car.carImages.content.push(carContent.content);
+        carContent.content.forEach(item => {
+          if(car.carImages.content.includes(item) === false){
+            car.carImages.content.push(item)
+          }
+        })
         car.carImages.loadPending = false;
       }
       else {
         Object.assign(car, getCarImageContent(carContent));
       }
+
     }
     else {
 
       if(car.carVideos) {
-        car.carVideos.content.push(carContent.content);
+        carContent.content.forEach(item => {
+          if(car.carVideos.content.includes(item) === false){
+            car.carVideos.content.push(item)
+          }
+        })
         car.carVideos.loadPending = false;
       }
       else {
@@ -80,19 +98,10 @@ const updateBrowsingCarContent = (state, carContent) => {
       }
     }
 
-    return state;
+    return {...state};
   }
   else {
-    if(carContent.type === 'Images') {
-      const car = getCarImageContent(carContent);
-      state.browsingCars.push(car);
-      return state;
-    }
-    else {
-      const car = getCarVideoContent(carContent);
-      state.browsingCars.push(car);
-      return state;
-    }
+    return state;
   }
 }
 
@@ -119,8 +128,11 @@ export const cars = (state = initialState, action) => {
           carToConfirm: carInfo
         }
 
-     case UPDATE_USER_CAR_CONTENT:
+    case UPDATE_BROWSING_CAR_CONTENT:
       return updateBrowsingCarContent(state, carContent)
+
+    case SET_BROWSING_CAR:
+      return setBrowsingCar(state, carInfo)
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent)
