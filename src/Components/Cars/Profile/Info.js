@@ -24,21 +24,19 @@ const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollo
             </TouchableHighlight>
         )
     }
-    else {
-        if(followed) {
+    else if(followed) {
             return (
                 <TouchableHighlight onPress={onUnFollowPress}>
                     <Text>UnFollow</Text>
                 </TouchableHighlight>
             )
-        }
-        else {
-            return (
-                <TouchableHighlight onPress={onFollowPress}>
-                    <Text>Follow</Text>
-                </TouchableHighlight>
-            )
-        }
+    }
+    else {
+        return (
+            <TouchableHighlight onPress={onFollowPress}>
+                <Text>Follow</Text>
+            </TouchableHighlight>
+        )
     }
 }
 

@@ -38,7 +38,7 @@ const updateCarFollowFlag = (state, followContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followContent.carInfoId);
   car.followed = followContent.following;
 
-  return state;
+  return {...state};
 }
 
 const setBrowsingCar = (state, carInfo) => {
