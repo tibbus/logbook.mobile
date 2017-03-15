@@ -97,9 +97,11 @@ export const IdentityOIDC = props => {
         source={require('../../Assets/Images/SignInPage.jpg')}
         style={styles.image}
         resizeMode="contain">
+        <View style={{flex: 1}}/>
         <View style={styles.contentView}>
             <Text style={styles.productName}>Logbook</Text>
             <Text style={styles.productLine}>All your car stuff, in one place</Text>
+            <View style={{flex: 1}}/>
             <View style={styles.loginButtonView}>
               <TouchableHighlight onPress={() => attemptAuth('Facebook')}>
                 <View style={[styles.loginButton, styles.facebookLoginButton]}>
@@ -111,7 +113,6 @@ export const IdentityOIDC = props => {
                   </View>
                 </View>
               </TouchableHighlight>
-
               <TouchableHighlight onPress={() => attemptAuth('Google')}>
                 <View style={[styles.loginButton, styles.googleLoginButton]}>
                   <View style={styles.loginLogoView}>
@@ -122,8 +123,9 @@ export const IdentityOIDC = props => {
                   </View>
                 </View>
               </TouchableHighlight>
+              <View style={{flex: 1}}/>
+              <Text style={styles.messageLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
             </View>
-            <Text style={styles.messageLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
           </View>
         </Image>
     </View>
@@ -143,25 +145,27 @@ const styles = StyleSheet.create({
     height,
   },
   contentView:{
-    paddingTop: height - 380
+    //paddingTop: height - (height/1.8)
+    flex: 1.5,
   },
   loginButtonView:{
-    marginTop: 50
+    //marginTop: height/15
+    flex: 4,
   },
   loginLogoView: {
-    marginLeft: 20,
-    marginRight: 20
+    marginLeft: width/20,
+    marginRight: width/20
   },
   loginLogo: {
-    width: 30,
-    height: 30,
+    width: height/20,
+    height: height/20,
   },
   loginButton: {
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "flex-start",
-    marginTop: 10,
-    marginHorizontal: 15,
+    marginTop: height/70, //10
+    marginHorizontal: width/30, //20
     borderRadius : 3,
     flexDirection:'row'
   },
@@ -171,7 +175,7 @@ const styles = StyleSheet.create({
   facebookLoginButtonText: {
     fontWeight: "600",
     color: "#FFF",
-    fontSize: 20
+    fontSize: width/20 //20
   },
   googleLoginButton: {
     backgroundColor: "#FFFFFF"
@@ -179,26 +183,27 @@ const styles = StyleSheet.create({
   googleLoginButtonText: {
     fontWeight: "600",
     color: 'rgba(0, 0, 0, 0.35)',
-    fontSize: 20
+    fontSize: width/20 //20
   },
   productName: {
-    fontSize: 40,
+    fontSize: width/10, //40
     fontWeight: "700",
     color: 'rgba(255, 255, 255, 1.0)',
-    marginHorizontal: 35
+    marginHorizontal: width/10 //35
   },
   productLine: {
-    fontSize: 20,
+    fontSize: width/20, //20
     fontWeight: "600",
     color: 'rgba(255, 255, 255, 0.6)',
-    marginTop: 10,
-    marginHorizontal: 35
+    marginTop: height/70, //10
+    marginHorizontal: width/10 //35
   },
   messageLine: {
-    fontSize: 14,
+    flex: 3,
+    fontSize: width/25, //14
     color: 'rgba(255, 255, 255, 0.4)',
-    marginTop: 25,
-    marginHorizontal: 35
+//    marginTop: height/30, //25
+    marginHorizontal: width/10 //35
   }
 
 });
