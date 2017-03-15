@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ListView, View, Text, TextInput } from 'react-native'
+import { StyleSheet, ListView, View, Text, TextInput, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { SearchHeader, SearchRow } from './'
 //import styles
@@ -13,7 +13,7 @@ export class SearchCars extends Component {
     }
 
     render() {
-        const { onSubmit, search } = this.props;
+        const { onSubmit, search, onViewCarProfile } = this.props;
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -27,9 +27,9 @@ export class SearchCars extends Component {
             <ListView
                 style={styles.container}
                 dataSource={this.state.dataSource}
-                renderRow={(data) => <SearchRow {...data} />}
+                renderRow={(data) => <SearchRow {...data} navigator = {this.props.navigator}/>}
                 renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-                renderHeader={() => <SearchHeader searchFunction = { onSubmit } /> }
+                renderHeader={() => <SearchHeader searchFunction = { onSubmit }/> }
                 enableEmptySections={true}
             />
           </View>
