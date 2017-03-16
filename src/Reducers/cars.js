@@ -11,7 +11,7 @@ import {
 browsingCars:[
   {
     ownerInfo: {
-      id: 1,
+      userId: 1,
       name: '',
       profilePicture: ''
     },
@@ -41,7 +41,7 @@ const updateCarFollowFlag = (state, followContent) => {
   return {...state};
 }
 
-const setBrowsingCar = (state, carInfo) => {
+const setBrowsingCar = (state, carInfo, ownerInfo) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfo.id)
 
   if(car) {
@@ -49,6 +49,7 @@ const setBrowsingCar = (state, carInfo) => {
   }
 
   const newCar = {
+    ownerInfo: ownerInfo,
     carInfo: carInfo,
     carImages: {
       content: [],
@@ -106,7 +107,7 @@ const updateBrowsingCarContent = (state, carContent) => {
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, carContent, followContent } = action
+  const { type, userCars, carInfo, ownerInfo, carContent, followContent } = action
 
   switch (type) {
 
@@ -132,7 +133,7 @@ export const cars = (state = initialState, action) => {
       return updateBrowsingCarContent(state, carContent)
 
     case SET_BROWSING_CAR:
-      return setBrowsingCar(state, carInfo)
+      return setBrowsingCar(state, carInfo, ownerInfo)
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent)
