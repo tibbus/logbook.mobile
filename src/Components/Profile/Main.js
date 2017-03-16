@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, Dimensions } from 'react-native'
 import { Info } from './'
+
+const { width, height } = Dimensions.get("window");
 
 export class Main extends Component {
 
@@ -10,10 +12,12 @@ export class Main extends Component {
 
     render() {
         const { user, carCount } = this.props;
-        
+        const imageUrl = 'https://i.ytimg.com/vi/1JbvNF8g3Aw/maxresdefault.jpg';
+
         return (
             <View>
-                <Image source={{ uri: user.coverImg}} style={styles.photo} />
+                {/* <Image source={{ uri: user.coverImg}} style={styles.photo} /> */}
+                <Image source={{ uri: imageUrl}} style={styles.photo} />
                 <Info user = {user}/>
             </View>
         )
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#8E8E8E',
     },
     photo: {
-        height: 200,
-        width: 500,
+        height: 350,
+        width
   },
 });
