@@ -37,14 +37,14 @@ export class Gallery extends Component {
         var images = [];
         
         if(carImages.length !== 0){
-            images = carImages.posts.map(getContentUris);
+            images = carImages.map(getContentUris);
             images = [].concat.apply([], images);
         }
 
         var videos = [];
 
         if(carVideos.length !== 0) {
-            videos = carVideos.posts.map(getContentUris);
+            videos = carVideos.map(getContentUris);
             videos = [].concat.apply([], videos);
         }
 

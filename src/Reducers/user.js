@@ -5,7 +5,8 @@ import {
   SET_AUTH_ERROR,
   SET_USER,
   SET_USER_FOLLOW_COUNT,
-  SET_USER_CAR_COUNT
+  SET_USER_CAR_COUNT,
+  SET_USER_FOLLOWING
 } from '../Actions/Types'
 
 const initialState = {
@@ -16,11 +17,13 @@ const initialState = {
   profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
   coverImg: 'https://images.designtrends.com/wp-content/uploads/2015/11/07122458/Car-Backgrounds.jpg',
   followCount: 0,
-  carCount: 0
+  carCount: 0,
+  follows: []
 }
+// follows array contains the id's of cars.
 
 export const user = (state = initialState, action) => {
-  const { type, user, token, count } = action
+  const { type, user, token, count, follows } = action
 
   switch (type) {
     case INVALIDATE_USER:
@@ -65,6 +68,11 @@ export const user = (state = initialState, action) => {
       return {
         ...state,
         carCount: count
+      }
+    case SET_USER_FOLLOWING:
+      return {
+        ...state,
+        follows: follows
       }
     default:
       return state
