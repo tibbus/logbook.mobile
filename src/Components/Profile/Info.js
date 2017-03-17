@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import palette from '../../Themes/palette';
-import { StatsText, H1 } from '../Text'
+import { StatsText, HeadingOne } from '../Text'
 
 export const Info = (props) => {
   const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
@@ -31,7 +31,7 @@ export const Info = (props) => {
     </View>
     <View style={styles.subContainer}>
       <Image source={{ uri: imageUrl}} style={styles.photo} />
-      {H1(() => props.user.name)}
+      {HeadingOne(() => props.user.name)}
     </View>
 
   </View>

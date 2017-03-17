@@ -14,6 +14,6 @@ export const StatsText = (statsCount, statsCaption) => (
   </View>
 )
 
-export const H1 = (text) => (
+export const HeadingOne = (text) => (
   <Text style={styles.textTitle}> {text()}</Text>
 )
