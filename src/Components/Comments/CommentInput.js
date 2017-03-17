@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {
   StyleSheet,
   TextInput,
   View
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 const styles = StyleSheet.create({
   input: {
@@ -20,12 +19,29 @@ const styles = StyleSheet.create({
   }
 })
 
-export const CommentInput = ({
-  onSubmitEditing
-}) => (
-  <View style={styles.container}>
-    <TextInput placeholder='Comment...' style={styles.input}
-      onSubmitEditing={onSubmitEditing} />
-    <Icon.Button name='plus' onPress={() => {}}>Ok</Icon.Button>
-  </View>
-)
+export class CommentInput extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { text: ''}
+  }
+
+  render() {
+    const {props, onSubmitEditing} = this.props;
+    return (
+      <View style={styles.container}>
+        <TextInput placeholder='Add your comment here!' style={styles.input}
+          returnKeyType='done'
+          blurOnSubmit={true}
+          onChangeText={ (text) => this.setState({text}) }
+          value = {this.state.text}
+          onSubmitEditing={(event) => {
+            onSubmitEditing(props.activityData.id, props.user.id, event.nativeEvent.text)
+            this.setState({text: ''})
+            }
+          }
+          />
+        </View>
+      )
+    }
+}

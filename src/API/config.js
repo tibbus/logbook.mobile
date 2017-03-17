@@ -5,6 +5,7 @@ export const AZURE_SEARCH_API_VERSION = '2015-02-28'
 
 const environments = {
   dev: {
+    //uri: 'amilapc.com',
     uri: 'mycarbioservice.azurewebsites.net',
     authUri: 'mycarbioidentity.azurewebsites.net',
     searchUri: 'https://mycarbiosearch.search.windows.net/indexes/',
@@ -13,6 +14,7 @@ const environments = {
     getStreamUri: 'https://api.getstream.io',
     getStreamApiKey: '8r2y2gbevg9j',
     getStreamFetchLimit: 10,
+    apiFetchLimit: 20,
     secure: false
   }
 }
@@ -57,6 +59,11 @@ export const getStreamApiKey = env => {
 export const getStreamFetchLimit = env => {
   const { getStreamFetchLimit } = environments[env || CURRENT_ENV]
   return getStreamFetchLimit;
+}
+
+export const getApiFetchLimit = env => {
+  const { apiFetchLimit } = environments[env || CURRENT_ENV]
+  return apiFetchLimit;
 }
 
 export const api = `api/v${API_VERSION}/`

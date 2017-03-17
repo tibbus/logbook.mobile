@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 import { CarsNav, MainNavBar } from './'
-import { Search } from './Scenes'
+import { Search, Profile, AddCar, CarProfile, AddPost } from './Scenes'
 
 const configureScene = ({ sceneConfig } = {}) => {
   if (sceneConfig) {
@@ -23,6 +23,18 @@ export class MainNav extends Component {
       case 'search':
         return (<Search {...props} style={{flex: 1}} />)
 
+      case 'profile':
+        return (<Profile {...props} style={{flex: 1}} />)
+
+      case 'addPost':
+        return (<AddPost {...props} style={{flex: 1}} />)
+        
+      case 'addCar':
+        return(<AddCar {...props} style={{flex:1}}/>)
+      
+      case 'car':
+        return (<CarProfile {...props} {...route.passProps} style={{flex:1}}/>);
+
       default:
         return (<CarsNav {...props} style={{flex: 1}} />)
     }
@@ -31,7 +43,7 @@ export class MainNav extends Component {
   render () {
     return (
       <Navigator
-        initialRoute={{ id: 'home' }}
+        initialRoute={{ id: 'profile' }}
         navigationBar={<MainNavBar />}
         configureScene={configureScene}
         sceneStyles={{flex: 1}}

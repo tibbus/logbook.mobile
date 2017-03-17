@@ -1,6 +1,6 @@
 export default {
   //background colours
-  component: '#FFF',
+  component: 'rgba(255,255,255,1)',
   //background colour at furthest away
-  color: '#f4f4fb',
+  color: 'rgba(242,242,242,1)',
 };

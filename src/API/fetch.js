@@ -19,10 +19,21 @@ const customParams = (files, request) => {
     const keys = Object.keys(body)
     const formData = new global.FormData()
 
-    keys.forEach(key => formData.append(key, body[key]))
+    keys.forEach(key => {
+
+      if(key === 'files' || key === 'topics') {
+        body[key].forEach(item => formData.append(key, item));
+      }
+      else {
+        formData.append(key, body[key])
+      }
+      
+    })
     return {
       body: formData,
-      customHeaders: {}
+      customHeaders: {
+        'Content-Type': 'multipart/form-data'
+      }
     }
   }
 

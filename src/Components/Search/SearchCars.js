@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, ListView, View, Text, TextInput } from 'react-native'
+import { StyleSheet, ListView, View, Text, TextInput, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { SearchHeader, SearchRow } from './'
 //import styles
 import background from '../../Themes/background';
-import text from '../../Themes/text';
+
 
 export class SearchCars extends Component {
 
@@ -13,7 +13,7 @@ export class SearchCars extends Component {
     }
 
     render() {
-        const { onSubmit, search } = this.props;
+        const { onSubmit, search, onViewCarProfile } = this.props;
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -23,14 +23,13 @@ export class SearchCars extends Component {
 
         return (
           <View style={styles.containerEmpty}>
-          <SearchHeader searchFunction = { onSubmit } />
-          <Text style={styles.subHeading}>CARS</Text>
+          {/* <Text style={styles.subheading}>CARS</Text> */}
             <ListView
                 style={styles.container}
                 dataSource={this.state.dataSource}
-                renderRow={(data) => <SearchRow {...data} />}
+                renderRow={(data) => <SearchRow {...data} navigator = {this.props.navigator}/>}
                 renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-
+                renderHeader={() => <SearchHeader searchFunction = { onSubmit }/> }
                 enableEmptySections={true}
             />
           </View>
@@ -53,10 +52,8 @@ const styles = StyleSheet.create({
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#8E8E8E',
     },
-    subHeading: {
-      fontSize: 20,
-      fontWeight: '900',
-      paddingLeft: 30,
-      //color: text.secondaryText,
-    }
+    // subheading: {
+    //   fontSize: 20,
+    //   fontWeight: '900',
+    // }
 });

@@ -16,20 +16,29 @@ const getUrl = (uri, uriParams = {}) => {
   return env + uri
 }
 
+const getHeaders = (token) => {
+    return (
+        {
+            headers: {
+                'Stream-Auth-Type': 'jwt',
+                'Authorization': token
+            }
+        }
+    );
+}
+
 export const getFeedData = (feedType, feedId, token) => {
 
     const url = getUrl(`${getStreamApi}feed/${feedType}/${feedId}/?limit=${fetchLimit}&api_key=${apiKey}`)
     
-    return global.fetch(url, {
-        headers: {
-            'Stream-Auth-Type' : 'jwt',
-            'Authorization': token
-        }
-    })
+    return global.fetch(url, getHeaders(token))
     .then(response => response.json())
     .then(jsonResponse => {
         const timelineTimes = jsonResponse.results.map((timelineObject) => {
-            return timelineObject.Target;
+            return {
+                ...timelineObject.Target,
+                type: timelineObject.object
+            };
         })
         return timelineTimes;
     })
@@ -38,4 +47,31 @@ export const getFeedData = (feedType, feedId, token) => {
         throw new Error("Error during get stream api call.")
     })
 
+}
+
+export const getUserFollowing = (token, userId) => {
+
+    const url = getUrl(`${getStreamApi}feed/user/${userId}/following/?api_key=${apiKey}`);
+
+    return global.fetch(url, getHeaders(token))
+    .then(response => response.json())
+    .then(jsonResponse => {
+        console.log(jsonResponse);
+        const carIds = jsonResponse.results.map(item => {
+             return item.target_id.split(":")[1];
+        })
+        return carIds;
+    })
+}
+
+export const getCarFollowers = (token, carinfoId) => {
+
+    const url = getUrl(`${getStreamApi}feed/car/${carInfoId}/followers/?api_key=${apiKey}`)
+
+    return global.fetch(url, getHeaders(token))
+    .then(response => response.json())
+    .then(jsonResponse => {
+        console.log(jsonResponse);
+        return jsonResponse.results;
+    })
 }

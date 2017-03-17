@@ -1,12 +1,17 @@
 import { getUser } from '../API/fetch'
 import { confirmUserCar, getUserCars } from '../API/UserCar'
+import { getFollowCount, getGetStreamToken } from '../API/user'
+import { getUserFollowing } from '../API/GetStream'
 import { objKeysToDecap } from '../Utils'
 import {
   ADD_CAR,
   SET_USER,
   SET_USER_CARS,
   SET_LOADING_STATUS,
-  UNSET_LOADING_STATUS } from './Types'
+  UNSET_LOADING_STATUS,
+  SET_USER_FOLLOW_COUNT,
+  SET_USER_CAR_COUNT,
+  SET_USER_FOLLOWING } from './Types'
 
 export const setUserProfile = () => {
   return dispatch => {
@@ -32,16 +37,18 @@ export const updateUserCars = ({
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
     getUserCars({}, { userId, details })
       .then(userCars => {
-        dispatch({ type: SET_USER_CARS, userCars })
-        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })
+        dispatch({ type: SET_USER_CARS, userCars });
+        dispatch({ type: SET_USER_CAR_COUNT,count: userCars.length });
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });        
       })
+        
       .catch(() => {
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })
       })
   }
 }
 
-export const addUserCar = ({ userId, carInfoId }) => {
+export const addUserCar = (userId, carInfoId) => {
   return dispatch => (
     confirmUserCar({}, { userId, carInfoId })
       .then(userCar => {
@@ -54,4 +61,50 @@ export const addUserCar = ({ userId, carInfoId }) => {
 
       })
   )
+}
+
+export const updateUserFollowCount = (id) => {
+  return dispatch => {
+
+    const body  =  { actorId: id,  actorType: 'user'  }
+    getGetStreamToken({ body }, {})
+    .then(tokenResponse => {
+
+      getUserFollowing(tokenResponse.token, id)
+      .then(userFollowingFeeds => {
+        console.log(userFollowingFeeds)
+        dispatch({
+          type: SET_USER_FOLLOW_COUNT,
+          count: userFollowingFeeds.length
+        })
+      })
+      .catch(args => console.log(args))
+    })
+    .catch(args => console.log(args))
+  }
+};
+
+
+
+export const getUserFollowingFeeds = (userId) => {
+
+  return dispatch => {
+
+    const body  =  { actorId: userId,  actorType: 'user'  }
+    getGetStreamToken({ body }, {})
+    .then(tokenResponse => {
+
+      getUserFollowing(tokenResponse.token, userId)
+      .then(userFollowingFeeds => {
+        console.log(userFollowingFeeds)
+        dispatch({
+          type: SET_USER_FOLLOWING,
+          follows: userFollowingFeeds
+        })
+      })
+      .catch(args => console.log(args))
+    })
+    .catch(args => console.log(args))
+
+  }
 }

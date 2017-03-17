@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { ListVideo } from '../Video/ListVideo';
 import { FitImage } from '../Image';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome'
 //importing styles
 import background from '../../Themes/background';
 import comments from '../../Themes/comments';
@@ -18,7 +18,7 @@ import text from '../../Themes/text';
 
 const renderMedia = (type, data) => {
   const { details, paused = true, onVideoPress } = data
-  const { contentUris } = details
+  const { contentUris } = details.activityData
 
   switch (type) {
     case 'Image':
@@ -45,38 +45,31 @@ const renderMedia = (type, data) => {
 }
 
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, type, user = {} } = data;
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked } = data;
   profileImg = '';
-  if(details.carData === undefined || details.carData.image === undefined || details.carData.image === null){
-    profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png';
+  if(carOwner === undefined || carOwner.profileImg === undefined ){
+    profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
   }
   else{
-    profileImg = details.carData.image;
+    profileImg = carOwner.profileImg;
   }
   const {
     commentCount = (details.socialData === undefined || details.socialData.commentsCount === undefined) ? 0 : details.socialData.commentsCount,
     likeCount = (details.socialData === undefined || details.socialData.likesCount === undefined) ? 0 : details.socialData.likesCount,
     description = details.activityData.description,
-    timeAgo
+    timeAgo,
+    interests = details.activityData.topics
   } = details;
-  const { name } = user
+  const { name } = carOwner
 
   return (
     <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
       <View style={[styles.container, pending ? styles.pending : {}]}>
-        <View style={styles.eventHeader}>
+        <View style={[styles.carOwnerDetails, styles.eventHeader]}>
           <Image
             source={{uri: profileImg}}
             style={styles.icon} />
-          <View style={styles.userDetails}>
-            <View style={{flex: 1}}>
-              <Text style={styles.name}>{name}</Text>
-              <Text style={styles.date}>{timeAgo}</Text>
-            </View>
-          </View>
-          <TouchableHighlight onPress={() => onMenuPress(details)} underlayColor='#f0f0f0'>
-            <Icon name='more-vert' style={styles.moreIcon} />
-          </TouchableHighlight>
+          <Text style={styles.name}>{name}</Text>
         </View>
       </View>
       <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
@@ -84,6 +77,16 @@ export const Post = (data = {}) => {
         </View>
       </View>
       <View style={[styles.container, pending ? styles.pending : {}]}>
+        <View style={styles.eventBodyHeader}>
+          <View style={{flexDirection: 'row'}}>
+            {interests.map((interest) => {
+              return <View key={interest} style={styles.interestView}><Text>{interest}</Text></View>
+            })}
+          </View>
+          <View style={{flex:1}}>              
+            <Text style={styles.date}>{timeAgo}</Text>
+          </View>
+        </View>
         <View>
           <Text style={styles.description}>{description}</Text>
           <View>
@@ -92,16 +95,10 @@ export const Post = (data = {}) => {
         </View>
         <View style={styles.eventFooter}>
           <View style={[styles.flex, { justifyContent: 'center' }]}>
-            <Text style={styles.likes}>{likeCount} <Icon name='favorite-border' style={styles.heartIcon}/></Text>
+          {
+            liked ? <TouchableHighlight onPress={onUnlikePress}><Text style={styles.likes}>{likeCount}  <Icon name="heart" style={styles.heartIcon}/></Text></TouchableHighlight> : <TouchableHighlight onPress={onLikePress}><Text style={styles.likes}>{likeCount} <Icon name="heart-o" style={styles.likes}/></Text></TouchableHighlight>
+          }
           </View>
-        </View>
-      </View>
-      <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
-        <View style={styles.viewComments}>
-          <Text style={styles.viewCommentsText}>
-            View {commentCount} comments
-          </Text>
-
         </View>
       </View>
     </View>
@@ -144,6 +141,14 @@ const styles = StyleSheet.create({
   eventHeader: {
     flexDirection: 'row',
   },
+  eventBodyHeader:{
+    flex: 1,
+    flexDirection: 'row'
+  },
+  interestView: {
+    padding: 2,
+    borderWidth: 1,
+  },
   heartIcon: {
     color: icon.active,
     fontSize: 20,
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
     color: icon.inactive,
     textAlign: 'right',
   },
-  userDetails: {
+  carOwnerDetails: {
     flex: 1,
     paddingLeft: 5,
     paddingRight: 5,
