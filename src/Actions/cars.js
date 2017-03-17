@@ -8,6 +8,7 @@ import {
 } from './Types'
 import { getCarByRegistration, 
     getCarById as getCarByIdApi, 
+    getCarOwnerById as getCarOwnerByIdApi, 
     getCarImages, 
     getCarVideos, 
     followCar as followCarApi, 
@@ -32,7 +33,10 @@ export const getCarById = (carInfoId) => {
     return dispatch => {
         getCarByIdApi({}, { carInfoId })
         .then(carResponse => {
-            dispatch(setBrowsingCar(carResponse.carInfo)) 
+            getCarOwnerByIdApi({}, { carInfoId })
+            .then(carOwnerResponse => {
+                dispatch(setBrowsingCar(carResponse.carInfo, carOwnerResponse)) 
+            })
         })
         .catch(error => {
             console.log(error);
@@ -49,11 +53,12 @@ const extractPostDetails = (post) => {
     }
 }
 
-export const setBrowsingCar = (carInfo) => { 
+export const setBrowsingCar = (carInfo, ownerInfo) => { 
     return dispatch => {
         dispatch({ 
             type: SET_BROWSING_CAR,
-            carInfo:  carInfo
+            carInfo:  carInfo,
+            ownerInfo: ownerInfo
         });  
     }
 }

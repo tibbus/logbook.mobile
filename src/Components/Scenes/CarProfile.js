@@ -19,7 +19,12 @@ export class CarProfile extends Component {
 
         const { car, carInfoId, cars, user, dispatch } = this.props;
         if(car && !cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id )){
-            dispatch(setBrowsingCar(car.carInfo));
+            const ownerInfo = {
+                userId: user.id,
+                name: user.name,
+                image: user.profileImg 
+            }
+            dispatch(setBrowsingCar(car.carInfo, ownerInfo));
         }
         else {
             dispatch(getCarById(carInfoId));
@@ -51,7 +56,7 @@ export class CarProfile extends Component {
         navigator.pop()
     }
     render() {
-        const { user, car, carInfoId, cars, carOwner, navigator, dispatch, rootNav } = this.props;
+        const { user, car, carInfoId, cars, navigator, dispatch, rootNav } = this.props;
 
         let browsingCar;
         if(car) {
@@ -85,8 +90,8 @@ export class CarProfile extends Component {
                 <View style={styles.container}>
                     <View>
                         <FitImage resizeMode={Image.resizeMode.contain} source={{uri:image}} style={styles.photo} />
-                        <Info ownerImage={''} 
-                        ownerName={''} 
+                        <Info ownerImage={browsingCar.ownerInfo.image} 
+                        ownerName={browsingCar.ownerInfo.name} 
                         owned={owned}
                         onSettingsPress={() => console.log("Settings")}
                         followed = {followed}
