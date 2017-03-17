@@ -1,43 +1,93 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import palette from '../../Themes/palette';
+import { StatsText, HeadingOne } from '../Text'
 
+export const Info = (props) => {
+  const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
+
+  return (
+  <View style={styles.container}>
+    {/* Styles the stats and settigns icon in a row */}
+    <View style={styles.subContainer}>
+      {/* Styles the car count stats */}
+      {StatsText(() => props.user.carCount, 'Cars')}
+
+      {/* Styles the follow count stats */}
+      {StatsText(() => props.user.followCount, 'Follows')}
+
+      {/* Styles the following count stats */}
+      <View style={styles.statsContainer}>
+        <Text style={styles.statsText}>{'178'}</Text>
+        <Text style={styles.captionText}>{`Followers`}</Text>
+      </View>
+
+      {/* Styles the settings icon */}
+      <View style={styles.settingsContainer}>
+        <Icon name='cog' style={styles.icon} />
+        <Text style={styles.captionText}>{`Settings`}</Text>
+      </View>
+    </View>
+    <View style={styles.subContainer}>
+      <Image source={{ uri: imageUrl}} style={styles.photo} />
+      {HeadingOne(() => props.user.name)}
+    </View>
+
+  </View>
+)};
+
+const photoWidth = 60;
 const styles = StyleSheet.create({
+  // === Container Styles ===
   container: {
     flex: 1,
-    padding: 12,
-    alignItems: 'center',
+    paddingHorizontal: 30,
+    //allowFontScaling: true
   },
   subContainer: {
     flex: 1,
     flexDirection:'row',
-    padding: 12,
-    alignItems: 'center',
+    paddingTop: 25,
   },
-  text: {
-    marginLeft: 12,
+  statsContainer: {
+    flex: 1,
+    flexDirection:'column',
+    alignItems: 'flex-start',
+  },
+  settingsContainer: {
+    flex: 1,
+    flexDirection:'column',
+    alignItems: 'flex-end', //or center
+  },
+  // === Text Styles ===
+  statsText: {
+    fontSize: 20,
+    fontWeight: '700',
+    paddingBottom: 5
+  },
+  captionText: {
     fontSize: 16,
+    fontWeight: '200'
   },
+  icon: {
+    fontSize: 25,
+    fontWeight: '700',
+    paddingBottom: 3,
+    //marginRight:
+    color: palette.secondary,
+  },
+  textTitle: {
+    marginLeft: 20,
+    marginTop: 5,
+    fontSize: 35,
+    fontWeight: '700',
+    //numberOfLines: 2
+  },
+  // === Image Styles ===
   photo: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: photoWidth,
+    width: photoWidth,
+    borderRadius: photoWidth/2,
   },
 });
-
-export const Info = (props) => {
-  const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
-  
-  return (
-  <View style={styles.container}>
-    <View style={styles.subContainer}>
-      <Image source={{ uri: imageUrl}} style={styles.photo} />
-      <Text style={styles.text}>
-          {`Cars ${props.user.carCount} Follows ${props.user.followCount}`}
-      </Text>
-    </View>
-    <Text style={styles.text}>
-        {props.user.name}
-    </Text>
-    
-  </View>
-)};

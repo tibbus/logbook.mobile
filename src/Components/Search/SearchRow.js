@@ -9,8 +9,8 @@ import text from '../../Themes/text';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 30,
     //marginRight: 20,
     flexDirection: 'row',
@@ -60,11 +60,10 @@ export const SearchRow = (props) => {
         <Text lineBreakMode="tail" numberOfLines={1} style={styles.carTitle}>
           {`${props.make} ${props.model}`.replace(/\b\w/g, l => l.toUpperCase())}
         </Text>
-        <Text style={styles.text}>
-          {`${props.yearOfManufacture}`} {'\u00B7'} 54 Followers
-        </Text>
         <TouchableHighlight onPress={() => viewCar(navigator, carInfoId)}>
-          <Text>></Text>
+          <Text style={styles.text}>
+            {`${props.yearOfManufacture}`} {'\u00B7'} 54 Followers    >
+          </Text>
         </TouchableHighlight>
       </View>
   </View>
