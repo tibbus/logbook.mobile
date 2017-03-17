@@ -83,7 +83,7 @@ export class CarProfile extends Component {
         }
         const { image } = browsingCar.carInfo;
         const owned = !!cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
-        const followed = user.follows.includes(browsingCar.carInfo.id)
+        const followed = user.follows.includes(browsingCar.carInfo.id.toString())
         const timelineProps = { car:browsingCar, user, navigator, dispatch, rootNav}
         return (
             <BackScene onBack={() => this.back(navigator)} title = {browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
@@ -95,8 +95,8 @@ export class CarProfile extends Component {
                         owned={owned}
                         onSettingsPress={() => console.log("Settings")}
                         followed = {followed}
-                        onFollowPress={() => followCar(user.id, browsingCar.carInfo.id)}
-                        onUnFollowPress={() => unFollowCar(user.id, browsingCar.carInfo.id)}/>
+                        onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
+                        onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}/>
 
                     </View>
                     <ScrollableTabView

@@ -81,65 +81,6 @@ export class Timeline extends Component {
     }
   }
 
-  addStatus (config = {}) {
-    const { dispatch, rootNav } = this.props
-    const { mediaType } = config
-
-    rootNav
-      .push({
-        id: 'modal',
-        component: (
-          <StatusCreate
-            carInfoId={this.carInfoId}
-            navigator={rootNav}
-            dispatch={dispatch}
-            mediaType={mediaType}
-            style={styles.container} />
-        )
-      })
-  }
-
-  editStatus (statusId, mediaType = 'Status') {
-    const { dispatch, rootNav, timelines } = this.props
-
-    const status = getTimeline(timelines, this.carInfoId)
-      .find(item => {
-        const { type } = item
-
-        if (type === mediaType && item.details.id === statusId) {
-          return true
-        }
-        return false
-      })
-
-    if (!status) return false
-
-    rootNav
-      .push({
-        id: 'modal',
-        component: (
-          <StatusEdit
-            carInfoId={this.carInfoId}
-            statusId={statusId}
-            navigator={rootNav}
-            style={styles.container}
-            dispatch={dispatch}
-            description={status.details.description} />
-        )
-      })
-  }
-
-  showStatusMenu (post) {
-    const { details, type } = post
-    const { id } = details
-    const modal = {
-      type: 'StatusMenu',
-      id,
-      mediaType: type
-    }
-    this.setState({ modal })
-  }
-
   playVideo (post) {
     const { dispatch } = this.props
     const { details, paused = true } = post
@@ -191,69 +132,17 @@ export class Timeline extends Component {
     )
   }
 
-  clearModal () {
-    this.setState({
-      modal: undefined
-    })
-  }
-
-  statusAction ({ value }, id, mediaType) {
-    const { dispatch } = this.props
-    this.clearModal()
-
-    switch (value) {
-      case 'delete':
-        return dispatch(deletePost(id, this.carInfoId, mediaType))
-
-      default:
-        return this.editStatus(id, mediaType)
-    }
-  }
-
-  renderModalContent ({ type, id, mediaType } = {}) {
-    switch (type) {
-      case 'StatusMenu':
-        return (
-          <PostMenu
-            onSelect={val => this.statusAction(val, id, mediaType)} />
-        )
-
-      default:
-        return null
-    }
-  }
-
   render () {
     return (
       <LoadingView style={styles.container}
         isLoading={false}>
-        <Modal transparent={Boolean(true)} visible={!!this.state.modal} animationType='fade'>
-          <TouchableOpacity onPress={this.clearModal.bind(this)}
-            style={{backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, justifyContent: 'center'}}>
-            <View style={styles.modal}>
-              {this.renderModalContent(this.state.modal)}
-            </View>
-          </TouchableOpacity>
-        </Modal>
         <ListView
           contentContainerStyle={{ justifyContent: 'center' }}
           style={styles.container}
           dataSource={this.state.dataSource}
           enableEmptySections={Boolean(true)}
-          //renderHeader={this.renderHeader.bind(this)}
           renderRow={this.renderRow.bind(this)} />
       </LoadingView>
-    )
-  }
-
-  renderHeader () {
-    const addPhoto = () => this.addStatus({ mediaType: 'image' })
-    const addVideo = () => this.addStatus({ mediaType: 'video' })
-    return (
-      <StatusEntrySnapshot
-        onAddStatus={this.addStatus.bind(this)}
-        onAddPhoto={addPhoto}
-        onAddVideo={addVideo} />
     )
   }
 }
