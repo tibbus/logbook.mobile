@@ -23,7 +23,7 @@ export class SearchCars extends Component {
 
         return (
           <View style={styles.containerEmpty}>
-          <Text style={styles.subheading}>CARS</Text>
+          {/* <Text style={styles.subheading}>CARS</Text> */}
             <ListView
                 style={styles.container}
                 dataSource={this.state.dataSource}
@@ -52,9 +52,8 @@ const styles = StyleSheet.create({
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#8E8E8E',
     },
-    subheading: {
-      //marginTop: 100,
-      fontSize: 20,
-      fontWeight: '900',
-    }
+    // subheading: {
+    //   fontSize: 20,
+    //   fontWeight: '900',
+    // }
 });

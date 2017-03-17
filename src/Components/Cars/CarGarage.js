@@ -15,7 +15,7 @@ const createCarGarageIcon = function(car, navigator, user) {
             car: car,
             carOwner: {
                 profileImage: user.profileImg,
-                name: user.name 
+                name: user.name
             }
         }
     })}
@@ -31,9 +31,9 @@ export class CarGarage extends Component {
     render() {
         const { cars, user, navigator } = this.props;
         return (
-        <View>
-            <Text>GARAGE</Text>
-            <ScrollView 
+        <View style={styles.container}>
+            <Text style={styles.textHeading}>GARAGE</Text>
+            <ScrollView
                 automaticallyAdjustContentInsets={false}
                 horizontal={true}
                 style={[styles.scrollView, styles.horizontalScrollView]}>
@@ -43,17 +43,28 @@ export class CarGarage extends Component {
                         })
                     }
                     {<CarGarageIcon onPress={() => navigator.push({id: 'addCar'})}/>}
-            </ScrollView>            
+            </ScrollView>
         </View>
         );
     }
 }
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingVertical: 40,
+    //allowFontScaling: true
+  },
   scrollView: {
     flex: 1,
   },
   horizontalScrollView: {
     height: 200,
+  },
+  textHeading: {
+    fontSize: 20,
+    fontWeight: '700',
+    paddingBottom: 10
   }
 })

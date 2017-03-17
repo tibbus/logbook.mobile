@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  StatusBar,
   Image,
   WebView,
   View,
@@ -8,9 +9,9 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { BackScene } from '../Scenes'
 import { hashToObj } from '../../Utils'
+import { FacebookButton, GoogleButton } from '../Button'
 
 const { width, height } = Dimensions.get("window");
 
@@ -91,37 +92,25 @@ export const IdentityOIDC = props => {
 
   return (
     <View style={styles.container}>
+    {/* <StatusBar
+          backgroundColor="blue"
+          barStyle="light-content"
+        /> */}
      <Image
         source={require('../../Assets/Images/SignInPage.jpg')}
         style={styles.image}
-        resizeMode="contain">
+        resizeMode='contain'>
+        <View style={styles.container}/>
         <View style={styles.contentView}>
             <Text style={styles.productName}>Logbook</Text>
             <Text style={styles.productLine}>All your car stuff, in one place</Text>
+            <View style={styles.container}/>
             <View style={styles.loginButtonView}>
-              <TouchableHighlight onPress={() => attemptAuth('Facebook')}>
-                <View style={[styles.loginButton, styles.facebookLoginButton]}>
-                  <View style={styles.loginLogoView} >
-                    <Image style={styles.loginLogo} source={require('../../Assets/Images/FacebookLogo.png')}/>
-                  </View>
-                  <View>
-                    <Text style={styles.facebookLoginButtonText}>Continue with Facebook</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-            
-              <TouchableHighlight onPress={() => attemptAuth('Google')}>
-                <View style={[styles.loginButton, styles.googleLoginButton]}>
-                  <View style={styles.loginLogoView}>
-                    <Image style={styles.loginLogo} source={require('../../Assets/Images/GoogleLogo.png')}/>
-                  </View>
-                  <View>
-                    <Text style={styles.googleLoginButtonText}>Continue with Google</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
+              {FacebookButton(() => attemptAuth('Facebook'))}
+              {GoogleButton(() => attemptAuth('Google'))}
+              <View style={styles.container}/>
+              <Text style={styles.messageLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
             </View>
-            <Text style={styles.appLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
           </View>
         </Image>
     </View>
@@ -137,58 +126,28 @@ const styles = StyleSheet.create({
     height,
   },
   contentView:{
-    paddingTop: height - 375
+    flex: 1.5,
   },
   loginButtonView:{
-    marginTop: 30
-  },
-  loginLogoView: {
-    marginLeft: 20,
-    marginRight: 20
-  },
-  loginLogo: {
-    width: 40,
-    height: 40,
-  },
-  loginButton: {
-    paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 15,
-    marginHorizontal: 10,
-    borderRadius : 10,
-    flexDirection:'row'
-  },
-  facebookLoginButton: {
-    backgroundColor: "#3C5A96",
-  },
-  facebookLoginButtonText: {
-    color: "#FFF",
-    fontSize: 18,
-  },
-  googleLoginButton: {
-    backgroundColor: "#FFFFFF"
-  },
-  googleLoginButtonText: {
-    color: "#000000",
-    fontSize: 18
+    flex: 4,
   },
   productName: {
-    fontSize: 30,
-    color: "#FFFFFF",
-    marginHorizontal: 35
+    fontSize: 40,
+    fontWeight: "700",
+    color: 'rgba(255, 255, 255, 1.0)',
+    marginHorizontal: width/10 //35
   },
   productLine: {
     fontSize: 20,
-    color: "#FFFFFF",
-    marginTop: 10,
-    marginHorizontal: 35
+    fontWeight: "600",
+    color: 'rgba(255, 255, 255, 0.6)',
+    marginTop: height/70, //10
+    marginHorizontal: width/10 //35
   },
-  appLine: {
+  messageLine: {
+    flex: 3,
     fontSize: 14,
-    color: "#FFFFFF",
-    marginTop: 15,
-    marginHorizontal: 35
+    color: 'rgba(255, 255, 255, 0.4)',
+    marginHorizontal: width/10 //35
   }
-
 });
