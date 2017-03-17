@@ -9,7 +9,7 @@ import text from '../../Themes/text';
 const styles = StyleSheet.create({
   containerTop: {
     top: 0,
-    //flex: 1,
+    flex: 1,
     padding: 30,
     backgroundColor: background.component,
     flexDirection: 'column',
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    //flex: 1,
+    flex: 1,
     paddingHorizontal: 8,
     fontSize: 17,
     backgroundColor: search.searchBox,
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   titleText: {
-    //flex: 1,
     color: text.featureText,
     fontWeight: '800',
     fontSize: 40,
