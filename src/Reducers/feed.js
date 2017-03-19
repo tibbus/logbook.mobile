@@ -2,6 +2,7 @@ import {
     ADD_FEED_ITEM
 } from '../Actions/Types'
 import moment from 'moment'
+import { sortBy } from 'ramda'
 
 
 /*
@@ -23,7 +24,10 @@ const calculateTime = (feedItem) => {
 }
 
 const addFeedItem = (state, feedItem) => {
-    state.posts.splice(state.posts.indexOf(feedItem), 1)
+    const index = state.posts.indexOf(feedItem.activityData.id)
+    if(index > -1){
+        state.posts.splice(index, 1)
+    }
 
     const timeAgo = calculateTime(feedItem);
 

@@ -9,8 +9,10 @@ import { getUserFeed } from '../../Actions/feed'
 import { getPost } from '../Post';
 import { LoadingView } from '../LoadingView';
 import background from '../../Themes/background';
+import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
+import { Comments, CommentInput } from '../Comments';
 
-const stateToProps = ({ user, feed }) => ({ user, feed });
+const stateToProps = ({ user, feed, comments }) => ({ user, feed, comments });
 
 @connect(stateToProps)
 export class Feed extends Component {
@@ -29,7 +31,7 @@ export class Feed extends Component {
         }
     }
 
-    componentWillReceiveProps ({ feed }) {
+    componentWillReceiveProps ({ feed, comments = [] }) {
         //Commenting to prevent ddos :D
         /*if(likes !== this.props.likes) {
         const { dispatch } = this.props;
@@ -40,8 +42,13 @@ export class Feed extends Component {
         const { dispatch } = this.props;
 
         feed.posts.forEach((postItem) => {
-            //dispatch(setTimelineComments(timelineItem.activityData.id));
-            //dispatch(getTimelineComments(timelineItem.activityData.id));
+            if(!comments.find(item => item.timelinePostId === postItem.activityData.id)) {
+                dispatch(setTimelineComments(postItem.activityData.id));
+                dispatch(getTimelineComments(postItem.activityData.id));
+            }
+            else {
+                dispatch(getTimelineComments(postItem.activityData.id));
+            }
         })
 
         this.setState({
@@ -52,7 +59,7 @@ export class Feed extends Component {
 
     renderRow (post) {
 
-        const { user, dispatch } = this.props;
+        const { user, navigator, dispatch, comments } = this.props;
         const { carOwner } = post;
         const { carInfoId }  = post.activityData;
         const details = {...post};
@@ -66,12 +73,18 @@ export class Feed extends Component {
             onVideoPress: () => console.log('video play press'),
             onLikePress: () => console.log('like press'),
             onUnlikePress: () => console.log('unlike press'),
+            onViewCarPress: () => navigator.push({
+                                        id: 'car',
+                                        passProps: {
+                                            carInfoId: parseInt(carInfoId),
+                                        }
+                                    }),
             carOwner,
             liked
         }
 
-        /*const filteredComments = comments.find((timelinePostComments) => {
-        return timelinePostComments.timelinePostId === post.activityData.id
+        const filteredComments = comments.find((timelinePostComments) => {
+            return timelinePostComments.timelinePostId === post.activityData.id
         });
 
         var postComments = [];
@@ -83,16 +96,20 @@ export class Feed extends Component {
                 timeAgo: postComment.timeAgo
             };
             });
-        }*/
+        }
+        const commentProps = {
+            ...props.details,
+            user
+        }
                         
         return (
             <View style={styles.row}>
                 {getPost(props)}
-                {/*<Comments comments={postComments} />
-                <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
-                dispatch(addComment(timelinePostId, userId, commentText))}
-
-                }/>*/}
+                <Comments comments={postComments} />
+                <CommentInput props={commentProps} onSubmitEditing={(timelinePostId, userId, commentText) => {
+                        dispatch(addComment(timelinePostId, userId, commentText))}
+                    }
+                />
             </View>
         )
     }
@@ -121,8 +138,8 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   container: {
-    height: 400,
-    //flex: 1,
+    //height: 400,
+    flex: 1,
     //marginLeft: 5,
     //marginRight: 5,
     backgroundColor: background.color,
