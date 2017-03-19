@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {
-  ListView,
-  StyleSheet
+    View,
+    ListView,
+    StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getUserFeed } from '../../Actions/feed'
+import { getPost } from '../Post';
 import { LoadingView } from '../LoadingView';
 import background from '../../Themes/background';
 
@@ -21,9 +23,9 @@ export class Feed extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
         dispatch(getUserFeed(user.id))
-
+        const { posts } = feed;
         this.state = {
-            dataSource: ds.cloneWithRows(feed)
+            dataSource: ds.cloneWithRows(posts)
         }
     }
 
@@ -37,24 +39,29 @@ export class Feed extends Component {
         if (feed !== this.props.feed) {
         const { dispatch } = this.props;
 
-        feed.forEach((feedItem) => {
+        feed.posts.forEach((postItem) => {
             //dispatch(setTimelineComments(timelineItem.activityData.id));
             //dispatch(getTimelineComments(timelineItem.activityData.id));
         })
 
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(feed)        
+            dataSource: this.state.dataSource.cloneWithRows(feed.posts)        
         })
         }
     }
 
     renderRow (post) {
-        const { user, carOwner, comments, dispatch, likes = [] } = this.props;
+
+        const { user, dispatch } = this.props;
+        const { carOwner } = post;
         const { carInfoId }  = post.activityData;
-        const likedItem = likes.find(element => element.postId === post.activityData.id);
-        const liked = !!likedItem;
+        const details = {...post};
+        const type = details.type;
+        //const likedItem = likes.find(element => element.postId === post.activityData.id);
+        const liked = false;
         const props = {
-            ...post,
+            details,
+            type,
             onMenuPress: () => console.log('menu press'),
             onVideoPress: () => console.log('video play press'),
             onLikePress: () => console.log('like press'),
@@ -85,7 +92,7 @@ export class Feed extends Component {
                 <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
                 dispatch(addComment(timelinePostId, userId, commentText))}
 
-                }*/} />
+                }/>*/}
             </View>
         )
     }

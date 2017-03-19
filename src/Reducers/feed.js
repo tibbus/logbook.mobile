@@ -1,6 +1,7 @@
 import {
     ADD_FEED_ITEM
 } from '../Actions/Types'
+import moment from 'moment'
 
 
 /*
@@ -11,7 +12,7 @@ import {
     }
 */
 const initialState = {
-    feed: []
+    posts: []
 }
 
 const calculateTime = (feedItem) => {
@@ -22,11 +23,11 @@ const calculateTime = (feedItem) => {
 }
 
 const addFeedItem = (state, feedItem) => {
-    state.feed.splice(state.feed.indexOf(feedItem), 1)
+    state.posts.splice(state.posts.indexOf(feedItem), 1)
 
     const timeAgo = calculateTime(feedItem);
 
-    state.feed.push({
+    state.posts.push({
         ...feedItem,
         timeAgo: timeAgo
     });

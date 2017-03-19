@@ -8,7 +8,7 @@ const dispatchFeedItem = (carOwner, feedItem) => {
       type: ADD_FEED_ITEM,
       feedItem: {
           ...feedItem,
-          ...carOwner
+          carOwner:carOwner
       }
     })
   }
@@ -20,7 +20,8 @@ export const getUserFeed = (userId) => {
       .then(data => {
         
         data.map(feedItem => {
-          getCarOwnerById(feedItem.activityData.carInfoId)
+          const { carInfoId } = feedItem.activityData;
+          getCarOwnerById({}, { carInfoId })
           .then(carOwner => dispatch(dispatchFeedItem(carOwner, feedItem)))
           .catch(error => console.log(error))
         })
