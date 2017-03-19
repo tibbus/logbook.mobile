@@ -60,7 +60,7 @@ export class CarProfile extends Component {
 
         let browsingCar;
         if(car) {
-            browsingCar = cars.browsingCars.find(item => item.carInfo.id === car.id)
+            browsingCar = cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id)
 
             if(!browsingCar){
                 return (
