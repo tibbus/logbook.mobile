@@ -8,7 +8,7 @@ import {
 import { SignIn } from './Scenes'
 import { connect } from 'react-redux'
 
-const configureScene = ({ sceneConfig, id } = {}) => {
+const configureScene = ({ sceneConfig, id }: any = {}) => {
   if (sceneConfig) {
     return sceneConfig
   }
@@ -21,13 +21,13 @@ const configureScene = ({ sceneConfig, id } = {}) => {
 }
 
 @connect(({ user }) => ({ user }))
-export class RootNav extends Component {
+export class RootNav extends Component<any, any> {
 
-  renderScene (route, navigator) {
+  renderScene(route, navigator) {
     const { dispatch, user } = this.props
     const { token } = user
     const { id = 'main', component, requiresAuth = true } = route
-    const routeId = (requiresAuth && (!token || !user.id)) ? null : id
+    const routeId: any = (requiresAuth && (!token || !user.id)) ? null : id
 
     switch (routeId) {
 
@@ -43,14 +43,14 @@ export class RootNav extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <Navigator
         initialRoute={{}}
         configureScene={configureScene}
         renderScene={this.renderScene.bind(this)}
-        sceneStyle={{paddingTop: 20}}
-       />
+        sceneStyle={{ paddingTop: 20 }}
+      />
     )
   }
 

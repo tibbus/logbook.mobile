@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export class Success extends Component {
+export class Success extends Component<any, any> {
 
   constructor (props) {
     super(props)

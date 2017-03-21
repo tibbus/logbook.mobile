@@ -11,7 +11,11 @@ import {
 } from 'ramda'
 import moment from 'moment'
 
-export const mapKeys = curry((fn, obj) => zipObj(map(fn, keys(obj)), values(obj)))
+export const mapKeys = curry((fn: any, obj: any) => {
+  const currentObj: any = map(fn, keys(obj));
+
+  return zipObj(currentObj, values(obj))
+});
 
 export const objKeysToCamel = mapKeys(camelize)
 
@@ -25,10 +29,10 @@ export const paramsToObject = (params = []) => (
     }
 
     return acc
-  }, { })
+  }, {})
 )
 
-const urlToObj = (splitter: String) => (url: String) => {
+const urlToObj = (splitter: any) => (url: String) => {
   const split = url.split(splitter)
 
   if (split.length !== 2) {
@@ -53,7 +57,7 @@ export const replaceParams = (str, obj = {}, modifier = param => param) => {
   const helper = (acc, keys) => {
     if (isEmpty(keys)) return acc
 
-    const next = head(keys)
+    const next: any = head(keys)
     const val = obj[next]
     return helper(acc.replace(new RegExp(`\{${next}\}`, 'ig'), modifier(val)), tail(keys))
   }

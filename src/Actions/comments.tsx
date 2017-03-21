@@ -22,7 +22,7 @@ export const getTimelineComments = (timelinePostId) => dispatch => {
       }
     });
   })
-  .catch((...args) => console.log(...args));
+  .catch((...args) => console.log(args));
 }
 
 
@@ -36,5 +36,5 @@ export const addComment = (timelinePostId, authorUserId, comment) => dispatch =>
       timelinePostComment: createdComment
     });
   })
-  .catch((...args) => console.log(...args));
+  .catch((...args) => console.log(args));
 }

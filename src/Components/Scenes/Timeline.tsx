@@ -31,15 +31,17 @@ const getTimeline = (timelines, carInfoIdArg) => {
 const stateToProps = ({ timelines, comments, likes }) => ({ timelines, comments, likes })
 
 @connect(stateToProps)
-export class Timeline extends Component {
+export class Timeline extends Component<any, any> {
+  private carInfoId: string;
+  private userId: string;
 
-  constructor () {
+  constructor() {
     super(...arguments)
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     const { car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
-    const { carInfo = {} } = car;
-    const { user = {} } = this.props;
+    const { carInfo = {} }: {carInfo: any} = car;
+    const { user = {} }: {user: any} = this.props;
     this.carInfoId = carInfo.id;
     this.userId = user.id;
 
@@ -49,7 +51,7 @@ export class Timeline extends Component {
       dispatch(setCarTimeline({ carInfoId: this.carInfoId }));
     }
 
-    if(!likes.length && this.userId) {
+    if (!likes.length && this.userId) {
       dispatch(getUserLikedPosts(this.userId));
     }
 
@@ -59,7 +61,7 @@ export class Timeline extends Component {
     }
   }
 
-  componentWillReceiveProps ({ car, timelines = [], likes = [] }) {
+  componentWillReceiveProps({ car, timelines = [], likes = [] }) {
     //Commenting to prevent ddos :D
     /*if(likes !== this.props.likes) {
       const { dispatch } = this.props;
@@ -69,21 +71,21 @@ export class Timeline extends Component {
     if (timelines !== this.props.timelines) {
       const { dispatch } = this.props;
       const timeline = getTimeline(timelines, this.carInfoId);
-      
+
       timeline.forEach((timelineItem) => {
         dispatch(setTimelineComments(timelineItem.activityData.id));
         dispatch(getTimelineComments(timelineItem.activityData.id));
       })
 
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(timeline)        
+        dataSource: this.state.dataSource.cloneWithRows(timeline)
       })
     }
   }
 
-  addStatus (config = {}) {
+  addStatus(config = {}) {
     const { dispatch, rootNav } = this.props
-    const { mediaType } = config
+    const { mediaType }: any = config
 
     rootNav
       .push({
@@ -99,7 +101,7 @@ export class Timeline extends Component {
       })
   }
 
-  editStatus (statusId, mediaType = 'Status') {
+  editStatus(statusId, mediaType = 'Status') {
     const { dispatch, rootNav, timelines } = this.props
 
     const status = getTimeline(timelines, this.carInfoId)
@@ -129,7 +131,7 @@ export class Timeline extends Component {
       })
   }
 
-  showStatusMenu (post) {
+  showStatusMenu(post) {
     const { details, type } = post
     const { id } = details
     const modal = {
@@ -140,7 +142,7 @@ export class Timeline extends Component {
     this.setState({ modal })
   }
 
-  playVideo (post) {
+  playVideo(post) {
     const { dispatch } = this.props
     const { details, paused = true } = post
     const { carInfoId, id } = details
@@ -149,9 +151,9 @@ export class Timeline extends Component {
     dispatch(action(carInfoId, id))
   }
 
-  renderRow (post) {
+  renderRow(post) {
     const { user, carOwner, comments, dispatch, likes = [] } = this.props;
-    const { carInfoId }  = post.activityData;
+    const { carInfoId } = post.activityData;
     const likedItem = likes.find(element => element.postId === post.activityData.id);
     const liked = !!likedItem;
     const props = {
@@ -169,35 +171,36 @@ export class Timeline extends Component {
     });
 
     var postComments = [];
-    if(filteredComments) {
-        postComments = filteredComments.comments.map((postComment) => {
-          return {
-            text: postComment.comment,
-            profileImg: 'https://mycarbiostolocal.blob.core.windows.net/default0/Image/01010001/4d47ecd5-c26a-474c-8001-4587e2365a19/DefaultProfileImage.jpg',
-            timeAgo: postComment.timeAgo
-          };
-        });
+    if (filteredComments) {
+      postComments = filteredComments.comments.map((postComment) => {
+        return {
+          text: postComment.comment,
+          profileImg: 'https://mycarbiostolocal.blob.core.windows.net/default0/Image/01010001/4d47ecd5-c26a-474c-8001-4587e2365a19/DefaultProfileImage.jpg',
+          timeAgo: postComment.timeAgo
+        };
+      });
     }
-                      
+
     return (
       <View style={styles.row}>
         {getPost(props)}
         <Comments comments={postComments} />
         <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
-          dispatch(addComment(timelinePostId, userId, commentText))}
+          dispatch(addComment(timelinePostId, userId, commentText))
+        }
 
         } />
       </View>
     )
   }
 
-  clearModal () {
+  clearModal() {
     this.setState({
       modal: undefined
     })
   }
 
-  statusAction ({ value }, id, mediaType) {
+  statusAction({ value }, id, mediaType) {
     const { dispatch } = this.props
     this.clearModal()
 
@@ -210,7 +213,7 @@ export class Timeline extends Component {
     }
   }
 
-  renderModalContent ({ type, id, mediaType } = {}) {
+  renderModalContent({ type, id, mediaType }: any = {}) {
     switch (type) {
       case 'StatusMenu':
         return (
@@ -223,13 +226,13 @@ export class Timeline extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <LoadingView style={styles.container}
         isLoading={false}>
         <Modal transparent={Boolean(true)} visible={!!this.state.modal} animationType='fade'>
           <TouchableOpacity onPress={this.clearModal.bind(this)}
-            style={{backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, justifyContent: 'center'}}>
+            style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, justifyContent: 'center' }}>
             <View style={styles.modal}>
               {this.renderModalContent(this.state.modal)}
             </View>
@@ -246,7 +249,7 @@ export class Timeline extends Component {
     )
   }
 
-  renderHeader () {
+  renderHeader() {
     const addPhoto = () => this.addStatus({ mediaType: 'image' })
     const addVideo = () => this.addStatus({ mediaType: 'video' })
     return (

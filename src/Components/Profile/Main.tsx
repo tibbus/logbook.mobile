@@ -4,7 +4,7 @@ import { Info } from './'
 
 const { width, height } = Dimensions.get("window");
 
-export class Main extends Component {
+export class Main extends Component<any, any> {
 
     constructor (props) {
         super(props)

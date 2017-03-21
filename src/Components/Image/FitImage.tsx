@@ -3,17 +3,18 @@ import {
   Image
 } from 'react-native'
 
-const propTypes = {
-  height: PropTypes.number,
-  width: PropTypes.number,
-  originalHeight: PropTypes.number,
-  originalWidth: PropTypes.number,
-  source: PropTypes.object.isRequired,
-  style: Image.propTypes.style
-}
+export class FitImage extends Component<any, any> {
+  // @TODO check if this will work
+  static propTypes = {
+    height: PropTypes.number,
+    width: PropTypes.number,
+    originalHeight: PropTypes.number,
+    originalWidth: PropTypes.number,
+    source: PropTypes.object.isRequired,
+    style: Image.propTypes.style
+  }
 
-export class FitImage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     const size = [props.width, props.height]
@@ -21,12 +22,12 @@ export class FitImage extends Component {
 
     if (size.filter(e => e).length === 1) {
       throw new Error('Props error: size props must be present ' +
-                      'none or both of width and height.')
+        'none or both of width and height.')
     }
 
     if (originalSize.filter(e => e).length === 1) {
       throw new Error('Props error: originalSize props must be present ' +
-                      'none or both of originalWidth and originalHeight.')
+        'none or both of originalWidth and originalHeight.')
     }
 
     this.state = {
@@ -37,7 +38,7 @@ export class FitImage extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.originalWidth || !this.props.originalHeight) {
       Image.getSize(this.props.source.uri, (width, height) => {
         const newHeight = this.state.layoutWidth / width
@@ -51,35 +52,35 @@ export class FitImage extends Component {
     }
   }
 
-  getStyle () {
+  getStyle() {
     if (this.props.width) {
       return { width: this.props.width }
     }
     return { flex: 1 }
   }
 
-  getOriginalWidth () {
+  getOriginalWidth() {
     return this.props.originalWidth || this.state.originalWidth
   }
 
-  getOriginalHeight () {
+  getOriginalHeight() {
     return this.props.originalHeight || this.state.originalHeight
   }
 
-  getRatio (width) {
+  getRatio(width) {
     const layoutWidth = width || this.state.layoutWidth
 
     return layoutWidth / this.getOriginalWidth()
   }
 
-  getHeight (layoutWidth) {
+  getHeight(layoutWidth) {
     if (this.props.height) {
       return this.props.height
     }
     return this.getOriginalHeight() * this.getRatio(layoutWidth)
   }
 
-  resize (event) {
+  resize(event) {
     const { width } = event.nativeEvent.layout
     const height = this.getHeight(width)
 
@@ -89,7 +90,7 @@ export class FitImage extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <Image
         source={this.props.source}
@@ -103,5 +104,3 @@ export class FitImage extends Component {
     )
   }
 }
-
-FitImage.propTypes = propTypes

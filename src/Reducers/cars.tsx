@@ -4,7 +4,7 @@ import {
   SEARCHED_CAR,
   UPDATE_BROWSING_CAR_CONTENT,
   SET_BROWSING_CAR,
-  FOLLOW_CAR  
+  FOLLOW_CAR
 } from '../Actions/Types'
 
 /*
@@ -29,22 +29,22 @@ browsingCars:[
 ]
 */
 const initialState = {
-    userCars:[],
-    carToConfirm: null,
-    browsingCars: [],
+  userCars: [],
+  carToConfirm: null,
+  browsingCars: [],
 }
 
 const updateCarFollowFlag = (state, followContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followContent.carInfoId);
   car.followed = followContent.following;
 
-  return {...state};
+  return { ...state };
 }
 
 const setBrowsingCar = (state, carInfo, ownerInfo) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfo.id)
 
-  if(car) {
+  if (car) {
     return state;
   }
 
@@ -63,43 +63,45 @@ const setBrowsingCar = (state, carInfo, ownerInfo) => {
   }
   state.browsingCars.push(newCar);
 
-  return {...state};
+  return { ...state };
 }
 const updateBrowsingCarContent = (state, carContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfoId);
 
-  if(car) {
-    if(carContent.type === 'Images') {
+  if (car) {
+    if (carContent.type === 'Images') {
 
-      if(car.carImages) {
+      if (car.carImages) {
         carContent.content.forEach(item => {
-          if(car.carImages.content.includes(item) === false){
+          if (car.carImages.content.includes(item) === false) {
             car.carImages.content.push(item)
           }
         })
         car.carImages.loadPending = false;
       }
       else {
-        Object.assign(car, getCarImageContent(carContent));
+        // @TODO this doesn't look defined anywhere
+       // Object.assign(car, getCarImageContent(carContent));
       }
 
     }
     else {
 
-      if(car.carVideos) {
+      if (car.carVideos) {
         carContent.content.forEach(item => {
-          if(car.carVideos.content.includes(item) === false){
+          if (car.carVideos.content.includes(item) === false) {
             car.carVideos.content.push(item)
           }
         })
         car.carVideos.loadPending = false;
       }
       else {
-        Object.assign(car, getCarVideoContent(carContent));
+        // @TODO this doesn't look defined anywhere
+        //Object.assign(car, getCarVideoContent(carContent));
       }
     }
 
-    return {...state};
+    return { ...state };
   }
   else {
     return state;
@@ -121,13 +123,13 @@ export const cars = (state = initialState, action) => {
       return {
         ...state,
         userCars: userCars
-        }
+      }
 
     case SEARCHED_CAR:
       return {
-          ...state,
-          carToConfirm: carInfo
-        }
+        ...state,
+        carToConfirm: carInfo
+      }
 
     case UPDATE_BROWSING_CAR_CONTENT:
       return updateBrowsingCarContent(state, carContent)
@@ -137,7 +139,7 @@ export const cars = (state = initialState, action) => {
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent)
-       
+
     default:
       return state
   }

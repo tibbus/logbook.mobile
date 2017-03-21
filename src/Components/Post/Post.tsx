@@ -26,8 +26,10 @@ const renderMedia = (type, data) => {
         <FitImage
           key={uri}
           resizeMode={Image.resizeMode.contain}
-          source={{uri}}
-          style={styles.image} />
+          source={{ uri }}
+          // @TODO check if this does something as is not defined in styles
+          //style={styles.image}
+          />
       ))
 
     case 'Video':
@@ -44,13 +46,24 @@ const renderMedia = (type, data) => {
   }
 }
 
-export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked } = data;
-  profileImg = '';
-  if(carOwner === undefined || carOwner.profileImg === undefined ){
+interface postData {
+  details: any,
+  pending: any,
+  onMenuPress: any,
+  onLikePress: any,
+  onUnlikePress: any,
+  type: any,
+  carOwner: any,
+  liked: any
+}
+
+export const Post = (data: any = {}) => {
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked }: postData = data;
+  let profileImg = '';
+  if (carOwner === undefined || carOwner.profileImg === undefined) {
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
   }
-  else{
+  else {
     profileImg = carOwner.profileImg;
   }
   const {
@@ -67,7 +80,7 @@ export const Post = (data = {}) => {
       <View style={[styles.container, pending ? styles.pending : {}]}>
         <View style={[styles.carOwnerDetails, styles.eventHeader]}>
           <Image
-            source={{uri: profileImg}}
+            source={{ uri: profileImg }}
             style={styles.icon} />
           <Text style={styles.name}>{name}</Text>
         </View>
@@ -78,12 +91,12 @@ export const Post = (data = {}) => {
       </View>
       <View style={[styles.container, pending ? styles.pending : {}]}>
         <View style={styles.eventBodyHeader}>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             {interests.map((interest) => {
               return <View key={interest} style={styles.interestView}><Text>{interest}</Text></View>
             })}
           </View>
-          <View style={{flex:1}}>              
+          <View style={{ flex: 1 }}>
             <Text style={styles.date}>{timeAgo}</Text>
           </View>
         </View>
@@ -95,9 +108,9 @@ export const Post = (data = {}) => {
         </View>
         <View style={styles.eventFooter}>
           <View style={[styles.flex, { justifyContent: 'center' }]}>
-          {
-            liked ? <TouchableHighlight onPress={onUnlikePress}><Text style={styles.likes}>{likeCount}  <Icon name="heart" style={styles.heartIcon}/></Text></TouchableHighlight> : <TouchableHighlight onPress={onLikePress}><Text style={styles.likes}>{likeCount} <Icon name="heart-o" style={styles.likes}/></Text></TouchableHighlight>
-          }
+            {
+              liked ? <TouchableHighlight onPress={onUnlikePress}><Text style={styles.likes}>{likeCount}  <Icon name="heart" style={styles.heartIcon} /></Text></TouchableHighlight> : <TouchableHighlight onPress={onLikePress}><Text style={styles.likes}>{likeCount} <Icon name="heart-o" style={styles.likes} /></Text></TouchableHighlight>
+            }
           </View>
         </View>
       </View>
@@ -127,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 2,
     borderBottomColor: background.color,
-  },
+  } as React.ViewStyle,
   container: {
     padding: 20,
     paddingTop: 20,
@@ -141,10 +154,10 @@ const styles = StyleSheet.create({
   eventHeader: {
     flexDirection: 'row',
   },
-  eventBodyHeader:{
+  eventBodyHeader: {
     flex: 1,
     flexDirection: 'row'
-  },
+  } as React.ViewStyle,
   interestView: {
     padding: 2,
     borderWidth: 1,
@@ -156,7 +169,7 @@ const styles = StyleSheet.create({
   likes: {
     color: icon.inactive,
     textAlign: 'right',
-  },
+  } as React.TextStyle,
   carOwnerDetails: {
     flex: 1,
     paddingLeft: 5,
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: 'bold',
     color: 'red',
-  },
+  } as React.TextStyle,
   moreIcon: {
     fontSize: 12,
     flex: 1,
@@ -175,14 +188,14 @@ const styles = StyleSheet.create({
   date: {
     color: text.secondaryText,
     textAlign: 'right',
-  },
+  } as React.TextStyle,
   eventFooter: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 5,
     paddingTop: 5
-  },
+  } as React.ViewStyle,
   flex: {
     flex: 1
   },

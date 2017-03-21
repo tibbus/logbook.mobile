@@ -5,7 +5,7 @@ import {
 } from 'react-native'
 
 export const LoadingView = ({
-  children,
+  children = null,
   hideWhileLoading = true,
   isLoading,
   style = {}

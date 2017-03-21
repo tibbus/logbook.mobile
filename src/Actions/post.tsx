@@ -20,7 +20,7 @@ export const deletePost = (id, carInfoId, type = 'Status') => {
   const item = { id, carInfoId, type }
   const apiMethod = deleteMethods[`delete${type}`]
   return dispatch => apiMethod({}, item)
-      .then(() => dispatch({ type: DELETE_TIMELINE_ITEM, item }))
+    .then(() => dispatch({ type: DELETE_TIMELINE_ITEM, item }))
 }
 
 export const updateStatus = (id, carInfoId, item) => dispatch => {
@@ -40,13 +40,13 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
         }
       })
     })
-    .catch((...args) => console.log(...args))
+    .catch((...args) => console.log(args))
 }
 
 export const updateAddPost = (data) => dispatch => {
   dispatch({
     type: UPDATE_POST,
-    item: {data}
+    item: { data }
   });
 }
 

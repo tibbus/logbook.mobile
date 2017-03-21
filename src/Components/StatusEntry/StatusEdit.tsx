@@ -2,6 +2,9 @@ import { StatusCreate } from './StatusCreate'
 import { updateStatus } from '../../Actions/post'
 
 export class StatusEdit extends StatusCreate {
+  public title: string;
+  public actionName: string;
+  public description: string;
 
   constructor () {
     super(...arguments)

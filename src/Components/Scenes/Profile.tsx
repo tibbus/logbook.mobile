@@ -8,7 +8,7 @@ import { updateUserFollowCount, updateUserCars } from '../../Actions/user.js'
 const stateToProps = ({ user, cars }) => ({ user, cars });
 
 @connect(stateToProps)
-export class Profile extends Component {
+export class Profile extends Component<any, any> {
 
     constructor () {
         super(...arguments);

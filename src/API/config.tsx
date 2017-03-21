@@ -19,49 +19,49 @@ const environments = {
   }
 }
 
-export const getEnvironment = env => {
+export const getEnvironment = (env?: string) => {
   const { secure, uri } = environments[env || CURRENT_ENV]
   const protocol = secure ? 'https' : 'http'
   return `${protocol}://${uri}/`;
 }
 
-export const getIdentityEnvironment = env => {
+export const getIdentityEnvironment = (env?: string) => {
   const { secure, authUri } = environments[env || CURRENT_ENV]
   const protocol = secure ? 'https' : 'http'
   return `${protocol}://${authUri}/`;
 }
 
-export const getSearchEnvironment = env => {
+export const getSearchEnvironment = (env?: string) => {
   const { searchUri } = environments[env || CURRENT_ENV]
   return `${searchUri}/`;
 }
 
-export const getSearchIndex = env => {
+export const getSearchIndex = (env?: string) => {
   const { searchIndex } = environments[env || CURRENT_ENV]
   return `${searchIndex}/`;
 }
 
-export const getSearchApiKey = env => {
+export const getSearchApiKey = (env?: string) => {
   const { searchApiKey } = environments[env || CURRENT_ENV]
   return `${searchApiKey}`;
 }
 
-export const getStreamEnvironment = env => {
+export const getStreamEnvironment = (env?: string) => {
   const { getStreamUri } = environments[env || CURRENT_ENV]
   return `${getStreamUri}/`;
 }
 
-export const getStreamApiKey = env => {
+export const getStreamApiKey = (env?: string) => {
   const { getStreamApiKey } = environments[env || CURRENT_ENV]
   return `${getStreamApiKey}`;
 }
 
-export const getStreamFetchLimit = env => {
+export const getStreamFetchLimit = (env?: string) => {
   const { getStreamFetchLimit } = environments[env || CURRENT_ENV]
   return getStreamFetchLimit;
 }
 
-export const getApiFetchLimit = env => {
+export const getApiFetchLimit = (env?: string) => {
   const { apiFetchLimit } = environments[env || CURRENT_ENV]
   return apiFetchLimit;
 }

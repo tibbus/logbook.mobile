@@ -14,11 +14,12 @@
         "sourceMap": true,
         "baseUrl": ".",
         "paths": {
-            "*": ["./trc/*"]
+            "*": [
+                "./trc/*"
+            ]
         },
-        "types": [ 
-            "react", 
-            "react-native"
+        "types": [
+            "react"
         ]
     },
     "include": [

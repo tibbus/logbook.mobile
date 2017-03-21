@@ -6,7 +6,7 @@ import { SearchHeader, SearchRow } from './'
 import background from '../../Themes/background';
 
 
-export class SearchCars extends Component {
+export class SearchCars extends Component<any, any> {
 
     constructor (props) {
         super(props)

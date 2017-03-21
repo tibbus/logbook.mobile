@@ -8,7 +8,7 @@ import { getEnvironment } from '../../API/config'
 import { getIdentityEnvironment } from '../../API/config'
 import { setUserProfile } from '../../Actions/user'
 
-export class SignIn extends Component {
+export class SignIn extends Component<any, any> {
 
   signIn (method: String) {
     const id = `sign-in-${method}`

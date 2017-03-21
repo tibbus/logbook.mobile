@@ -7,7 +7,7 @@ import {
 
 export const StatusEntry = ({
   onChangeText,
-  onSubmitEditing,
+  onSubmitEditing = () => {},
   value = ''
 }) => (
   <View style={styles.container}>

@@ -67,7 +67,7 @@ const AuthView = props => {
   } = props
 
   return (
-    <BackScene style={{ flex: 1 }} title='Sign In' onBack={() => onAuthError('cancelled')}>
+    <BackScene style={{ flex: 1 } as any} title='Sign In' onBack={() => onAuthError('cancelled')}>
       <WebView
         automaticallyAdjustContentInsets={Boolean(false)}
         source={{ uri }}
@@ -136,14 +136,14 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: 'rgba(255, 255, 255, 1.0)',
     marginHorizontal: width/10 //35
-  },
+  } as React.TextStyle,
   productLine: {
     fontSize: 20,
     fontWeight: "600",
     color: 'rgba(255, 255, 255, 0.6)',
     marginTop: height/70, //10
     marginHorizontal: width/10 //35
-  },
+  } as React.TextStyle,
   messageLine: {
     flex: 3,
     fontSize: 14,

@@ -38,7 +38,7 @@ export const setCarTimeline = ({
   carInfoId
 }) => {
   return dispatch => {
-    getTimeline(carInfoId , { carInfoId })
+    getTimeline(carInfoId)
       .then(data => {
         dispatch(addTimelineAction(carInfoId, data))
       })
@@ -67,11 +67,11 @@ export const addCarTimelineStatus = ({
 
 const formatFiles = (mediaType, files) => {
   const formattedFiles = files.map((file) => {
-      const { uri, extension = '', id } = file
-      const extLower = extension.toLowerCase()
-      const type = `${mediaType}/${extLower}`
-      const name = `${id}.${extLower}`
-      return  { uri, type, name }
+    const { uri, extension = '', id } = file
+    const extLower = extension.toLowerCase()
+    const type = `${mediaType}/${extLower}`
+    const name = `${id}.${extLower}`
+    return { uri, type, name }
   })
 
   return formattedFiles;
@@ -87,7 +87,7 @@ const fileRequest = (mediaType, location, description, files, tags) => ({
 })
 
 export const addCarTimelinePost = (request) => {
-  if(request.postType === 'image') {
+  if (request.postType === 'image') {
     return addCarTimelineImage(request);
   }
   else if (request.postType === 'video') {
@@ -98,8 +98,8 @@ export const addCarTimelinePost = (request) => {
   }
 }
 
-export const addCarTimelineImage = (postDetails) => { 
-  
+export const addCarTimelineImage = (postDetails) => {
+
   return dispatch => {
     // TODO handle image create error
     const { carInfoId, description, tags } = postDetails;
@@ -112,7 +112,7 @@ export const addCarTimelineImage = (postDetails) => {
           published: true
         })
         dispatch({
-          type: RESET_POST
+          type: 'RESET_POST'
         })
       })
       .catch((args) => {
@@ -127,7 +127,7 @@ export const addCarTimelineImage = (postDetails) => {
 }
 
 export const addCarTimelineVideo = (postDetails) => {
-  
+
   return dispatch => {
     // TODO handle video create error
     const { carInfoId, description, tags } = postDetails;
@@ -140,7 +140,7 @@ export const addCarTimelineVideo = (postDetails) => {
           published: true
         })
         dispatch({
-          type: RESET_POST
+          type: 'RESET_POST'
         })
       })
       .catch((args) => {
@@ -150,7 +150,7 @@ export const addCarTimelineVideo = (postDetails) => {
           publishPending: false,
           published: false
         })
-    })
+      })
   }
 }
 

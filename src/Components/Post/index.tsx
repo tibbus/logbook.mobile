@@ -3,7 +3,7 @@ import { Post } from './Post'
 export * from './PostMenu'
 
 export const getPost = (props = {}) => {
-  const { type } = props
+  const { type }: any = props
 
   switch (type) {
     default:

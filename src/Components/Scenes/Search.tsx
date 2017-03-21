@@ -13,7 +13,7 @@ import {
 const stateToProps = ({ search }) => ({ search });
 
 @connect(stateToProps)
-export class Search extends Component {
+export class Search extends Component<any, any> {
 
     constructor () {
         super(...arguments);

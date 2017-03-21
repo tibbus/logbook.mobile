@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     height: 40,
     backgroundColor: '#f2f2f2'
-  },
+  } as React.ViewStyle,
   profileImg: {
     width: 30,
     height: 30

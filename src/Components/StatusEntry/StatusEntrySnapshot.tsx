@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 const stateToProps = ({ user }) => ({ user })
 
 @connect(stateToProps)
-export class StatusEntrySnapshot extends Component {
+export class StatusEntrySnapshot extends Component<any, any> {
 
   render () {
     const {
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     flexDirection: 'row',
     padding: 10
-  },
+  } as React.ViewStyle,
   textInput: {
     color: '#666'
   },
@@ -67,5 +67,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  } as React.ViewStyle
 })

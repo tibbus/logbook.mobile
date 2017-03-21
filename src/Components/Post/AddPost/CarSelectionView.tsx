@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         width:250, 
         height:20
-    },
+    } as React.ViewStyle,
     selectedCarFont: {
         fontSize: 10
     }

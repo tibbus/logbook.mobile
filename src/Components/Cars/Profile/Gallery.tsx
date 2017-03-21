@@ -7,48 +7,49 @@ import {
     ListView,
     ScrollView
 } from 'react-native'
-import { FitImage }  from '../../Image'
+import { FitImage } from '../../Image'
 import { ListVideo } from '../../Video/ListVideo';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const galleryContent = (contentUri, type) => {
-    
-    if(type === "Image") {
-        return <FitImage key={contentUri} resizeMode={Image.resizeMode.contain} source={{uri: contentUri}} style={styles.photo} />
+
+    if (type === "Image") {
+        // @TODO Image.resizeMode.contain replaced with fixed
+        return <FitImage key={contentUri} resizeMode={Image.resizeMode.contain} source={{ uri: contentUri }} style={styles.photo} />
     }
-    
-    if(type === "Video") {
+
+    if (type === "Video") {
         return <ListVideo key={contentUri} paused={true} uri={contentUri} onVideoPress={() => this.paused = false} />;
     }
 }
 
 const getContentUris = (post) => post.contentUris;
 
-export class Gallery extends Component {
+export class Gallery extends Component<any, any> {
 
-    constructor (props) {
+    constructor(props) {
         super(props)
     }
 
-    render () {
+    render() {
 
         const { carImages, carVideos } = this.props;
-        
+
         var images = [];
-        
-        if(carImages.length !== 0){
+
+        if (carImages.length !== 0) {
             images = carImages.map(getContentUris);
             images = [].concat.apply([], images);
         }
 
         var videos = [];
 
-        if(carVideos.length !== 0) {
+        if (carVideos.length !== 0) {
             videos = carVideos.map(getContentUris);
             videos = [].concat.apply([], videos);
         }
 
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             imageDataSource: ds.cloneWithRows(images),
             videoDataSource: ds.cloneWithRows(videos)
@@ -56,10 +57,10 @@ export class Gallery extends Component {
 
         return (
 
-            <ScrollView 
+            <ScrollView
                 automaticallyAdjustContentInsets={false}
                 style={styles.scrollView}>
-                <View style={{height:300}}>
+                <View style={{ height: 300 }}>
                     <Text>Videos</Text>
                     <ScrollView
                         automaticallyAdjustContentInsets={false}
@@ -69,8 +70,8 @@ export class Gallery extends Component {
                             videos.map((video) => galleryContent(video, 'Video'))
                         }
                     </ScrollView>
-                    </View>
-                    <View style={{height:300}}>
+                </View>
+                <View style={{ height: 300 }}>
                     <Text>Photos</Text>
                     <ListView
                         dataSource={this.state.imageDataSource}
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     listImages: {
         flexDirection: 'row',
         flexWrap: 'wrap'
-    },
+    } as React.ViewStyle,
     horizontalScrollView: {
         height: 300,
     }

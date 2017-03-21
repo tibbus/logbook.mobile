@@ -66,5 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     color: '#666'
-  }
+  } as React.TextStyle
 })

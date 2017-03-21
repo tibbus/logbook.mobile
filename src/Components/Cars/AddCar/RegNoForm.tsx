@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
-  }
+  } as React.ViewStyle
 })
 
-export class RegNoForm extends Component {
+export class RegNoForm extends Component<any, any> {
 
   constructor (props) {
     super(props)

@@ -62,22 +62,22 @@ const styles = StyleSheet.create({
         //flex: 1,
         padding: 12,
         alignItems: 'center',
-    },
+    } as React.ViewStyle,
     statContainer: {
         flex: 1,
         flexDirection: 'row'
-    },
+    } as React.ViewStyle,
     subContainer: {
         flex: 1,
         flexDirection:'row',
         alignItems: 'center',
-    },
+    } as React.ViewStyle,
     stats: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         paddingBottom: 15
-    },
+    } as React.ViewStyle,
     textHeading: {
         marginLeft: 12,
         fontSize: 16,

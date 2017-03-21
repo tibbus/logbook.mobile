@@ -8,7 +8,8 @@ import { StatusEntry } from './'
 import {
   addCarTimelineImage,
   addCarTimelineStatus,
-  addCarTimelineVideo } from '../../Actions/timeline'
+  addCarTimelineVideo
+} from '../../Actions/timeline'
 import MediaPicker from 'react-native-image-picker'
 import { paramsToObj } from '../../Utils'
 import { last } from 'ramda'
@@ -17,13 +18,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#d0d0d0',
     flex: 1
-  }
+  } as any
 })
 
 const pickMedia = (opts = {}) => {
-  const { mediaType } = opts
-  const title = mediaType === 'video' ? 'Videos' : 'Photos'
-  const config = { ...opts, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
+  const { mediaType }: any = opts;
+  const title = mediaType === 'video' ? 'Videos' : 'Photos';
+  const config = { ...opts, title, chooseFromLibraryButtonTitle: 'Choose from Library...' };
 
   return new Promise((resolve, reject) => {
     MediaPicker.launchImageLibrary(config, response => {
@@ -50,20 +51,24 @@ const getParams = (origURL, uri) => {
   }
 }
 
-export class StatusCreate extends Component {
+export class StatusCreate extends Component<any, any> {
+  public title: string;
+  public actionName: string;
+  public description: string;
+  private postType: string;
 
-  constructor () {
+  constructor() {
     super(...arguments)
-    this.title = 'Post a status'
-    this.actionName = 'Post'
-    this.state = {}
+    this.title = 'Post a status';
+    this.actionName = 'Post';
+    this.state = {};
 
     const { mediaType = null } = this.props
 
     if (mediaType) {
       pickMedia({ mediaType })
-        .then((media, f2) => {
-          const { origURL = '', uri = '' } = media
+        .then((media) => {
+          const { origURL = '', uri = '' }: any = media
           const params = getParams(origURL, uri)
 
           if (!params) {
@@ -83,21 +88,21 @@ export class StatusCreate extends Component {
     }
   }
 
-  back () {
+  back() {
     const { navigator } = this.props
     navigator.pop()
   }
 
-  onAction () {
+  onAction() {
     this.doStatusAction()
     this.back()
   }
 
-  setStatusDescription (text) {
-    this.description = text
+  setStatusDescription(text) {
+    this.description = text;
   }
 
-  getAction () {
+  getAction() {
     const { carInfoId } = this.props
     const { description, postType } = this
     const { image, video } = this.state
@@ -126,12 +131,12 @@ export class StatusCreate extends Component {
     }
   }
 
-  doStatusAction () {
+  doStatusAction() {
     const { dispatch } = this.props
     dispatch(this.getAction())
   }
 
-  render () {
+  render() {
     const { description = '' } = this.props
     const { image } = this.state
 
@@ -145,7 +150,7 @@ export class StatusCreate extends Component {
         <StatusEntry
           value={description}
           onChangeText={this.setStatusDescription.bind(this)} />
-          {image ? (<Image source={{uri: image.uri}} style={{flex: 3}} resizeMode='contain' />) : null}
+        {image ? (<Image source={{ uri: image.uri }} style={{ flex: 3 }} resizeMode='contain' />) : null}
 
       </BackScene>
     )

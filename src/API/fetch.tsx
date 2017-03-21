@@ -1,9 +1,9 @@
-import { store } from '../store'
-import { getEnvironment, getIdentityEnvironment } from './config'
-import { replaceParams } from '../Utils'
+import { store } from '../store';
+import { getEnvironment, getIdentityEnvironment } from './config';
+import { replaceParams } from '../Utils';
 
 const getUrl = (uri, uriParams = {}, identity = false) => {
-  
+
   const env = identity ? getIdentityEnvironment() : getEnvironment()
 
   if (uriParams) {
@@ -21,13 +21,13 @@ const customParams = (files, request) => {
 
     keys.forEach(key => {
 
-      if(key === 'files' || key === 'topics') {
+      if (key === 'files' || key === 'topics') {
         body[key].forEach(item => formData.append(key, item));
       }
       else {
         formData.append(key, body[key])
       }
-      
+
     })
     return {
       body: formData,
@@ -46,12 +46,12 @@ const customParams = (files, request) => {
   }
 }
 
-export const fetcher = (uri, method = 'GET', files = false, identity = false) => (request = {}, uriParams) => {
-  const { user } = store.getState()
+export const fetcher = (uri, method = 'GET', files = false, identity = false) => (request = {}, uriParams?) => {
+  const { user }: any = store.getState()
   const { token = {}, id } = user
-  const { tokenType, accessToken } = token
+  const { tokenType, accessToken }: any = token
   const Authorization = `${tokenType} ${accessToken}`
-  const { headers = {} } = request
+  const { headers = {} }: any = request;
   const url = getUrl(uri, Object.assign({}, uriParams, { userId: id }), identity)
 
   const { body, customHeaders } = customParams(files, request)

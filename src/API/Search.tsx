@@ -6,26 +6,26 @@ const apiKey = getSearchApiKey();
 const searchIndex = getSearchIndex();
 
 const getUrl = (searchType, uriParams = { 'api-version': `${AZURE_SEARCH_API_VERSION}` }) => {
-    
+
     const env = getSearchEnvironment();
     const uri = `${searchIndex}docs/${searchType}?api-version=${AZURE_SEARCH_API_VERSION}`;
-    
+
     if (uriParams) {
         return env + replaceParams(uri, uriParams, encodeURIComponent);
-  }
-  
-  return env + uri;
+    }
+
+    return env + uri;
 }
 
 export const getSearchSuggestions = (searchTerm) => {
-    
-    const url = getUrl('suggest');
+
+    const url: any = getUrl('suggest');
     const requestBody = {
-        'search' : searchTerm,
-        'suggesterName' : 'basic'
+        'search': searchTerm,
+        'suggesterName': 'basic'
     }
 
-    return executeRequest(url. requestBody);
+    return executeRequest(url.requestBody);
 }
 
 export const getSearchResult = (searchTerm) => {
@@ -36,18 +36,18 @@ export const getSearchResult = (searchTerm) => {
     return executeRequest(url, requestBody);
 }
 
-const executeRequest = (url, body) => {
+const executeRequest = (url, body?) => {
 
-    const requestDetails = { method: 'POST', body: JSON.stringify(body), headers: {'api-key' : apiKey, 'Accept' : 'application/json','Content-Type' : 'application/json'}};
+    const requestDetails = { method: 'POST', body: JSON.stringify(body), headers: { 'api-key': apiKey, 'Accept': 'application/json', 'Content-Type': 'application/json' } };
     return global.fetch(url, requestDetails)
-    .then(response => {
-        
-        if(response.ok){
-            return response.json();
-        }
-    })
-    .catch(error => {
-        console.log(error);
-        throw new Error("Error during search api call.");
-    })
+        .then(response => {
+
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            throw new Error("Error during search api call.");
+        })
 }

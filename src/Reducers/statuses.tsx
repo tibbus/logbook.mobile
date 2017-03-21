@@ -8,7 +8,7 @@ import {
 
 const setStatePaused = (state, paused) => ({ ...state, paused })
 
-export const timelineItemReducer = (state = {}, action) => {
+export const timelineItemReducer = (state: any = {}, action) => {
   const { type, item, pending = false } = action
 
   switch (type) {
@@ -21,7 +21,7 @@ export const timelineItemReducer = (state = {}, action) => {
           ...item.details
         }
       }
-    
+
     case ADD_USER_LIKED_ITEM:
       const addLikeTimelineItem = {
         ...state,

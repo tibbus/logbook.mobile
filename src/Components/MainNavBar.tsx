@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderWidth: 0.5,
     borderColor: navBar.line,
-  },
+  } as React.ViewStyle,
   button: {
     height: 40,
     flex: 1,
@@ -39,37 +39,37 @@ const styles = StyleSheet.create({
   }
 })
 
-export class MainNavBar extends Component {
+export class MainNavBar extends Component<any, any> {
 
-  goToHome () {
+  goToHome() {
     const { navigator } = this.props
     navigator.push({
       id: 'home'
     })
   }
 
-  gotoSearch () {
+  gotoSearch() {
     const { navigator } = this.props
     navigator.push({
       id: 'search'
     })
   }
 
-  gotoProfile () {
+  gotoProfile() {
     const { navigator } = this.props
     navigator.push({
       id: 'profile'
     })
   }
 
-  gotoAddPost () {
+  gotoAddPost() {
     const { navigator } = this.props
     navigator.push({
       id: 'addPost'
     })
   }
 
-  render () {
+  render() {
     const { navigator } = this.props
     const routes = navigator.getCurrentRoutes()
     const { length } = routes
@@ -78,19 +78,19 @@ export class MainNavBar extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableHighlight style={bgColour('home')} onPress={this.goToHome.bind(this)}>
+        <TouchableHighlight style={bgColour('home') as React.ViewStyle} onPress={this.goToHome.bind(this)}>
           <Icon name='home' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')}>
+        <TouchableHighlight style={bgColour('away') as React.ViewStyle}>
           <Icon name='bell-o' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')}>
-          <Icon name='plus-square-o' style={styles.icon} onPress={this.gotoAddPost.bind(this)}/>
+        <TouchableHighlight style={bgColour('away') as React.ViewStyle}>
+          <Icon name='plus-square-o' style={styles.icon} onPress={this.gotoAddPost.bind(this)} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('search')} onPress={this.gotoSearch.bind(this)}>
+        <TouchableHighlight style={bgColour('search') as React.ViewStyle} onPress={this.gotoSearch.bind(this)}>
           <Icon name='search' style={styles.icon} />
         </TouchableHighlight>
-        <TouchableHighlight style={bgColour('profile')} onPress={this.gotoProfile.bind(this)}>
+        <TouchableHighlight style={bgColour('profile') as React.ViewStyle} onPress={this.gotoProfile.bind(this)}>
           <Icon name='user' style={styles.icon} />
         </TouchableHighlight>
       </View>

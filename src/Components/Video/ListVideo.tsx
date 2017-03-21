@@ -12,20 +12,21 @@ export const ListVideo = ({
   paused,
   uri
 }) => (
-  <TouchableOpacity onPress={onVideoPress} style={styles.button}>
-    <View>
-      <Video
-        source={{uri}}
-        resizeMode='contain'
-        paused={paused}
-        repeat={Boolean(true)}
-        controls={Boolean(true)}
-        style={{ height: 170, width: 300 }} />
+    // @TODO remove style={styles.button} from the below component as was not defined
+    <TouchableOpacity onPress={onVideoPress}>
+      <View>
+        <Video
+          source={{ uri }}
+          resizeMode='contain'
+          paused={paused}
+          repeat={Boolean(true)}
+          controls={Boolean(true)}
+          style={{ height: 170, width: 300 }} />
 
-      <View style={styles.iconContainer}>{paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
-    </View>
-  </TouchableOpacity>
-)
+        <View style={styles.iconContainer}>{paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
+      </View>
+    </TouchableOpacity>
+  )
 
 const styles = StyleSheet.create({
   iconContainer: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
+  } as React.ViewStyle,
   icon: {
     fontSize: 90,
     color: '#e0e0e0',

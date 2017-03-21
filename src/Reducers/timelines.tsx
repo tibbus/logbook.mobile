@@ -36,7 +36,13 @@ const newTimelineItem = (timeline, carInfoId, { data, pending }) => ({
   )
 })
 
-const itemMatch = (item1, { type, id, details = {} }) => (
+interface CarInfo {
+  type: any,
+  id: any,
+  details: any
+}
+
+const itemMatch = (item1, { type, id, details = {} }: CarInfo) => (
   item1.type === type && item1.details.id === (id || details.id)
 )
 
@@ -52,7 +58,7 @@ const removeTimelineItem = (action, state) => {
 
 const timelineReducer = (state = [], action) => {
   const { type, item } = action
-  const { timeline, carInfoId } = state
+  const { timeline, carInfoId }: any = state
 
   switch (type) {
     case ADD_TIMELINE_ITEM:

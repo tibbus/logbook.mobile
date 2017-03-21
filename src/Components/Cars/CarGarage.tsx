@@ -22,7 +22,7 @@ const createCarGarageIcon = function(car, navigator, user) {
     />;
 }
 
-export class CarGarage extends Component {
+export class CarGarage extends Component<any, any> {
 
     constructor(props) {
         super(props)
@@ -66,5 +66,5 @@ var styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     paddingBottom: 10
-  }
+  } as React.TextStyle
 })

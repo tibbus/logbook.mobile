@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export class CommentInput extends Component {
+export class CommentInput extends Component<any, any> {
 
   constructor (props) {
     super(props);

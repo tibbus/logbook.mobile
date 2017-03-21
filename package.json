@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "standard \"./src/**/*.js\" && ava"
+    "test": "standard \"./src/**/*.js\" && ava",
+    "tsc": "tsc"
   },
   "dependencies": {
     "assert": "1.4.1",
@@ -62,7 +63,7 @@
     "babel-preset-react-native": "1.5.7",
     "deep-freeze": "0.0.1",
     "standard": "7.1.0",
-    "typescript": "^2.2.1"
+    "typescript": "2.2.1"
   },
   "standard": {
     "parser": "babel-eslint"

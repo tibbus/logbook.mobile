@@ -11,35 +11,36 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import MediaPicker from 'react-native-image-picker'
-import { FitImage }  from '../../Image'
+import { FitImage } from '../../Image'
 import { paramsToObj } from '../../../Utils'
 import { getTagsView } from './TagsView'
 import { getGalleryView } from './GalleryView'
 import { getStatusView } from './StatusView'
 import { getCarSelectionView } from './CarSelectionView'
 
-export class LandingPage extends Component {
+export class LandingPage extends Component<any, any> {
+  private addPost: any;
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.addPost = {
-            carInfoId: '',
-            postType: '',
-            description: '',
-            tags: [],
-            canAddContent: true,
-            content: {
-                contentType: '',
-                data: []
-            },
-            car: {
-              image: '',
-              make: '',
-              model: '',
-              yearOfManufacture: ''
-            }
-        }
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      carInfoId: '',
+      postType: '',
+      description: '',
+      tags: [],
+      canAddContent: true,
+      content: {
+        contentType: '',
+        data: []
+      },
+      car: {
+        image: '',
+        make: '',
+        model: '',
+        yearOfManufacture: ''
+      }
+    }
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       tagsDataSource: ds.cloneWithRows(this.addPost.tags),
       contentDataSource: ds.cloneWithRows(this.addPost.content.data)
@@ -59,69 +60,69 @@ export class LandingPage extends Component {
     this.addPost.car.yearOfManufacture = value.yearOfManufacture;
 
     this.setState({
-        tagsDataSource: this.state.tagsDataSource.cloneWithRows(this.addPost.tags)        
-      });
-    }
+      tagsDataSource: this.state.tagsDataSource.cloneWithRows(this.addPost.tags)
+    });
+  }
 
   showMenuBar() {
-      return (
-          <View style={styles.contentContainer}>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => this.onGalleryPress('image')}>
-                <Text>Image</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => this.onGalleryPress('video')}>
-                <Text>Video</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => onCameraPress()}>
-                <Text>Camera</Text>
-              </TouchableHighlight>
-          </View>
-      )
+    return (
+      <View style={styles.contentContainer}>
+        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('image')}>
+          <Text>Image</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('video')}>
+          <Text>Video</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onCameraPress()}>
+          <Text>Camera</Text>
+        </TouchableHighlight>
+      </View>
+    )
   }
 
   showNextButton(onNextClick) {
     const postDetails = this.addPost;
-      return (
-          <View style={styles.contentContainer}>
-              <TouchableHighlight style={{flex:1, alignItems: 'center', paddingHorizontal: 10}} onPress={() => onNextClick(postDetails)}>
-                <Text>Next</Text>
-              </TouchableHighlight>
-          </View>
-      )
+    return (
+      <View style={styles.contentContainer}>
+        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => onNextClick(postDetails)}>
+          <Text>Next</Text>
+        </TouchableHighlight>
+      </View>
+    )
   }
 
   onGalleryPress(type) {
-    const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video'};
+    const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video' };
     const title = type === 'image' ? 'Photos' : 'Videos'
     const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
 
     MediaPicker.launchImageLibrary(config, (response) => {
-    
-      const { didCancel, error, data, uri = '', origURL = ''} = response;
-      
-      if(didCancel) {
+
+      const { didCancel, error, data, uri = '', origURL = '' } = response;
+
+      if (didCancel) {
         console.log(response);
       }
 
-      if(error) {
+      if (error) {
         console.log(response);
       }
 
-      if(!origURL && !uri) {
+      if (!origURL && !uri) {
         return;
       }
-  
-      const params = getParams(origURL, uri)
 
-      if(!params) {
+      const params: any = getParams(origURL, uri)
+
+      if (!params) {
         throw new Error('Error: Invalid file.')
       }
-      
+
       const contentData = {
-          id: params.id,
-          extension: params.ext,
-          type: type === 'image' ? 'image' : 'video',
-          uri: uri
+        id: params.id,
+        extension: params.ext,
+        type: type === 'image' ? 'image' : 'video',
+        uri: uri
       }
 
       this.addPost.postType = type === 'image' ? 'image' : 'video';
@@ -130,26 +131,30 @@ export class LandingPage extends Component {
       this.addPost.canAddContent = false;
 
       this.setState({
-          contentDataSource: this.state.contentDataSource.cloneWithRows(this.addPost.content.data)        
+        contentDataSource: this.state.contentDataSource.cloneWithRows(this.addPost.content.data)
       });
     })
   }
 
+  // @TODO check if this is used properly
   onCameraPress() {
+    // @TODO check if it worked before as config should not be defined here
+    const config = null;
+
     MediaPicker.launchCamera(config, response => {
       const { didCancel, error, data, uri, origURL } = response;
 
-      if(didCancel) {
+      if (didCancel) {
         console.log(response);
       }
 
-      if(error) {
+      if (error) {
         console.log(response);
       }
 
       const params = getParams(origURL, uri)
-      
-      if(!params) {
+
+      if (!params) {
         throw new Error('Error: Invalid file.')
       }
 
@@ -157,32 +162,32 @@ export class LandingPage extends Component {
     })
   }
 
-  render () {
-      const { navigator, rootNav, cars, onNextClick } = this.props;
+  render() {
+    const { navigator, rootNav, cars, onNextClick } = this.props;
 
-      return (
-        <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <View style={styles.headerButtonContainer}>
-              <TouchableHighlight style={styles.headerButton} onPress={() => rootNav.pop()}>
-                  <Text>Cancel</Text>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.headerHeadingContainer}>
-              <Text style={styles.headerHeadingTextt}>ADD POST</Text>
-            </View>
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={styles.headerButtonContainer}>
+            <TouchableHighlight style={styles.headerButton} onPress={() => rootNav.pop()}>
+              <Text>Cancel</Text>
+            </TouchableHighlight>
           </View>
-            {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
-            {getStatusView(true, (text) => {this.addPost.description = text}, "")}
-          <View style={{flex:1, borderBottomWidth: 2, borderBottomColor: '#000000'}}>
+          <View style={styles.headerHeadingContainer}>
+            <Text style={styles.headerHeadingText}>ADD POST</Text>
           </View>
-            {getTagsView(this.state.tagsDataSource)}            
-            {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
-            {
-                this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
-            }
         </View>
-      )
+        {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
+        {getStatusView(true, (text) => { this.addPost.description = text }, "")}
+        <View style={{ flex: 1, borderBottomWidth: 2, borderBottomColor: '#000000' }}>
+        </View>
+        {getTagsView(this.state.tagsDataSource)}
+        {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
+        {
+          this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
+        }
+      </View>
+    )
   }
 }
 
@@ -191,7 +196,8 @@ const getParams = (origURL, uri) => {
     return paramsToObj(origURL)
   }
 
-  const ext = last(uri.split('.'))
+  // @TODO check how last keyword is working
+  const ext = null//last(uri.split('.'))
   return {
     ext,
     id: 'anonymous',
@@ -200,17 +206,17 @@ const getParams = (origURL, uri) => {
 }
 
 const getCarOptions = (cars) => {
-    const carOptions = cars.map((car) => {
-        return {
-          id: car.carInfo.id, 
-          model: car.carInfo.car.model, 
-          make: car.carInfo.car.make, 
-          yearOfManufacture: car.carInfo.car.yearOfManufacture, 
-          image: car.carInfo.image
-        }
-    });
+  const carOptions = cars.map((car) => {
+    return {
+      id: car.carInfo.id,
+      model: car.carInfo.car.model,
+      make: car.carInfo.car.make,
+      yearOfManufacture: car.carInfo.car.yearOfManufacture,
+      image: car.carInfo.image
+    }
+  });
 
-    return carOptions;
+  return carOptions;
 }
 
 const styles = StyleSheet.create({
@@ -222,22 +228,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
     paddingHorizontal: 10
-  },
+  } as React.ViewStyle,
   headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
-  },
+  } as React.ViewStyle,
   headerButton: {
   },
   headerHeadingContainer: {
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 50
-  },
+  } as React.ViewStyle,
   headerHeadingText: {
-  },
+  } as React.TextStyle,
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
-  }
+  } as React.ViewStyle
 })

@@ -9,7 +9,7 @@ import { BackScene } from '../Scenes/BackScene'
 import { is, isNil, length, pick } from 'ramda'
 import moment from 'moment'
 
-const renderRow = (val = '', e, key) => {
+const renderRow = (val: any = '', e, key) => {
   const valLength = length(val)
   if (is(Array, val) && valLength) {
     return (
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
-  },
+  } as any,
   item: {
     fontSize: 10
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 10
-  },
+  } as React.ViewStyle,
   detail: {
     flex: 1
   },

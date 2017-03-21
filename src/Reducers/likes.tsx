@@ -4,7 +4,7 @@ import {
   SET_USER_LIKED_ITEMS
 } from '../Actions/Types'
 
-initialState = []
+const initialState = [];
 
 const updateItem = (state, updatedItem, removeItem = false) => {
   const newState = state;
@@ -13,15 +13,15 @@ const updateItem = (state, updatedItem, removeItem = false) => {
 }
 
 export const likes = (state = initialState, action) => {
-  const { type, likedItems, updatedItem} = action;
-  
+  const { type, likedItems, updatedItem } = action;
+
   switch (type) {
     case SET_USER_LIKED_ITEMS:
-        return likedItems;
+      return likedItems;
     case ADD_USER_LIKED_ITEM:
-        return updateItem(state, updatedItem);
+      return updateItem(state, updatedItem);
     case REMOVE_USER_LIKED_ITEM:
-        return updateItem(state, updatedItem, true)
+      return updateItem(state, updatedItem, true)
     default:
       return state
   }
