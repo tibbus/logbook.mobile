@@ -13,11 +13,6 @@
         "allowJs": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "paths": {
-            "*": [
-                "./trc/*"
-            ]
-        },
         "types": [
             "react"
         ]
