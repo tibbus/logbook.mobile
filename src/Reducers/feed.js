@@ -39,7 +39,7 @@ const addFeedItem = (state, feedItem) => {
             timeAgo: timeAgo
         });
 
-        return {...newState};
+        return newState;
     }
     else {
         state.posts.push({

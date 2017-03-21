@@ -67,13 +67,12 @@ export class Feed extends Component {
         const { user, navigator, dispatch, comments, likes = [] } = this.props;
         const { carOwner } = post;
         const { carInfoId }  = post.activityData;
-        const details = {...post};
-        const type = details.type;
+        const type = post.type;
         const likedItem = likes.find(element => element.postId === post.activityData.id);
         const liked = !!likedItem;
         const isFeed = true;
         const props = {
-            details,
+            details:{...post},
             type,
             onMenuPress: () => console.log('menu press'),
             onVideoPress: () => console.log('video play press'),
