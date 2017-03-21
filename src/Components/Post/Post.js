@@ -44,10 +44,21 @@ const renderMedia = (type, data) => {
   }
 }
 
+const getViewCar = (isFeed, onViewCarPress) => {
+  if(isFeed){
+    return (
+      <TouchableHighlight onPress={onViewCarPress}> 
+        <Text>View Car ></Text> 
+      </TouchableHighlight>
+    )
+  }
+  return null;
+}
+
 export const Post = (data = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked } = data;
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress } = data;
   profileImg = '';
-  if(carOwner === undefined || carOwner.profileImg === undefined ){
+  if(carOwner === undefined || carOwner.profileImg === undefined || carOwner.profileImg === ""){
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
   }
   else{
@@ -70,6 +81,9 @@ export const Post = (data = {}) => {
             source={{uri: profileImg}}
             style={styles.icon} />
           <Text style={styles.name}>{name}</Text>
+          {
+            getViewCar(isFeed, onViewCarPress)
+          }          
         </View>
       </View>
       <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>
