@@ -44,6 +44,17 @@ const renderMedia = (type, data) => {
   }
 }
 
+const getViewCar = (isFeed, onViewCarPress) => {
+  if(isFeed){
+    return (
+      <TouchableHighlight onPress={onViewCarPress}> 
+        <Text>View Car ></Text> 
+      </TouchableHighlight>
+    )
+  }
+  return null;
+}
+
 export const Post = (data = {}) => {
   const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress } = data;
   profileImg = '';
@@ -70,9 +81,9 @@ export const Post = (data = {}) => {
             source={{uri: profileImg}}
             style={styles.icon} />
           <Text style={styles.name}>{name}</Text>
-          <TouchableHighlight onPress={onViewCarPress}>
-            <Text>View Car ></Text>
-          </TouchableHighlight>
+          {
+            getViewCar(isFeed, onViewCarPress)
+          }          
         </View>
       </View>
       <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>

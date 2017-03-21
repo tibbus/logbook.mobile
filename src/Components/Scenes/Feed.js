@@ -10,28 +10,33 @@ import { getPost } from '../Post';
 import { LoadingView } from '../LoadingView';
 import background from '../../Themes/background';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
+import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
 import { Comments, CommentInput } from '../Comments';
 
-const stateToProps = ({ user, feed, comments }) => ({ user, feed, comments });
+const stateToProps = ({ user, feed, comments, likes }) => ({ user, feed, comments, likes });
 
 @connect(stateToProps)
 export class Feed extends Component {
     
-    constructor(props) {
-        super(props)
-
-        const { user, dispatch, feed } = this.props;
-
+    constructor() {
+        super(...arguments)
+        
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const { user, dispatch, feed = [], comments = [], likes = [] } = this.props;
 
         dispatch(getUserFeed(user.id))
+
+        if(!likes.length && user.id) {
+            dispatch(getUserLikedPosts(user.id));
+        }
+
         const { posts } = feed;
         this.state = {
             dataSource: ds.cloneWithRows(posts)
         }
     }
 
-    componentWillReceiveProps ({ feed, comments = [] }) {
+    componentWillReceiveProps ({ feed, comments = [], likes = [] }) {
         //Commenting to prevent ddos :D
         /*if(likes !== this.props.likes) {
         const { dispatch } = this.props;
@@ -39,40 +44,41 @@ export class Feed extends Component {
         }*/
 
         if (feed !== this.props.feed) {
-        const { dispatch } = this.props;
+            const { dispatch } = this.props;
 
-        feed.posts.forEach((postItem) => {
-            if(!comments.find(item => item.timelinePostId === postItem.activityData.id)) {
-                dispatch(setTimelineComments(postItem.activityData.id));
-                dispatch(getTimelineComments(postItem.activityData.id));
-            }
-            else {
-                dispatch(getTimelineComments(postItem.activityData.id));
-            }
-        })
+            feed.posts.forEach((postItem) => {
+                if(!comments.find(item => item.timelinePostId === postItem.activityData.id)) {
+                    dispatch(setTimelineComments(postItem.activityData.id));
+                    dispatch(getTimelineComments(postItem.activityData.id));
+                }
+                else {
+                    dispatch(getTimelineComments(postItem.activityData.id));
+                }
+            })
 
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(feed.posts)        
-        })
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(feed.posts)        
+            })
         }
     }
 
     renderRow (post) {
 
-        const { user, navigator, dispatch, comments } = this.props;
+        const { user, navigator, dispatch, comments, likes = [] } = this.props;
         const { carOwner } = post;
         const { carInfoId }  = post.activityData;
         const details = {...post};
         const type = details.type;
-        //const likedItem = likes.find(element => element.postId === post.activityData.id);
-        const liked = false;
+        const likedItem = likes.find(element => element.postId === post.activityData.id);
+        const liked = !!likedItem;
+        const isFeed = true;
         const props = {
             details,
             type,
             onMenuPress: () => console.log('menu press'),
             onVideoPress: () => console.log('video play press'),
-            onLikePress: () => console.log('like press'),
-            onUnlikePress: () => console.log('unlike press'),
+            onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
+            onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
             onViewCarPress: () => navigator.push({
                                         id: 'car',
                                         passProps: {
@@ -80,7 +86,8 @@ export class Feed extends Component {
                                         }
                                     }),
             carOwner,
-            liked
+            liked,
+            isFeed
         }
 
         const filteredComments = comments.find((timelinePostComments) => {

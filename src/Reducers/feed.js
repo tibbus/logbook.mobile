@@ -24,19 +24,32 @@ const calculateTime = (feedItem) => {
 }
 
 const addFeedItem = (state, feedItem) => {
-    const index = state.posts.indexOf(feedItem.activityData.id)
-    if(index > -1){
-        state.posts.splice(index, 1)
-    }
 
     const timeAgo = calculateTime(feedItem);
 
-    state.posts.push({
-        ...feedItem,
-        timeAgo: timeAgo
-    });
+    if(state.posts.find(item => item.activityData.id === feedItem.activityData.id)) {
 
-    return {...state};
+        const newState = {
+            posts: []
+        }
+        newState.posts = state.posts.filter((item) => item.activityData.id !== feedItem.activityData.id)
+
+        newState.posts.push({
+            ...feedItem,
+            timeAgo: timeAgo
+        });
+
+        return {...newState};
+    }
+    else {
+        state.posts.push({
+            ...feedItem,
+            timeAgo: timeAgo
+        });
+
+        return {...state};
+    }
+    
 }
 
 export const feed = (state = initialState, action) => {
