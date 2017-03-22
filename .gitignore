@@ -41,5 +41,3 @@ android/app/libs
 android/keystores/debug.keystore
 .vscode/
 .eslintrc
-tsconfig.json
-typings/
