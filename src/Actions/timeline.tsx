@@ -38,7 +38,7 @@ export const setCarTimeline = ({
   carInfoId
 }) => {
   return dispatch => {
-    getTimeline(carInfoId)
+    getTimeline('car', carInfoId , { carInfoId })
       .then(data => {
         dispatch(addTimelineAction(carInfoId, data))
       })

@@ -3,22 +3,22 @@ import { api } from './config'
 import { getStreamApi } from './config'
 import { getFeedData } from './GetStream'
 
-export const  getTimelineToken = fetcher(api + 'feeds/token', 'POST')
+export const getTimelineToken = fetcher(api + 'feeds/token', 'POST')
 
 const getOldTimeline = fetcher(api + 'timeline/{carInfoId}')
 
-export const  getTimeline = (carInfoId) => {
+export const getTimeline = (type, carInfoId, userObject?) => {
     console.log('get timeline')
-    const  promise = new Promise((resolve, reject) => {
-        const  body = { actorId: carInfoId, actorType: 'car' }
-        const  request = { body }
+    const promise = new Promise((resolve, reject) => {
+        const body = { actorId: carInfoId, actorType: type }
+        const request = { body }
 
         getTimelineToken({ body }, {})
             .then(tokenResponse => {
                 console.log(tokenResponse)
 
                 //Call to timeline
-                getFeedData('car', carInfoId, tokenResponse.token)
+                getFeedData(type, carInfoId, tokenResponse.token)
                     .then(response => {
                         console.log(response);
                         resolve(response);
@@ -32,5 +32,5 @@ export const  getTimeline = (carInfoId) => {
             })
     })
 
-        return promise;
+    return promise;
 }

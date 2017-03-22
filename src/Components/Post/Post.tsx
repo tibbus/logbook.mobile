@@ -27,9 +27,9 @@ const renderMedia = (type, data) => {
           key={uri}
           resizeMode={Image.resizeMode.contain}
           source={{ uri }}
-          // @TODO check if this does something as is not defined in styles
-          //style={styles.image}
-          />
+        // @TODO check if this does something as is not defined in styles
+        //style={styles.image}
+        />
       ))
 
     case 'Video':
@@ -46,6 +46,17 @@ const renderMedia = (type, data) => {
   }
 }
 
+const getViewCar = (isFeed, onViewCarPress) => {
+  if (isFeed) {
+    return (
+      <TouchableHighlight onPress={onViewCarPress}>
+        <Text>View Car ></Text>
+      </TouchableHighlight>
+    )
+  }
+  return null;
+}
+
 interface postData {
   details: any,
   pending: any,
@@ -54,13 +65,15 @@ interface postData {
   onUnlikePress: any,
   type: any,
   carOwner: any,
-  liked: any
+  liked: any,
+  isFeed: any,
+  onViewCarPress: any
 }
 
 export const Post = (data: any = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked }: postData = data;
+  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress }: postData = data;
   let profileImg = '';
-  if (carOwner === undefined || carOwner.profileImg === undefined) {
+  if (carOwner === undefined || carOwner.profileImg === undefined || carOwner.profileImg === "") {
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
   }
   else {
@@ -83,6 +96,9 @@ export const Post = (data: any = {}) => {
             source={{ uri: profileImg }}
             style={styles.icon} />
           <Text style={styles.name}>{name}</Text>
+          {
+            getViewCar(isFeed, onViewCarPress)
+          }
         </View>
       </View>
       <View style={[styles.containerEmpty, pending ? styles.pending : {}]}>

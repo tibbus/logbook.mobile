@@ -57,3 +57,6 @@ export const CARS_SEARCHED = 'CARS_SEARCHED'
 export const POST_PUBLISHED = 'POST_PUBLISHED'
 export const UPDATE_POST = 'UPDATE_POST'
 export const RESET_POST = 'RESET_POST'
+
+//Feed
+export const ADD_FEED_ITEM = 'ADD_FEED_ITEM'
