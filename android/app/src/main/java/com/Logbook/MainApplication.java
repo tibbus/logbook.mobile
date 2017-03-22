@@ -1,9 +1,12 @@
-package com.mycarbioapp;
+package com.Logbook;
 
 import android.app.Application;
 
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.ReactApplication;
+import com.tradle.react.UdpSocketsModule;
+import com.peel.react.TcpSocketsModule;
+import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -18,7 +21,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         public String getJSMainModuleName() {
-            return "D:\\PersonalProjects\\mycarbio.mobile\\index.android";
+            return "../../index.android";
         }
 
         /**
@@ -37,6 +40,9 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
+            new UdpSocketsModule(),
+            new TcpSocketsModule(),
+            new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
                 new ReactVideoPackage(),
                 new VectorIconsPackage(),
                 new ImagePickerPackage()

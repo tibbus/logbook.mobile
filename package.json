@@ -1,5 +1,5 @@
 {
-  "name": "MyCarBioApp",
+  "name": "Logbook",
   "version": "0.0.9",
   "private": true,
   "scripts": {
@@ -28,6 +28,7 @@
     "ramda": "0.21.0",
     "react": "15.3.2",
     "react-native": "0.35.0",
+    "react-native-code-push": "^1.15.1-beta",
     "react-native-crypto": "2.0.1",
     "react-native-drawer": "2.2.3",
     "react-native-http": "github:tradle/react-native-http#834492d",

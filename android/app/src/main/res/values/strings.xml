@@ -1,5 +1,6 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">A8fskR5_2Pdtwja1FmUU50Jw68-7EyAmtCsjG</string>
 
 
-    <string name="app_name">MyCarBioApp</string>
+    <string name="app_name">Logbook</string>
 </resources>

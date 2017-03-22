@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import "CodePush.h"
 
 #import "RCTRootView.h"
 
@@ -31,7 +32,12 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  
+#ifdef DEBUG
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+#else
+    jsCodeLocation = [CodePush bundleURL];
+#endif
 
   /**
    * OPTION 2
@@ -44,7 +50,7 @@
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"MyCarBioApp"
+                                                      moduleName:@"Logbook"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
