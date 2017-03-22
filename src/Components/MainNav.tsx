@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { Navigator } from 'react-native'
-import { Search, Profile, AddCar, CarProfile, AddPost } from './Scenes'
+import React, { Component } from 'react';
+import { Navigator } from 'react-native';
+import { MainNavBar } from './'
+import { Search, Profile, AddCar, CarProfile, AddPost } from './Scenes';
 
 const configureScene = ({ sceneConfig }: any = {}) => {
   if (sceneConfig) {
@@ -40,6 +41,7 @@ export class MainNav extends Component<any, any> {
     return (
       <Navigator
         initialRoute={{ id: 'profile' }}
+        navigationBar={<MainNavBar />}
         configureScene={configureScene}
         sceneStyles={{ flex: 1 }}
         renderScene={this.renderScene.bind(this)}
