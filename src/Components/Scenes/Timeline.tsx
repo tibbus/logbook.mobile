@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { connect } from 'react-redux';
+import { connect } from '../../Utils/connect';
 import {
   pauseVideoAction,
   playVideoAction,
@@ -35,8 +35,8 @@ export class Timeline extends Component<any, any> {
   private carInfoId: string;
   private userId: string;
 
-  constructor() {
-    super(...arguments)
+  constructor(props) {
+    super(props)
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     const { car, dispatch, timelines = [], comments = [], likes = [] } = this.props;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from '../../Utils/connect';
 import { ScrollView, StyleSheet } from 'react-native'
 import { Main } from '../Profile'
 import { CarGarage } from '../Cars'
@@ -10,26 +10,26 @@ const stateToProps = ({ user, cars }) => ({ user, cars });
 @connect(stateToProps)
 export class Profile extends Component<any, any> {
 
-    constructor () {
-        super(...arguments);
+  constructor(props) {
+    super(props);
 
-        const {dispatch, cars, user } = this.props;
+    const { dispatch, cars, user } = this.props;
 
-        dispatch(updateUserFollowCount(user.id));
-        dispatch(updateUserCars());
-    }
+    dispatch(updateUserFollowCount(user.id));
+    dispatch(updateUserCars());
+  }
 
-    render() {
-        const { user, cars, navigator } = this.props;
-        return (
-            <ScrollView
-                automaticallyAdjustContentInsets={false}
-                style={[styles.scrollView, styles.horizontalScrollView]}>
-                    {<Main user = {user} />}
-                    {<CarGarage cars = {cars} user = {user} navigator = {navigator} />}
-            </ScrollView>
-        )        
-    }
+  render() {
+    const { user, cars, navigator } = this.props;
+    return (
+      <ScrollView
+        automaticallyAdjustContentInsets={false}
+        style={[styles.scrollView, styles.horizontalScrollView]}>
+        {<Main user={user} />}
+        {<CarGarage cars={cars} user={user} navigator={navigator} />}
+      </ScrollView>
+    )
+  }
 }
 
 var styles = StyleSheet.create({

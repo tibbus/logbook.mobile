@@ -57,8 +57,8 @@ export class StatusCreate extends Component<any, any> {
   public description: string;
   private postType: string;
 
-  constructor() {
-    super(...arguments)
+  constructor(props) {
+    super(props)
     this.title = 'Post a status';
     this.actionName = 'Post';
     this.state = {};

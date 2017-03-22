@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from '../../Utils/connect';
 import { View, Navigator } from 'react-native'
 import { RegNoForm, ConfirmationDetails, Success } from '../Cars/AddCar'
 import { getCar } from '../../Actions/cars.js'
@@ -10,8 +10,8 @@ const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingSt
 @connect(stateToProps)
 export class AddCar extends Component<any, any> {
 
-    constructor() {
-        super(...arguments);
+    constructor(props) {
+        super(props);
     }
 
     renderScene(route, navigator) {

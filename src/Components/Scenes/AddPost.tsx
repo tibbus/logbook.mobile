@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from '../../Utils/connect';
 import {
   StyleSheet,
   Text,
@@ -18,6 +18,7 @@ const stateToProps = ({ user, cars, post }) => ({ user, cars, post });
 
 @connect(stateToProps)
 export class AddPost extends Component<any, any> {
+  private navigator: any;
 
   constructor(props) {
     super(props)

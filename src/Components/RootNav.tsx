@@ -6,7 +6,7 @@ import {
   MainNav
 } from './'
 import { SignIn } from './Scenes'
-import { connect } from 'react-redux'
+import { connect } from '../Utils/connect';
 
 const configureScene = ({ sceneConfig, id }: any = {}) => {
   if (sceneConfig) {

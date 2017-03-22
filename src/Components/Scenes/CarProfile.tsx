@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from '../../Utils/connect';
 import { View, Image, StyleSheet, Text } from 'react-native'
 import { Info, Gallery } from '../Cars/Profile'
 import { FitImage } from '../Image'
@@ -14,8 +14,8 @@ const stateToProps = ({ user, cars }) => ({ user, cars });
 @connect(stateToProps)
 export class CarProfile extends Component<any, any> {
 
-    constructor() {
-        super(...arguments);
+    constructor(props) {
+        super(props);
 
         const { car, carInfoId, cars, user, dispatch } = this.props;
         if (car && !cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id)) {

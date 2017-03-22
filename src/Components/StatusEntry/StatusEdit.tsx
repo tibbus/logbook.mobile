@@ -6,8 +6,8 @@ export class StatusEdit extends StatusCreate {
   public actionName: string;
   public description: string;
 
-  constructor () {
-    super(...arguments)
+  constructor (props) {
+    super(props)
     this.title = 'Edit Status'
     this.actionName = 'Save'
   }

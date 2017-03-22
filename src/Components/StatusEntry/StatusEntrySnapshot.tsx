@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import { connect } from 'react-redux'
+import { connect } from '../../Utils/connect';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const stateToProps = ({ user }) => ({ user })

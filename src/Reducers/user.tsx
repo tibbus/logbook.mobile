@@ -22,7 +22,7 @@ const initialState = {
 }
 // follows array contains the id's of cars.
 
-export const user = (state = initialState, action) => {
+export const user = (state: any = initialState, action) => {
   const { type, user, token, count, follows } = action
 
   switch (type) {
