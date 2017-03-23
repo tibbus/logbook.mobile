@@ -3,9 +3,12 @@
   "version": "0.0.9",
   "private": true,
   "scripts": {
-    "start": "npm run copy:assets && ./node_modules/.bin/tsc -w",
-    "build": "npm run copy:assets && ./node_modules/.bin/tsc",
-    "copy:assets": "./node_modules/.bin/mkdirp build && ./node_modules/.bin/ncp src/Assets build/Assets"
+    "start": "npm run copy:assets && tsc -w",
+    "build": "npm run copy:assets && tsc",
+    "copy:assets": "mkdirp build && ncp src/Assets build/Assets",
+    "tsc": "tsc",
+    "ncp": "ncp",
+    "mkdirp": "mkdirp"
   },
   "dependencies": {
     "assert": "1.4.1",
@@ -48,9 +51,7 @@
     "tty-browserify": "0.0.0",
     "underscore.string": "3.3.4",
     "url": "0.10.3",
-    "vm-browserify": "0.0.4"
-  },
-  "devDependencies": {
+    "vm-browserify": "0.0.4",
     "@types/moment": "2.13.0",
     "@types/ramda": "0.0.4",
     "@types/react": "15.0.17",
