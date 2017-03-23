@@ -27,25 +27,31 @@ export class SignIn extends Component<any, any> {
     )
   }
 
-  authSuccess (token) {
-    const { dispatch } = this.props
+  authSuccess = token => {
+    const { dispatch } = this.props;
 
-    dispatch({ token, type: SET_AUTH })
-    dispatch(setUserProfile())
+    dispatch({ token, type: SET_AUTH });
+    dispatch(setUserProfile);
   }
 
-  authError (error) {
-    const { dispatch } = this.props
+  authError = error => {
+    const { dispatch } = this.props;
 
-    dispatch({ type: SET_AUTH_ERROR, error })
+    dispatch({ type: SET_AUTH_ERROR, error });
+  }
+
+  attemptAuth = authService => {
+    const { dispatch } = this.props;
+
+    dispatch({ type: ATTEMPT_OIDC_AUTH, authService: authService });
   }
 
   render () {
-    const { user, dispatch } = this.props
+    const { user, dispatch } = this.props;
 
     return (
       <IdentityOIDC
-        attemptAuth={(authService) => dispatch({ type: ATTEMPT_OIDC_AUTH, authService: authService })}
+        attemptAuth={this.attemptAuth}
         shouldAttempt={user.attemptingOIDC}
         authService={user.authService}
         uri={getIdentityEnvironment()}
@@ -53,8 +59,8 @@ export class SignIn extends Component<any, any> {
         clientId='mycarbiowebapp'
         redirectUri={getIdentityEnvironment()}
         scopes={['openid', 'profile', 'mycarbioapi']}
-        onAuthSuccess={this.authSuccess.bind(this)}
-        onAuthError={this.authError.bind(this)}
+        onAuthSuccess={this.authSuccess}
+        onAuthError={this.authError}
       />
     )
   }

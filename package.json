@@ -3,8 +3,9 @@
   "version": "0.0.9",
   "private": true,
   "scripts": {
-    "start": "tsc -w",
-    "prestart": "mkdirp build ; ncp src/Assets build/Assets",
+    "start": "npm run copy:assets && tsc -w",
+    "build": "npm run copy:assets && tsc",
+    "copy:assets": "mkdirp build && ncp src/Assets build/Assets",
     "tsc": "tsc",
     "ncp": "ncp",
     "mkdirp": "mkdirp"

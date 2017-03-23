@@ -68,18 +68,12 @@ export const fetcher = (uri, method = 'GET', files = false, identity = false) =>
   return global
     .fetch(url, requestObject)
     .then(response => {
-      const type = response.headers.get('content-type')
-
       if (!response.ok) {
         throw new Error('Bad Response')
       }
 
-      if (type && type.match(/application\/json/ig)) {
-        return response.json();
-      }
-
-      return {};
-    })
+      return response.json();
+    });
 }
 
 export const getUser = fetcher('connect/userinfo', 'GET', false, true);

@@ -24,22 +24,14 @@ const configureScene = ({ sceneConfig, id }: any = {}) => {
 export class RootNav extends Component<any, any> {
 
   renderScene(route, navigator) {
-    const { dispatch, user } = this.props
-    const { token } = user
-    const { id = 'main', component, requiresAuth = true } = route
-    const routeId: any = (requiresAuth && (!token || !user.id)) ? null : id
+    const { dispatch, user } = this.props;
+    const routeId: string =  !user.token || !user.id ? null : 'main';
 
     switch (routeId) {
-
       case 'main':
-        return (<MainNav navigator={navigator} />)
-
-      case 'modal':
-        return component
-
+        return (<MainNav navigator={navigator} />);
       default:
-        return (<SignIn navigator={navigator} user={user} dispatch={dispatch} />)
-
+        return (<SignIn navigator={navigator} user={user} dispatch={dispatch} />);
     }
   }
 
