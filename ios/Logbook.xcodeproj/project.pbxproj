@@ -133,7 +133,7 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = UdpSockets;
 		};
-		24BEA7811E8497130094E065 /* PBXContainerItemProxy */ = {
+		24BEA75A1E848BD80094E065 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFB53462A7BF4732818A2BEC /* CodePush.xcodeproj */;
 			proxyType = 2;
@@ -405,10 +405,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		24BEA77D1E8497130094E065 /* Products */ = {
+		24BEA7561E848BD80094E065 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24BEA7821E8497130094E065 /* libCodePush.a */,
+				24BEA75B1E848BD80094E065 /* libCodePush.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -584,7 +584,7 @@
 					ProjectRef = 241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */;
 				},
 				{
-					ProductGroup = 24BEA77D1E8497130094E065 /* Products */;
+					ProductGroup = 24BEA7561E848BD80094E065 /* Products */;
 					ProjectRef = DFB53462A7BF4732818A2BEC /* CodePush.xcodeproj */;
 				},
 				{
@@ -745,11 +745,11 @@
 			remoteRef = 241E94AC1E833B8D00AA9C59 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		24BEA7821E8497130094E065 /* libCodePush.a */ = {
+		24BEA75B1E848BD80094E065 /* libCodePush.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libCodePush.a;
-			remoteRef = 24BEA7811E8497130094E065 /* PBXContainerItemProxy */;
+			remoteRef = 24BEA75A1E848BD80094E065 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4021F0EE1D1C703300B8FBDD /* libRNImagePicker.a */ = {
@@ -944,7 +944,7 @@
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 				INFOPLIST_FILE = Logbook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -978,7 +978,7 @@
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 				INFOPLIST_FILE = Logbook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
