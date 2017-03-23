@@ -43,3 +43,5 @@ android/keystores/debug.keystore
 .eslintrc
 
 yarn\.lock
+
+codesigndoc_exports/
