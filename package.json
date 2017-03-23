@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "npm run copy:assets && tsc -w",
-    "build": "npm run copy:assets && tsc",
-    "copy:assets": "mkdirp build && ncp src/Assets build/Assets",
+    "build": "npm run copy:assets && npm run tsc",
+    "copy:assets": "npm run mkdirp build && npm run ncp src/Assets build/Assets",
     "tsc": "tsc",
     "ncp": "ncp",
     "mkdirp": "mkdirp"
