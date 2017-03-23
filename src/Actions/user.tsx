@@ -14,20 +14,18 @@ import {
   SET_USER_FOLLOWING
 } from './Types'
 
-export const setUserProfile = () => {
-  return dispatch => {
-    getUser()
-      .then(userDetails => {
-        const user = {
-          ...userDetails,
-          //profile: objKeysToDecap(JSON.parse(userDetails.profile))
-        }
-        dispatch({
-          type: SET_USER,
-          user
-        })
-      })
-  }
+export const setUserProfile = dispatch => {
+  getUser().then(userDetails => {
+    const user = {
+      ...userDetails,
+      //profile: objKeysToDecap(JSON.parse(userDetails.profile))
+    }
+
+    dispatch({
+      type: SET_USER,
+      user
+    })
+  })
 }
 
 export const updateUserCars = ({
@@ -67,7 +65,7 @@ export const addUserCar = (userId, carInfoId) => {
 export const updateUserFollowCount = (id) => {
   return dispatch => {
 
-    const  body = { actorId: id, actorType: 'user' }
+    const body = { actorId: id, actorType: 'user' }
     getGetStreamToken({ body }, {})
       .then(tokenResponse => {
 
@@ -91,7 +89,7 @@ export const getUserFollowingFeeds = (userId) => {
 
   return dispatch => {
 
-    const  body = { actorId: userId, actorType: 'user' }
+    const body = { actorId: userId, actorType: 'user' }
     getGetStreamToken({ body }, {})
       .then(tokenResponse => {
 

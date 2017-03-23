@@ -57,7 +57,7 @@ export const user = (state: any = initialState, action) => {
         ...state,
         ...user,
         token: state.token,
-        attemptingOIDC: !!state.token
+        attemptingOIDC: false
       }
     case SET_USER_FOLLOW_COUNT:
       return {
