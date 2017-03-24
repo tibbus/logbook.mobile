@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
 import { View, Image, StyleSheet, Text } from 'react-native'
-import { Info, Gallery } from '../Cars/Profile'
+import { Info, Gallery, TechSpec } from '../Cars/Profile'
 import { FitImage } from '../Image'
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar } from '../../Actions/cars.js'
 import { getUserFollowingFeeds } from '../../Actions/user.js'
@@ -105,7 +105,7 @@ export class CarProfile extends Component<any, any> {
                         <Text tabLabel='Overview'>Overview</Text>
                         <Timeline tabLabel='Timeline' {...timelineProps} />
                         <Gallery tabLabel='Showcase' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
-                        <Text tabLabel='Technical Spec'>Technical Spec</Text>
+                        <TechSpec tabLabel='Technical Spec' car={car} />
 
                     </ScrollableTabView>
                 </View>
