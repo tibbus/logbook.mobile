@@ -1,8 +1,11 @@
-import {
-    ADD_FEED_ITEM
-} from '../Actions/Types'
-import moment from 'moment'
-import { sortBy } from 'ramda'
+import moment from 'moment';
+import { sortBy } from 'ramda';
+
+import { 
+    ADD_FEED_ITEM, 
+    ADD_USER_LIKED_ITEM ,
+    REMOVE_USER_LIKED_ITEM
+} from '../Actions/Types';
 
 
 /*
@@ -52,15 +55,29 @@ const addFeedItem = (state, feedItem) => {
 
 }
 
-export const feed = (state = initialState, action) => {
+const updateLikesCount = (state, action, value) => {
+    let postIndex;
+    let post = state.posts.find((item, index) => {
+        postIndex = index;
+        return item.activityData.id === action.updatedItem.postId;
+    });
+    post.socialData.likesCount += value;
+    state.posts = [...state.posts];
+    state.posts[postIndex] = { ...post };
+
+    return { ...state };
+}
+
+export const feed = (state: any = initialState, action) => {
     const { type, feedItem } = action
 
     switch (type) {
-
         case ADD_FEED_ITEM:
             return addFeedItem(state, feedItem);
-
-
+        case ADD_USER_LIKED_ITEM:
+            return updateLikesCount(state, action, 1);
+        case REMOVE_USER_LIKED_ITEM:
+            return updateLikesCount(state,action, -1);
         default:
             return state
     }

@@ -46,6 +46,7 @@ export class Feed extends Component<any, any> {
         if (feed !== this.props.feed) {
             const { dispatch } = this.props;
 
+            // @TODO should not fetch comments for every action on the timeline
             feed.posts.forEach((postItem) => {
                 if (!comments.find(item => item.timelinePostId === postItem.activityData.id)) {
                     dispatch(setTimelineComments(postItem.activityData.id));
@@ -62,8 +63,7 @@ export class Feed extends Component<any, any> {
         }
     }
 
-    renderRow(post) {
-
+    renderRow = post => {
         const { user, navigator, dispatch, comments, likes = [] } = this.props;
         const { carOwner } = post;
         const { carInfoId } = post.activityData;
@@ -130,7 +130,7 @@ export class Feed extends Component<any, any> {
                     style={styles.container}
                     dataSource={this.state.dataSource}
                     enableEmptySections={Boolean(true)}
-                    renderRow={this.renderRow.bind(this)} />
+                    renderRow={this.renderRow} />
             </LoadingView>
         )
     }

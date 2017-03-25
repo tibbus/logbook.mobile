@@ -10,11 +10,11 @@ const updateItem = (state, updatedItem, removeItem = false) => {
 
   if (removeItem) {
     const newState = state.filter(item => item.id !== updatedItem.id)
-    return newState;
+    return [...newState];
   }
   else {
     state.push(updatedItem);
-    return state;
+    return [...state];
   }
 }
 
