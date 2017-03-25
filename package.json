@@ -125,5 +125,8 @@
     "timers": "timers-browserify",
     "tty": "tty-browserify",
     "vm": "vm-browserify"
+  },
+  "devDependencies": {
+    "remote-redux-devtools": "0.5.7"
   }
 }

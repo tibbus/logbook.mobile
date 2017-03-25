@@ -14,6 +14,8 @@ export class FitImage extends Component<any, any> {
     style: Image.propTypes.style
   }
 
+  private isMount: boolean;
+
   constructor(props) {
     super(props)
 
@@ -39,10 +41,15 @@ export class FitImage extends Component<any, any> {
   }
 
   componentDidMount() {
+  this.isMount = true;
     if (!this.props.originalWidth || !this.props.originalHeight) {
       Image.getSize(this.props.source.uri, (width, height) => {
-        const newHeight = this.state.layoutWidth / width
+        // Image.getResize async event doesn't have a way to clear it, so if the component is not mounted exit
+        if (!this.isMount) {
+          return;
+        }
 
+        const newHeight = this.state.layoutWidth / width;
         this.setState({
           height: newHeight,
           originalWidth: width,
@@ -50,6 +57,10 @@ export class FitImage extends Component<any, any> {
         })
       })
     }
+  }
+
+  componentWillUnmount() {
+    this.isMount = false;
   }
 
   getStyle() {

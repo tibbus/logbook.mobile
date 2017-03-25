@@ -72,6 +72,7 @@ export class Timeline extends Component<any, any> {
       const { dispatch } = this.props;
       const timeline = getTimeline(timelines, this.carInfoId);
 
+      // @TODO should not fetch comments for every action on the timeline
       timeline.forEach((timelineItem) => {
         dispatch(setTimelineComments(timelineItem.activityData.id));
         dispatch(getTimelineComments(timelineItem.activityData.id));
