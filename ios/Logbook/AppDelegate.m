@@ -12,11 +12,22 @@
 
 #import "RCTRootView.h"
 
+@import HockeySDK;
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"ef9e059773b243cfb7d4ed68abdaa865"];
+  // Do some additional configuration if needed here
+  [[BITHockeyManager sharedHockeyManager] startManager];
+  [[BITHockeyManager sharedHockeyManager].authenticator
+   authenticateInstallation];
+
+  
   NSURL *jsCodeLocation;
+  
 
   /**
    * Loading JavaScript code - uncomment the one you want.
