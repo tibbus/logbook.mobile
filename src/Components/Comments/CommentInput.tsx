@@ -36,8 +36,8 @@ export class CommentInput extends Component<any, any> {
           onChangeText={ (text) => this.setState({text}) }
           value = {this.state.text}
           onSubmitEditing={(event) => {
-            onSubmitEditing(props.activityData.id, props.user.id, event.nativeEvent.text)
-            this.setState({text: ''})
+              onSubmitEditing(props.activityData.id, props.user.id, event.nativeEvent.text)
+              this.setState({text: ''})
             }
           }
           />
