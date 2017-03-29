@@ -106,6 +106,7 @@ export class Timeline extends Component<any, any> {
       onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
       onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
       carOwner,
+      user,
       liked
     }
 
