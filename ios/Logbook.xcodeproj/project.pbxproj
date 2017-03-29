@@ -580,7 +580,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = ZCS3QR7ZM9;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -957,8 +957,8 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Amila Prabandhika  Palahepitiya Gamage (ZCS3QR7ZM9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = ZCS3QR7ZM9;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -986,8 +986,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.Logbook;
 				PRODUCT_NAME = Logbook;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dc8e7351-3704-4eb3-b2b3-1624ba017f72";
+				PROVISIONING_PROFILE_SPECIFIER = "Logbook Test";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -996,8 +996,8 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Amila Prabandhika  Palahepitiya Gamage (ZCS3QR7ZM9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
 				DEVELOPMENT_TEAM = ZCS3QR7ZM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1024,8 +1024,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.Logbook;
 				PRODUCT_NAME = Logbook;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dc8e7351-3704-4eb3-b2b3-1624ba017f72";
+				PROVISIONING_PROFILE_SPECIFIER = "Logbook Test";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
