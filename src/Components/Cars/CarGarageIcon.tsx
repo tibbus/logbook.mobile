@@ -25,14 +25,14 @@ export class CarGarageIcon extends Component<any, any> {
         }
         else {
             return (
-                <View style={styles.carIcon}>
+                <View>
                     <View>
-                        <TouchableHighlight style={styles.carIcon} onPress={onPress}>
+                        <TouchableHighlight onPress={onPress}>
                             <Image source={{ uri: car.carInfo.image }} style={styles.image} />
                         </TouchableHighlight>
                     </View>
 
-                    <View style={styles.captionButtonView}>
+                    <View style={{width: photoWidth}}>
                         {CaptionButton(() => onPress,car.carInfo.car.make, car.carInfo.car.model)}
                     </View>
                     {/*<Text style={styles.captionText}>{car.carInfo.car.make}</Text>

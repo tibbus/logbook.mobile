@@ -33,15 +33,13 @@ export const GoogleButton = (onPress) => (
 )
 
 export const CaptionButton = (onPress, carMake, carModel) => (
-  <TouchableHighlight style={styles.captionView} onPress={() => onPress()}>
-    <View style={styles.captionButtonView}>
-      <View style={styles.captionTextView}>
-        <Text lineBreakMode="tail" numberOfLines={1} style={styles.captionText}>{[carMake, " ", carModel]}</Text>
-        <Text style={styles.captionText}>{"12 Followers"}</Text>
-      </View>    
-      <View style={[styles.captionButton]}>
-        <Text style={styles.captionButtonText}>Edit Profile</Text>
+  <TouchableHighlight onPress={() => onPress()}>
+    <View style={{flexDirection: 'row'}}>
+      <View style={{flex: 1, flexDirection: 'column'}}>
+        <Text lineBreakMode="tail" numberOfLines={1} style={{flex: 1}}>{[carMake, " ", carModel]} sdasds dasdas dsadas dasdas dsadsa</Text>
+        <Text style={{flex: 1}}>{"12 Followers"}</Text>
       </View>
-    </View>
+      <Text style={{flex: 1, color: 'blue', marginLeft: 50}}>Edit Profile</Text>
+    </View>   
   </TouchableHighlight>
 )
