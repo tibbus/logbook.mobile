@@ -24,7 +24,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		242DD0A31E8B2A75009AF8E0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */; };
 		242DD0A41E8B2A75009AF8E0 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */; };
-		24469E251E8B0F4C004A1A9F /* ogImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 24469E241E8B0F4C004A1A9F /* ogImage.png */; };
 		280DDEBC02544E4988AF2511 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04777CE618144118AE0725D9 /* Octicons.ttf */; };
 		454E8F1E6224467A8F95480E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6532DFBDE5C248E3AF8C6609 /* Ionicons.ttf */; };
 		4B8A28231FDC4AB4A631ECFC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 481CB9CEDD78416FAE40FC67 /* EvilIcons.ttf */; };
@@ -208,7 +207,6 @@
 		241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
-		24469E241E8B0F4C004A1A9F /* ogImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ogImage.png; path = ../../logbook.landing/images/ogImage.png; sourceTree = "<group>"; };
 		289148AC640A44A3955ED394 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		2A6A1133D1864F0BAA12C3BC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		41171C6A028F416CA4C03BB8 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				24469E241E8B0F4C004A1A9F /* ogImage.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -828,7 +825,6 @@
 				69464ED68B074E3FBD724BBE /* FontAwesome.ttf in Resources */,
 				242DD0A41E8B2A75009AF8E0 /* HockeySDKResources.bundle in Resources */,
 				C8BD584657784A9B8FB2A210 /* Foundation.ttf in Resources */,
-				24469E251E8B0F4C004A1A9F /* ogImage.png in Resources */,
 				454E8F1E6224467A8F95480E /* Ionicons.ttf in Resources */,
 				7FB5AA09EC254F21834104AF /* MaterialIcons.ttf in Resources */,
 				280DDEBC02544E4988AF2511 /* Octicons.ttf in Resources */,
