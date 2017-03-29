@@ -18,10 +18,7 @@ export const Info = (props) => {
       {StatsText(() => props.user.followCount, 'Follows')}
 
       {/* Styles the following count stats */}
-      <View style={styles.statsContainer}>
-        <Text style={styles.statsText}>{'178'}</Text>
-        <Text style={styles.captionText}>{`Followers`}</Text>
-      </View>
+      {StatsText(() => props.user.followCount, 'Followers')}
 
       {/* Styles the settings icon */}
       <View style={styles.settingsContainer}>
@@ -76,13 +73,6 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     //marginRight:
     color: palette.secondary,
-  },
-  textTitle: {
-    marginLeft: 20,
-    marginTop: 5,
-    fontSize: 35,
-    fontWeight: '700',
-    //numberOfLines: 2
   },
   // === Image Styles ===
   photo: {

@@ -38,5 +38,10 @@ export default StyleSheet.create({
      fontSize: 35,
      fontWeight: '700',
      //numberOfLines: 2
-   }  as React.TextStyle
+   }  as React.TextStyle,
+   textSubtitle: {
+    fontSize: 25,
+    fontWeight: '700',
+    paddingBottom: 10,
+   }  as React.TextStyle,
  });

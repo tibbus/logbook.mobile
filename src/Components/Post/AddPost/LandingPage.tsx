@@ -222,6 +222,7 @@ const getCarOptions = (cars) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 30,
   },
   headerContainer: {
     flex: 1,

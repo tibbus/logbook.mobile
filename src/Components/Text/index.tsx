@@ -17,3 +17,7 @@ export const StatsText = (statsCount, statsCaption) => (
 export const HeadingOne = (text) => (
   <Text style={styles.textTitle}> {text()}</Text>
 )
+
+export const HeadingTwo = (text) => (
+  <Text style={styles.textSubtitle}> {text()}</Text>
+)
