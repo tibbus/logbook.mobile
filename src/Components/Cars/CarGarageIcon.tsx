@@ -32,8 +32,8 @@ export class CarGarageIcon extends Component<any, any> {
                         </TouchableHighlight>
                     </View>
 
-                    <View style={{width: photoWidth}}>
-                        {CaptionButton(() => onPress,car.carInfo.car.make, car.carInfo.car.model)}
+                    <View style={{ width: photoWidth }}>
+                        {CaptionButton(() => onPress, car.carInfo.car.make, car.carInfo.car.model)}
                     </View>
                     {/*<Text style={styles.captionText}>{car.carInfo.car.make}</Text>
                     <View style={styles.carInfoIcon}>
@@ -63,8 +63,8 @@ var styles = StyleSheet.create({
         flex: 1,
     } as React.ViewStyle,
     carIcon: {
-        marginRight: 20,
-        marginBottom: 15,
+        //marginRight: 20,
+        //marginBottom: 15,
         flexDirection: 'column',
         alignItems: 'flex-start',
         backgroundColor: '#eaeaea',
@@ -79,5 +79,7 @@ var styles = StyleSheet.create({
         width: photoWidth,
         height: photoHeight,
         borderRadius: 3,
+        marginBottom: 15,
+        marginRight: 20,
     },
 })
