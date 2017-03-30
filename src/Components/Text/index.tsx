@@ -15,9 +15,21 @@ export const StatsText = (statsCount, statsCaption) => (
 )
 
 export const HeadingOne = (text) => (
-  <Text style={styles.textTitle}> {text()}</Text>
+  <Text style={styles.textTitle}>{text()}</Text>
 )
 
 export const HeadingTwo = (text) => (
-  <Text style={styles.textSubtitle}> {text()}</Text>
+  <Text style={styles.textSubtitle}>{text()}</Text>
+)
+
+export const HeadingOneWhite = (text) => (
+  <Text style={styles.textTitleWhite}>{text()}</Text>
+)
+
+export const HeadingTwoWhite = (text) => (
+  <Text style={styles.textSubtitleWhite}>{text()}</Text>
+)
+
+export const ParagraphWhite = (text) => (
+  <Text style={styles.textParagraphWhite}>{text()}</Text>
 )
