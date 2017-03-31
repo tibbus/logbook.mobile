@@ -7,7 +7,7 @@ const environments = {
   dev: {
     //uri: 'amilapc.com',
     uri: 'mycarbioservice.azurewebsites.net',
-    authUri: 'mycarbioidentity.azurewebsites.net',
+    authUri: 'logbookidentity.azurewebsites.net',
     searchUri: 'https://mycarbiosearch.search.windows.net/indexes/',
     searchIndex: 'carinfostaging',
     searchApiKey: '56204AA4847BE7E6D4F8ACFB6502D7C6',
