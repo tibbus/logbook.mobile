@@ -35,20 +35,6 @@ export class CarGarageIcon extends Component<any, any> {
                     <View style={{ width: photoWidth }}>
                         {CaptionButton(() => onPress, car.carInfo.car.make, car.carInfo.car.model)}
                     </View>
-                    {/*<Text style={styles.captionText}>{car.carInfo.car.make}</Text>
-                    <View style={styles.carInfoIcon}>
-                        <TouchableHighlight style={} onPress={onPress}>
-                            <View>
-                                <View>
-                                    <Text style={styles.captionText}>{car.carInfo.car.make}</Text>
-                                </View>
-                                <View>
-                                    <Text style={[styles.buttonText, styles.button]}>Edit Profile</Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                    </View>*/}
-
                 </View>
             );
         }
