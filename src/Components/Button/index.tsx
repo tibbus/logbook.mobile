@@ -6,6 +6,8 @@ import {
   Image
 } from 'react-native';
 import styles from './styles';
+import {capitalize} from 'underscore.string'
+
 export const FacebookButton = (onPress) => (
   <TouchableHighlight onPress={() => onPress()}>
     <View style={[styles.loginButton, styles.facebookButtonBgd]}>
@@ -36,10 +38,10 @@ export const CaptionButton = (onPress, carMake, carModel) => (
   <TouchableHighlight onPress={() => onPress()}>
     <View style={styles.rowContainer}>
       <View style={[styles.columnContainer]}>
-        <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>{[carMake, " ", carModel]} sdasds dasdas dsadas dasdas dsadsa</Text>
+        {/* Fix car name capitlisation */}
+        <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>{[carMake, " ", carModel]}</Text>
         <Text style={[styles.container, styles.captionText]}>{"12 Followers"}</Text>
       </View>
-      {/*<Text style={{flex: 1, color: 'blue', marginLeft: 50}}>Edit Profile</Text>*/}
       <Text style={[styles.captionButton, styles.captionButtonText]}>Edit Profile</Text>
     </View>   
   </TouchableHighlight>
