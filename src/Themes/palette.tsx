@@ -2,4 +2,7 @@ export default {
   //Colours of the theme colour paletee
   primary: 'rgba(0,0,255,1)',
   secondary: 'rgba(250,193,18,1)',
+  inactive: 'rgba(176,173,173,1)',
+  border: 'rgba(242,242,242,1)',
+
 };

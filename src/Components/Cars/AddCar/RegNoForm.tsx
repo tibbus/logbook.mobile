@@ -7,10 +7,11 @@ import {
   Dimensions
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import LinearGradient from 'react-native-linear-gradient'
+//import LinearGradient from 'react-native-linear-gradient'
 import { HeadingOneWhite, HeadingTwoWhite, ParagraphWhite } from '../../Text'
 import palette from '../../../Themes/palette';
 
+//const LinearGradient = require('react-native-linear-gradient');
 const { width, height } = Dimensions.get("window");
 
 export class RegNoForm extends Component<any, any> {
@@ -27,8 +28,10 @@ export class RegNoForm extends Component<any, any> {
     const { carRegSubmit } = this.props
     return (
       <View style={styles.container}>
-        {HeadingOneWhite (() => 'Add your car to your garage')}
-        {ParagraphWhite (() => 'Enter your Vehical Registration No.')}
+        <View style={{ marginTop: 10 }}>
+          {HeadingOneWhite (() => 'Add your car to your garage')}
+        </View>
+        {ParagraphWhite (() => 'We use your Vehical Registration No. to add relevant info about your car from the DVLA')}
         <View style={{ marginTop: 60 }}>
           {HeadingTwoWhite (() => 'Vehical Registration No.')}
         </View>
@@ -43,11 +46,11 @@ export class RegNoForm extends Component<any, any> {
         </View>
         <Icon.Button name='plus' onPress={() => carRegSubmit(this.state.text)}>Next</Icon.Button>
         
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} >
+        {/*<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} >
           <Text>
             Sign in with Facebook
           </Text>
-        </LinearGradient>
+        </LinearGradient>*/}
       </View>
     )
   }
@@ -57,6 +60,8 @@ const paddingHorizontal=30
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    //justifyContent: 'space-around',
     justifyContent: 'center',
     alignItems: "flex-start",
     paddingHorizontal: paddingHorizontal,
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   } as React.ViewStyle,
   textInput: {
-        height: 60,
+    height: 60,
     //marginVertical: 30, 
     color: 'white', 
     fontSize: 30,
