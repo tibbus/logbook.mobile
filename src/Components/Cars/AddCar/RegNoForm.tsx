@@ -7,11 +7,9 @@ import {
   Dimensions
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-//import LinearGradient from 'react-native-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient'
 import { HeadingOneWhite, HeadingTwoWhite, ParagraphWhite } from '../../Text'
 import palette from '../../../Themes/palette';
-
-//const LinearGradient = require('react-native-linear-gradient');
 const { width, height } = Dimensions.get("window");
 
 export class RegNoForm extends Component<any, any> {
@@ -46,11 +44,11 @@ export class RegNoForm extends Component<any, any> {
         </View>
         <Icon.Button name='plus' onPress={() => carRegSubmit(this.state.text)}>Next</Icon.Button>
         
-        {/*<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} >
+        {<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} >
           <Text>
             Sign in with Facebook
           </Text>
-        </LinearGradient>*/}
+        </LinearGradient>}
       </View>
     )
   }
