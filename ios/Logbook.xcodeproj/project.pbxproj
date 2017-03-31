@@ -22,7 +22,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		24469E251E8B0F4C004A1A9F /* ogImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 24469E241E8B0F4C004A1A9F /* ogImage.png */; };
+		242DD0A31E8B2A75009AF8E0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */; };
+		242DD0A41E8B2A75009AF8E0 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */; };
 		280DDEBC02544E4988AF2511 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04777CE618144118AE0725D9 /* Octicons.ttf */; };
 		3C65CF80D7B7455A9E047F80 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2723A7FD59DB46A095473752 /* libBVLinearGradient.a */; };
 		454E8F1E6224467A8F95480E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6532DFBDE5C248E3AF8C6609 /* Ionicons.ttf */; };
@@ -214,6 +215,8 @@
 		241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		24469E241E8B0F4C004A1A9F /* ogImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ogImage.png; path = ../../logbook.landing/images/ogImage.png; sourceTree = "<group>"; };
 		2723A7FD59DB46A095473752 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		289148AC640A44A3955ED394 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		2A6A1133D1864F0BAA12C3BC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		41171C6A028F416CA4C03BB8 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				E9BE893697624DE9989B4C3F /* libRNImagePicker.a in Frameworks */,
+				242DD0A31E8B2A75009AF8E0 /* HockeySDK.framework in Frameworks */,
 				CC8AC364A1914A1A9A8CF2B1 /* libRNVectorIcons.a in Frameworks */,
 				BDD1037152BA441B9DEBC928 /* libRCTVideo.a in Frameworks */,
 				5E94C93AF07543E1BB820FA8 /* libCodePush.a in Frameworks */,
@@ -355,7 +359,6 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				24469E241E8B0F4C004A1A9F /* ogImage.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -427,6 +430,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		242DD0A01E8B2A75009AF8E0 /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */,
+				242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */,
+			);
+			name = HockeySDK.embeddedframework;
+			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			sourceTree = "<group>";
+		};
 		24BEA7561E848BD80094E065 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +483,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				242DD0A01E8B2A75009AF8E0 /* HockeySDK.embeddedframework */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -560,6 +574,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				242DD0881E8B22CD009AF8E0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -586,7 +601,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = ZCS3QR7ZM9;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -840,8 +855,8 @@
 				72276BAE3A6E46B39775FD36 /* Entypo.ttf in Resources */,
 				4B8A28231FDC4AB4A631ECFC /* EvilIcons.ttf in Resources */,
 				69464ED68B074E3FBD724BBE /* FontAwesome.ttf in Resources */,
+				242DD0A41E8B2A75009AF8E0 /* HockeySDKResources.bundle in Resources */,
 				C8BD584657784A9B8FB2A210 /* Foundation.ttf in Resources */,
-				24469E251E8B0F4C004A1A9F /* ogImage.png in Resources */,
 				454E8F1E6224467A8F95480E /* Ionicons.ttf in Resources */,
 				7FB5AA09EC254F21834104AF /* MaterialIcons.ttf in Resources */,
 				280DDEBC02544E4988AF2511 /* Octicons.ttf in Resources */,
@@ -865,6 +880,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		242DD0881E8B22CD009AF8E0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -963,10 +991,14 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Amila Prabandhika  Palahepitiya Gamage (ZCS3QR7ZM9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = ZCS3QR7ZM9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -990,8 +1022,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.Logbook;
 				PRODUCT_NAME = Logbook;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dc8e7351-3704-4eb3-b2b3-1624ba017f72";
+				PROVISIONING_PROFILE_SPECIFIER = "Logbook Test";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1000,9 +1032,13 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application: Amila Prabandhika  Palahepitiya Gamage (ZCS3QR7ZM9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amila Prabandhika  Palahepitiya Gamage (5S79G95KR8)";
 				DEVELOPMENT_TEAM = ZCS3QR7ZM9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1026,8 +1062,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.Logbook;
 				PRODUCT_NAME = Logbook;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dc8e7351-3704-4eb3-b2b3-1624ba017f72";
+				PROVISIONING_PROFILE_SPECIFIER = "Logbook Test";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
