@@ -11,9 +11,6 @@ import { CaptionButton } from '../Button'
 
 export class CarGarageIcon extends Component<any, any> {
 
-    //const capitalizeFirstLetter = function(text) {
-    //    return text.charAt(0).toUpperCase() + text.slice(1);
-    //}
     render() {
         const { car, onPress } = this.props;
         if (!car) {

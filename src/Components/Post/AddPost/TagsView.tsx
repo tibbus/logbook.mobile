@@ -11,7 +11,7 @@ import palette from '../../../Themes/palette';
 export const getTagsView = (tagsDataSource) => {
   return (
     <View style={styles.tagsContainer}>
-        <Text style={styles.tagsText}>Tags</Text>
+        <Text style={styles.tagsText}>Tags:</Text>
         <ListView
         horizontal={true}
         style={{flex:1}}

@@ -39,7 +39,7 @@ export const CaptionButton = (onPress, carMake, carModel) => (
     <View style={styles.rowContainer}>
       <View style={[styles.columnContainer]}>
         {/* Fix car name capitlisation */}
-        <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>{[carMake, " ", carModel]}</Text>
+        <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>{capitalize([carMake, " ", carModel], true)}</Text>
         <Text style={[styles.container, styles.captionText]}>{"12 Followers"}</Text>
       </View>
       <Text style={[styles.captionButton, styles.captionButtonText]}>Edit Profile</Text>
