@@ -46,12 +46,12 @@ export default StyleSheet.create({
   textTitleWhite: {
     fontSize: 40,
     fontWeight: '700',
-    color: 'white',
+    color: 'rgba(255, 255, 255, 1)',
   } as React.TextStyle,
   textSubtitleWhite: {
     fontSize: 20,
     fontWeight: '700',
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.9)',
   } as React.TextStyle,
   textParagraphWhite: {
     marginTop: 30,

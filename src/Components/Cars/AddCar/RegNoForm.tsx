@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: textInputHeight,
     width: width - (2 * paddingHorizontal),
     borderBottomWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderColor: 'rgba(255, 255, 255, 0.1)',
     marginBottom: 20,
   } as React.ViewStyle,
   textInput: {
