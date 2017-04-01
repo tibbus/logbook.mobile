@@ -28,7 +28,7 @@ export class RegNoForm extends Component<any, any> {
     return (
       <GradientView>
         <View style={styles.container}>
-          <View>
+          <View style={styles.subContainer}>
             <View style={{ marginTop: 10 }}>
               {HeadingOneWhite(() => 'Add your car to your garage')}
             </View>
@@ -63,8 +63,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     // justifyContent: 'center',
     alignItems: "flex-start",
-    paddingHorizontal: paddingHorizontal,
     //backgroundColor: palette.secondary
+  } as React.ViewStyle,
+  subContainer: {
+    paddingHorizontal: paddingHorizontal,
   } as React.ViewStyle,
   underline: {
     height: textInputHeight,
