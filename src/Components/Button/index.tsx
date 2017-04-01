@@ -46,3 +46,13 @@ export const CaptionButton = (onPress, carMake, carModel) => (
     </View>   
   </TouchableHighlight>
 )
+
+export const NextButton = (onPress, title) => (
+  <TouchableHighlight onPress={() => onPress()}>
+    <View style={[styles.loginButton, styles.googleButtonBgd]}>
+      <View>
+        <Text style={[styles.loginButtonText, styles.googleButtonText]}>{title}</Text>
+      </View>
+    </View>
+  </TouchableHighlight>
+)
