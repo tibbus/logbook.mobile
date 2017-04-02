@@ -27,7 +27,7 @@ export class Success extends Component<any, any> {
               {HeadingOneWhite(() => "Success! Car added to garage")}
             </View>
             <View style={{ marginTop: 20 }}>
-              {ParagraphBoldHighlightWhite(() => "Well done! It's been a workout. Something Uplifting")}
+              {ParagraphBoldHighlightWhite(() => "It's been a workout. We're family now")}
             </View>
             <View style={{ alignItems: 'center', padding: 30 }}>
             <Icon name='check-circle' style={{ fontSize: 150, color: palette.success }} />
