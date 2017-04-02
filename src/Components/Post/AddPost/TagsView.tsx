@@ -5,17 +5,19 @@ import {
   View,
   ListView
 } from 'react-native'
+import {capitalize} from 'underscore.string'
+import palette from '../../../Themes/palette';
 
 export const getTagsView = (tagsDataSource) => {
   return (
     <View style={styles.tagsContainer}>
-        <Text>Tags</Text>
+        <Text style={styles.tagsText}>Tags:</Text>
         <ListView
         horizontal={true}
         style={{flex:1}}
         dataSource={tagsDataSource}
         scrollEnabled={false}
-        renderRow={(rowData) => <Text style={styles.tagsRow}>{rowData}</Text>}/>
+        renderRow={(rowData) => <Text style={styles.tagsRow}>{capitalize(rowData, true)}</Text>}/>
     </View>
   )
 }
@@ -27,9 +29,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  tagsText: {
+    fontSize: 15,
+    color: palette.inactive,
+    marginRight: 15,
+  },
   tagsRow: {
-    paddingHorizontal: 5, 
+    paddingHorizontal: 10, 
+    paddingVertical: 5,
     borderWidth: 1, 
-    margin: 5
+    borderColor: palette.border,
+    margin: 5,
+    fontSize: 15,
   }
 })

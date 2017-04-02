@@ -25,6 +25,7 @@
 		242DD0A31E8B2A75009AF8E0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */; };
 		242DD0A41E8B2A75009AF8E0 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */; };
 		280DDEBC02544E4988AF2511 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04777CE618144118AE0725D9 /* Octicons.ttf */; };
+		3C65CF80D7B7455A9E047F80 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2723A7FD59DB46A095473752 /* libBVLinearGradient.a */; };
 		454E8F1E6224467A8F95480E /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6532DFBDE5C248E3AF8C6609 /* Ionicons.ttf */; };
 		4B8A28231FDC4AB4A631ECFC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 481CB9CEDD78416FAE40FC67 /* EvilIcons.ttf */; };
 		5C85B36463C94AD19028E9CA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 235C9661B68A485082BA4A87 /* libz.tbd */; };
@@ -135,6 +136,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = UdpSockets;
 		};
+		24BE13861E8EADBC005F3E37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4884DCF99E64C9592F820C0 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
 		24BEA75A1E848BD80094E065 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFB53462A7BF4732818A2BEC /* CodePush.xcodeproj */;
@@ -205,6 +213,8 @@
 		2139EA9E997A4BAE93323754 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		235C9661B68A485082BA4A87 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		24469E241E8B0F4C004A1A9F /* ogImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ogImage.png; path = ../../logbook.landing/images/ogImage.png; sourceTree = "<group>"; };
+		2723A7FD59DB46A095473752 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		289148AC640A44A3955ED394 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
@@ -225,6 +235,7 @@
 		9D537CCCD6484F82A398A839 /* TcpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TcpSockets.xcodeproj; path = "../node_modules/react-native-tcp/ios/TcpSockets.xcodeproj"; sourceTree = "<group>"; };
 		B30B0E1591604D4391CAA2D3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		DFB53462A7BF4732818A2BEC /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		E4884DCF99E64C9592F820C0 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		F2CDE53823C64A2985351311 /* libRNRandomBytes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRandomBytes.a; sourceTree = "<group>"; };
 		F93ED30B756D4011A7CF4B03 /* libUdpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libUdpSockets.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,6 +272,7 @@
 				A8D5BA445DA244849042044D /* libRNRandomBytes.a in Frameworks */,
 				5F1CDD797FE547C1A6A52C9C /* libTcpSockets.a in Frameworks */,
 				A4118D687AD9489485B982C9 /* libUdpSockets.a in Frameworks */,
+				3C65CF80D7B7455A9E047F80 /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +422,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		24BE13831E8EADBC005F3E37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24BE13871E8EADBC005F3E37 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		242DD0A01E8B2A75009AF8E0 /* HockeySDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +501,7 @@
 				871B8AD9EC3147E6B1794E2B /* RNRandomBytes.xcodeproj */,
 				9D537CCCD6484F82A398A839 /* TcpSockets.xcodeproj */,
 				4ABDED7615D14C46953C177B /* UdpSockets.xcodeproj */,
+				E4884DCF99E64C9592F820C0 /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -596,6 +617,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 24BE13831E8EADBC005F3E37 /* Products */;
+					ProjectRef = E4884DCF99E64C9592F820C0 /* BVLinearGradient.xcodeproj */;
+				},
 				{
 					ProductGroup = 241E945C1E8338D800AA9C59 /* Products */;
 					ProjectRef = 241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */;
@@ -762,6 +787,13 @@
 			remoteRef = 241E94AC1E833B8D00AA9C59 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		24BE13871E8EADBC005F3E37 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 24BE13861E8EADBC005F3E37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		24BEA75B1E848BD80094E065 /* libCodePush.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -924,6 +956,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -941,6 +974,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -976,6 +1010,8 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = Logbook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -1014,6 +1050,8 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = Logbook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -1082,6 +1120,8 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1135,6 +1175,8 @@
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;

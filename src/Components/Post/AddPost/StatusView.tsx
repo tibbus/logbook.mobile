@@ -1,32 +1,35 @@
 import React from 'react'
 import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Image
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    Image
 } from 'react-native'
+import palette from '../../../Themes/palette';
+
 
 export const getStatusView = (editMode, updateStatus, status) => {
-  return (
-    <View style={styles.contentDescriptionContainer}>
-        <Image source={{uri: 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png'}} style={styles.icon} />
-        {
-            editMode ? getStatusInput(updateStatus) : getStatusDisplay(status)
-        }
-       
-    </View>
-  )
+    return (
+        <View style={styles.contentDescriptionContainer}>
+            <Image source={{ uri: 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png' }} style={styles.icon} />
+            {
+                editMode ? getStatusInput(updateStatus) : getStatusDisplay(status)
+            }
+
+        </View>
+    )
 }
 
 const getStatusInput = (updateStatus) => {
     return (
         <TextInput
             onChangeText={(text) => updateStatus(text)}
-            placeholder="What's new with car term today? Feeling like: Cruising? Thing? Or something?" 
-            returnKeyType='done' 
-            multiline={true} 
-            style={styles.statusInput}/>
+            placeholder="What's new with car term today?"
+            placeholderTextColor={palette.inactive}
+            returnKeyType='done'
+            multiline={true}
+            style={styles.statusInput} />
     )
 }
 
@@ -47,10 +50,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     statusInput: {
-        flex:1, 
-        marginTop: 20, 
-        paddingVertical: 10, 
-        borderWidth: 1, 
-        borderColor: '#000000'
+        flex: 1,
+        height: 100,
+        fontSize: 20,
+        lineHeight: 100,
+        color: 'black',
+        marginTop: 10,
+        paddingVertical: 10,
+        //backgroundColor: 'black'
     }
 })

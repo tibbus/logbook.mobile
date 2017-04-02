@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     photo: {
-        height: 350
+        height: 300
   },
 });

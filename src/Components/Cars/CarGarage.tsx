@@ -6,6 +6,7 @@ import {
     StyleSheet
 } from 'react-native'
 import { CarGarageIcon } from './'
+import { HeadingTwo } from '../Text'
 
 
 const createCarGarageIcon = function(car, navigator, user) {
@@ -32,7 +33,7 @@ export class CarGarage extends Component<any, any> {
         const { cars, user, navigator } = this.props;
         return (
         <View style={styles.container}>
-            <Text style={styles.textHeading}>GARAGE</Text>
+            {HeadingTwo(() => 'GARAGE')}
             <ScrollView
                 automaticallyAdjustContentInsets={false}
                 horizontal={true}
@@ -60,11 +61,6 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   horizontalScrollView: {
-    height: 200,
+    height: 230,
   },
-  textHeading: {
-    fontSize: 20,
-    fontWeight: '700',
-    paddingBottom: 10
-  } as React.TextStyle
 })

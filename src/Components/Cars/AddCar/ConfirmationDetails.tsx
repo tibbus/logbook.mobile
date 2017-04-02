@@ -6,7 +6,9 @@ import {
   TouchableHighlight,
 } from 'react-native'
 import { LoadingView } from '../../LoadingView'
-
+import { NextButton } from '../../Button'
+import { HeadingOneWhite, HeadingTwoWhite, ParagraphWhite, ParagraphBoldWhite, ParagraphBoldHighlightWhite } from '../../Text'
+import { GradientView } from '../../Views'
 
 export class ConfirmationDetails extends Component<any, any> {
 
@@ -26,18 +28,30 @@ export class ConfirmationDetails extends Component<any, any> {
     }
     else {
       return (
-        <View style={styles.container}>
-          <Text>Is this you?</Text>
-          <View style={styles.subContainer}>
-            <Text style={styles.textCarHeading}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>
-            <Text style={styles.textCarInfo}>{carToConfirm.car.yearOfManufacture}</Text>
+        <View style={{ flex: 1 }}>
+          <View style={styles.container}>
+            <View style={styles.subContainer}>
+              <View style={{ marginTop: 40 }}>
+                {HeadingOneWhite(() => "Here's what we found")}
+              </View>
+              <View style={{ marginTop: 20 }}>
+                {HeadingTwoWhite(() => 'Is this right?')}
+              </View>
+              <View style={{ marginTop: 30 }}>
+                {ParagraphWhite(() => 'LOG8 00K is registed to a ' + carToConfirm.colour.toLowerCase())}
+                {ParagraphBoldWhite(() => carToConfirm.car.make + " " + carToConfirm.car.model)}
+                {ParagraphBoldHighlightWhite(() => carToConfirm.car.yearOfManufacture)}
+                {/*<Text style={styles.textCarHeading}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>*/}
+                {/*<Text style={styles.textCarInfo}>{carToConfirm.car.yearOfManufacture}</Text>*/}
+              </View>
+            </View>
+            {/*<Text style={styles.textCarInfo}>Vehical Colour: {carToConfirm.colour}</Text>*/}
+            {/*<Text style={styles.textCarInfo}>Transmission:{carToConfirm.transmission}</Text>*/}
+            {/*<Text style={styles.textCarInfo}>Fuel Type:{carToConfirm.fuelType}</Text>*/}
           </View>
-          <Text style={styles.textCarInfo}>Vehical Colour: {carToConfirm.colour}</Text>
-          <Text style={styles.textCarInfo}>Transmission:{carToConfirm.transmission}</Text>
-          <Text style={styles.textCarInfo}>Fuel Type:{carToConfirm.fuelType}</Text>
-          <TouchableHighlight onPress={() => onConfirm(userId, carToConfirm.id)}>
-            <Text>Next  ></Text>
-          </TouchableHighlight>
+          <View style={{ marginBottom: 20 }}>
+            {NextButton(() => onConfirm(userId, carToConfirm.id), "That's me")}
+          </View>
         </View>
       )
     }
@@ -47,32 +61,35 @@ export class ConfirmationDetails extends Component<any, any> {
     const { carsLoading } = loadingStatus;
     const showView = carToConfirm === null;
     return (
-      <LoadingView style={{ flex: 1 }}
-        isLoading={carsLoading}
-        hideWhileLoading={showView}>
-        {this.renderView()}
-      </LoadingView>
+      <GradientView>
+        <LoadingView style={{ flex: 1 }}
+          isLoading={carsLoading}
+          hideWhileLoading={showView}>
+          {this.renderView()}
+        </LoadingView>
+      </GradientView>
+
     )
   }
 }
 
+const paddingHorizontal = 30
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    padding: 12,
-    alignItems: 'center',
+    //justifyContent: 'space-around',
+    alignItems: "flex-start",
   } as React.ViewStyle,
   subContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    paddingHorizontal: paddingHorizontal,
   } as React.ViewStyle,
-  textCarHeading: {
-    marginLeft: 12,
-    fontSize: 16,
-  },
-  textCarInfo: {
-    marginLeft: 12,
-    fontSize: 12,
-  }
+  // textCarHeading: {
+  //   marginLeft: 12,
+  //   fontSize: 16,
+  // },
+  // textCarInfo: {
+  //   marginLeft: 12,
+  //   fontSize: 12,
+  // }
 });
