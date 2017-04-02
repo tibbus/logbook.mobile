@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { NextButton } from '../../Button'
-import { HeadingOneWhite, HeadingTwoWhite, ParagraphWhite } from '../../Text'
+import { HeadingOneWhite, HeadingThreeWhite, CaptionWhite } from '../../Text'
 import { GradientView } from '../../Views'
 import palette from '../../../Themes/palette';
 
@@ -29,12 +29,12 @@ export class RegNoForm extends Component<any, any> {
       <GradientView>
         <View style={styles.container}>
           <View style={styles.subContainer}>
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 40 }}>
               {HeadingOneWhite(() => 'Add your car to your garage')}
             </View>
-            {ParagraphWhite(() => 'We use your Vehical Registration No. to add relevant info about your car from the DVLA')}
+            {CaptionWhite(() => 'We use your Vehical Registration No. to add relevant info about your car from the DVLA')}
             <View style={{ marginTop: 60 }}>
-              {HeadingTwoWhite(() => 'Vehical Registration No.')}
+              {HeadingThreeWhite(() => 'Vehical Registration No.')}
             </View>
             <View style={styles.underline}>
               <TextInput autoCapitalize='characters' style={styles.textInput}
@@ -46,8 +46,9 @@ export class RegNoForm extends Component<any, any> {
                 value={this.state.text} />
             </View>
           </View>
-          {/*<Icon.Button name='chevron-right' onPress={() => carRegSubmit(this.state.text)}>Check</Icon.Button>*/}
-          {NextButton(() => () => carRegSubmit(this.state.text), 'Check')}
+        </View>
+        <View style={{ marginBottom: 20 }}>
+          {NextButton(() => carRegSubmit(this.state.text), 'Check')}
         </View>
       </GradientView>
     )
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    //justifyContent: 'space-around',
     // justifyContent: 'center',
     alignItems: "flex-start",
     //backgroundColor: palette.secondary

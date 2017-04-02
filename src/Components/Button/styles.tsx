@@ -20,6 +20,10 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   } as React.ViewStyle,
+  buttonText: {
+    fontWeight: "600",
+    fontSize: 20,
+  },
   /* ====== OAuth login button styles ====== */
   // Facebook
   facebookButtonBgd: {
@@ -82,4 +86,23 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 3,
   } as React.ViewStyle,
+  /* ====== Next button styles ====== */
+  nextButtonText: {
+    color: palette.text,
+  },
+  nextButton: {
+    backgroundColor: 'transparent',
+    marginHorizontal: 30,
+  },
+  nextButtonBorder: {
+    width: width,
+    paddingVertical: 30,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
+  },
+  nextIcon: {
+    fontSize: 15,
+    paddingTop: 6,
+  }
 });
