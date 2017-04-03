@@ -43,7 +43,7 @@ export class Main extends Component<any, any> {
     }
 }
 
-const coverPhotoHeight = 250;
+const coverPhotoHeight = 275;
 const profilePictureHeight = 50;
 const styles = StyleSheet.create({
     container: {
