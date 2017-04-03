@@ -12,7 +12,7 @@ const environments = {
     searchIndex: 'carinfostaging',
     searchApiKey: '56204AA4847BE7E6D4F8ACFB6502D7C6',
     getStreamUri: 'https://api.getstream.io',
-    getStreamApiKey: '8r2y2gbevg9j',
+    getStreamApiKey: '5b5hp2vh27ds',
     getStreamFetchLimit: 10,
     apiFetchLimit: 20,
     secure: false

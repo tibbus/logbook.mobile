@@ -40,11 +40,18 @@ export class LandingPage extends Component<any, any> {
         yearOfManufacture: ''
       }
     }
+
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       tagsDataSource: ds.cloneWithRows(this.addPost.tags),
       contentDataSource: ds.cloneWithRows(this.addPost.content.data)
     };
+  }
+
+  componentDidMount(){
+      const cars = getCarOptions(this.props.cars.userCars);
+      const {id} = cars[0]
+      this.onSelectCar(id, cars[0])
   }
 
   onSelectCar(id, value) {
@@ -210,7 +217,7 @@ const getCarOptions = (cars) => {
     return {
       id: car.carInfo.id,
       model: car.carInfo.car.model,
-      make: car.carInfo.car.make,
+      make: car.carInfo.car.make, 
       yearOfManufacture: car.carInfo.car.yearOfManufacture,
       image: car.carInfo.image
     }

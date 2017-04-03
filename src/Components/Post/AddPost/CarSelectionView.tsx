@@ -12,18 +12,20 @@ export const getCarSelectionView = (editMode, carCollection, onSelectCar, select
   return (
     <View style={styles.carSelectorContainer}>
         <Text>Current Car</Text>
-        { editMode ? getCarSelection(carCollection, onSelectCar) : displaySelectedCar(selectedCar) }
+        { editMode ? getCarSelection(carCollection, onSelectCar, selectedCar) : displaySelectedCar(selectedCar) }
 
     </View>
   )
 }
 
-const getCarSelection = (carCollection, onSelectCar) => {
+const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
     return (
         <ModalDropdown 
             options={carCollection}
             renderRow={(row) => displaySelectedCar(row)}
-            onSelect={(id, value) => { onSelectCar(id, value)}} />
+            onSelect={(id, value) => { onSelectCar(id, value)}}>
+            <Text>{selectedCar.make + ' ' + selectedCar.model}</Text>
+        </ModalDropdown>
     )
 }
 
