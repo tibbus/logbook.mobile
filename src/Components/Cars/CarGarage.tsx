@@ -53,8 +53,8 @@ export class CarGarage extends Component<any, any> {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingVertical: 40,
+    paddingLeft: 30,
+    paddingVertical: 30,
     //allowFontScaling: true
   },
   scrollView: {

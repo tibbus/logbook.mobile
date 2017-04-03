@@ -46,14 +46,13 @@ var styles = StyleSheet.create({
         flex: 1,
     } as React.ViewStyle,
     carIcon: {
-        //marginRight: 20,
-        //marginBottom: 15,
         flexDirection: 'column',
         alignItems: 'flex-start',
         backgroundColor: '#eaeaea',
         borderRadius: 3,
         width: photoWidth,
         height: photoHeight,
+        marginRight: 20,
     } as React.ViewStyle,
     carInfoIcon: {
         flexDirection: 'row',

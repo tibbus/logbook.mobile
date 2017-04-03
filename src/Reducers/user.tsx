@@ -15,7 +15,7 @@ const initialState = {
   name: 'Guest',
   token: null,
   profileImg: 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png',
-  coverImg: 'https://images.designtrends.com/wp-content/uploads/2015/11/07122458/Car-Backgrounds.jpg',
+  coverImg: 'http://www.rssportscars.com/photos/potd/supercar-collection-p1mclaren/p1mclaren-car-collection.jpg',
   followCount: 0,
   carCount: 0,
   follows: []
