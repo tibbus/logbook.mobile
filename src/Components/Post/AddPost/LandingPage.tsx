@@ -50,7 +50,8 @@ export class LandingPage extends Component<any, any> {
 
   componentDidMount(){
       const cars = getCarOptions(this.props.cars.userCars);
-      this.onSelectCar(cars[0].id, cars[0])
+      const {id} = cars[0]
+      this.onSelectCar(id, cars[0])
   }
 
   onSelectCar(id, value) {

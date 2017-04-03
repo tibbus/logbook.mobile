@@ -24,7 +24,7 @@ const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
             options={carCollection}
             renderRow={(row) => displaySelectedCar(row)}
             onSelect={(id, value) => { onSelectCar(id, value)}}>
-            <Text>{selectedCar.make + " " + selectedCar.model}</Text>
+            <Text>{selectedCar.make + ' ' + selectedCar.model}</Text>
         </ModalDropdown>
     )
 }
