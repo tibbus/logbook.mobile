@@ -8,28 +8,22 @@ import {
     Button
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
-const StatInfo = (statName, statValue) => (
-    <View style={styles.stats}>
-        <Text>{statValue}</Text>
-        <Text>{statName}</Text>
-    </View>
-)
+import { StatsText, HeadingOne } from '../../Text'
 
 const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollowPress) => {
-    if(owned) {
+    if (owned) {
         return (
             <TouchableHighlight onPress={onSettingsPress}>
                 <Text>Settings</Text>
             </TouchableHighlight>
         )
     }
-    else if(followed) {
-            return (
-                <TouchableHighlight onPress={onUnFollowPress}>
-                    <Text>UnFollow</Text>
-                </TouchableHighlight>
-            )
+    else if (followed) {
+        return (
+            <TouchableHighlight onPress={onUnFollowPress}>
+                <Text>UnFollow</Text>
+            </TouchableHighlight>
+        )
     }
     else {
         return (
@@ -41,18 +35,20 @@ const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollo
 }
 
 
-export const Info = ({ownerImage, ownerName, owned, onSettingsPress, followed, onFollowPress, onUnFollowPress}) => (
+export const Info = ({ ownerImage, ownerName, owned, onSettingsPress, followed, onFollowPress, onUnFollowPress }) => (
 
     <View style={styles.container}>
         <View style={styles.statContainer}>
-            {StatInfo('Posts', 12)}
-            {StatInfo('Media', 37)}
-            {StatInfo('Followers', 178)}
+            {StatsText(() => '12', 'Posts')}
+            {StatsText(() => '37', 'Media')}
+            {StatsText(() => '178', 'Followers')}
             {ActionButton(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
         </View>
         <View style={styles.subContainer}>
-            <Image source={{ uri: ownerImage}} style={styles.photo} />
-            <Text style={styles.text}>{ownerName}</Text>
+            <Image source={{ uri: ownerImage }} style={styles.photo} />
+            {/*<Text style={styles.text}>{ownerName}</Text>*/}
+            {HeadingOne(() => ownerName)}
+
         </View>
     </View>
 )
@@ -69,8 +65,9 @@ const styles = StyleSheet.create({
     } as React.ViewStyle,
     subContainer: {
         flex: 1,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
+        paddingTop: 30,
     } as React.ViewStyle,
     stats: {
         flex: 1,
