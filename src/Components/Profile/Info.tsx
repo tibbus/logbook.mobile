@@ -26,15 +26,9 @@ export const Info = (props) => {
         <Text style={styles.captionText}>{`Settings`}</Text>
       </View>
     </View>
-    <View style={styles.subContainer}>
-      <Image source={{ uri: imageUrl}} style={styles.photo} />
-      {HeadingOne(() => props.user.name)}
-    </View>
-
   </View>
 )};
 
-const photoWidth = 60;
 const styles = StyleSheet.create({
   // === Container Styles ===
   container: {
@@ -73,11 +67,5 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     //marginRight:
     color: palette.secondary,
-  },
-  // === Image Styles ===
-  photo: {
-    height: photoWidth,
-    width: photoWidth,
-    borderRadius: photoWidth/2,
   },
 });
