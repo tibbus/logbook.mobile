@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     backdropView: {
         height: coverPhotoHeight,
         width: width,
-        backgroundColor: 'rgba(0,0,0,0.4)',
+        backgroundColor: 'rgba(0,0,0,0.3)',
     },
     headline: {
         fontSize: 40,

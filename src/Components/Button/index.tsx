@@ -43,7 +43,7 @@ export const CaptionButton = (onPress, carMake, carModel) => (
         <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>{capitalize(carMake, true) + ' ' + capitalize(carModel, true)}</Text>
         <Text style={[styles.container, styles.captionText]}>{"12 Followers"}</Text>
       </View>
-      <Text style={[styles.captionButton, styles.captionButtonText]}>Edit Profile</Text>
+      <Text style={[styles.captionButton, styles.captionButtonText]}>Edit Car</Text>
     </View>
   </TouchableHighlight>
 )
