@@ -46,7 +46,6 @@ export const Info = ({ ownerImage, ownerName, owned, onSettingsPress, followed, 
         </View>
         <View style={styles.subContainer}>
             <Image source={{ uri: ownerImage }} style={styles.photo} />
-            {/*<Text style={styles.text}>{ownerName}</Text>*/}
             {HeadingOne(() => ownerName)}
 
         </View>
