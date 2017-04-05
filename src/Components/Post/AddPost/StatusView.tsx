@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 10,
         paddingVertical: 10,
-        //backgroundColor: 'black'
+        backgroundColor: 'black'
     }
 })

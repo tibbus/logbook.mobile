@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     opacity: 0.5
   },
   description: {
-    fontSize: 20,
+    fontSize: 50,
     //lineHeight: 10,
     //try not to use letterSpacing - iOS only
     letterSpacing: 0.5,

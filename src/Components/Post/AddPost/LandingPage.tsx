@@ -48,10 +48,10 @@ export class LandingPage extends Component<any, any> {
     };
   }
 
-  componentDidMount(){
-      const cars = getCarOptions(this.props.cars.userCars);
-      const {id} = cars[0]
-      this.onSelectCar(id, cars[0])
+  componentDidMount() {
+    const cars = getCarOptions(this.props.cars.userCars);
+    const { id } = cars[0]
+    this.onSelectCar(id, cars[0])
   }
 
   onSelectCar(id, value) {
@@ -176,19 +176,22 @@ export class LandingPage extends Component<any, any> {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.headerButtonContainer}>
-            <TouchableHighlight style={styles.headerButton} onPress={() => rootNav.pop()}>
-              <Text>Cancel</Text>
+            <TouchableHighlight onPress={() => rootNav.pop()}>
+              <Text style={styles.headerButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
           <View style={styles.headerHeadingContainer}>
             <Text style={styles.headerHeadingText}>ADD POST</Text>
           </View>
+          <TouchableHighlight onPress={() => rootNav.pop()}>
+            <Text>Next</Text>
+          </TouchableHighlight>
         </View>
         {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
         {getStatusView(true, (text) => { this.addPost.description = text }, "")}
-        <View style={{ flex: 1, borderBottomWidth: 2, borderBottomColor: '#000000' }}>
-        </View>
+        <View style={{ flex: 1, flexDirection: 'row', borderTopWidth: 2, borderTopColor: 'red', marginVertical: 70,}}>
         {getTagsView(this.state.tagsDataSource)}
+                </View>
         {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
         {
           this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
@@ -217,7 +220,7 @@ const getCarOptions = (cars) => {
     return {
       id: car.carInfo.id,
       model: car.carInfo.car.model,
-      make: car.carInfo.car.make, 
+      make: car.carInfo.car.make,
       yearOfManufacture: car.carInfo.car.yearOfManufacture,
       image: car.carInfo.image
     }
@@ -229,24 +232,28 @@ const getCarOptions = (cars) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
+    // paddingHorizontal: 30,
   },
   headerContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingHorizontal: 10
+    backgroundColor: '#f7f7f8',
+        justifyContent: "space-around",
+    alignItems: "center",
+
+    // paddingHorizontal: 10
   } as React.ViewStyle,
   headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
   } as React.ViewStyle,
-  headerButton: {
+  headerButtonText: {
+    fontWeight: "600",
   },
   headerHeadingContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 50
+    // paddingHorizontal: 50
   } as React.ViewStyle,
   headerHeadingText: {
   } as React.TextStyle,
