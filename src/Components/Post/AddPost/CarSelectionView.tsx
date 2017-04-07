@@ -16,9 +16,7 @@ import palette from '../../../Themes/palette';
 export const getCarSelectionView = (editMode, carCollection, onSelectCar, selectedCar) => {
     return (
         <View style={styles.carSelectorContainer}>
-            {/*<Text>Current Car</Text>*/}
             {editMode ? getCarSelection(carCollection, onSelectCar, selectedCar) : displaySelectedCar(selectedCar)}
-
         </View>
     )
 }
@@ -26,8 +24,8 @@ export const getCarSelectionView = (editMode, carCollection, onSelectCar, select
 const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
     return (
         <ModalDropdown
-            animationType = {"slide"}
-            transparent = {true}
+            animationType={"slide"}
+            transparent={true}
             options={carCollection}
             renderRow={(row) => displaySelectedCar(row)}
             onSelect={(id, value) => { onSelectCar(id, value) }}>

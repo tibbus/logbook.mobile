@@ -78,15 +78,6 @@ export class LandingPage extends Component<any, any> {
   showMenuBar() {
     return (
       <View style={styles.contentContainer}>
-        {/*<TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('video')}>
-          <Icon name='video-camera' style={styles.icon} />
-        </TouchableHighlight>
-        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onCameraPress()}>
-          <Icon name='circle-o' style={styles.icon} />
-        </TouchableHighlight>
-        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('image')}>
-          <Icon name='picture-o' style={styles.icon} />
-        </TouchableHighlight>*/}
         {IconButton(() => this.onGalleryPress('video'), 'video-camera')}
         {IconButton(() => this.onCameraPress(), 'circle-o')}
         {IconButton(() => this.onGalleryPress('image'), 'picture-o')}
@@ -241,16 +232,20 @@ const getCarOptions = (cars) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
+  } as React.ViewStyle,
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  } as React.ViewStyle,
   emptyContainer: {
     flex: 3,
     backgroundColor: background.color,
-  },
+  } as React.ViewStyle,
   tagsView: {
     flex: 1,
     flexDirection: 'row',
     marginTop: 60,
-  },
+  } as React.ViewStyle,
   headerContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -276,7 +271,7 @@ const styles = StyleSheet.create({
   } as React.ViewStyle,
   headerButtonText: {
     fontWeight: "600",
-  },
+  } as React.TextStyle,
   headerHeadingText: {
   } as React.TextStyle,
 })
