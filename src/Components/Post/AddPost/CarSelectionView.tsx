@@ -1,30 +1,42 @@
 import React from 'react'
 import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  TouchableHighlight
+    Dimensions,
+    StyleSheet,
+    Text,
+    Image,
+    View,
+    TouchableHighlight
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import ModalDropdown from 'react-native-modal-dropdown'
+import screen from '../../../Themes/screen';
+import background from '../../../Themes/background';
+import palette from '../../../Themes/palette';
 
 export const getCarSelectionView = (editMode, carCollection, onSelectCar, selectedCar) => {
-  return (
-    <View style={styles.carSelectorContainer}>
-        <Text>Current Car</Text>
-        { editMode ? getCarSelection(carCollection, onSelectCar, selectedCar) : displaySelectedCar(selectedCar) }
-
-    </View>
-  )
+    return (
+        <View style={styles.carSelectorContainer}>
+            {editMode ? getCarSelection(carCollection, onSelectCar, selectedCar) : displaySelectedCar(selectedCar)}
+        </View>
+    )
 }
 
 const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
     return (
-        <ModalDropdown 
+        <ModalDropdown
+            animationType={"slide"}
+            transparent={true}
             options={carCollection}
             renderRow={(row) => displaySelectedCar(row)}
-            onSelect={(id, value) => { onSelectCar(id, value)}}>
-            <Text>{selectedCar.make + ' ' + selectedCar.model}</Text>
+            onSelect={(id, value) => { onSelectCar(id, value) }}>
+            <View style={styles.row}>
+                <View style={styles.opacityView}>
+                    <Image source={{ uri: selectedCar.image }} style={styles.photo} />
+                </View>
+                <View style={styles.selectedCarView}>
+                    <Text lineBreakMode="clip" numberOfLines={1} style={styles.selectedCarText}>{selectedCar.make + ' ' + selectedCar.model}  <Icon name='chevron-down' style={styles.chevronIcon} /></Text>
+                </View>
+            </View>
         </ModalDropdown>
     )
 }
@@ -32,32 +44,56 @@ const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
 const displaySelectedCar = (data) => {
     return (
         <TouchableHighlight>
-            <View style={styles.selectedCar}>
-                <Image source={{ uri: data.image}} style={styles.photo} />
-                <Text style={styles.selectedCarFont}>{`${data.model} (${data.make}) (${data.yearOfManufacture})`}</Text>
+            <View style={styles.modalCarView}>
+                <Image source={{ uri: data.image }} style={styles.photo} />
+                <View style={styles.selectedCarView}>
+                    <Text style={styles.selectedCarText}>{`${data.make} ${data.model} (${data.yearOfManufacture})`}</Text>
+                </View>
             </View>
         </TouchableHighlight>
     )
 }
 
+const { width, height } = Dimensions.get("window");
+const photoWidth = 30;
 const styles = StyleSheet.create({
-    carSelectorContainer: {
+    selectedCarView: {
         flex: 1,
-        paddingHorizontal: 10
+        flexDirection: 'column',
+        justifyContent: "center",
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingVertical: 15,
+        backgroundColor: background.secondary,
+        paddingHorizontal: screen.paddingHorizontal,
+        borderTopWidth: 2,
+        borderTopColor: palette.border,
+    },
+    opacityView: {
+        opacity: 0.3,
     },
     photo: {
-        height: 40,
-        width: 40,
-        borderRadius: 20
+        height: photoWidth,
+        width: photoWidth,
+        borderRadius: photoWidth / 2
     },
-    selectedCar: {
-        flex: 1, 
-        flexDirection: 'row', 
-        width:250, 
-        height:20
+    modalCarView: {
+        flex: 1,
+        flexDirection: 'row',
+        width: width,
+        paddingVertical: 15,
+        paddingLeft: screen.paddingHorizontal,
+        backgroundColor: 'white',
     } as React.ViewStyle,
-    selectedCarFont: {
-        fontSize: 10
+    selectedCarText: {
+        fontSize: 15,
+        fontWeight: "600",
+        paddingLeft: 10,
+    },
+    chevronIcon: {
+        color: 'red',
     }
 
 })

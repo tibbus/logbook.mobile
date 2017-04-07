@@ -17,6 +17,10 @@ import { getTagsView } from './TagsView'
 import { getGalleryView } from './GalleryView'
 import { getStatusView } from './StatusView'
 import { getCarSelectionView } from './CarSelectionView'
+import { IconButton } from '../../Button'
+import background from '../../../Themes/background';
+import palette from '../../../Themes/palette';
+
 
 export class LandingPage extends Component<any, any> {
   private addPost: any;
@@ -48,10 +52,10 @@ export class LandingPage extends Component<any, any> {
     };
   }
 
-  componentDidMount(){
-      const cars = getCarOptions(this.props.cars.userCars);
-      const {id} = cars[0]
-      this.onSelectCar(id, cars[0])
+  componentDidMount() {
+    const cars = getCarOptions(this.props.cars.userCars);
+    const { id } = cars[0]
+    this.onSelectCar(id, cars[0])
   }
 
   onSelectCar(id, value) {
@@ -74,15 +78,9 @@ export class LandingPage extends Component<any, any> {
   showMenuBar() {
     return (
       <View style={styles.contentContainer}>
-        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('image')}>
-          <Text>Image</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onGalleryPress('video')}>
-          <Text>Video</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => this.onCameraPress()}>
-          <Text>Camera</Text>
-        </TouchableHighlight>
+        {IconButton(() => this.onGalleryPress('video'), 'video-camera')}
+        {IconButton(() => this.onCameraPress(), 'circle-o')}
+        {IconButton(() => this.onGalleryPress('image'), 'picture-o')}
       </View>
     )
   }
@@ -176,23 +174,28 @@ export class LandingPage extends Component<any, any> {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.headerButtonContainer}>
-            <TouchableHighlight style={styles.headerButton} onPress={() => rootNav.pop()}>
-              <Text>Cancel</Text>
+            <TouchableHighlight onPress={() => rootNav.pop()}>
+              <Text style={styles.headerButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
           <View style={styles.headerHeadingContainer}>
             <Text style={styles.headerHeadingText}>ADD POST</Text>
           </View>
+          <TouchableHighlight onPress={() => rootNav.pop()}>
+            <Text>Next</Text>
+          </TouchableHighlight>
         </View>
         {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
         {getStatusView(true, (text) => { this.addPost.description = text }, "")}
-        <View style={{ flex: 1, borderBottomWidth: 2, borderBottomColor: '#000000' }}>
+        <View style={styles.tagsView}>
+          {getTagsView(this.state.tagsDataSource)}
         </View>
-        {getTagsView(this.state.tagsDataSource)}
-        {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
-        {
-          this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
-        }
+        <View style={styles.emptyContainer}>
+          {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
+          {
+            this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
+          }
+        </View>
       </View>
     )
   }
@@ -217,7 +220,7 @@ const getCarOptions = (cars) => {
     return {
       id: car.carInfo.id,
       model: car.carInfo.car.model,
-      make: car.carInfo.car.make, 
+      make: car.carInfo.car.make,
       yearOfManufacture: car.carInfo.car.yearOfManufacture,
       image: car.carInfo.image
     }
@@ -229,29 +232,46 @@ const getCarOptions = (cars) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-  },
+  } as React.ViewStyle,
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  } as React.ViewStyle,
+  emptyContainer: {
+    flex: 3,
+    backgroundColor: background.color,
+  } as React.ViewStyle,
+  tagsView: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 60,
+  } as React.ViewStyle,
   headerContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingHorizontal: 10
+    backgroundColor: background.secondary,
+    justifyContent: "space-around",
+    alignItems: "center",
+  } as React.ViewStyle,
+  headerHeadingContainer: {
+    alignItems: "center",
+    justifyContent: "center",
   } as React.ViewStyle,
   headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
   } as React.ViewStyle,
-  headerButton: {
-  },
-  headerHeadingContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 50
+  contentContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // alignItems: 'center', 
+    paddingVertical: 30,
+    backgroundColor: background.color,
   } as React.ViewStyle,
+  headerButtonText: {
+    fontWeight: "600",
+  } as React.TextStyle,
   headerHeadingText: {
   } as React.TextStyle,
-  contentContainer: {
-    flex: 1,
-    flexDirection: 'row',
-  } as React.ViewStyle
 })

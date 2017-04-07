@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native'
 import palette from '../../../Themes/palette';
-
+import screen from '../../../Themes/screen';
 
 export const getStatusView = (editMode, updateStatus, status) => {
     return (
@@ -25,9 +25,10 @@ const getStatusInput = (updateStatus) => {
     return (
         <TextInput
             onChangeText={(text) => updateStatus(text)}
-            placeholder="What's new with car term today?"
+            placeholder="What's new with car term today? Feeling like cruising? Thing? Or something?"
             placeholderTextColor={palette.inactive}
             returnKeyType='done'
+            maxLength={200}
             multiline={true}
             style={styles.statusInput} />
     )
@@ -43,20 +44,22 @@ const styles = StyleSheet.create({
     contentDescriptionContainer: {
         flex: 1,
         flexDirection: 'column',
+        paddingTop: 20,
+        paddingBottom: 10,
+        paddingHorizontal: screen.paddingHorizontal,
     },
     icon: {
-        height: 40,
-        width: 40,
-        borderRadius: 20,
+        height: screen.addPostProfileDimensions,
+        width: screen.addPostProfileDimensions,
+        borderRadius: screen.addPostProfileDimensions/2,
     },
     statusInput: {
         flex: 1,
-        height: 100,
+        height: 80,
         fontSize: 20,
-        lineHeight: 100,
+        lineHeight: 200,
         color: 'black',
         marginTop: 10,
-        paddingVertical: 10,
-        //backgroundColor: 'black'
+        // backgroundColor: 'black'
     }
 })
