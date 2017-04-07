@@ -3,7 +3,7 @@ import { connect } from '../../Utils/connect';
 import { View, Image, StyleSheet, Text } from 'react-native'
 import { Info, Gallery, TechSpec } from '../Cars/Profile'
 import { FitImage } from '../Image'
-import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar } from '../../Actions/cars.js'
+import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars.js'
 import { getUserFollowingFeeds } from '../../Actions/user.js'
 import { BackScene, Timeline } from '../Scenes'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
@@ -45,6 +45,9 @@ export class CarProfile extends Component<any, any> {
         const browsingCar = cars.browsingCars.find(item => item.carInfo.id === browsingCarId);
 
         if (browsingCar) {
+            if(browsingCar.carStats.followersCount.loadPending) {
+                dispatch(getCarFollowersCount(browsingCarId));    
+            }
             if (browsingCar.carImages.loadPending) {
                 dispatch(getCarTimelineContent(browsingCarId, 'Images', 0));
             }
@@ -95,6 +98,7 @@ export class CarProfile extends Component<any, any> {
                         <Info ownerImage={browsingCar.ownerInfo.image}
                             ownerName={browsingCar.ownerInfo.name}
                             owned={owned}
+                            carStats={browsingCar.carStats}
                             onSettingsPress={() => console.log("Settings")}
                             followed={followed}
                             onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}

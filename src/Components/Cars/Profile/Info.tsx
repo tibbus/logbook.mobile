@@ -35,13 +35,13 @@ const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollo
 }
 
 
-export const Info = ({ ownerImage, ownerName, owned, onSettingsPress, followed, onFollowPress, onUnFollowPress }) => (
+export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, followed, onFollowPress, onUnFollowPress }) => (
 
     <View style={styles.container}>
         <View style={styles.statContainer}>
             {StatsText(() => '12', 'Posts')}
             {StatsText(() => '37', 'Media')}
-            {StatsText(() => '178', 'Followers')}
+            {StatsText(() => carStats.followersCount.count, 'Followers')}
             {ActionButton(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
         </View>
         <View style={styles.subContainer}>

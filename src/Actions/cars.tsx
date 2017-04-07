@@ -4,7 +4,8 @@ import {
     UNSET_LOADING_STATUS,
     UPDATE_BROWSING_CAR_CONTENT,
     SET_BROWSING_CAR,
-    FOLLOW_CAR
+    FOLLOW_CAR,
+    SET_FOLLOWER_COUNT
 } from './Types'
 import {
     getCarByRegistration,
@@ -15,6 +16,8 @@ import {
     followCar as followCarApi,
     unFollowCar as unFollowCarApi
 } from '../API/Car'
+import { getCarFollowers } from '../API/GetStream'
+import { getGetStreamToken } from '../API/user'
 import { getUserFollowingFeeds } from './user'
 import { getApiFetchLimit } from '../API/config'
 
@@ -147,3 +150,40 @@ export const unFollowCar = (userId, carInfoId) => {
             })
     }
 }
+
+//@TODO: Need circuit breaker pattern here.
+export const getCarFollowersCount = (id) => {
+  return dispatch => {
+
+    dispatch({
+        type: SET_FOLLOWER_COUNT,
+        followersContent: {
+            carInfoId: id,
+            loadPending: false,
+        }
+    })
+
+    const body = { actorId: id, actorType: 'car' }
+    getGetStreamToken({ body }, {})
+      .then(tokenResponse => {
+
+        getCarFollowers(tokenResponse.token, id)
+          .then(carFollowersResponse => {
+            console.log(carFollowersResponse)
+            dispatch({
+              type: SET_FOLLOWER_COUNT,
+              followersContent: {
+                carInfoId: id,
+                count: carFollowersResponse.length
+              }
+            })
+          })
+          .catch(args => {
+            console.log(args);
+        })
+      })
+      .catch(args => {
+          console.log(args);
+    })
+  }
+};

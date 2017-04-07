@@ -4,7 +4,8 @@ import {
   SEARCHED_CAR,
   UPDATE_BROWSING_CAR_CONTENT,
   SET_BROWSING_CAR,
-  FOLLOW_CAR
+  FOLLOW_CAR,
+  SET_FOLLOWER_COUNT
 } from '../Actions/Types'
 
 /*
@@ -24,6 +25,20 @@ browsingCars:[
       content: [],
       loadPending: true
     }
+    carStats: {
+      followCount: {
+        count: 0,
+        loadPending: true
+      },
+      mediaCount: {
+        count: 0,
+        loadPending: true
+      },
+      postCount: {
+        count: 0,
+        loadPending: true
+      },
+    }
     followed: false
   }
 ]
@@ -39,6 +54,20 @@ const updateCarFollowFlag = (state, followContent) => {
   car.followed = followContent.following;
 
   return { ...state };
+}
+
+const updateCarFollowersCount = (state, followersContent) => {
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followersContent.carInfoId);
+
+  if(followersContent.count){
+    car.carStats.followersCount.count = followersContent.count;
+  }
+
+  if(followersContent.loadPending !== undefined) {
+    car.carStats.followersCount.loadPending = followersContent.loadPending;
+  }
+
+  return {...state}
 }
 
 const setBrowsingCar = (state, carInfo, ownerInfo) => {
@@ -58,6 +87,20 @@ const setBrowsingCar = (state, carInfo, ownerInfo) => {
     carVideos: {
       content: [],
       loadPending: true
+    },
+    carStats: {
+      followersCount: {
+        count: 0,
+        loadPending: true
+      },
+      mediaCount: {
+        count: 0,
+        loadPending: true
+      },
+      postsCount: {
+        count: 0,
+        loadPending: true
+      },
     },
     followed: false
   }
@@ -109,7 +152,7 @@ const updateBrowsingCarContent = (state, carContent) => {
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, ownerInfo, carContent, followContent } = action
+  const { type, userCars, carInfo, ownerInfo, carContent, followContent, followersContent } = action
 
   switch (type) {
 
@@ -132,13 +175,16 @@ export const cars = (state = initialState, action) => {
       }
 
     case UPDATE_BROWSING_CAR_CONTENT:
-      return updateBrowsingCarContent(state, carContent)
+      return updateBrowsingCarContent(state, carContent);
 
     case SET_BROWSING_CAR:
-      return setBrowsingCar(state, carInfo, ownerInfo)
+      return setBrowsingCar(state, carInfo, ownerInfo);
 
     case FOLLOW_CAR:
-      return updateCarFollowFlag(state, followContent)
+      return updateCarFollowFlag(state, followContent);
+
+    case SET_FOLLOWER_COUNT:
+      return updateCarFollowersCount(state, followersContent);
 
     default:
       return state

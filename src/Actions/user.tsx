@@ -28,10 +28,7 @@ export const setUserProfile = dispatch => {
   })
 }
 
-export const updateUserCars = ({
-  userId = null,
-  details = true
-} = {}) => {
+export const updateUserCars = (userId = null,details = true) => {
   return dispatch => {
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
     getUserCars({}, { userId, details })
