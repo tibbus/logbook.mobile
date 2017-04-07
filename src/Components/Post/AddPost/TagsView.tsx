@@ -9,6 +9,7 @@ import {
 import { capitalize } from 'underscore.string'
 import { TagsBox } from '../../Tags/index';
 import palette from '../../../Themes/palette';
+import screen from '../../../Themes/screen';
 
 export const getTagsView = (tagsDataSource) => {
   return (
@@ -37,18 +38,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue'
+    // backgroundColor: 'blue',
+    paddingLeft: screen.paddingHorizontal,
+    borderTopWidth: screen.componentBorderWidth,  
+    borderBottomWidth: screen.componentBorderWidth, 
+    borderColor: palette.border,
   },
   tagsHeader: {
     fontSize: 15,
     color: palette.inactive,
     marginRight: 15,
-    paddingBottom: 10,
+    // paddingBottom: 10,
   },
   scrollView: {
     flex: 1,
   },
   horizontalScrollView: {
-    paddingBottom: 10,
+    // paddingBottom: 10,
   },
 })

@@ -104,5 +104,11 @@ export default StyleSheet.create({
   nextIcon: {
     fontSize: 15,
     paddingTop: 6,
-  }
+  },
+  /* ====== Icon button styles ====== */
+  iconButton: {
+    fontSize: 25,
+    fontWeight: '700',
+    color: palette.secondary,
+  },
 });

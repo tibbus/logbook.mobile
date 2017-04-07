@@ -7,6 +7,8 @@ import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowC
 import { getUserFollowingFeeds } from '../../Actions/user.js'
 import { BackScene, Timeline } from '../Scenes'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
+import palette from '../../Themes/palette';
+import background from '../../Themes/background';
 
 
 const stateToProps = ({ user, cars }) => ({ user, cars });
@@ -88,7 +90,7 @@ export class CarProfile extends Component<any, any> {
         return (
             <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
                 <View style={styles.container}>
-                    <View>
+                    <View style={styles.row}>
                         <FitImage resizeMode={Image.resizeMode.contain} source={{ uri: image }} style={styles.photo} />
                         <Info ownerImage={browsingCar.ownerInfo.image}
                             ownerName={browsingCar.ownerInfo.name}
@@ -101,11 +103,16 @@ export class CarProfile extends Component<any, any> {
                     </View>
                     <ScrollableTabView
                         initialPage={0}
+                        tabBarActiveTextColor={palette.primary}
+                        tabBarInactiveTextColor={palette.inactive}
+                        tabBarUnderlineStyle={styles.underline}
+                        tabBarTextStyle={styles.tabText}
+                        tabBarBackgroundColor={background.color}
                         renderTabBar={() => <ScrollableTabBar />}>
-                        <Text tabLabel='Overview'>Overview</Text>
-                        <Timeline tabLabel='Timeline' {...timelineProps} />
-                        <Gallery tabLabel='Showcase' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
-                        <TechSpec tabLabel='Technical Spec' car={car} />
+                        <Text tabLabel='OVERVIEW'>Overview</Text>
+                        <Timeline tabLabel='TIMELINE' {...timelineProps} />
+                        <Gallery tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
+                        <TechSpec tabLabel='SPEC' car={car} />
 
                     </ScrollableTabView>
                 </View>
@@ -117,13 +124,30 @@ export class CarProfile extends Component<any, any> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 5,
+        // padding: 5,
+        // alignItems: 'center',
+        flexDirection: 'column',
+    } as React.ViewStyle,
+    row: {
+        flex: 1,
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'row',
+                paddingHorizontal: 30,
+                paddingVertical: 10,
+
     } as React.ViewStyle,
     photo: {
-        height: 150,
-        width: 350,
-        borderRadius: 5
+        height: 100,
+        width: 100,
+        borderRadius: 50
+    },
+    underline: {
+        backgroundColor: 'green',
+        height: 0,
+    },
+    tabText: {
+        fontSize: 18,
+        fontWeight: '700',
+        // marginHorizontal: 10,
     },
 });

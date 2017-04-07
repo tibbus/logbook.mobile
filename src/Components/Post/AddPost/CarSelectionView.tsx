@@ -9,6 +9,9 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ModalDropdown from 'react-native-modal-dropdown'
+import screen from '../../../Themes/screen';
+import background from '../../../Themes/background';
+import palette from '../../../Themes/palette';
 
 export const getCarSelectionView = (editMode, carCollection, onSelectCar, selectedCar) => {
     return (
@@ -23,6 +26,8 @@ export const getCarSelectionView = (editMode, carCollection, onSelectCar, select
 const getCarSelection = (carCollection, onSelectCar, selectedCar) => {
     return (
         <ModalDropdown
+            animationType = {"slide"}
+            transparent = {true}
             options={carCollection}
             renderRow={(row) => displaySelectedCar(row)}
             onSelect={(id, value) => { onSelectCar(id, value) }}>
@@ -43,9 +48,9 @@ const displaySelectedCar = (data) => {
         <TouchableHighlight>
             <View style={styles.modalCarView}>
                 <Image source={{ uri: data.image }} style={styles.photo} />
-                            <View style={styles.selectedCarView}>
-                <Text style={styles.selectedCarText}>{`${data.model} (${data.make}) (${data.yearOfManufacture})`}</Text>
-            </View>
+                <View style={styles.selectedCarView}>
+                    <Text style={styles.selectedCarText}>{`${data.make} ${data.model} (${data.yearOfManufacture})`}</Text>
+                </View>
             </View>
         </TouchableHighlight>
     )
@@ -58,20 +63,18 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: "center",
-        // paddingLeft: 10,
     },
     row: {
         flex: 1,
         flexDirection: 'row',
         paddingVertical: 15,
-        backgroundColor: 'yellow',
+        backgroundColor: background.secondary,
+        paddingHorizontal: screen.paddingHorizontal,
+        borderTopWidth: 2,
+        borderTopColor: palette.border,
     },
     opacityView: {
         opacity: 0.3,
-    },
-    carSelectorContainer: {
-        flex: 1,
-        // paddingHorizontal: 10
     },
     photo: {
         height: photoWidth,
@@ -83,13 +86,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: width,
         paddingVertical: 15,
-        backgroundColor: 'red',
+        paddingLeft: screen.paddingHorizontal,
+        backgroundColor: 'white',
     } as React.ViewStyle,
     selectedCarText: {
         fontSize: 15,
         fontWeight: "600",
-                paddingLeft: 10,
-
+        paddingLeft: 10,
     },
     chevronIcon: {
         color: 'red',

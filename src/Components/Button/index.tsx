@@ -62,3 +62,11 @@ export const NextButton = (onPress, title) => (
     </View>
   </TouchableHighlight>
 )
+
+export const IconButton = (onPress, iconName) => (
+  <TouchableHighlight onPress={() => onPress()}>
+    <View style={styles.rowContainer}>
+      <Icon style={styles.iconButton} name={iconName}></Icon>
+    </View>
+  </TouchableHighlight>
+)
