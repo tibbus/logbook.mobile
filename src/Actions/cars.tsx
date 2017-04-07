@@ -151,6 +151,7 @@ export const unFollowCar = (userId, carInfoId) => {
     }
 }
 
+//@TODO: Need circuit breaker pattern here.
 export const getCarFollowersCount = (id) => {
   return dispatch => {
 
@@ -178,23 +179,11 @@ export const getCarFollowersCount = (id) => {
             })
           })
           .catch(args => {
-              dispatch({
-                type: SET_FOLLOWER_COUNT,
-                followersContent: {
-                    carInfoId: id,
-                    loadPending: true,
-                }
-            })
+            console.log(args);
         })
       })
       .catch(args => {
-            dispatch({
-            type: SET_FOLLOWER_COUNT,
-            followersContent: {
-                carInfoId: id,
-                loadPending: true,
-            }
-        })
+          console.log(args);
     })
   }
 };
