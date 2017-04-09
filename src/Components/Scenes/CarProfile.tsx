@@ -88,6 +88,11 @@ export class CarProfile extends Component<any, any> {
         }
         const { image } = browsingCar.carInfo;
         const owned = !!cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
+        let verified = false;
+        if(owned){
+            //const car = cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
+            //verified = car.verified;
+        }
         const followed = user.follows.includes(browsingCar.carInfo.id.toString())
         const timelineProps = { car: browsingCar, user, navigator, dispatch, rootNav }
         return (
@@ -102,7 +107,9 @@ export class CarProfile extends Component<any, any> {
                             onSettingsPress={() => console.log("Settings")}
                             followed={followed}
                             onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
-                            onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}/>
+                            onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
+                            verified
+                            onVerifyPress={() => navigator.push({ id: 'verify' })}/>
 
                     </View>
                     <ScrollableTabView

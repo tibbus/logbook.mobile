@@ -5,4 +5,5 @@ const baseUri = api + 'user/{userId}/usercar/'
 
 export const getUserCars = fetcher(baseUri + 'details={details}')
 export const confirmUserCar = fetcher(baseUri + 'add/{carInfoId}', 'POST')
+export const verifyUserCar = fetcher(baseUri + 'verify/{carInfoId}', 'POST')
 export const deleteUserCar = fetcher(baseUri + '{userCarId}')

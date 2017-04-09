@@ -5,7 +5,8 @@ import {
   UPDATE_BROWSING_CAR_CONTENT,
   SET_BROWSING_CAR,
   FOLLOW_CAR,
-  SET_FOLLOWER_COUNT
+  SET_FOLLOWER_COUNT,
+  USER_CAR_VERIFIED
 } from '../Actions/Types'
 
 /*
@@ -42,6 +43,15 @@ browsingCars:[
     followed: false
   }
 ]
+userCars: [
+  {
+    id: 14,
+    carInfo: {
+      ...
+    },
+    verified: false
+  }
+]
 */
 const initialState = {
   userCars: [],
@@ -54,6 +64,13 @@ const updateCarFollowFlag = (state, followContent) => {
   car.followed = followContent.following;
 
   return { ...state };
+}
+
+const updateUserCarVerifiedStatus = (state, verifyContent) => {
+  const car = state.userCars.find(userCar => userCar.carInfo.id === verifyContent.carInfoId);
+  car.verified = verifyContent.verified
+
+  return {...state};
 }
 
 const updateCarFollowersCount = (state, followersContent) => {
@@ -152,7 +169,7 @@ const updateBrowsingCarContent = (state, carContent) => {
 }
 
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, ownerInfo, carContent, followContent, followersContent } = action
+  const { type, userCars, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent } = action
 
   switch (type) {
 
@@ -161,6 +178,9 @@ export const cars = (state = initialState, action) => {
         userCars: state.userCars.push(),
         carToConfirm: null
       }
+    
+    case USER_CAR_VERIFIED:
+      return updateUserCarVerifiedStatus(state, verifyContent);
 
     case SET_USER_CARS:
       return {
@@ -182,6 +202,9 @@ export const cars = (state = initialState, action) => {
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent);
+
+    case SET_FOLLOWER_COUNT:
+      return updateCarFollowersCount(state, followersContent);
 
     case SET_FOLLOWER_COUNT:
       return updateCarFollowersCount(state, followersContent);

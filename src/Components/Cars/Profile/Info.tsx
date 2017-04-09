@@ -9,8 +9,9 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { StatsText, HeadingOne } from '../../Text'
+import { ActionButton } from '../../Button'
 
-const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollowPress) => {
+const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFollowPress) => {
     if (owned) {
         return (
             <TouchableHighlight onPress={onSettingsPress}>
@@ -34,20 +35,32 @@ const ActionButton = (owned, onSettingsPress, followed, onFollowPress, onUnFollo
     }
 }
 
+const VerifyButton = (verified, onVerify) => {
+    if(verified) {
+        return (
+            ActionButton(onVerify, 'Verify')
+        )
+    }
+}
 
-export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, followed, onFollowPress, onUnFollowPress }) => (
+
+export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, followed, onFollowPress, onUnFollowPress, verified, onVerifyPress }) => (
 
     <View style={styles.container}>
         <View style={styles.statContainer}>
             {StatsText(() => '12', 'Posts')}
             {StatsText(() => '37', 'Media')}
             {StatsText(() => carStats.followersCount.count, 'Followers')}
-            {ActionButton(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
+            {ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
         </View>
         <View style={styles.subContainer}>
             <Image source={{ uri: ownerImage }} style={styles.photo} />
             {HeadingOne(() => ownerName)}
-
+        </View>
+        <View style={styles.subContainer}>
+            {VerifyButton(verified, onVerifyPress)}  
+        </View>      
+        <View>
         </View>
     </View>
 )

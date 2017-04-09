@@ -1,5 +1,5 @@
 import { getUser } from '../API/fetch'
-import { confirmUserCar, getUserCars } from '../API/UserCar'
+import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar'
 import { getFollowCount, getGetStreamToken } from '../API/user'
 import { getUserFollowing } from '../API/GetStream'
 import { objKeysToDecap } from '../Utils'
@@ -11,7 +11,8 @@ import {
   UNSET_LOADING_STATUS,
   SET_USER_FOLLOW_COUNT,
   SET_USER_CAR_COUNT,
-  SET_USER_FOLLOWING
+  SET_USER_FOLLOWING,
+  USER_CAR_VERIFIED
 } from './Types'
 
 export const setUserProfile = dispatch => {
@@ -56,6 +57,28 @@ export const addUserCar = (userId, carInfoId) => {
       .catch(e => {
 
       })
+  )
+}
+
+export const verifyUserCar = (userId, carInfoId, vinNumbers) => {
+  const body = {
+    firstNumber: vinNumbers.first,
+    secondNumber: vinNumbers.second,
+    lastNumber: vinNumbers.last
+  };
+  
+  return dispatch => (
+    verifyUserCarApi({body}, {userId, carInfoId})
+    .then(verifyResponse => {
+      dispatch({
+        type: USER_CAR_VERIFIED,
+        verifyContent: {
+          carInfoId: carInfoId,
+          verified: true
+        }
+      })
+    })
+    .catch(e => console.log(e))
   )
 }
 
