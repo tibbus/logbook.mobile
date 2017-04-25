@@ -63,12 +63,12 @@ export const addUserCar = (userId, carInfoId) => {
 export const verifyUserCar = (userId, carInfoId, vinNumbers) => {
   return dispatch => {
     const body = {
-      firstNumber: vinNumbers.first,
-      secondNumber: vinNumbers.second,
-      lastNumber: vinNumbers.last
+      firstLetter: vinNumbers.first,
+      secondLetter: vinNumbers.second,
+      lastLetter: vinNumbers.last
     };
 
-    verifyUserCarApi(body, {userId, carInfoId})
+    verifyUserCarApi({body}, {userId, carInfoId})
       .then(verifyResponse => {
         dispatch({
           type: USER_CAR_VERIFIED,
