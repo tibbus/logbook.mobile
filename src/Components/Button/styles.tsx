@@ -105,6 +105,15 @@ export default StyleSheet.create({
     fontSize: 15,
     paddingTop: 6,
   },
+  /* ====== Action button styles ====== */
+  actionButtonText: {
+    color: palette.text,
+  },
+  actonButton: {
+    color: palette.secondary,
+    backgroundColor: 'transparent',
+    marginHorizontal: 30,
+  },
   /* ====== Icon button styles ====== */
   iconButton: {
     fontSize: 25,
