@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
 import { View, Navigator } from 'react-native'
 import { Intro, Confirm, Success } from '../Cars/Verify'
+import { verifyUserCar } from '../../Actions/user'
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });
 
@@ -24,7 +25,7 @@ export class VerifyCar extends Component<any, any> {
                 return (<Intro onVerify={() => navigator.push({ id: 'confirm'})} onVerifyLater={() => this.props.navigator.pop()} />);
 
             case 'confirm':
-                return (<Confirm onConfirm={(userId, carInfoId, verifyDetails) => { console.log(userId + '' + carInfoId + '' + verifyDetails), navigator.push({ id: 'success' })}} {...props} style={{ flex: 1 }} />);
+                return (<Confirm onConfirm={(userId, carInfoId, verifyDetails) => { dispatch(verifyUserCar(userId, carInfoId, verifyDetails)), navigator.push({ id: 'success' })}} {...props} style={{ flex: 1 }} />);
 
             case 'success':
                 return (<Success viewFeed={() => this.props.navigator.push({id: 'profile'})} {...props} />)

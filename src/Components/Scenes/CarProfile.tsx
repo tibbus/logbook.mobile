@@ -90,8 +90,8 @@ export class CarProfile extends Component<any, any> {
         const owned = !!cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
         let verified = false;
         if(owned){
-            //const car = cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
-            //verified = car.verified;
+            const car = cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
+            verified = car.verified;
         }
         const followed = user.follows.includes(browsingCar.carInfo.id.toString())
         const timelineProps = { car: browsingCar, user, navigator, dispatch, rootNav }
@@ -108,7 +108,7 @@ export class CarProfile extends Component<any, any> {
                             followed={followed}
                             onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
                             onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
-                            verified
+                            verified={verified}
                             onVerifyPress={() => navigator.push({ id: 'verify' })}/>
 
                     </View>

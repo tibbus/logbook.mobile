@@ -61,25 +61,25 @@ export const addUserCar = (userId, carInfoId) => {
 }
 
 export const verifyUserCar = (userId, carInfoId, vinNumbers) => {
-  const body = {
-    firstNumber: vinNumbers.first,
-    secondNumber: vinNumbers.second,
-    lastNumber: vinNumbers.last
-  };
-  
-  return dispatch => (
-    verifyUserCarApi({body}, {userId, carInfoId})
-    .then(verifyResponse => {
-      dispatch({
-        type: USER_CAR_VERIFIED,
-        verifyContent: {
-          carInfoId: carInfoId,
-          verified: true
-        }
+  return dispatch => {
+    const body = {
+      firstNumber: vinNumbers.first,
+      secondNumber: vinNumbers.second,
+      lastNumber: vinNumbers.last
+    };
+
+    verifyUserCarApi(body, {userId, carInfoId})
+      .then(verifyResponse => {
+        dispatch({
+          type: USER_CAR_VERIFIED,
+          verifyContent: {
+            carInfoId: carInfoId,
+            verified: verifyResponse.verified
+          }
+        })
       })
-    })
-    .catch(e => console.log(e))
-  )
+      .catch(e => console.log(e))
+  }
 }
 
 export const updateUserFollowCount = (id) => {
