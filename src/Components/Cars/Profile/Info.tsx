@@ -35,8 +35,8 @@ const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFoll
     }
 }
 
-const VerifyButton = (verified, onVerify) => {
-    if(verified === false) {
+const VerifyButton = (verified, owned, onVerify) => {
+    if(verified === false && owned === true) {
         return (
             ActionButton(onVerify, 'Verify')
         )
