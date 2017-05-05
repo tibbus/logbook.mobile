@@ -10,10 +10,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 export const BackScene = ({
   children = null,
   onBack,
-  onAction = () => {},
+  onAction = null,
   style = null,
   title,
-  actionName = 'Go'
+  actionName = ''
 }) => (
   <View style={style}>
     <View style={styles.statusBar}>
