@@ -16,7 +16,7 @@ const dispatchFeedItem = (carOwner, feedItem) => {
 
 export const getUserFeed = (userId) => {
     return dispatch => {
-        getTimeline('user', userId, { userId })
+        getTimeline('user', userId)
             .then((data: any) => {
 
                 data.map(feedItem => {

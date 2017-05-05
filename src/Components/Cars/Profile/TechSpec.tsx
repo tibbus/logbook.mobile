@@ -6,6 +6,17 @@ import {
     ScrollView
 } from 'react-native'
 
+const getTaxInfo = (car) => {
+
+    if(car.tax) {
+        return (
+            <View>
+                <Text>Status : {car.tax.taxStatus}</Text>
+                <Text>Renewal : {car.tax.expiryDate}</Text>
+            </View>
+        )
+    }
+} 
 
 export class TechSpec extends Component<any, any> {
 
@@ -22,8 +33,7 @@ export class TechSpec extends Component<any, any> {
                 style={styles.scrollView}>
                 <View style={{ height: 300 }}>
                     <Text>DVLA</Text>
-                    <Text>Status : {car.tax.taxStatus}</Text>
-                    <Text>Renewal : {car.tax.expiryDate}</Text>
+                    {getTaxInfo(car)}
                 </View>
                 <View style={styles.seperator}></View>
                 <View style={{ height: 300 }}>

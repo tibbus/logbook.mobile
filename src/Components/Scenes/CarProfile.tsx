@@ -1,17 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
 import { View, Image, StyleSheet, Text } from 'react-native'
-import { Info, Gallery, TechSpec } from '../Cars/Profile'
+import { Info, Gallery, TechSpec, Overview } from '../Cars/Profile'
 import { FitImage } from '../Image'
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars.js'
 import { getUserFollowingFeeds } from '../../Actions/user.js'
+import {
+  pauseVideoAction,
+  playVideoAction,
+  setCarTimeline
+} from '../../Actions/timeline';
 import { BackScene, Timeline } from '../Scenes'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 import palette from '../../Themes/palette';
 import background from '../../Themes/background';
+import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
+import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 
+const getTimeline = (timelines, carInfoIdArg) => {
+  const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
+  return timelineDetails ? timelineDetails.timeline : []
+}
 
-const stateToProps = ({ user, cars }) => ({ user, cars });
+const stateToProps = ({ user, cars, timelines, comments, likes }) => ({ user, cars, timelines, comments, likes });
 
 @connect(stateToProps)
 export class CarProfile extends Component<any, any> {
@@ -19,7 +30,8 @@ export class CarProfile extends Component<any, any> {
     constructor(props) {
         super(props);
 
-        const { car, carInfoId, cars, user, dispatch } = this.props;
+        const { car, carInfoId, cars, user, dispatch, timelines = [] } = this.props;
+        let timeline = [];
         if (car && !cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id)) {
             const ownerInfo = {
                 userId: user.id,
@@ -27,9 +39,19 @@ export class CarProfile extends Component<any, any> {
                 image: user.profileImg
             }
             dispatch(setBrowsingCar(car.carInfo, ownerInfo));
+            getTimeline(timelines, car.carInfo.id);
+            if (!timeline.length) {
+                dispatch(setCarTimeline({ carInfoId: car.carInfo.id }));
+            }
         }
         else {
-            dispatch(getCarById(carInfoId));
+            if(carInfoId) {
+                dispatch(getCarById(carInfoId));
+                getTimeline(timelines, carInfoId);
+                if (!timeline.length) {
+                    dispatch(setCarTimeline({ carInfoId: carInfoId }));
+                }
+            }
         }
 
         if (user.follows.length === 0) {
@@ -37,7 +59,7 @@ export class CarProfile extends Component<any, any> {
         }
     }
 
-    componentWillReceiveProps({ cars }) {
+    componentWillReceiveProps({ cars, timelines = [] }) {
 
         const { dispatch, car, carInfoId } = this.props;
         let browsingCarId = 0;
@@ -61,7 +83,7 @@ export class CarProfile extends Component<any, any> {
         navigator.pop()
     }
     render() {
-        const { user, car, carInfoId, cars, navigator, dispatch, rootNav } = this.props;
+        const { user, car, carInfoId, cars, navigator, dispatch, rootNav, timelines, likes = [], comments } = this.props;
 
         let browsingCar;
         if (car) {
@@ -95,6 +117,25 @@ export class CarProfile extends Component<any, any> {
         }
         const followed = user.follows.includes(browsingCar.carInfo.id.toString())
         const timelineProps = { car: browsingCar, user, navigator, dispatch, rootNav }
+        const carTimelineItem = timelines.find(timelineItem => timelineItem.carInfoId === browsingCar.carInfo.id)
+        let timeline = null;
+        if(carTimelineItem){
+            timeline = carTimelineItem.timeline;
+        }
+
+        const overViewProps = {
+            timeline: timeline,
+            user: user,
+            comments: comments,
+            likes: likes,
+            likePost: likePost,
+            unlikeTimelinePost: unlikeTimelinePost,
+            addComment: addComment,
+            playVideoAction: playVideoAction,
+            pauseVideoAction: pauseVideoAction,
+            dispatch: dispatch
+        }
+
         return (
             <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
                 <View style={styles.container}>
@@ -120,7 +161,7 @@ export class CarProfile extends Component<any, any> {
                         tabBarTextStyle={styles.tabText}
                         tabBarBackgroundColor={background.color}
                         renderTabBar={() => <ScrollableTabBar />}>
-                        <Text tabLabel='OVERVIEW'>Overview</Text>
+                        <Overview tabLabel='OVERVIEW' {...overViewProps} />
                         <Timeline tabLabel='TIMELINE' {...timelineProps} />
                         <Gallery tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
                         <TechSpec tabLabel='SPEC' car={car} />
