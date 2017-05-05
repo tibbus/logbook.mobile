@@ -18,7 +18,7 @@ export class Success extends Component<any, any> {
   }
 
   render() {
-    const { completeProfile, viewProfile } = this.props;
+    const { navigator, rootNav } = this.props;
     return (
       <GradientView>
         <View style={styles.container}>
@@ -35,8 +35,8 @@ export class Success extends Component<any, any> {
           </View>
         </View>
         <View style={{ marginBottom: 20 }}>
-          {NextButton(() => console.log('complete'), "Add your car photo")}
-          {NextButton(() => console.log('view profile'), "View Profile")}
+          {NextButton(() => console.log("complete"), "Add your car photo")}
+          {NextButton(() => rootNav.push({ id: 'profile'}), "View Profile")}
         </View>
       </GradientView>
 

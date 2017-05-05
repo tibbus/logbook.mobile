@@ -5,6 +5,9 @@ import {
 
 const initialState = {
   carsLoading: false,
+  verifyingUserCar: false,
+  addingUserCar: false,
+  updatingUserCar: false,
   profileLoading: false
 }
 
@@ -12,6 +15,12 @@ const setLoading = (state, resourceName, status) => {
   switch (resourceName) {
     case 'cars':
       return { ...state, carsLoading: status }
+    case 'verifyUserCar':
+      return { ...state, verifyingUserCar: status }
+    case 'addUserCar':
+      return { ...state, addingUserCar: status }
+    case 'updateUserCar':
+      return { ...state, updatingUserCar: status }
     default:
       return state
   }
