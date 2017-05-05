@@ -9,15 +9,23 @@ import {
 } from 'react-native'
 import { FitImage } from '../../Image'
 import { ListVideo } from '../../Video/ListVideo';
-import { getPost } from '../../Post';
-import { Comments, CommentInput } from '../../Comments';
+import { Timeline } from '../../Scenes';
 //importing styles
 import background from '../../../Themes/background';
 
 const compareTimelineItems = (itemA, itemB) => {
-    const itemAScore = itemA.socialData.commentsCount + itemA.socialData.likesCount;
-    const itemBScore = itemB.socialData.commentsCount + itemB.socialData.likesCount;
 
+    let itemAScore = 0;
+    let itemBScore = 0;
+    
+    if(itemA.socialData) {
+        itemAScore = itemA.socialData.commentsCount + itemA.socialData.likesCount;
+    }
+
+    if(itemB.socialData) {
+        itemBScore = itemB.socialData.commentsCount + itemB.socialData.likesCount;
+    }
+    
     return itemAScore - itemBScore;
 }
 
@@ -65,80 +73,10 @@ export class Overview extends Component<any, any> {
 
     constructor(props) {
         super(props)
-        
-        let { timeline } = this.props;
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        if(!timeline){
-            timeline = [];
-        }
-        else {
-            timeline = timeline.slice(0, 3);
-        }
-        this.state = {
-            dataSource: ds.cloneWithRows(timeline)
-        }
-    }
-
-    playVideo(post) {
-        const { dispatch, playVideoAction, pauseVideoAction } = this.props
-        const { details, paused = true } = post
-        const { carInfoId, id } = details
-        const action = paused ? playVideoAction : pauseVideoAction
-
-        dispatch(action(carInfoId, id))
-  }
-
-    renderRow(post) {
-        const { user, carOwner, comments, dispatch, likes = [], likePost, unlikeTimelinePost, addComment } = this.props;
-        const { carInfoId } = post.activityData;
-        const likedItem = likes.find(element => element.postId === post.activityData.id);
-        const liked = !!likedItem;
-        const props = {
-            ...post,
-            // @TODO showStatusMenu not defined ??
-            //onMenuPress: () => this.showStatusMenu(post),
-            onVideoPress: this.playVideo.bind(this),
-            onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
-            onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
-            carOwner,
-            user,
-            liked
-        }
-
-        const filteredComments = comments.find((timelinePostComments) => {
-            return timelinePostComments.timelinePostId === post.activityData.id
-        });
-
-        var postComments = [];
-        if (filteredComments) {
-            postComments = filteredComments.comments.map((postComment) => {
-                return {
-                text: postComment.comment,
-                profileImg: 'https://mycarbiostolocal.blob.core.windows.net/default0/Image/01010001/4d47ecd5-c26a-474c-8001-4587e2365a19/DefaultProfileImage.jpg',
-                timeAgo: postComment.timeAgo
-                };
-            });
-        }
-
-        return (
-            <View style={styles.row}>
-                {getPost(props)}
-                <Comments comments={postComments} />
-                <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
-                    dispatch(addComment(timelinePostId, userId, commentText))
-                }} />
-            </View>
-        )
     }
 
     render() {
-        const { car, timeline } = this.props;
-        if(timeline) {
-            const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-            this.state = {
-            dataSource: ds.cloneWithRows(timeline.slice(0,3))
-        }
-        }
+        const { timeline, timelineProps } = this.props;
         const uriInfo = getFeaturedItemContentUris(timeline);
         console.log(uriInfo)
         return (
@@ -166,12 +104,7 @@ export class Overview extends Component<any, any> {
                     <Text>Highlights</Text>
                     <Text>View Timeline > </Text>
                 </View>
-                <ListView
-                    contentContainerStyle={{ justifyContent: 'center' }}
-                    style={styles.container}
-                    dataSource={this.state.dataSource}
-                    enableEmptySections={Boolean(true)}
-                    renderRow={this.renderRow.bind(this)} />
+                <Timeline {...timelineProps}/>
             </ScrollView>
 
         )
@@ -185,11 +118,8 @@ const styles = StyleSheet.create({
         //flex:1
     },
     container: {
-    height: 400,
-    //flex: 1,
-    //marginLeft: 5,
-    //marginRight: 5,
-    backgroundColor: background.color,
+        height: 400,
+        backgroundColor: background.color,
   },
     headingContainer: {
         flexDirection: 'row'
