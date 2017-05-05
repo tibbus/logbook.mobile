@@ -61,11 +61,18 @@ const updateLikesCount = (state, action, value) => {
         postIndex = index;
         return item.activityData.id === action.updatedItem.postId;
     });
-    post.socialData.likesCount += value;
-    state.posts = [...state.posts];
-    state.posts[postIndex] = { ...post };
+    
+    if(post) {
+        post.socialData.likesCount += value;
+        state.posts = [...state.posts];
+        state.posts[postIndex] = { ...post };
 
-    return { ...state };
+        return { ...state };
+    }
+    else {
+        return {state};
+    }
+
 }
 
 export const feed = (state: any = initialState, action) => {

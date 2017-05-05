@@ -9,7 +9,6 @@
 
 #import "AppDelegate.h"
 #import "CodePush.h"
-
 #import "RCTRootView.h"
 
 @import HockeySDK;
@@ -59,7 +58,10 @@
    */
 
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-
+  
+  NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Logbook", @"UserAgent", nil];
+  [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Logbook"
                                                initialProperties:nil
