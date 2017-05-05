@@ -58,7 +58,7 @@ export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, 
             {HeadingOne(() => ownerName)}
         </View>
         <View style={styles.subContainer}>
-            {VerifyButton(verified, onVerifyPress)}  
+            {VerifyButton(verified, owned, onVerifyPress)}  
         </View>      
         <View>
         </View>

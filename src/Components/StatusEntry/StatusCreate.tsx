@@ -142,7 +142,6 @@ export class StatusCreate extends Component<any, any> {
 
     return (
       <BackScene
-        onAction={() => this.onAction()}
         onBack={this.back.bind(this)}
         actionName={this.actionName}
         title={this.title}
