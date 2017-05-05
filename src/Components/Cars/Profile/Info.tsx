@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
     StyleSheet,
     Image,
@@ -6,10 +6,11 @@ import {
     Text,
     TouchableHighlight,
     Button
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { StatsText, HeadingOne } from '../../Text'
-import { ActionButton } from '../../Button'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { StatsText } from '../../Text';
+import textStyle from '../../../Styles/text';
+import { ActionButton } from '../../Button';
 
 const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFollowPress) => {
     if (owned) {
@@ -36,7 +37,7 @@ const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFoll
 }
 
 const VerifyButton = (verified, owned, onVerify) => {
-    if(verified === false && owned === true) {
+    if (verified === false && owned === true) {
         return (
             ActionButton(onVerify, 'Verify')
         )
@@ -55,11 +56,11 @@ export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, 
         </View>
         <View style={styles.subContainer}>
             <Image source={{ uri: ownerImage }} style={styles.photo} />
-            {HeadingOne(() => ownerName)}
+            <Text style={textStyle.title}>{ownerName}</Text>
         </View>
         <View style={styles.subContainer}>
-            {VerifyButton(verified, owned, onVerifyPress)}  
-        </View>      
+            {VerifyButton(verified, owned, onVerifyPress)}
+        </View>
         <View>
         </View>
     </View>

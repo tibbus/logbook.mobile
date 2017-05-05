@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { NextButton } from '../../Button'
-import { HeadingOneWhite, ParagraphBoldHighlightWhite } from '../../Text'
-import { GradientView } from '../../Views'
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { NextButton } from '../../Button';
+import textStyle from '../../../Styles/text';
+import { GradientView } from '../../Views';
 import palette from '../../../Themes/palette';
 
 export class Success extends Component<any, any> {
-
   constructor(props) {
     super(props)
   }
@@ -24,13 +18,13 @@ export class Success extends Component<any, any> {
         <View style={styles.container}>
           <View style={styles.subContainer}>
             <View style={{ marginTop: 40 }}>
-              {HeadingOneWhite(() => "Success! Car added to garage")}
+              <Text style={textStyle.titleWhite}>Success! Car added to garage</Text>
             </View>
             <View style={{ marginTop: 20 }}>
-              {ParagraphBoldHighlightWhite(() => "It's been a workout. We're family now")}
+              <Text style={textStyle.paragraphBoldHighlightWhite}>It's been a workout. We're family now</Text>
             </View>
             <View style={{ alignItems: 'center', padding: 30 }}>
-            <Icon name='check-circle' style={{ fontSize: 150, color: palette.success }} />
+              <Icon name='check-circle' style={{ fontSize: 150, color: palette.success }} />
             </View>
           </View>
         </View>

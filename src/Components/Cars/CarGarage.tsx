@@ -1,15 +1,9 @@
-import React, { Component }  from 'react'
-import {
-    View,
-    ScrollView,
-    Text,
-    StyleSheet
-} from 'react-native'
-import { CarGarageIcon } from './'
-import { HeadingTwo } from '../Text'
+import React, { Component } from 'react';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { CarGarageIcon } from './';
+import textStyle from '../../Styles/text';
 
-
-const createCarGarageIcon = function(car, navigator, user) {
+const createCarGarageIcon = function (car, navigator, user) {
     return <CarGarageIcon key={car.id} car={car} onPress={() => navigator.push({
         id: 'car',
         passProps: {
@@ -21,10 +15,9 @@ const createCarGarageIcon = function(car, navigator, user) {
         }
     })}
     />;
-}
+};
 
 export class CarGarage extends Component<any, any> {
-
     constructor(props) {
         super(props)
     }
@@ -32,35 +25,35 @@ export class CarGarage extends Component<any, any> {
     render() {
         const { cars, user, navigator } = this.props;
         return (
-        <View style={styles.container}>
-            {HeadingTwo(() => 'GARAGE')}
-            <ScrollView
-                automaticallyAdjustContentInsets={false}
-                horizontal={true}
-                style={[styles.scrollView, styles.horizontalScrollView]}>
+            <View style={styles.container}>
+                <Text style={textStyle.subtitle}>GARAGE</Text>
+                <ScrollView
+                    automaticallyAdjustContentInsets={false}
+                    horizontal={true}
+                    style={[styles.scrollView, styles.horizontalScrollView]}>
                     {
-                        cars.userCars.map(function(car) {
+                        cars.userCars.map(function (car) {
                             return createCarGarageIcon(car, navigator, user);
                         })
                     }
-                    {<CarGarageIcon onPress={() => navigator.push({id: 'addCar'})}/>}
-            </ScrollView>
-        </View>
+                    {<CarGarageIcon onPress={() => navigator.push({ id: 'addCar' })} />}
+                </ScrollView>
+            </View>
         );
     }
 }
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: 30,
-    paddingVertical: 30,
-    //allowFontScaling: true
-  },
-  scrollView: {
-    flex: 1,
-  },
-  horizontalScrollView: {
-    height: 220,
-  },
-})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingLeft: 30,
+        paddingVertical: 30,
+        //allowFontScaling: true
+    },
+    scrollView: {
+        flex: 1,
+    },
+    horizontalScrollView: {
+        height: 220,
+    },
+});
