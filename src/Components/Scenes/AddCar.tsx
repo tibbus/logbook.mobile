@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
-import { View, Navigator } from 'react-native'
+import { View, Navigator, Alert, StyleSheet } from 'react-native'
 import { RegNoForm, ConfirmationDetails, Success } from '../Cars/AddCar'
 import { getCar } from '../../Actions/cars.js'
 import { addUserCar } from '../../Actions/user.js'
+import { LoadingView } from '../LoadingView';
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });
 
@@ -17,28 +18,50 @@ export class AddCar extends Component<any, any> {
     renderScene(route, navigator) {
         const { id } = route;
         const { dispatch, cars } = this.props;
-        const props = { navigator, userId: this.props.user.id, carToConfirm: this.props.cars.carToConfirm, loadingStatus: this.props.loadingStatus };
+        const props = { navigator, userId: this.props.user.id, carToConfirm: this.props.cars.carToConfirm, loadingStatus: this.props.loadingStatus, rootNav: this.props.navigator };
         switch (id) {
             case 'addRegNo':
-                return (<RegNoForm carRegSubmit={regNo => {
-                    dispatch(getCar(regNo));
-                    navigator.push({ id: 'confirmCar' });
-                }} {...props} />);
+                return (
+                    <LoadingView style={styles.container}
+                        isLoading={this.props.loadingStatus.carsLoading}>
+                        <RegNoForm carRegSubmit={regNo => {
+                            dispatch(getCar(
+                                regNo, 
+                                () => navigator.push({ id: 'confirmCar' }),
+                                () => Alert.alert("Failed!", "No car is registered to the entered registration number!")));
+                        }} {...props} />
+                    </LoadingView>
+                );
 
             case 'confirmCar':
-                return (<ConfirmationDetails onConfirm={(userId, carInfoId) => {
-                    dispatch(addUserCar(userId, carInfoId));
-                    navigator.push({ id: 'success' });
-                }} {...props} style={{ flex: 1 }} />);
+                return (
+                     <LoadingView style={styles.container}
+                        isLoading={this.props.loadingStatus.addingUserCar}>
+                        <ConfirmationDetails onConfirm={(userId, carInfoId) => {
+                            dispatch(addUserCar(
+                                userId, 
+                                carInfoId,
+                                () => navigator.push({ id: 'success' }),
+                                () => { Alert.alert("Failed!", "Failed to add car to garage!"), navigator.pop()}));
+                        }} {...props} style={{ flex: 1 }} />
+                    </LoadingView>
+                );
 
             case 'success':
                 return (<Success {...props} />)
 
             default:
-                return (<RegNoForm carRegSubmit={regNo => {
-                    dispatch(getCar(regNo));
-                    navigator.push({ id: 'confirmCar' });
-                }} {...props} />);
+                return (
+                    <LoadingView style={styles.container}
+                        isLoading={this.props.loadingStatus.carsLoading}>
+                        <RegNoForm carRegSubmit={regNo => {
+                            dispatch(getCar(
+                                regNo, 
+                                () => navigator.push({ id: 'confirmCar' }),
+                                () => Alert.alert("Failed!", "No car is registered to the entered registration number!")));
+                        }} {...props} />
+                    </LoadingView>
+                );
         }
     }
 
@@ -51,3 +74,9 @@ export class AddCar extends Component<any, any> {
         )
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 400,
+  }
+})

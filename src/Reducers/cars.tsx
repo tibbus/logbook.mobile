@@ -168,16 +168,18 @@ const updateBrowsingCarContent = (state, carContent) => {
   }
 }
 
+const addUserCar = (state, userCar) => {
+  state.userCars.push(userCar);
+  return {...state}
+}
+
 export const cars = (state = initialState, action) => {
-  const { type, userCars, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent } = action
+  const { type, userCars, userCar, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent } = action
 
   switch (type) {
 
     case ADD_CAR:
-      return {
-        userCars: state.userCars.push(),
-        carToConfirm: null
-      }
+      return addUserCar(state, userCar);
     
     case USER_CAR_VERIFIED:
       return updateUserCarVerifiedStatus(state, verifyContent);

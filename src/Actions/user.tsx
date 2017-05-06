@@ -31,43 +31,48 @@ export const setUserProfile = dispatch => {
 
 export const updateUserCars = (userId = null,details = true) => {
   return dispatch => {
-    dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'updateUserCar' })
     getUserCars({}, { userId, details })
       .then(userCars => {
         dispatch({ type: SET_USER_CARS, userCars });
         dispatch({ type: SET_USER_CAR_COUNT, count: userCars.length });
-        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'updateUserCar' });
       })
 
       .catch(() => {
-        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'updateUserCar' })
       })
   }
 }
 
-export const addUserCar = (userId, carInfoId) => {
-  return dispatch => (
+export const addUserCar = (userId, carInfoId, onSuccess, onFailure) => {
+  return dispatch => {
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addUserCar' })
     confirmUserCar({}, { userId, carInfoId })
       .then(userCar => {
         dispatch({
           type: ADD_CAR,
           userCar
         })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addUserCar' });
+        onSuccess();
       })
-      .catch(e => {
-
+      .catch(error => {
+        console.log(error);
+        onFailure();
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addUserCar' });
       })
-  )
+  }
 }
 
-export const verifyUserCar = (userId, carInfoId, vinNumbers) => {
+export const verifyUserCar = (userId, carInfoId, vinNumbers, onSuccess, onFailure) => {
   return dispatch => {
     const body = {
       firstLetter: vinNumbers.first,
       secondLetter: vinNumbers.second,
       lastLetter: vinNumbers.last
     };
-
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'verifyUserCar' })
     verifyUserCarApi({body}, {userId, carInfoId})
       .then(verifyResponse => {
         dispatch({
@@ -77,8 +82,15 @@ export const verifyUserCar = (userId, carInfoId, vinNumbers) => {
             verified: verifyResponse.verified
           }
         })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'verifyUserCar' });
+        onSuccess();
+
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e);
+        onFailure();
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'verifyUserCar' });
+      })
   }
 }
 

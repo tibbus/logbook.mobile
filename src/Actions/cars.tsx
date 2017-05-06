@@ -21,16 +21,19 @@ import { getGetStreamToken } from '../API/user'
 import { getUserFollowingFeeds } from './user'
 import { getApiFetchLimit } from '../API/config'
 
-export const getCar = (registration) => {
+export const getCar = (registration, onSuccess, onFailure) => {
     return dispatch => {
         dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
         getCarByRegistration({}, { registration })
             .then(carInfo => {
                 dispatch({ type: SEARCHED_CAR, carInfo });
                 dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
+                onSuccess();
             })
             .catch(error => {
-
+                console.log(error);
+                onFailure();
+                dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
             })
     }
 }

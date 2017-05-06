@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
-import { View, Navigator } from 'react-native'
+import { View, Navigator, Alert, StyleSheet } from 'react-native'
 import { Intro, Confirm, Success } from '../Cars/Verify'
 import { verifyUserCar } from '../../Actions/user'
+import { LoadingView } from '../LoadingView';
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });
 
@@ -25,7 +26,20 @@ export class VerifyCar extends Component<any, any> {
                 return (<Intro onVerify={() => navigator.push({ id: 'confirm'})} onVerifyLater={() => this.props.navigator.pop()} />);
 
             case 'confirm':
-                return (<Confirm onConfirm={(userId, carInfoId, verifyDetails) => { dispatch(verifyUserCar(userId, carInfoId, verifyDetails)), navigator.push({ id: 'success' })}} {...props} style={{ flex: 1 }} />);
+                return (
+                    <LoadingView style={styles.container}
+                        isLoading={this.props.loadingStatus.verifyingUserCar}>
+                        <Confirm onConfirm={(userId, carInfoId, verifyDetails) => { 
+                            dispatch(verifyUserCar(
+                                userId, 
+                                carInfoId, 
+                                verifyDetails, 
+                                () => navigator.push({ id: 'success' }), 
+                                () => Alert.alert("Failed!", "Car verification failed!"))
+                                )
+                            }} {...props} style={{ flex: 1 }} />
+                    </LoadingView>
+                );
 
             case 'success':
                 return (<Success viewFeed={() => this.props.navigator.push({id: 'profile'})} {...props} />)
@@ -44,3 +58,9 @@ export class VerifyCar extends Component<any, any> {
         )
     }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 400,
+  }
+})
