@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-} from 'react-native'
-import { LoadingView } from '../../LoadingView'
-import { NextButton } from '../../Button'
-import { HeadingOneWhite, HeadingTwoWhite, ParagraphWhite, ParagraphBoldWhite, ParagraphBoldHighlightWhite } from '../../Text'
-import { GradientView } from '../../Views'
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { LoadingView } from '../../LoadingView';
+import { NextButton } from '../../Button';
+import textStyle from '../../../Styles/text';
+import { GradientView } from '../../Views';
 
 export class ConfirmationDetails extends Component<any, any> {
-
   constructor(props) {
     super(props)
   }
@@ -32,15 +26,15 @@ export class ConfirmationDetails extends Component<any, any> {
           <View style={styles.container}>
             <View style={styles.subContainer}>
               <View style={{ marginTop: 40 }}>
-                {HeadingOneWhite(() => "Here's what we found")}
+                <Text style={textStyle.titleWhite}>Here's what we found</Text>
               </View>
               <View style={{ marginTop: 20 }}>
-                {HeadingTwoWhite(() => 'Is this right?')}
+                <Text style={textStyle.headingTwoWhite}>Is this right?</Text>
               </View>
               <View style={{ marginTop: 30 }}>
-                {ParagraphWhite(() => 'LOG8 00K is registed to a ' + carToConfirm.colour.toLowerCase())}
-                {ParagraphBoldWhite(() => carToConfirm.car.make + " " + carToConfirm.car.model)}
-                {ParagraphBoldHighlightWhite(() => carToConfirm.car.yearOfManufacture)}
+                <Text style={textStyle.paragraphWhite}>LOG8 00K is registed to a {carToConfirm.colour.toLowerCase()}</Text>
+                <Text style={textStyle.paragraphBoldWhite}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>
+                <Text style={textStyle.paragraphBoldHighlightWhite}>{carToConfirm.car.yearOfManufacture}</Text>
                 {/*<Text style={styles.textCarHeading}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>*/}
                 {/*<Text style={styles.textCarInfo}>{carToConfirm.car.yearOfManufacture}</Text>*/}
               </View>

@@ -1,15 +1,9 @@
-import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Dimensions
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { NextButton } from '../../Button'
-import { HeadingOneWhite, HeadingThreeWhite, CaptionWhite } from '../../Text'
-import { GradientView } from '../../Views'
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, View, Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { NextButton } from '../../Button';
+import textStyle from '../../../Styles/text';
+import { GradientView } from '../../Views';
 import palette from '../../../Themes/palette';
 
 const { width, height } = Dimensions.get("window");
@@ -30,11 +24,11 @@ export class RegNoForm extends Component<any, any> {
         <View style={styles.container}>
           <View style={styles.subContainer}>
             <View style={{ marginTop: 40 }}>
-              {HeadingOneWhite(() => 'Add your car to your garage')}
+              <Text style={textStyle.titleWhite}>Add your car to your garage</Text>
             </View>
-            {CaptionWhite(() => 'We use your Vehical Registration No. to add relevant info about your car from the DVLA')}
+            <Text style={textStyle.captionWhite}>'We use your Vehical Registration No. to add relevant info about your car from the DVLA</Text>
             <View style={{ marginTop: 60 }}>
-              {HeadingThreeWhite(() => 'Vehical Registration No.')}
+              <Text style={textStyle.headingThreeWhite}>Vehical Registration No.</Text>
             </View>
             <View style={styles.underline}>
               <TextInput autoCapitalize='characters' style={styles.textInput}

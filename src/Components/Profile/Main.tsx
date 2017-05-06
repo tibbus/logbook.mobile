@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Dimensions, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Info } from './'
-import { HeadingOneWhite } from '../Text'
-
 
 const { width, height } = Dimensions.get("window");
 

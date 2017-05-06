@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import palette from '../../Themes/palette';
-import { StatsText, HeadingOne } from '../Text'
+import { StatsText } from '../Text';
 
 export const Info = (props) => {
   const imageUrl = props.user.profileImg? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
