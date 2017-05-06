@@ -34,7 +34,7 @@ export class ConfirmationDetails extends Component<any, any> {
               <View style={{ marginTop: 30 }}>
                 <Text style={textStyle.paragraphWhite}>LOG8 00K is registed to a {carToConfirm.colour.toLowerCase()}</Text>
                 <Text style={textStyle.paragraphBoldWhite}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>
-                <Text style={textStyle.paragraphBoldHighlightWhite}>{carToConfirm.car.yearOfManufacture} {carToConfirm.car.model}</Text>
+                <Text style={textStyle.paragraphBoldHighlightWhite}>{carToConfirm.car.yearOfManufacture}</Text>
                 {/*<Text style={styles.textCarHeading}>{carToConfirm.car.make} {carToConfirm.car.model}</Text>*/}
                 {/*<Text style={styles.textCarInfo}>{carToConfirm.car.yearOfManufacture}</Text>*/}
               </View>
