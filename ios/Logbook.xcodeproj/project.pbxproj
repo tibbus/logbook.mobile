@@ -213,10 +213,9 @@
 		2139EA9E997A4BAE93323754 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		235C9661B68A485082BA4A87 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		241E945B1E8338D800AA9C59 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
-		24469E241E8B0F4C004A1A9F /* ogImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ogImage.png; path = ../../logbook.landing/images/ogImage.png; sourceTree = "<group>"; };
-		2723A7FD59DB46A095473752 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		242DD0A11E8B2A75009AF8E0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		242DD0A21E8B2A75009AF8E0 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		2723A7FD59DB46A095473752 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		289148AC640A44A3955ED394 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		2A6A1133D1864F0BAA12C3BC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		41171C6A028F416CA4C03BB8 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -422,14 +421,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		24BE13831E8EADBC005F3E37 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				24BE13871E8EADBC005F3E37 /* libBVLinearGradient.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		242DD0A01E8B2A75009AF8E0 /* HockeySDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +429,14 @@
 			);
 			name = HockeySDK.embeddedframework;
 			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			sourceTree = "<group>";
+		};
+		24BE13831E8EADBC005F3E37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24BE13871E8EADBC005F3E37 /* libBVLinearGradient.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		24BEA7561E848BD80094E065 /* Products */ = {
