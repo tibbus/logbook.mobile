@@ -3,7 +3,7 @@ import {
     View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient/index.ios.js';
-import palette from '../../Themes/palette';
+import palette from '../../Styles/Themes/palette';
 import styles from './styles';
 
 export class GradientView extends React.Component<any, any> {

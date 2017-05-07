@@ -3,7 +3,7 @@ import { StyleSheet, ListView, View, Text, TextInput, TouchableHighlight } from 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { SearchHeader, SearchRow } from './'
 //import styles
-import background from '../../Themes/background';
+import background from '../../Styles/Themes/background';
 
 
 export class SearchCars extends Component<any, any> {

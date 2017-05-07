@@ -6,8 +6,8 @@ import {
     View,
     Image
 } from 'react-native'
-import palette from '../../../Themes/palette';
-import screen from '../../../Themes/screen';
+import palette from '../../../Styles/Themes/palette';
+import screen from '../../../Styles/Themes/screen';
 
 export const getStatusView = (editMode, updateStatus, status) => {
     return (

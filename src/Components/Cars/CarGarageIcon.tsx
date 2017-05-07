@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
-import {
-    View,
-    Text,
-    Image,
-    TouchableHighlight,
-    StyleSheet
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { CaptionButton } from '../Button'
+import React, { Component } from 'react';
+import { View, Text, Image, TouchableHighlight, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { CaptionButton } from '../Button';
+import pallete from '../../Styles/Themes/palette';
 
 export class CarGarageIcon extends Component<any, any> {
 
@@ -15,8 +11,12 @@ export class CarGarageIcon extends Component<any, any> {
         const { car, onPress } = this.props;
         if (!car) {
             return (
-                <TouchableHighlight style={styles.carIcon} onPress={onPress}>
+                <TouchableHighlight style={styles.carIconWrapper} onPress={onPress}>
+                  <View>
                     <Icon name='plus' style={styles.carIcon} />
+                    <Text style={styles.carIconText}>Add Car</Text>
+                  </View>
+
                 </TouchableHighlight>
             );
         }
@@ -45,14 +45,23 @@ var styles = StyleSheet.create({
     captionButtonView: {
         flex: 1,
     } as React.ViewStyle,
-    carIcon: {
+    carIconWrapper: {
         flexDirection: 'column',
-        alignItems: 'flex-start',
         backgroundColor: '#eaeaea',
         borderRadius: 3,
         width: photoWidth,
         height: photoHeight,
         marginRight: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    } as React.ViewStyle,
+    carIcon: {
+        fontSize: 50,
+        color: pallete.primary
+    } as React.ViewStyle,
+    carIconText: {
+  			fontSize: 11,
+        color: pallete.primary
     } as React.ViewStyle,
     carInfoIcon: {
         flexDirection: 'row',

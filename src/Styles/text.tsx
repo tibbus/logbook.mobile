@@ -6,10 +6,11 @@ export default StyleSheet.create({
   statsContainer: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end', //or center
+    
   } as React.ViewStyle,
   settingsContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     alignItems: 'flex-end', //or center
   },
@@ -17,7 +18,8 @@ export default StyleSheet.create({
   statsText: {
     fontSize: 20,
     fontWeight: '700',
-    paddingBottom: 5
+    paddingBottom: 5,
+    alignItems: 'flex-end'
   } as React.TextStyle,
   statsCaptionText: {
     fontSize: 16,

@@ -8,8 +8,8 @@ import { getUserFollowingFeeds } from '../../Actions/user.js'
 import { setCarTimeline } from '../../Actions/timeline';
 import { BackScene, Timeline } from '../Scenes'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import palette from '../../Themes/palette';
-import background from '../../Themes/background';
+import palette from '../../Styles/Themes/palette';
+import background from '../../Styles/Themes/background';
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)

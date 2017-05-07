@@ -2,9 +2,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
 //import styles
-import background from '../../Themes/background';
-import navBar from '../../Themes/navBar';
-import text from '../../Themes/text';
+import background from '../../Styles/Themes/background';
+import navBar from '../../Styles/Themes/navBar';
+import text from '../../Styles/Themes/text';
 
 const styles = StyleSheet.create({
   container: {

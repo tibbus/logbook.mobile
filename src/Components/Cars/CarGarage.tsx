@@ -45,7 +45,7 @@ export class CarGarage extends Component<any, any> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 4,
         paddingLeft: 30,
         paddingVertical: 30,
         //allowFontScaling: true

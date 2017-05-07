@@ -18,8 +18,8 @@ import { getGalleryView } from './GalleryView'
 import { getStatusView } from './StatusView'
 import { getCarSelectionView } from './CarSelectionView'
 import { IconButton } from '../../Button'
-import background from '../../../Themes/background';
-import palette from '../../../Themes/palette';
+import background from '../../../Styles/Themes/background';
+import palette from '../../../Styles/Themes/palette';
 
 
 export class LandingPage extends Component<any, any> {

@@ -49,9 +49,9 @@ export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, 
 
     <View style={styles.container}>
         <View style={styles.statContainer}>
-            {StatsText(() => '12', 'Posts')}
-            {StatsText(() => '37', 'Media')}
-            {StatsText(() => carStats.followersCount.count, 'Followers')}
+            <StatsText count="12" caption="Posts" />
+            <StatsText count="37" caption="Media" />
+            <StatsText count={carStats.followersCount.count} caption="Followers" />
             {ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
         </View>
         <View style={styles.subContainer}>
