@@ -11,7 +11,7 @@ import { FitImage } from '../../Image'
 import { ListVideo } from '../../Video/ListVideo';
 import { Timeline } from '../../Scenes';
 //importing styles
-import background from '../../../Themes/background';
+import background from '../../../Styles/Themes/background';
 
 const compareTimelineItems = (itemA, itemB) => {
 

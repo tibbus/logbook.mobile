@@ -3,7 +3,7 @@ import {
     Dimensions,
     StyleSheet,
 } from 'react-native';
-import palette from '../../Themes/palette';
+import palette from '../../Styles/Themes/palette';
 
 const { width, height } = Dimensions.get("window");
 const tabBarHeight = 60;

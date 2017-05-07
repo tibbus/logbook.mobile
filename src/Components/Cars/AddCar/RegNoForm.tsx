@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NextButton } from '../../Button';
 import textStyle from '../../../Styles/text';
 import { GradientView } from '../../Views';
-import palette from '../../../Themes/palette';
+import palette from '../../../Styles/Themes/palette';
 
 const { width, height } = Dimensions.get("window");
 

@@ -20,7 +20,7 @@ import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
 import { getPost, PostMenu } from '../Post';
 import { Comments, CommentInput } from '../Comments';
 //importing styles
-import background from '../../Themes/background';
+import background from '../../Styles/Themes/background';
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)

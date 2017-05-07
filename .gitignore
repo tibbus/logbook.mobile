@@ -45,3 +45,6 @@ android/keystores/debug.keystore
 yarn\.lock
 
 codesigndoc_exports/
+
+*sublime-project
+*sublime-workspace

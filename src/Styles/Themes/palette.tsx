@@ -5,5 +5,5 @@ export default {
   success: 'rgba(212,236,16,1)',
   inactive: 'rgba(176,173,173,1)',
   border: 'rgba(242,242,242,1)',
-  text: 'rgba(0,0,0,1)',
+  text: 'rgba(0,0,0,1)', 
 };

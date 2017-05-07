@@ -8,7 +8,7 @@ import { connect } from '../../Utils/connect';
 import { getUserFeed } from '../../Actions/feed'
 import { getPost } from '../Post';
 import { LoadingView } from '../LoadingView';
-import background from '../../Themes/background';
+import background from '../../Styles/Themes/background';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
 import { Comments, CommentInput } from '../Comments';

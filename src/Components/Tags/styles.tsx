@@ -2,7 +2,7 @@ import React from 'react';
 import {
     StyleSheet,
 } from 'react-native';
-import palette from '../../Themes/palette';
+import palette from '../../Styles/Themes/palette';
 
 export default StyleSheet.create({
     tagsRow: {

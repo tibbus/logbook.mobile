@@ -8,8 +8,8 @@ import {
 } from 'react-native'
 import { capitalize } from 'underscore.string'
 import { TagsBox } from '../../Tags/index';
-import palette from '../../../Themes/palette';
-import screen from '../../../Themes/screen';
+import palette from '../../../Styles/Themes/palette';
+import screen from '../../../Styles/Themes/screen';
 
 export const getTagsView = (tagsDataSource) => {
   return (

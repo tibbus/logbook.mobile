@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 //import styles
-import background from '../../Themes/background';
-import search from '../../Themes/search';
-import text from '../../Themes/text';
+import background from '../../Styles/Themes/background';
+import search from '../../Styles/Themes/search';
+import text from '../../Styles/Themes/text';
 
 const styles = StyleSheet.create({
   containerTop: {

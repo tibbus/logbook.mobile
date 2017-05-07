@@ -11,10 +11,10 @@ import { ListVideo } from '../Video/ListVideo';
 import { FitImage } from '../Image';
 import Icon from 'react-native-vector-icons/FontAwesome'
 //importing styles
-import background from '../../Themes/background';
-import comments from '../../Themes/comments';
-import icon from '../../Themes/icon';
-import text from '../../Themes/text';
+import background from '../../Styles/Themes/background';
+import comments from '../../Styles/Themes/comments';
+import icon from '../../Styles/Themes/icon';
+import text from '../../Styles/Themes/text';
 
 const renderMedia = (type, data) => {
   const { details, paused = true, onVideoPress } = data

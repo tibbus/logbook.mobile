@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TextInput, Alert } from 'react-native';
 import { NextButton } from '../../Button';
 import textStyle from '../../../Styles/text';
 import { GradientView } from '../../Views';
-import palette from '../../../Themes/palette';
+import palette from '../../../Styles/Themes/palette';
 
 export class Confirm extends Component<any, any> {
     private vinNumbers: any;

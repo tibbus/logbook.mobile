@@ -9,9 +9,9 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ModalDropdown from 'react-native-modal-dropdown'
-import screen from '../../../Themes/screen';
-import background from '../../../Themes/background';
-import palette from '../../../Themes/palette';
+import screen from '../../../Styles/Themes/screen';
+import background from '../../../Styles/Themes/background';
+import palette from '../../../Styles/Themes/palette';
 
 export const getCarSelectionView = (editMode, carCollection, onSelectCar, selectedCar) => {
     return (

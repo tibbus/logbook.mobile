@@ -6,8 +6,8 @@ import {
   View
 } from 'react-native';
 //importing styles
-import background from '../Themes/background';
-import navBar from '../Themes/navBar';
+import background from '../Styles/Themes/background';
+import navBar from '../Styles/Themes/navBar';
 
 const styles = StyleSheet.create({
   container: {

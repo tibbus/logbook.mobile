@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import palette from '../../Themes/palette';
+import palette from '../../Styles/Themes/palette';
 
 const { width, height } = Dimensions.get("window");
 
