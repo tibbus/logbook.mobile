@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,14 @@ import {
   Image,
   View,
   ListView
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { FitImage } from '../../Image'
-import { getTagsView } from './TagsView'
-import { getGalleryView } from './GalleryView'
-import { getStatusView } from './StatusView'
-import { getCarSelectionView } from './CarSelectionView'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { FitImage } from '../../Components/Image';
+import { getTagsView } from './TagsView';
+import { getGalleryView } from './GalleryView';
+import { getStatusView } from './StatusView';
+import { getCarSelectionView } from './CarSelectionView';
 
 export class ConfirmPage extends Component<any, any> {
 

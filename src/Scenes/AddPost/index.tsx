@@ -9,10 +9,12 @@ import {
   View,
   Navigator
 } from 'react-native';
-import { LandingPage, ConfirmPage } from '../../Components/Post/AddPost';
-import { updateUserCars } from '../../Actions/user.js'
-import { addCarTimelinePost } from '../../Actions/timeline'
-import { updateAddPost, resetAddPost } from '../../Actions/post'
+
+import { LandingPage } from './LandingPage';
+import { ConfirmPage } from './ConfirmPage';
+import { updateUserCars } from '../../Actions/user';
+import { addCarTimelinePost } from '../../Actions/timeline';
+import { updateAddPost, resetAddPost } from '../../Actions/post';
 
 const stateToProps = ({ user, cars, post }) => ({ user, cars, post });
 

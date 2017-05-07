@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
 import { View, StyleSheet } from 'react-native';
 
-import { Main } from '../../Components/Profile';
-import { CarGarage } from '../../Components/Cars';
+import { Main } from './Main';
+import { CarGarage } from './CarGarage';
 import { updateUserFollowCount, updateUserCars } from '../../Actions/user.js'
 
 const stateToProps = ({ user, cars }) => ({ user, cars });

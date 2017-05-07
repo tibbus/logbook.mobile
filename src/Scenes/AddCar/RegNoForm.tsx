@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { NextButton } from '../../Button';
-import textStyle from '../../../Styles/text';
-import { GradientView } from '../../Views';
-import palette from '../../../Styles/Themes/palette';
+
+import { NextButton } from '../../Components/Button';
+import { GradientView } from '../../Components/Views';
+
+import textStyle from '../../Styles/text';
+import palette from '../../Styles/Themes/palette';
 
 const { width, height } = Dimensions.get("window");
 

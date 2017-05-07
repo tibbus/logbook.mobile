@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
   ListView,
   ScrollView
-} from 'react-native'
-import { capitalize } from 'underscore.string'
-import { TagsBox } from '../../Tags/index';
-import palette from '../../../Styles/Themes/palette';
-import screen from '../../../Styles/Themes/screen';
+} from 'react-native';
+import { capitalize } from 'underscore.string';
+
+import { TagsBox } from '../../Components/Tags/index';
+import palette from '../../Styles/Themes/palette';
+import screen from '../../Styles/Themes/screen';
 
 export const getTagsView = (tagsDataSource) => {
   return (
@@ -40,8 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: 'blue',
     paddingLeft: screen.paddingHorizontal,
-    borderTopWidth: screen.componentBorderWidth,  
-    borderBottomWidth: screen.componentBorderWidth, 
+    borderTopWidth: screen.componentBorderWidth,
+    borderBottomWidth: screen.componentBorderWidth,
     borderColor: palette.border,
   },
   tagsHeader: {

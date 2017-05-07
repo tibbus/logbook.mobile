@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { NextButton } from '../../Button';
-import textStyle from '../../../Styles/text';
-import { GradientView } from '../../Views';
-import palette from '../../../Styles/Themes/palette';
+
+import { NextButton } from '../../Components/Button';
+import { GradientView } from '../../Components/Views';
+
+import textStyle from '../../Styles/text';
+import palette from '../../Styles/Themes/palette';
 
 export class Success extends Component<any, any> {
+
   constructor(props) {
     super(props)
   }
 
   render() {
-    const { navigator, rootNav } = this.props;
+    const { viewFeed } = this.props;
     return (
       <GradientView>
         <View style={styles.container}>
           <View style={styles.subContainer}>
             <View style={{ marginTop: 40 }}>
-              <Text style={textStyle.titleWhite}>Success! Car added to garage</Text>
+              <Text style={textStyle.titleWhite}>Success! Car has been verified</Text>
             </View>
             <View style={{ marginTop: 20 }}>
               <Text style={textStyle.paragraphBoldHighlightWhite}>It's been a workout. We're family now</Text>
@@ -29,8 +32,7 @@ export class Success extends Component<any, any> {
           </View>
         </View>
         <View style={{ marginBottom: 20 }}>
-          {NextButton(() => console.log("complete"), "Add your car photo")}
-          {NextButton(() => rootNav.push({ id: 'profile'}), "View Profile")}
+          {NextButton(() => viewFeed(), "View your feed")}
         </View>
       </GradientView>
 

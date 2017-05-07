@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
 import { View, Navigator, Alert, StyleSheet } from 'react-native';
 
-import { RegNoForm, ConfirmationDetails, Success } from '../../Components/Cars/AddCar'
-import { getCar } from '../../Actions/cars.js'
-import { addUserCar } from '../../Actions/user.js'
+import { RegNoForm } from './RegNoForm';
+import { ConfirmationDetails } from './ConfirmationDetails';
+import { Success } from './Success';
+import { getCar } from '../../Actions/cars';
+import { addUserCar } from '../../Actions/user';
 import { LoadingView } from '../../Components/LoadingView';
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
     Text,
     ScrollView
-} from 'react-native'
+} from 'react-native';
 
 const getTaxInfo = (car) => {
 
-    if(car.tax) {
+    if (car.tax) {
         return (
             <View>
                 <Text>Status : {car.tax.taxStatus}</Text>
@@ -16,7 +16,7 @@ const getTaxInfo = (car) => {
             </View>
         )
     }
-} 
+}
 
 export class TechSpec extends Component<any, any> {
 

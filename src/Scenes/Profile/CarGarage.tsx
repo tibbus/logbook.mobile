@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import { CarGarageIcon } from './';
+import { CarGarageIcon } from './CarGarageIcon';
 import textStyle from '../../Styles/text';
 
 const createCarGarageIcon = function (car, navigator, user) {

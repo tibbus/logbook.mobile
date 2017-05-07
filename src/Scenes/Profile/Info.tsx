@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import palette from '../../Styles/Themes/palette';
-import { StatsText } from '../Text';
+import { StatsText } from '../../Components/Text';
 
 export const Info = (props) => {
   const imageUrl = props.user.profileImg ? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';

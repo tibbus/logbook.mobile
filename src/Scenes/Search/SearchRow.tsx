@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+
 //import styles
 import background from '../../Styles/Themes/background';
 import navBar from '../../Styles/Themes/navBar';

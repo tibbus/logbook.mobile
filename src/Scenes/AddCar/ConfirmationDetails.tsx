@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import { LoadingView } from '../../LoadingView';
-import { NextButton } from '../../Button';
-import textStyle from '../../../Styles/text';
-import { GradientView } from '../../Views';
+import { LoadingView } from '../../Components/LoadingView';
+import { NextButton } from '../../Components/Button';
+import textStyle from '../../Styles/text';
+import { GradientView } from '../../Components/Views/';
 
 export class ConfirmationDetails extends Component<any, any> {
   constructor(props) {

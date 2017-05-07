@@ -8,11 +8,11 @@ import {
   ListView,
 } from 'react-native';
 
-import { FitImage } from '../../Image'
-import { ListVideo } from '../../Video/ListVideo';
-import { Timeline } from '../../../Scenes/';
+import { FitImage } from '../../Components/Image'
+import { ListVideo } from '../../Components/Video/ListVideo';
+import { Timeline } from '../';
 //importing styles
-import background from '../../../Styles/Themes/background';
+import background from '../../Styles/Themes/background';
 
 const compareTimelineItems = (itemA, itemB) => {
   let itemAScore = 0;

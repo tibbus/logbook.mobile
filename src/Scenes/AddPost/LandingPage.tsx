@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,20 +7,19 @@ import {
   Image,
   View,
   ListView
-} from 'react-native'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MediaPicker from 'react-native-image-picker';
 
-import Icon from 'react-native-vector-icons/FontAwesome'
-import MediaPicker from 'react-native-image-picker'
-import { FitImage } from '../../Image'
-import { paramsToObj } from '../../../Utils'
-import { getTagsView } from './TagsView'
-import { getGalleryView } from './GalleryView'
-import { getStatusView } from './StatusView'
-import { getCarSelectionView } from './CarSelectionView'
-import { IconButton } from '../../Button'
-import background from '../../../Styles/Themes/background';
-import palette from '../../../Styles/Themes/palette';
-
+import { FitImage } from '../../Components/Image';
+import { paramsToObj } from '../../Utils';
+import { getTagsView } from './TagsView';
+import { getGalleryView } from './GalleryView';
+import { getStatusView } from './StatusView';
+import { getCarSelectionView } from './CarSelectionView';
+import { IconButton } from '../../Components/Button';
+import background from '../../Styles/Themes/background';
+import palette from '../../Styles/Themes/palette';
 
 export class LandingPage extends Component<any, any> {
   private addPost: any;

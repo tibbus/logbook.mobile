@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from '../../Utils/connect';
 import { View, Navigator, Alert, StyleSheet } from 'react-native';
 
-import { Intro, Confirm, Success } from '../../Components/Cars/Verify'
-import { verifyUserCar } from '../../Actions/user'
+import { Intro } from './Intro';
+import { Confirm } from './Confirm';
+import { Success } from './Success';
+import { verifyUserCar } from '../../Actions/user';
 import { LoadingView } from '../../Components/LoadingView';
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });

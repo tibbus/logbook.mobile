@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
 import { ListView, Text, View, StyleSheet } from 'react-native';
 
-import { SearchCars } from '../../Components/Search';
+import { SearchCars } from './SearchCars';
 import { searchCars } from '../../Actions/search';
 import { getCarById } from '../../Actions/cars';
 

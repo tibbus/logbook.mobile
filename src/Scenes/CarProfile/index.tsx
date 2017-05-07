@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
 import { View, Image, StyleSheet, Text } from 'react-native';
 
-import { Info, Gallery, TechSpec, Overview } from '../../Components/Cars/Profile';
+import { Info } from './Info';
+import { Gallery } from './Gallery';
+import { TechSpec } from './TechSpec';
+import { Overview } from './Overview';
 import { FitImage } from '../../Components/Image';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';

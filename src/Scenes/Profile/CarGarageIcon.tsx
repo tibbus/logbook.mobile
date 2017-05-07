@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableHighlight, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { CaptionButton } from '../Button';
+import { CaptionButton } from '../../Components/Button';
 import pallete from '../../Styles/Themes/palette';
 
 export class CarGarageIcon extends Component<any, any> {
