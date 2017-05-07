@@ -6,7 +6,10 @@ import {
   SET_BROWSING_CAR,
   FOLLOW_CAR,
   SET_FOLLOWER_COUNT,
-  USER_CAR_VERIFIED
+  USER_CAR_VERIFIED,
+  ADD_TIMELINE,
+  ADD_TIMELINE_ITEM,
+  DELETE_TIMELINE_ITEM
 } from '../Actions/Types'
 
 /*
@@ -127,7 +130,10 @@ const setBrowsingCar = (state, carInfo, ownerInfo) => {
 }
 const updateBrowsingCarContent = (state, carContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carContent.carInfoId);
-
+  
+  let carImageCount = 0;
+  let carVideoCount = 0;
+  
   if (car) {
     if (carContent.type === 'Images') {
 
@@ -137,6 +143,7 @@ const updateBrowsingCarContent = (state, carContent) => {
             car.carImages.content.push(item)
           }
         })
+        carImageCount = car.carImages.content.length;
         car.carImages.loadPending = false;
       }
       else {
@@ -153,6 +160,7 @@ const updateBrowsingCarContent = (state, carContent) => {
             car.carVideos.content.push(item)
           }
         })
+        carVideoCount = car.carVideos.content.length;
         car.carVideos.loadPending = false;
       }
       else {
@@ -160,6 +168,9 @@ const updateBrowsingCarContent = (state, carContent) => {
         //Object.assign(car, getCarVideoContent(carContent));
       }
     }
+
+    car.carStats.mediaCount.count = carImageCount + carVideoCount;
+    car.carStats.mediaCount.loadPending = false;
 
     return { ...state };
   }
@@ -173,8 +184,44 @@ const addUserCar = (state, userCar) => {
   return {...state}
 }
 
+const setCarPostCount = (state, carInfoId, timeline) => {
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfoId);
+
+  if(car && car.carStats.postsCount.loadPending === true) {
+    car.carStats.postsCount.count = timeline.length;
+    car.carStats.postsCount.loadPending = false;
+
+    return { ...state };
+  }
+  
+  return state;
+}
+
+const updateCarPostCount = (state, carInfoId, operation) => {
+
+  const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === carInfoId);
+
+  if(car) {
+
+    if(operation === "ADD") {
+      car.carStats.postsCount.count += 1;
+      return {...state};
+    }
+    else if(operation === "REMOVE") {
+      car.carStats.postsCount.count -= 1;
+      return {...state};
+    }
+    else {
+      return state;
+    }
+  }
+
+  return state;
+
+}
+
 export const cars = (state = initialState, action) => {
-  const { type, userCars, userCar, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent } = action
+  const { type, userCars, userCar, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent, carInfoId, timeline } = action
 
   switch (type) {
 
@@ -210,6 +257,15 @@ export const cars = (state = initialState, action) => {
 
     case SET_FOLLOWER_COUNT:
       return updateCarFollowersCount(state, followersContent);
+
+    case ADD_TIMELINE:
+      return setCarPostCount(state, carInfoId, timeline);
+
+    case ADD_TIMELINE_ITEM:
+      return updateCarPostCount(state, carInfoId, "ADD");
+    
+    case DELETE_TIMELINE_ITEM:
+      return updateCarPostCount(state, carInfoId, "REMOVE");
 
     default:
       return state
