@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
-import {
-  Image,
-  StyleSheet
-} from 'react-native'
-import { BackScene } from '../Scenes'
-import { StatusEntry } from './'
-import {
-  addCarTimelineImage,
-  addCarTimelineStatus,
-  addCarTimelineVideo
-} from '../../Actions/timeline'
-import MediaPicker from 'react-native-image-picker'
-import { paramsToObj } from '../../Utils'
-import { last } from 'ramda'
+import React, { Component } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import MediaPicker from 'react-native-image-picker';
+import { last } from 'ramda';
+
+import { BackScene } from '../../Scenes/';
+import { StatusEntry } from './';
+import { addCarTimelineImage, addCarTimelineStatus, addCarTimelineVideo } from '../../Actions/timeline';
+import { paramsToObj } from '../../Utils';
 
 const styles = StyleSheet.create({
   container: {
