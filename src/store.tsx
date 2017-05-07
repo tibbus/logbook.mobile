@@ -11,4 +11,4 @@ export const store = createStore(
     applyMiddleware(thunk),
   ));
 
-export const dispatch: any = store.dispatch;
+export const dispatch = store.dispatch;
