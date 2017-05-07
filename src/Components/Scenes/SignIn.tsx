@@ -1,42 +1,14 @@
-import React, { Component } from 'react';
-import { Text, AsyncStorage } from 'react-native';
-
-import { IdentityOIDC } from '../Auth';
-import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types';
-import { getEnvironment } from '../../API/config';
-import { getIdentityEnvironment } from '../../API/config';
-import { setUserProfile } from '../../Actions/user';
-import { dispatch } from '../../store';
+import React, { Component } from 'react'
+import {
+  Text
+} from 'react-native'
+import { IdentityOIDC } from '../Auth'
+import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types'
+import { getEnvironment } from '../../API/config'
+import { getIdentityEnvironment } from '../../API/config'
+import { setUserProfile } from '../../Actions/user'
 
 export class SignIn extends Component<any, any> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true
-    };
-  }
-
-  componentDidMount() {
-    // logout -->
-    //AsyncStorage.removeItem('token:auth');
-    try {
-      AsyncStorage.getItem('token:auth', (err, result) => {
-        if (!result) {
-          this.setState({loading: false});
-          return;
-        }
-
-        const token = JSON.parse(result); 
-
-        dispatch({ token, type: SET_AUTH });
-        dispatch(setUserProfile);
-      });
-    } catch (error) {
-      this.setState({loading: false});
-      console.log(error);
-    }
-  }
 
   signIn (method: String) {
     const id = `sign-in-${method}`
@@ -55,32 +27,27 @@ export class SignIn extends Component<any, any> {
     )
   }
 
-  authSuccess = token => { console.log(token);
-    try {
-      AsyncStorage.setItem('token:auth', JSON.stringify(token));
-      //AsyncStorage.setItem('token:auth', null);
-    } catch (error) {
-      console.log(error);
-    }
+  authSuccess = token => {
+    const { dispatch } = this.props;
 
     dispatch({ token, type: SET_AUTH });
     dispatch(setUserProfile);
   }
 
   authError = error => {
+    const { dispatch } = this.props;
+
     dispatch({ type: SET_AUTH_ERROR, error });
   }
 
   attemptAuth = authService => {
+    const { dispatch } = this.props;
+
     dispatch({ type: ATTEMPT_OIDC_AUTH, authService: authService });
   }
 
   render () {
-    const { user } = this.props;
-
-    if (this.state.loading) {
-      return null;
-    }
+    const { user, dispatch } = this.props;
 
     return (
       <IdentityOIDC
@@ -97,4 +64,5 @@ export class SignIn extends Component<any, any> {
       />
     )
   }
+
 }
