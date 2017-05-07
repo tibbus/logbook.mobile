@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import {
-  Navigator
-} from 'react-native'
-import {
-  MainNav
-} from './'
-import { SignIn } from './Scenes'
-import { connect } from '../Utils/connect';
+import React, { Component } from 'react';
+import { Navigator } from 'react-native';
+
+import { MainNav } from './MainNav';
+import { SignIn } from '../'
+import { connect } from '../../Utils/connect';
 
 const configureScene = ({ sceneConfig, id }: any = {}) => {
   if (sceneConfig) {
@@ -25,7 +22,7 @@ export class RootNav extends Component<any, any> {
 
   renderScene(route, navigator) {
     const { dispatch, user } = this.props;
-    const routeId: string =  !user.token || !user.id ? null : 'main';
+    const routeId: string = !user.token || !user.id ? null : 'main';
 
     switch (routeId) {
       case 'main':

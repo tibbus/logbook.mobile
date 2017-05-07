@@ -8,10 +8,10 @@ import {
   Text,
   StyleSheet,
   Dimensions
-} from 'react-native'
-import { BackScene } from '../Scenes'
-import { hashToObj } from '../../Utils'
-import { FacebookButton, GoogleButton } from '../Button'
+} from 'react-native';
+import { BackScene } from '../';
+import { hashToObj } from '../../Utils';
+import { FacebookButton, GoogleButton } from '../../Components/Button';
 
 const { width, height } = Dimensions.get("window");
 

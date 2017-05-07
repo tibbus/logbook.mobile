@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import {
   StyleSheet,
   Text,
   TouchableHighlight,
   View
-} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const BackScene = ({
   children = null,

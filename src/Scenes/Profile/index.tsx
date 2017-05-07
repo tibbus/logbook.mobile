@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
 import { View, StyleSheet } from 'react-native';
 
-import { Main } from '../Profile';
-import { CarGarage } from '../Cars';
+import { Main } from '../../Components/Profile';
+import { CarGarage } from '../../Components/Cars';
 import { updateUserFollowCount, updateUserCars } from '../../Actions/user.js'
 
 const stateToProps = ({ user, cars }) => ({ user, cars });
@@ -26,11 +26,11 @@ export class Profile extends Component<any, any> {
         {<Main user={user} />}
         {<CarGarage cars={cars} user={user} navigator={navigator} />}
       </View>
-    )
+    );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 30,
@@ -45,4 +45,4 @@ var styles = StyleSheet.create({
     fontWeight: '700',
     paddingBottom: 10
   }
-})
+});

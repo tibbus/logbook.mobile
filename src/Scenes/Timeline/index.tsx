@@ -7,28 +7,24 @@ import {
   View
 } from 'react-native';
 import { connect } from '../../Utils/connect';
-import {
-  pauseVideoAction,
-  playVideoAction,
-  setCarTimeline
-} from '../../Actions/timeline';
+
+import { pauseVideoAction, playVideoAction, setCarTimeline} from '../../Actions/timeline';
 import { deletePost } from '../../Actions/post';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
-import { LoadingView } from '../LoadingView';
-import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../StatusEntry';
-import { getPost, PostMenu } from '../Post';
-import { Comments, CommentInput } from '../Comments';
+import { LoadingView } from '../../Components/LoadingView';
+import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../../Components/StatusEntry';
+import { getPost, PostMenu } from '../../Components/Post';
+import { Comments, CommentInput } from '../../Components/Comments';
 //importing styles
 import background from '../../Styles/Themes/background';
 
 const getTimeline = (timelines, carInfoIdArg) => {
-  const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg)
-  return timelineDetails ? timelineDetails.timeline : []
-}
+  const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg);
+  return timelineDetails ? timelineDetails.timeline : [];
+};
 
-
-const stateToProps = ({ timelines, comments, likes }) => ({ timelines, comments, likes })
+const stateToProps = ({ timelines, comments, likes }) => ({ timelines, comments, likes });
 
 @connect(stateToProps)
 export class Timeline extends Component<any, any> {
@@ -36,7 +32,7 @@ export class Timeline extends Component<any, any> {
   private userId: string;
 
   constructor(props) {
-    super(props)
+    super(props);
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     const { car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
@@ -114,7 +110,7 @@ export class Timeline extends Component<any, any> {
       return timelinePostComments.timelinePostId === post.activityData.id
     });
 
-    var postComments = [];
+    let postComments = [];
     if (filteredComments) {
       postComments = filteredComments.comments.map((postComment) => {
         return {
@@ -135,7 +131,7 @@ export class Timeline extends Component<any, any> {
 
         } />
       </View>
-    )
+    );
   }
 
   render() {
@@ -149,7 +145,7 @@ export class Timeline extends Component<any, any> {
           enableEmptySections={Boolean(true)}
           renderRow={this.renderRow.bind(this)} />
       </LoadingView>
-    )
+    );
   }
 }
 
@@ -184,4 +180,4 @@ const styles = StyleSheet.create({
   row: {
     marginTop: 10,
   }
-})
+});

@@ -1,30 +1,28 @@
-import React, { Component } from 'react'
-import {
-  Text
-} from 'react-native'
-import { IdentityOIDC } from '../Auth'
-import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types'
-import { getEnvironment } from '../../API/config'
-import { getIdentityEnvironment } from '../../API/config'
-import { setUserProfile } from '../../Actions/user'
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+
+import { IdentityOIDC } from './IdentityOIDC';
+import { ATTEMPT_OIDC_AUTH, SET_AUTH, SET_AUTH_ERROR } from '../../Actions/Types';
+import { getEnvironment } from '../../API/config';
+import { getIdentityEnvironment } from '../../API/config';
+import { setUserProfile } from '../../Actions/user';
 
 export class SignIn extends Component<any, any> {
-
-  signIn (method: String) {
+  signIn(method: String) {
     const id = `sign-in-${method}`
     this.props.navigator.push({
       id
-    })
+    });
   }
 
-  renderMessage ({ name, tokenExpired }) {
+  renderMessage({ name, tokenExpired }) {
     const message =
       tokenExpired
         ? `Sorry ${name}, you have been signed out`
         : `Welcome ${name}`
     return (
       <Text>{message}</Text>
-    )
+    );
   }
 
   authSuccess = token => {
@@ -46,7 +44,7 @@ export class SignIn extends Component<any, any> {
     dispatch({ type: ATTEMPT_OIDC_AUTH, authService: authService });
   }
 
-  render () {
+  render() {
     const { user, dispatch } = this.props;
 
     return (
@@ -62,7 +60,6 @@ export class SignIn extends Component<any, any> {
         onAuthSuccess={this.authSuccess}
         onAuthError={this.authError}
       />
-    )
+    );
   }
-
 }

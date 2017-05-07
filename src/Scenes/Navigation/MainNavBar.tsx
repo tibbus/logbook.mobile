@@ -1,13 +1,10 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { StyleSheet, TouchableHighlight, View } from 'react-native';
+
 //importing styles
-import background from '../Styles/Themes/background';
-import navBar from '../Styles/Themes/navBar';
+import background from '../../Styles/Themes/background';
+import navBar from '../../Styles/Themes/navBar';
 
 const styles = StyleSheet.create({
   container: {

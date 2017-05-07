@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
-import { SearchCars } from '../Search'
-import { searchCars } from '../../Actions/search.js'
-import { getCarById } from '../../Actions/cars.js'
-import {
-    ListView,
-    Text,
-    View,
-    StyleSheet
-} from 'react-native'
+import { ListView, Text, View, StyleSheet } from 'react-native';
+
+import { SearchCars } from '../../Components/Search';
+import { searchCars } from '../../Actions/search';
+import { getCarById } from '../../Actions/cars';
 
 const stateToProps = ({ search }) => ({ search });
 
 @connect(stateToProps)
 export class Search extends Component<any, any> {
-
     constructor(props) {
         super(props);
     }
@@ -28,7 +23,7 @@ export class Search extends Component<any, any> {
                 onSubmit={searchTerm => dispatch(searchCars({ searchTerm }))}
                 search={search}
                 navigator={navigator} />
-        )
+        );
     }
 }
 

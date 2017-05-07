@@ -1,13 +1,9 @@
-import React from 'react'
-import {
-  ListView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'
-import { BackScene } from '../Scenes/BackScene'
-import { is, isNil, length, pick } from 'ramda'
-import moment from 'moment'
+import React from 'react';
+import { ListView, StyleSheet, Text, View } from 'react-native';
+import { is, isNil, length, pick } from 'ramda';
+import moment from 'moment';
+
+import { BackScene } from '../../Scenes/BackScene/';
 
 const renderRow = (val: any = '', e, key) => {
   const valLength = length(val)
@@ -56,7 +52,7 @@ export const CarMOTHistory = ({
     const dateStr = moment(testDate).format('Mo MMMM YYYY')
     const style = isNil(expiryDate) ? styles.failed : styles.passed
     return (
-      <View style={[ styles.sectionHeader, style ]}>
+      <View style={[styles.sectionHeader, style]}>
         <Text>Test Date: {dateStr}</Text>
       </View>
     )
