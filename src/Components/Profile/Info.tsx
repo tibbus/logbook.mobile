@@ -11,9 +11,9 @@ export const Info = (props) => {
   return (
   <View style={styles.container}>
     <View style={styles.subContainer}>
-      <StatsText statsCount={props.user.carCount} statsCaption="Cars"/>
-      <StatsText statsCount={props.user.followCount} statsCaption="Follows"/>
-      <StatsText statsCount={props.user.followCount} statsCaption="Followers"/>
+      <StatsText count={props.user.carCount} caption="Cars" />
+      <StatsText count={props.user.followCount} caption="Follows" />
+      <StatsText count={props.user.followCount} caption="Followers" />
 
       <View style={styles.settingsContainer}>
         <Icon name='cog' style={styles.icon} />
