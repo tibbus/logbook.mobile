@@ -8,7 +8,8 @@ const initialState = {
   verifyingUserCar: false,
   addingUserCar: false,
   updatingUserCar: false,
-  profileLoading: false
+  profileLoading: false,
+  addPostLoading: false,
 }
 
 const setLoading = (state, resourceName, status) => {
@@ -20,7 +21,9 @@ const setLoading = (state, resourceName, status) => {
     case 'addUserCar':
       return { ...state, addingUserCar: status }
     case 'updateUserCar':
-      return { ...state, updatingUserCar: status }
+      return { ...state, addPostLoading: status }
+    case 'addPost':
+      return { ...state, addPostLoading: status }
     default:
       return state
   }

@@ -7,14 +7,16 @@ import {
   Text,
   TouchableHighlight
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { FitImage } from '../../Components/Image';
 
-export const getGalleryView = (galleryDataSource?, onAddMediaClick?) => {
+import pallete from '../../Styles/Themes/palette';
+
+export const getGalleryView = (galleryDataSource?, onAddMediaClick?, showAddMediaButton = true) => {
   return (
     <View style={styles.galleryContainer}>
       {
-        (galleryDataSource.getRowCount() > 0 && galleryDataSource.getRowCount() < 3) ? showAddMedia(onAddMediaClick) : null
+        (galleryDataSource.getRowCount() > 0 && galleryDataSource.getRowCount() < 3 && showAddMediaButton) ? showAddMedia(onAddMediaClick) : null
       }
       <ListView
         horizontal={true}
@@ -41,16 +43,22 @@ const galleryContent = (data) => {
 
 const showAddMedia = (onAddMediaClick) => {
   return (
-    <TouchableHighlight onPress={onAddMediaClick}>
-      <Text>Add Media</Text>
+    <TouchableHighlight style={styles.addMediaIconWrapper} onPress={onAddMediaClick}>
+      <View style={styles.addMediaIconView}>
+        <Icon name='plus-circle' style={styles.addMediaIcon} />
+        <Text style={styles.addMediaIconText}>Add Media</Text>
+      </View>
     </TouchableHighlight>
   )
 }
 
+const photoWidth = 120;
+const photoHeight = 120;
+
 const styles = StyleSheet.create({
   postPhoto: {
-    height: 120,
-    width: 120,
+    height: photoWidth,
+    width: photoHeight,
     borderRadius: 5,
     padding: 5,
     margin: 3
@@ -58,5 +66,28 @@ const styles = StyleSheet.create({
   galleryContainer: {
     flex: 1,
     flexDirection: 'row'
-  }
+  },
+  addMediaIconView: {
+    alignItems: 'center'
+  },
+  addMediaIconWrapper: {
+        backgroundColor: '#eaeaea',
+        borderRadius: 5,
+        width: photoWidth,
+        height: photoHeight,
+        margin: 3,
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+  } as React.ViewStyle,
+  addMediaIcon: {
+        fontSize: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: pallete.secondary
+  } as React.ViewStyle,
+  addMediaIconText: {
+      fontSize: 11,
+      color: pallete.secondary
+  } as React.ViewStyle,
 })

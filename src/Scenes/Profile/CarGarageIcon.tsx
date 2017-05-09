@@ -16,7 +16,6 @@ export class CarGarageIcon extends Component<any, any> {
                     <Icon name='plus' style={styles.carIcon} />
                     <Text style={styles.carIconText}>Add Car</Text>
                   </View>
-
                 </TouchableHighlight>
             );
         }
