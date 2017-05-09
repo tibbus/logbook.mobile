@@ -7,7 +7,8 @@ import {
   TouchableHighlight,
   Image,
   View,
-  Navigator
+  Navigator,
+  Alert
 } from 'react-native';
 
 import { LandingPage } from './LandingPage';
@@ -15,8 +16,9 @@ import { ConfirmPage } from './ConfirmPage';
 import { updateUserCars } from '../../Actions/user';
 import { addCarTimelinePost } from '../../Actions/timeline';
 import { updateAddPost, resetAddPost } from '../../Actions/post';
+import { LoadingView } from '../../Components/LoadingView';
 
-const stateToProps = ({ user, cars, post }) => ({ user, cars, post });
+const stateToProps = ({ user, cars, post, loadingStatus }) => ({ user, cars, post, loadingStatus });
 
 @connect(stateToProps)
 export class AddPost extends Component<any, any> {
@@ -32,60 +34,47 @@ export class AddPost extends Component<any, any> {
 
   }
 
-  componentWillReceiveProps({ post }) {
-
-    if (post.publishPending === true) {
-      this.setState({ postDetails: post.data });
-    }
-
-    if (post.publishPending === false && post.published === true) {
-      this.props.navigator.push({ id: 'profile' });
-    }
-
-    if (post.publishPending === false && post.published === false) {
-      this.navigator.push({ id: 'postFailed' });
-    }
-  }
-
   renderScene(route, navigator) {
     const { id } = route;
     const { dispatch } = this.props;
-    const props = { navigator: navigator, rootNav: this.props.navigator, cars: this.props.cars, user: this.props.user }
+    const rootNav = this.props.navigator;
+    const props = { navigator: navigator, rootNav: rootNav, cars: this.props.cars, user: this.props.user }
     this.navigator = navigator;
 
     switch (id) {
       case 'composePost':
         return (
-          <LandingPage {...props}
-            onNextClick={(postDetails) => {
-              dispatch(updateAddPost(postDetails))
-              navigator.push({ id: 'confirmPost' })
-            }} />
+          <LoadingView style={styles.container}
+          isLoading={this.props.loadingStatus.addPostLoading}>
+            <LandingPage {...props}
+              onNextClick={(postDetails) => {
+                dispatch(updateAddPost(postDetails, () => navigator.push({ id: 'confirmPost' })))
+              }} />
+          </LoadingView>
         )
       case 'confirmPost':
-        const postDetails = { postDetails: this.state.postDetails };
+        const postDetails = { postDetails: this.props.post.data };
         return (
-          <ConfirmPage {...props} {...postDetails}
-            onCancelClick={() => {
-              dispatch(resetAddPost())
-              this.props.navigator.pop()
-            }}
-            onPostClick={(postDetails) => dispatch(addCarTimelinePost(postDetails))} />
-        )
-      case 'postSuccess':
-        return (
-          <View><Text>Success</Text></View>
-        )
-
-      case 'postFailed':
-        return (
-          <View><Text>Failed</Text></View>
+          <LoadingView style={styles.container}
+          isLoading={this.props.loadingStatus.addPostLoading}>
+            <ConfirmPage {...props} {...postDetails}
+              onCancelClick={() => { dispatch(resetAddPost(() => this.props.navigator.pop()))}}
+              onPostClick={(postDetails) => dispatch(addCarTimelinePost(
+                postDetails,
+                () => rootNav.push({ id: 'home' }),
+                () => Alert.alert("Failed!", "Could not add post to car timeline!")))} />
+          </LoadingView>
         )
 
       default:
         return (
-          <LandingPage {...props}
-            onNextClick={(postDetails) => dispatch(updateAddPost(postDetails))} />
+          <LoadingView style={styles.container}
+          isLoading={this.props.loadingStatus.addPostLoading}>
+            <LandingPage {...props}
+              onNextClick={(postDetails) => {
+                dispatch(updateAddPost(postDetails, () => navigator.push({ id: 'confirmPost' })))
+              }} />
+          </LoadingView>
         )
     }
   }
@@ -98,3 +87,9 @@ export class AddPost extends Component<any, any> {
         renderScene={this.renderScene.bind(this)} />)
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  }
+});

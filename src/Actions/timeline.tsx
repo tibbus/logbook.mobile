@@ -3,7 +3,9 @@ import {
   ADD_TIMELINE_ITEM,
   PAUSE_TIMELINE_VIDEO,
   PLAY_TIMELINE_VIDEO,
-  POST_PUBLISHED
+  POST_PUBLISHED,
+  SET_LOADING_STATUS,
+  UNSET_LOADING_STATUS
 } from './Types'
 import { getTimeline } from '../API/Timeline'
 import { createStatus } from '../API/Status'
@@ -48,20 +50,24 @@ export const setCarTimeline = ({
   }
 }
 
-export const addCarTimelineStatus = ({
-  carInfoId,
-  description
-}) => {
+export const addCarTimelineStatus = (carInfoId, description, onSuccess, onFailure ) => {
   const body = { description, topics: [] }
   const request = { body }
 
   return dispatch => {
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     dispatch(details => dispatch(addTimelineItemAction(carInfoId, body, 'Status', true)))
     createStatus(request, { carInfoId })
       .then(details => {
         dispatch(addTimelineItemAction(carInfoId, details, 'Status'))
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+        onSuccess();
       })
-      .catch(console.info)
+      .catch(error => {
+        console.log(error);
+        onFailure();
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+      })
   }
 }
 
@@ -86,21 +92,22 @@ const fileRequest = (mediaType, location, description, files, tags) => ({
   }
 })
 
-export const addCarTimelinePost = (request) => {
+export const addCarTimelinePost = (request, onSuccess, onFailure) => {
   if (request.postType === 'image') {
-    return addCarTimelineImage(request);
+    return addCarTimelineImage(request, onSuccess, onFailure);
   }
   else if (request.postType === 'video') {
-    return addCarTimelineVideo(request);
+    return addCarTimelineVideo(request, onSuccess, onFailure);
   }
   else {
-    return addCarTimelineStatus(request)
+    return addCarTimelineStatus(request.carInfoId, request.description, onSuccess, onFailure)
   }
 }
 
-export const addCarTimelineImage = (postDetails) => {
+export const addCarTimelineImage = (postDetails, onSuccess, onFailure) => {
 
   return dispatch => {
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     // TODO handle image create error
     const { carInfoId, description, tags } = postDetails;
     createImage(fileRequest('image', '', description, postDetails.content.data, tags), { carInfoId })
@@ -114,6 +121,8 @@ export const addCarTimelineImage = (postDetails) => {
         dispatch({
           type: 'RESET_POST'
         })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+        onSuccess();
       })
       .catch((args) => {
         console.log(args)
@@ -122,13 +131,16 @@ export const addCarTimelineImage = (postDetails) => {
           publishPending: false,
           published: false
         })
+        onFailure();
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
       })
   }
 }
 
-export const addCarTimelineVideo = (postDetails) => {
+export const addCarTimelineVideo = (postDetails, onSuccess, onFailure) => {
 
   return dispatch => {
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     // TODO handle video create error
     const { carInfoId, description, tags } = postDetails;
     createVideo(fileRequest('video', '', description, postDetails.content.data, tags), { carInfoId })
@@ -142,6 +154,8 @@ export const addCarTimelineVideo = (postDetails) => {
         dispatch({
           type: 'RESET_POST'
         })
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+        onSuccess();
       })
       .catch((args) => {
         console.log(args)
@@ -150,6 +164,8 @@ export const addCarTimelineVideo = (postDetails) => {
           publishPending: false,
           published: false
         })
+        onFailure();
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
       })
   }
 }

@@ -89,7 +89,10 @@ export class LandingPage extends Component<any, any> {
     return (
       <View style={styles.contentContainer}>
         <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => onNextClick(postDetails)}>
-          <Text>Next</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.nextButtonText}>Next</Text>
+            <Text style={styles.nextButtonText}>></Text>
+          </View>
         </TouchableHighlight>
       </View>
     )
@@ -180,9 +183,11 @@ export class LandingPage extends Component<any, any> {
           <View style={styles.headerHeadingContainer}>
             <Text style={styles.headerHeadingText}>ADD POST</Text>
           </View>
-          <TouchableHighlight onPress={() => rootNav.pop()}>
-            <Text>Next</Text>
-          </TouchableHighlight>
+          <View style={styles.headerButtonContainer}>
+            <TouchableHighlight onPress={() => onNextClick(this.addPost)}>
+              <Text style={styles.headerButtonText}>Next</Text>
+            </TouchableHighlight>
+          </View>
         </View>
         {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
         {getStatusView(true, (text) => { this.addPost.description = text }, "")}
@@ -273,4 +278,9 @@ const styles = StyleSheet.create({
   } as React.TextStyle,
   headerHeadingText: {
   } as React.TextStyle,
+  nextButtonText: {
+    flex: 1,
+    fontSize: 20,
+    color: palette.secondary
+  } as React.ViewStyle,
 })

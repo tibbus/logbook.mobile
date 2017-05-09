@@ -9,7 +9,9 @@ import {
   DELETE_TIMELINE_ITEM,
   UPDATE_TIMELINE_ITEM,
   UPDATE_POST,
-  RESET_POST
+  RESET_POST,
+  SET_LOADING_STATUS,
+  UNSET_LOADING_STATUS
 } from './Types'
 
 const deleteMethods = {
@@ -43,15 +45,23 @@ export const updateStatus = (id, carInfoId, item) => dispatch => {
     .catch((...args) => console.log(args))
 }
 
-export const updateAddPost = (data) => dispatch => {
+export const updateAddPost = (data, onSuccess) => dispatch => {
+
+  dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
   dispatch({
     type: UPDATE_POST,
     item: { data }
   });
+  dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+  onSuccess();
+  
 }
 
-export const resetAddPost = () => dispatch => {
+export const resetAddPost = (onSuccess) => dispatch => {
+  dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
   dispatch({
     type: RESET_POST
   });
+  dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
+  onSuccess();
 }

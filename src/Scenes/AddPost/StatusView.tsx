@@ -37,7 +37,7 @@ const getStatusInput = (updateStatus) => {
 
 const getStatusDisplay = (status) => {
   return (
-    <Text>{status}</Text>
+    <Text style={styles.statusDisplay}>{status}</Text>
   )
 }
 
@@ -62,5 +62,10 @@ const styles = StyleSheet.create({
     color: 'black',
     marginTop: 10,
     // backgroundColor: 'black'
+  },
+  statusDisplay: {
+    flex:1,
+    marginTop: 10,
+    fontSize: 20
   }
 })

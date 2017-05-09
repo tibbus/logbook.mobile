@@ -9,6 +9,8 @@ import {
   ListView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import background from '../../Styles/Themes/background';
+import palette from '../../Styles/Themes/palette';
 
 import { FitImage } from '../../Components/Image';
 import { getTagsView } from './TagsView';
@@ -21,11 +23,16 @@ export class ConfirmPage extends Component<any, any> {
   constructor(props) {
     super(props)
 
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    this.state = {
-      tagsDataSource: ds.cloneWithRows(this.props.postDetails.tags),
-      contentDataSource: ds.cloneWithRows(this.props.postDetails.content.data)
-    };
+    const { postDetails } = props;
+
+    if(postDetails) {
+      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
+      this.state = {
+        tagsDataSource: ds.cloneWithRows(postDetails.tags),
+        contentDataSource:  ds.cloneWithRows(postDetails.content.data)
+      }
+    }
   }
 
   render() {
@@ -36,23 +43,29 @@ export class ConfirmPage extends Component<any, any> {
         <View style={styles.headerContainer}>
           <View style={styles.headerButtonContainer}>
             <TouchableHighlight style={styles.headerButton} onPress={onCancelClick}>
-              <Text>Cancel</Text>
+              <Text style={styles.headerButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
           <View style={styles.headerHeadingContainer}>
-            <Text style={styles.headerHeadingTextt}>ADD POST</Text>
+            <Text style={styles.headerHeadingText}>ADD POST</Text>
+          </View>
+          <View style={styles.headerButtonContainer}>
           </View>
         </View>
         {getCarSelectionView(false, null, null, postDetails.car)}
         {getStatusView(false, null, postDetails.description)}
-        <View style={{ flex: 1, borderBottomWidth: 2, borderBottomColor: '#000000' }}>
+        <View style={styles.tagsView}>
+          {getTagsView(this.state.tagsDataSource)}
         </View>
-        {getTagsView(this.state.tagsDataSource)}
-        {getGalleryView(this.state.contentDataSource)}
-        <View style={styles.contentContainer}>
-          <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => onPostClick(postDetails)}>
-            <Text>Post</Text>
-          </TouchableHighlight>
+        <View style={styles.emptyContainer}>
+          {getGalleryView(this.state.contentDataSource, null, false)}
+          <View style={styles.contentContainer}>
+            <TouchableHighlight style={styles.postActionButton} onPress={() => onPostClick(postDetails)}>
+              <View style={styles.postActionButtonContainer}>
+                <Text style={styles.postActionButtonText}>Post</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     )
@@ -63,28 +76,62 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  headerContainer: {
+ headerContainer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingHorizontal: 10
+    backgroundColor: background.secondary,
+    justifyContent: "space-around",
+    alignItems: "center",
   } as React.ViewStyle,
-  headerButtonContainer: {
+   headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
   } as React.ViewStyle,
   headerButton: {
   },
+  headerButtonText: {
+    fontWeight: "600",
+  } as React.TextStyle,
   headerHeadingContainer: {
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 50
   } as React.ViewStyle,
   headerHeadingText: {
   },
-  contentContainer: {
+    contentContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // alignItems: 'center', 
+    paddingVertical: 10,
+    backgroundColor: background.color,
+  } as React.ViewStyle,
+  tagsView: {
     flex: 1,
     flexDirection: 'row',
+    marginTop: 60,
+  } as React.ViewStyle,
+   emptyContainer: {
+    flex: 3,
+    backgroundColor: background.color,
+  } as React.ViewStyle,
+  postActionButton: {
+    flex: 1, 
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    backgroundColor: palette.primary,
+    justifyContent: "space-around",
+    height: 30,
+    marginHorizontal: 10
+  } as React.ViewStyle,
+  postActionButtonText: {
+    flex: 1,
+    fontSize: 20,
+    color: 'white'
+  } as React.ViewStyle,
+  postActionButtonContainer: {
+    paddingHorizontal: 10,
+    borderRadius: 5,
   } as React.ViewStyle,
 })
 

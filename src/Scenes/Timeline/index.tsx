@@ -13,7 +13,6 @@ import { deletePost } from '../../Actions/post';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
 import { LoadingView } from '../../Components/LoadingView';
-import { StatusCreate, StatusEdit, StatusEntrySnapshot } from '../../Components/StatusEntry';
 import { getPost, PostMenu } from '../../Components/Post';
 import { Comments, CommentInput } from '../../Components/Comments';
 //importing styles
