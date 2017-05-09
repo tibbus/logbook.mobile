@@ -22,14 +22,21 @@ export class ConfirmPage extends Component<any, any> {
 
   constructor(props) {
     super(props)
+
+    const { postDetails } = props;
+
+    if(postDetails) {
+      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
+      this.state = {
+        tagsDataSource: ds.cloneWithRows(postDetails.tags),
+        contentDataSource:  ds.cloneWithRows(postDetails.content.data)
+      }
+    }
   }
 
   render() {
     const { navigator, rootNav, cars, onCancelClick, onPostClick, postDetails } = this.props;
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
-    const tagsDataSource = ds.cloneWithRows(this.props.postDetails.tags);
-    const contentDataSource= ds.cloneWithRows(this.props.postDetails.content.data);
 
     return (
       <View style={styles.container}>
@@ -48,10 +55,10 @@ export class ConfirmPage extends Component<any, any> {
         {getCarSelectionView(false, null, null, postDetails.car)}
         {getStatusView(false, null, postDetails.description)}
         <View style={styles.tagsView}>
-          {getTagsView(tagsDataSource)}
+          {getTagsView(this.state.tagsDataSource)}
         </View>
         <View style={styles.emptyContainer}>
-          {getGalleryView(contentDataSource, null, false)}
+          {getGalleryView(this.state.contentDataSource, null, false)}
           <View style={styles.contentContainer}>
             <TouchableHighlight style={styles.postActionButton} onPress={() => onPostClick(postDetails)}>
               <View style={styles.postActionButtonContainer}>
@@ -96,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     // alignItems: 'center', 
-    paddingVertical: 30,
+    paddingVertical: 10,
     backgroundColor: background.color,
   } as React.ViewStyle,
   tagsView: {
@@ -112,9 +119,10 @@ const styles = StyleSheet.create({
     flex: 1, 
     alignItems: 'center',
     paddingHorizontal: 10,
-    color: palette.primary,
     backgroundColor: palette.primary,
     justifyContent: "space-around",
+    height: 30,
+    marginHorizontal: 10
   } as React.ViewStyle,
   postActionButtonText: {
     flex: 1,
