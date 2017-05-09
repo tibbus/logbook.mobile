@@ -28,15 +28,9 @@ export class ConfirmPage extends Component<any, any> {
     const { navigator, rootNav, cars, onCancelClick, onPostClick, postDetails } = this.props;
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
-    if(this.props.postDetails) {
-      const tags = this.props.postDetails.tags;
-      const contentData = this.props.postDetails.content.data;
+    const tagsDataSource = ds.cloneWithRows(this.props.postDetails.tags);
+    const contentDataSource= ds.cloneWithRows(this.props.postDetails.content.data);
 
-      this.state = {
-        tagsDataSource: ds.cloneWithRows(tags),
-        contentDataSource: ds.cloneWithRows(contentData),
-      };
-    }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -54,10 +48,10 @@ export class ConfirmPage extends Component<any, any> {
         {getCarSelectionView(false, null, null, postDetails.car)}
         {getStatusView(false, null, postDetails.description)}
         <View style={styles.tagsView}>
-          {getTagsView(this.state.tagsDataSource)}
+          {getTagsView(tagsDataSource)}
         </View>
         <View style={styles.emptyContainer}>
-          {getGalleryView(this.state.contentDataSource, null, false)}
+          {getGalleryView(contentDataSource, null, false)}
           <View style={styles.contentContainer}>
             <TouchableHighlight style={styles.postActionButton} onPress={() => onPostClick(postDetails)}>
               <View style={styles.postActionButtonContainer}>
