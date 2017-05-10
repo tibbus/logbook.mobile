@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { FitImage } from '../../Components/Image';
+import { ListVideo } from '../../Components/Video/ListVideo';
 
 import pallete from '../../Styles/Themes/palette';
 
@@ -37,7 +38,7 @@ const galleryContent = (data) => {
 
   if (data.type === "video") {
     // @TODO removed because undefined
-    //return <ListVideo key={data.uri} paused={true} uri={data.uri} onVideoPress={() => { this.paused === true ? this.paused = false : this.paused = true }} />;
+    return <ListVideo key={data.uri} paused={true} uri={data.uri} onVideoPress={() => { this.paused === true ? this.paused = false : this.paused = true }} />;
   }
 }
 

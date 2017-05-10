@@ -47,8 +47,12 @@ export class AddPost extends Component<any, any> {
           <LoadingView style={styles.container}
           isLoading={this.props.loadingStatus.addPostLoading}>
             <LandingPage {...props}
-              onNextClick={(postDetails) => {
-                dispatch(updateAddPost(postDetails, () => navigator.push({ id: 'confirmPost' })))
+              onPostClick={(postDetails) => {
+                //dispatch(updateAddPost(postDetails, () => navigator.push({ id: 'confirmPost' })))
+                dispatch(addCarTimelinePost(
+                  postDetails,
+                  () => rootNav.push({ id: 'home' }),
+                  () => Alert.alert("Failed!", "Could not add post to car timeline!")))
               }} />
           </LoadingView>
         )
@@ -72,7 +76,10 @@ export class AddPost extends Component<any, any> {
           isLoading={this.props.loadingStatus.addPostLoading}>
             <LandingPage {...props}
               onNextClick={(postDetails) => {
-                dispatch(updateAddPost(postDetails, () => navigator.push({ id: 'confirmPost' })))
+                dispatch(addCarTimelinePost(
+                  postDetails,
+                  () => rootNav.push({ id: 'home' }),
+                  () => Alert.alert("Failed!", "Could not add post to car timeline!")))
               }} />
           </LoadingView>
         )
