@@ -10,10 +10,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 export const ListVideo = ({
   onVideoPress,
   paused,
-  uri,
+  uri
 }) => (
     // @TODO remove style={styles.button} from the below component as was not defined
-    <TouchableOpacity onPress={() => onVideoPress(paused)}>
+    <TouchableOpacity onPress={onVideoPress}>
       <View>
         <Video
           source={{ uri }}

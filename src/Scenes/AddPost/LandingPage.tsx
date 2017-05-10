@@ -6,12 +6,12 @@ import {
   TouchableHighlight,
   Image,
   View,
-  ListView,
-  Alert
+  ListView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ImagePicker from 'react-native-image-picker';
+import MediaPicker from 'react-native-image-picker';
 
+import { FitImage } from '../../Components/Image';
 import { paramsToObj } from '../../Utils';
 import { getTagsView } from './TagsView';
 import { getGalleryView } from './GalleryView';
@@ -78,17 +78,20 @@ export class LandingPage extends Component<any, any> {
     return (
       <View style={styles.contentContainer}>
         {IconButton(() => this.onGalleryPress('video'), 'video-camera')}
+        {IconButton(() => this.onCameraPress(), 'circle-o')}
         {IconButton(() => this.onGalleryPress('image'), 'picture-o')}
       </View>
     )
   }
 
-  showPostButton(onPostClick) {
+  showNextButton(onNextClick) {
+    const postDetails = this.addPost;
     return (
       <View style={styles.contentContainer}>
-        <TouchableHighlight style={styles.postActionButton} onPress={() => onPostClick()}>
-          <View style={styles.postActionButtonContainer}>
-            <Text style={styles.postActionButtonText}>Post</Text>
+        <TouchableHighlight style={{ flex: 1, alignItems: 'center', paddingHorizontal: 10 }} onPress={() => onNextClick(postDetails)}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.nextButtonText}>Next</Text>
+            <Text style={styles.nextButtonText}>></Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -98,10 +101,9 @@ export class LandingPage extends Component<any, any> {
   onGalleryPress(type) {
     const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video' };
     const title = type === 'image' ? 'Photos' : 'Videos'
-    const titleLiveCapture = type === 'image' ? 'Take a photo...' : 'Take a video...'
-    const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
+    const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...' }
 
-    ImagePicker.showImagePicker(config, (response) => {
+    MediaPicker.launchImageLibrary(config, (response) => {
 
       const { didCancel, error, data, uri = '', origURL = '' } = response;
 
@@ -141,8 +143,34 @@ export class LandingPage extends Component<any, any> {
     })
   }
 
+  // @TODO check if this is used properly
+  onCameraPress() {
+    // @TODO check if it worked before as config should not be defined here
+    const config = null;
+
+    MediaPicker.launchCamera(config, response => {
+      const { didCancel, error, data, uri, origURL } = response;
+
+      if (didCancel) {
+        console.log(response);
+      }
+
+      if (error) {
+        console.log(response);
+      }
+
+      const params = getParams(origURL, uri)
+
+      if (!params) {
+        throw new Error('Error: Invalid file.')
+      }
+
+      console.log(response);
+    })
+  }
+
   render() {
-    const { navigator, rootNav, cars, onPostClick } = this.props;
+    const { navigator, rootNav, cars, onNextClick } = this.props;
 
     return (
       <View style={styles.container}>
@@ -156,8 +184,8 @@ export class LandingPage extends Component<any, any> {
             <Text style={styles.headerHeadingText}>ADD POST</Text>
           </View>
           <View style={styles.headerButtonContainer}>
-            <TouchableHighlight onPress={() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty."))}>
-                <Text style={styles.headerButtonText}>Post</Text>
+            <TouchableHighlight onPress={() => onNextClick(this.addPost)}>
+              <Text style={styles.headerButtonText}>Next</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -169,7 +197,7 @@ export class LandingPage extends Component<any, any> {
         <View style={styles.emptyContainer}>
           {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
           {
-            this.addPost.canAddContent ? this.showMenuBar() : this.showPostButton(() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty.")))
+            this.addPost.canAddContent ? this.showMenuBar() : this.showNextButton(onNextClick)
           }
         </View>
       </View>
@@ -183,7 +211,7 @@ const getParams = (origURL, uri) => {
   }
 
   // @TODO check how last keyword is working
-  const ext = uri.split('.').pop();
+  const ext = null//last(uri.split('.'))
   return {
     ext,
     id: 'anonymous',
@@ -203,26 +231,6 @@ const getCarOptions = (cars) => {
   });
 
   return carOptions;
-}
-
-const validateInput = (postDetails, onSuccess, onFailure) => {
-
-  let valid = true;
-
-  if(!postDetails.carInfoId) {
-    valid = false;
-  }
-
-  if(!postDetails.description) {
-    valid = false;
-  }
-
-  if(valid) {
-    onSuccess();
-  }
-  else {
-    onFailure();
-  }
 }
 
 const styles = StyleSheet.create({
@@ -274,23 +282,5 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     color: palette.secondary
-  } as React.ViewStyle,
-  postActionButton: {
-    flex: 1, 
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    backgroundColor: palette.primary,
-    justifyContent: "space-around",
-    height: 30,
-    //marginHorizontal: 10
-  } as React.ViewStyle,
-  postActionButtonText: {
-    flex: 1,
-    fontSize: 20,
-    color: 'white'
-  } as React.ViewStyle,
-  postActionButtonContainer: {
-    paddingHorizontal: 10,
-    borderRadius: 5,
   } as React.ViewStyle,
 })
