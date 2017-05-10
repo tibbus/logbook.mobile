@@ -27,8 +27,7 @@ export class TechSpec extends Component<any, any> {
     render() {
         const { car } = this.props;
         return (
-
-            <ScrollView
+            <View
                 automaticallyAdjustContentInsets={false}
                 style={styles.scrollView}>
                 <View style={{ height: 300 }}>
@@ -43,17 +42,15 @@ export class TechSpec extends Component<any, any> {
                     <Text>Transmission : {car.carInfo.transmission}</Text>
                     <Text>Capacity: {car.carInfo.cylinderCapacity}</Text>
                 </View>
-            </ScrollView>
-
-        )
+            </View>
+        );
     }
 }
 
 const styles = StyleSheet.create({
 
     scrollView: {
-        height: 300,
-        //flex:1
+        flex:1
     },
     separator: {
         flex: 1,

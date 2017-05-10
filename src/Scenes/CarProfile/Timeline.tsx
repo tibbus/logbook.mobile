@@ -140,6 +140,7 @@ export class Timeline extends Component<any, any> {
         isLoading={false}>
         <ListView
           contentContainerStyle={{ justifyContent: 'center' }}
+          scrollEnabled={false}
           style={styles.container}
           dataSource={this.state.dataSource}
           enableEmptySections={Boolean(true)}
@@ -157,10 +158,6 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   container: {
-    height: 400,
-    //flex: 1,
-    //marginLeft: 5,
-    //marginRight: 5,
     backgroundColor: background.color,
   },
   posts: {

@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import { View, Image, StyleSheet, Text, ScrollView } from 'react-native';
+import ScrollableTabView from '../../Components/react-native-scrollable-tab-view/';
+import ScrollableTabBar from '../../Components/react-native-scrollable-tab-view/ScrollableTabBar';
 
 import { Info } from './Info';
-import { Gallery } from './Gallery';
+import { ShowCase } from './ShowCase';
 import { TechSpec } from './TechSpec';
 import { Overview } from './Overview';
 import { FitImage } from '../../Components/Image';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setCarTimeline } from '../../Actions/timeline';
-import { BackScene, Timeline } from '../';
-import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import { BackScene } from '../';
+import { Timeline } from './Timeline'
+
 import palette from '../../Styles/Themes/palette';
 import background from '../../Styles/Themes/background';
 
@@ -24,7 +27,6 @@ const stateToProps = ({ user, cars, timelines }) => ({ user, cars, timelines });
 
 @connect(stateToProps)
 export class CarProfile extends Component<any, any> {
-
   constructor(props) {
     super(props);
 
@@ -58,7 +60,6 @@ export class CarProfile extends Component<any, any> {
   }
 
   componentWillReceiveProps({ cars, timelines = [] }) {
-
     const { dispatch, car, carInfoId } = this.props;
     let browsingCarId = 0;
     car ? browsingCarId = car.carInfo.id : browsingCarId = carInfoId;
@@ -80,6 +81,7 @@ export class CarProfile extends Component<any, any> {
   back(navigator) {
     navigator.pop()
   }
+
   render() {
     const { user, car, carInfoId, cars, navigator, dispatch, rootNav, timelines } = this.props;
 
@@ -126,23 +128,28 @@ export class CarProfile extends Component<any, any> {
       timeline: timeline,
     }
 
+    const userInfoComponent = (
+      <View style={styles.row}>
+        <View style={{ width: 100 }}>
+          <Image source={{ uri: image }} style={styles.photo} />
+        </View>
+
+        <Info ownerImage={browsingCar.ownerInfo.image}
+          ownerName={browsingCar.ownerInfo.name}
+          owned={owned}
+          carStats={browsingCar.carStats}
+          onSettingsPress={() => console.log("Settings")}
+          followed={followed}
+          onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
+          onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
+          verified={verified}
+          onVerifyPress={() => navigator.push({ id: 'verify' })} />
+      </View>
+    );
+
     return (
       <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
-        <View style={styles.container}>
-          <View style={styles.row}>
-            <FitImage resizeMode={Image.resizeMode.contain} source={{ uri: image }} style={styles.photo} />
-            <Info ownerImage={browsingCar.ownerInfo.image}
-              ownerName={browsingCar.ownerInfo.name}
-              owned={owned}
-              carStats={browsingCar.carStats}
-              onSettingsPress={() => console.log("Settings")}
-              followed={followed}
-              onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
-              onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
-              verified={verified}
-              onVerifyPress={() => navigator.push({ id: 'verify' })} />
-
-          </View>
+        <View style={{ flex: 1 }}>
           <ScrollableTabView
             initialPage={0}
             tabBarActiveTextColor={palette.primary}
@@ -150,12 +157,14 @@ export class CarProfile extends Component<any, any> {
             tabBarUnderlineStyle={styles.underline}
             tabBarTextStyle={styles.tabText}
             tabBarBackgroundColor={background.color}
-            renderTabBar={() => <ScrollableTabBar />}>
+            style={{ flex: 1 }}
+            aboveBarComponent={userInfoComponent}
+            renderTabBar={() => <ScrollableTabBar />}
+          >
             <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
             <Timeline tabLabel='TIMELINE' {...timelineProps} />
-            <Gallery tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
+            <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} style={{ flex: 1 }} />
             <TechSpec tabLabel='SPEC' car={car} />
-
           </ScrollableTabView>
         </View>
       </BackScene>
@@ -165,17 +174,10 @@ export class CarProfile extends Component<any, any> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // padding: 5,
-    // alignItems: 'center',
-    flexDirection: 'column',
+    flex: 1
   } as React.ViewStyle,
   row: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 30,
-    paddingVertical: 10,
+    flexDirection: 'row'
 
   } as React.ViewStyle,
   photo: {

@@ -53,11 +53,11 @@ export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, 
       <StatsText count={carStats.postsCount.count} caption="Posts" />
       <StatsText count={carStats.mediaCount.count} caption="Media" />
       <StatsText count={carStats.followersCount.count} caption="Followers" />
-      {ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
     </View>
+    {ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
     <View style={styles.subContainer}>
       <Image source={{ uri: ownerImage }} style={styles.photo} />
-      <Text style={textStyle.title}>{ownerName}</Text>
+      <Text style={styles.ownerName}>{ownerName}</Text>
     </View>
     <View style={styles.subContainer}>
       {VerifyButton(verified, owned, onVerifyPress)}
@@ -69,9 +69,7 @@ export const Info = ({ ownerImage, ownerName, owned, carStats, onSettingsPress, 
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
-    padding: 12,
-    alignItems: 'center',
+    flex: 1
   } as React.ViewStyle,
   statContainer: {
     flex: 1,
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 30,
+    padding: 30,
   } as React.ViewStyle,
   stats: {
     flex: 1,
@@ -89,6 +87,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 15
   } as React.ViewStyle,
+  ownerName: {
+    fontSize: 17,
+    marginLeft: 5,
+    fontWeight: '600'
+  },
   textHeading: {
     marginLeft: 12,
     fontSize: 16,

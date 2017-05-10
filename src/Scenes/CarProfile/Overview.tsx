@@ -10,7 +10,7 @@ import {
 
 import { FitImage } from '../../Components/Image'
 import { ListVideo } from '../../Components/Video/ListVideo';
-import { Timeline } from '../';
+import { Timeline } from './Timeline';
 //importing styles
 import background from '../../Styles/Themes/background';
 
@@ -78,10 +78,9 @@ export class Overview extends Component<any, any> {
   render() {
     const { timeline, timelineProps } = this.props;
     const uriInfo = getFeaturedItemContentUris(timeline);
-    console.log(uriInfo)
+
     return (
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
+      <View
         style={styles.scrollView}>
         <View>
           <View style={styles.headingContainer}>
@@ -105,8 +104,7 @@ export class Overview extends Component<any, any> {
           <Text>View Timeline > </Text>
         </View>
         <Timeline {...timelineProps} />
-      </ScrollView>
-
+      </View>
     )
   }
 }
@@ -114,26 +112,17 @@ export class Overview extends Component<any, any> {
 const styles = StyleSheet.create({
 
   scrollView: {
-    height: 300,
-    //flex:1
+    flex: 1
   },
   container: {
     height: 400,
     backgroundColor: background.color,
   },
   headingContainer: {
-    flexDirection: 'row'
   } as React.ViewStyle,
   featuredContainer: {
-    flex: 1,
-    flexDirection: 'row',
     //height: 300
   } as React.ViewStyle,
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
   horizontalScrollView: {
     //height: 300
   },
