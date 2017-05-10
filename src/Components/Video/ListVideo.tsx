@@ -21,7 +21,7 @@ export const ListVideo = ({
           paused={paused}
           repeat={Boolean(true)}
           controls={Boolean(true)}
-          style={{ height: 170, width: 300 }} />
+          style={{ height: 170, width: 100 }} />
 
         <View style={styles.iconContainer}>{paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
       </View>
