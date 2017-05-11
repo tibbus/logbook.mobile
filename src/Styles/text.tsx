@@ -4,10 +4,9 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   // === Container Styles ===
   statsContainer: {
-    flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-end', //or center
-    
+    marginRight: 20
   } as React.ViewStyle,
   settingsContainer: {
     flex: 2,

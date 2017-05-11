@@ -26,17 +26,16 @@ export class CarGarage extends Component<any, any> {
         const { cars, user, navigator } = this.props;
         return (
             <View style={styles.container}>
-                <Text style={textStyle.subtitle}>GARAGE</Text>
-                <ScrollView
-                    automaticallyAdjustContentInsets={false}
+                <Text style={[textStyle.subtitle, { paddingLeft: 30 }]}>GARAGE</Text>
+                <ScrollView automaticallyAdjustContentInsets={false}
                     horizontal={true}
-                    style={[styles.scrollView, styles.horizontalScrollView]}>
+                    style={[styles.horizontalScrollView]}>
                     {
                         cars.userCars.map(function (car) {
                             return createCarGarageIcon(car, navigator, user);
                         })
                     }
-                    {<CarGarageIcon onPress={() => navigator.push({ id: 'addCar' })} />}
+                    <CarGarageIcon onPress={() => navigator.push({ id: 'addCar' })} />
                 </ScrollView>
             </View>
         );
@@ -45,15 +44,13 @@ export class CarGarage extends Component<any, any> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 4,
-        paddingLeft: 30,
-        paddingVertical: 30,
-        //allowFontScaling: true
-    },
-    scrollView: {
-        flex: 1,
+        paddingVertical: 20
     },
     horizontalScrollView: {
-        height: 220,
-    },
+        //@todo investigate why paddingRight is not working in the scrollView
+        paddingHorizontal: 30,
+        paddingRight: 30,
+        flex: 1,
+        height: 220
+    }
 });

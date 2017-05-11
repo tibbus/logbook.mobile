@@ -10,7 +10,7 @@ export const Info = (props) => {
 
   return (
   <View style={styles.container}>
-    <View style={styles.subContainer}>
+    <View style={styles.infoContainer}>
       <StatsText count={props.user.carCount} caption="Cars" />
       <StatsText count={props.user.followCount} caption="Follows" />
       <StatsText count={props.user.followCount} caption="Followers" />
@@ -31,9 +31,7 @@ export const Info = (props) => {
 const styles = StyleSheet.create({
   // === Container Styles ===
   container: {
-    flex: 1,
-    paddingRight: 30,
-    //allowFontScaling: true
+    flex: 1
   },
   profilePicture: {
     borderWidth: 1,
@@ -45,18 +43,18 @@ const styles = StyleSheet.create({
   headline: {
     fontSize: 30,
     fontWeight: "700",
-    marginLeft: 30,
+    marginLeft: 20,
     flex: 8
   },
-  subContainer: {
-    flex: 1,
+  infoContainer: {
     flexDirection:'row',
-    paddingTop: 15,
+    marginTop: 20,
+    marginHorizontal: 30,
     alignItems: 'flex-start',
   },
   nameContainer: {
-    paddingHorizontal: 30,
-    flex: 1.2,
+    marginTop: 20,
+    paddingHorizontal: 25,
     flexDirection:'row'
   },
   statsContainer: {

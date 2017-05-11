@@ -20,7 +20,7 @@ export class Main extends Component<any, any> {
                     <View style={{flex: 1}} />
                     <Icon name='camera' style={styles.icon} />
                 </Image>
-                <Info style={styles.info} user={user} />
+                <Info user={user} />
             </View>
         )
     }
@@ -30,13 +30,9 @@ const coverPhotoHeight = 275;
 const profilePictureHeight = 50;
 const styles = StyleSheet.create({
     container: {
-        flex: 6
     },
     backdrop: {
-        flex: 1.4
-    },
-    info: {
-        flex: 1,
+        height: 300
     },
     icon: {
         fontSize: 25,

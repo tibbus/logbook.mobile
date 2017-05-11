@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import { Main } from './Main';
 import { CarGarage } from './CarGarage';
@@ -22,10 +22,10 @@ export class Profile extends Component<any, any> {
   render() {
     const { user, cars, navigator } = this.props;
     return (
-      <View style={styles.scrollView}>
+      <ScrollView style={styles.scrollView}>
         {<Main user={user} />}
         {<CarGarage cars={cars} user={user} navigator={navigator} />}
-      </View>
+      </ScrollView>
     );
   }
 }

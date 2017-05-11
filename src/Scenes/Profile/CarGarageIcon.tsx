@@ -50,7 +50,7 @@ var styles = StyleSheet.create({
         borderRadius: 3,
         width: photoWidth,
         height: photoHeight,
-        marginRight: 20,
+        marginRight: 30,
         alignItems: 'center',
         justifyContent: 'center',
     } as React.ViewStyle,
