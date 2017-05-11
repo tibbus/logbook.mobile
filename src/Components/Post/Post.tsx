@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native'
-import { ListVideo } from '../Video/ListVideo';
+import { LBVideo } from '../Video';
 import { FitImage } from '../Image';
 import Icon from 'react-native-vector-icons/FontAwesome'
 //importing styles
@@ -34,11 +34,12 @@ const renderMedia = (type, data) => {
 
     case 'Video':
       return contentUris.map(uri => (
-        <ListVideo
+        <LBVideo
           key={uri}
           paused={paused}
           uri={uri}
-          onVideoPress={() => onVideoPress(data)} />
+          height={200}
+          width={300}/>
       ))
 
     default:
@@ -117,7 +118,9 @@ export const Post = (data: any = {}) => {
           </View>
         </View>
         <View>
-          <Text style={styles.description}>{description}</Text>
+          <View>
+            <Text style={styles.description}>{description}</Text>
+          </View>
           <View>
             {renderMedia(type, data)}
           </View>
