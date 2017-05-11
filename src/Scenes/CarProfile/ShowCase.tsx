@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { FitImage } from '../../Components/Image'
-import { ListVideo } from '../../Components/Video/ListVideo';
+import { LBVideo } from '../../Components/Video';
 
 const galleryContent = (contentUri, type) => {
 
@@ -20,7 +20,7 @@ const galleryContent = (contentUri, type) => {
   }
 
   if (type === "Video") {
-    return <ListVideo key={contentUri} paused={true} uri={contentUri} onVideoPress={() => this.paused = false} />;
+    return <LBVideo key={contentUri} paused={true} uri={contentUri}/>;
   }
 }
 

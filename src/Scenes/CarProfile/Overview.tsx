@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { FitImage } from '../../Components/Image'
-import { ListVideo } from '../../Components/Video/ListVideo';
+import { LBVideo } from '../../Components/Video';
 import { Timeline } from './Timeline';
 //importing styles
 import background from '../../Styles/Themes/background';
@@ -65,7 +65,7 @@ const featuredViewItem = (item) => {
   }
 
   if (item.type === "Video") {
-    return <ListVideo key={item.uri} paused={true} uri={item.uri} onVideoPress={() => this.paused = false} />
+    return <LBVideo key={item.uri} paused={true} uri={item.uri} />
   }
 }
 
