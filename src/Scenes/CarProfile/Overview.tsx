@@ -6,13 +6,16 @@ import {
   ScrollView,
   Image,
   ListView,
+  TouchableOpacity
 } from 'react-native';
 
-import { FitImage } from '../../Components/Image'
+var Lightbox = require('react-native-lightbox');
+
 import { LBVideo } from '../../Components/Video';
 import { Timeline } from './Timeline';
 //importing styles
 import background from '../../Styles/Themes/background';
+import palette from '../../Styles/Themes/palette'
 
 const compareTimelineItems = (itemA, itemB) => {
   let itemAScore = 0;
@@ -61,11 +64,11 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <FitImage key={item.uri} source={{ uri: item.uri }} style={styles.photo} />
+    return <Lightbox><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo}/></Lightbox>
   }
 
   if (item.type === "Video") {
-    return <LBVideo key={item.uri} paused={true} uri={item.uri} />
+    return <LBVideo key={item.uri} paused={true} uri={item.uri} style={styles.photo} />
   }
 }
 
@@ -76,7 +79,7 @@ export class Overview extends Component<any, any> {
   }
 
   render() {
-    const { timeline, timelineProps } = this.props;
+    const { timeline, timelineProps, tabView } = this.props;
     const uriInfo = getFeaturedItemContentUris(timeline);
 
     return (
@@ -84,15 +87,16 @@ export class Overview extends Component<any, any> {
         style={styles.scrollView}>
         <View>
           <View style={styles.headingContainer}>
-            <Text>Featured</Text>
-            <Text>View Showcase > </Text>
+            <Text style={styles.headingFirstTitle}>FEATURED</Text>
+            <TouchableOpacity onPress={() => tabView.goToPage(2)}>
+              <Text style={styles.headingSecondTitle}>View Showcase > </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.featuredContainer}>
             <ScrollView
               automaticallyAdjustContentInsets={false}
               horizontal={true}
-              style={styles.horizontalScrollView}
-            >
+              style={styles.horizontalScrollView}>
               {
                 uriInfo.map((item) => featuredViewItem(item))
               }
@@ -100,8 +104,10 @@ export class Overview extends Component<any, any> {
           </View>
         </View>
         <View style={styles.headingContainer}>
-          <Text>Highlights</Text>
-          <Text>View Timeline > </Text>
+          <Text style={styles.headingFirstTitle}>HIGHLIGHTS</Text>
+          <TouchableOpacity onPress={() => tabView.goToPage(1)}>
+            <Text style={styles.headingSecondTitle}>View Timeline > </Text>
+          </TouchableOpacity>
         </View>
         <Timeline {...timelineProps} />
       </View>
@@ -119,6 +125,26 @@ const styles = StyleSheet.create({
     backgroundColor: background.color,
   },
   headingContainer: {
+    flex:1,
+    flexDirection: 'row',
+    marginTop: 15,
+    marginBottom: 5
+  } as React.ViewStyle,
+  headingFirstTitle: {
+    flex:1.5,
+    flexDirection: 'row',
+    fontSize: 18,
+    fontWeight: '700',
+    color: palette.text,
+    paddingLeft: 20
+  } as React.ViewStyle,
+  headingSecondTitle: {
+    flex:1,
+    flexDirection: 'row',
+    fontSize: 14,
+    fontWeight: '400',
+    color: palette.inactive,
+    paddingRight: 10
   } as React.ViewStyle,
   featuredContainer: {
     //height: 300
@@ -126,9 +152,7 @@ const styles = StyleSheet.create({
   horizontalScrollView: {
     //height: 300
   },
-  photo: {
-    height: 120,
-    width: 120,
+  photo: {  
     borderRadius: 5,
     padding: 5,
     margin: 3

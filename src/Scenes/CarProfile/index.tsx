@@ -27,6 +27,9 @@ const stateToProps = ({ user, cars, timelines }) => ({ user, cars, timelines });
 
 @connect(stateToProps)
 export class CarProfile extends Component<any, any> {
+
+  private scrollableTabView: {};
+
   constructor(props) {
     super(props);
 
@@ -125,6 +128,7 @@ export class CarProfile extends Component<any, any> {
     }
 
     const overViewProps = {
+      tabView: this.scrollableTabView,
       timeline: timeline,
     }
 
@@ -151,6 +155,7 @@ export class CarProfile extends Component<any, any> {
       <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
         <View style={{ flex: 1 }}>
           <ScrollableTabView
+            ref={(tabView) => {this.scrollableTabView = tabView}}
             initialPage={0}
             tabBarActiveTextColor={palette.primary}
             tabBarInactiveTextColor={palette.inactive}

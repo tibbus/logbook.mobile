@@ -23,8 +23,8 @@ export class LBVideo extends Component<any,any> {
     this.state = {
       uri: props.uri,
       paused: props.paused,
-      height: (props.height) ? props.height : 170,
-      width: (props.width) ? props.width : 120
+      height: (props.height) ? props.height : 120,
+      width: (props.width) ? props.width : 170
     }
   }
 
@@ -39,7 +39,7 @@ export class LBVideo extends Component<any,any> {
             paused={this.state.paused}
             repeat={Boolean(true)}
             controls={Boolean(true)}
-            style={{ height: this.state.height, width: this.state.width }} />
+            style={this.props.style} />
 
           <View style={styles.iconContainer}>{this.state.paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
         </TouchableOpacity>
