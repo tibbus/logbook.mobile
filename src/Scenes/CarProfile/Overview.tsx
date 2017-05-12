@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
     //height: 300
   },
   photo: {  
+    height: 120, 
+    width: 120,
     borderRadius: 5,
     padding: 5,
     margin: 3
