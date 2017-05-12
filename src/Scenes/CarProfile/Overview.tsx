@@ -61,7 +61,7 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <FitImage key={item.uri} resizeMode={Image.resizeMode.contain} source={{ uri: item.uri }} style={styles.photo} />
+    return <FitImage key={item.uri} source={{ uri: item.uri }} style={styles.photo} />
   }
 
   if (item.type === "Video") {

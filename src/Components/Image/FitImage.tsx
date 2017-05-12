@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  Image
+  Image,
+  Dimensions
 } from 'react-native'
+var Lightbox = require('react-native-lightbox');
+
+let WINDOW_WIDTH = Dimensions.get('window').width;
 
 export class FitImage extends Component<any, any> {
   // @TODO check if this will work
@@ -15,6 +19,7 @@ export class FitImage extends Component<any, any> {
   }
 
   private isMount: boolean;
+  private isFullScreen: boolean;
 
   constructor(props) {
     super(props)
@@ -36,7 +41,7 @@ export class FitImage extends Component<any, any> {
       height: 0,
       layoutWidth: undefined,
       originalWidth: undefined,
-      originalHeight: undefined
+      originalHeight: undefined,
     }
   }
 
@@ -92,7 +97,7 @@ export class FitImage extends Component<any, any> {
   }
 
   resize(event) {
-    const { width } = event.nativeEvent.layout
+    const width  = (this.isFullScreen === true) ? WINDOW_WIDTH : event.nativeEvent.layout.width;
     const height = this.getHeight(width)
 
     this.setState({
@@ -103,15 +108,18 @@ export class FitImage extends Component<any, any> {
 
   render() {
     return (
-      <Image
-        source={this.props.source}
-        style={[
-          { height: this.state.height },
-          this.props.style,
-          this.getStyle()
-        ]}
-        onLayout={(event) => this.resize(event)}
-      />
+      <Lightbox onOpen={() => {this.isFullScreen = true;}} onClose={() => {this.isFullScreen = false}}>
+        <Image
+          source={this.props.source}
+          style={[
+            { height: this.state.height },
+            { width: this.props.style },
+            this.getStyle()
+          ]}
+          resizeMode='contain'
+          onLayout={(event) => this.resize(event)}
+        />
+      </Lightbox>
     )
   }
 }
