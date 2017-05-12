@@ -23,7 +23,7 @@ const renderMedia = (type, data) => {
   switch (type) {
     case 'Image':
       return contentUris.map(uri => (
-        <FitImage
+        <Image
           key={uri}
           resizeMode={Image.resizeMode.contain}
           source={{ uri }}

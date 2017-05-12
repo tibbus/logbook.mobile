@@ -8,7 +8,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { FitImage } from '../../Components/Image';
 import { LBVideo } from '../../Components/Video';
 
 import pallete from '../../Styles/Themes/palette';
@@ -33,7 +32,7 @@ export const getGalleryView = (galleryDataSource?, onAddMediaClick?, showAddMedi
 const galleryContent = (data) => {
 
   if (data.type === "image") {
-    return <FitImage key={data.uri} resizeMode={Image.resizeMode.contain} source={{ uri: data.uri }} style={styles.postPhoto} />
+    return <Image key={data.uri} resizeMode={Image.resizeMode.contain} source={{ uri: data.uri }} style={styles.postPhoto} />
   }
 
   if (data.type === "video") {
