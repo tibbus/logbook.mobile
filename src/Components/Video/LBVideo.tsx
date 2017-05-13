@@ -39,7 +39,7 @@ export class LBVideo extends Component<any,any> {
             paused={this.state.paused}
             repeat={Boolean(true)}
             controls={Boolean(true)}
-            style={this.props.style} />
+            style={[this.props.style, {height: this.state.height}, {width: this.state.width} ]} />
 
           <View style={styles.iconContainer}>{this.state.paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
         </TouchableOpacity>
