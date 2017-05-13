@@ -15,7 +15,8 @@ export class FitImage extends Component<any, any> {
     originalHeight: PropTypes.number,
     originalWidth: PropTypes.number,
     source: PropTypes.object.isRequired,
-    style: Image.propTypes.style
+    style: Image.propTypes.style,
+    circle: PropTypes.bool
   }
 
   private isMount: boolean;

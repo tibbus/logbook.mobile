@@ -21,7 +21,7 @@ export default StyleSheet.create({
     alignItems: 'flex-end'
   } as React.TextStyle,
   statsCaptionText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '200'
   } as React.TextStyle,
   settingsIcon: {

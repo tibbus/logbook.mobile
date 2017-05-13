@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     container: {
     },
     backdrop: {
-        height: 300
+        height: 250
     },
     icon: {
         fontSize: 25,

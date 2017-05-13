@@ -4,11 +4,12 @@ import { View, Image, StyleSheet, Text, ScrollView } from 'react-native';
 import ScrollableTabView from '../../Components/react-native-scrollable-tab-view/';
 import ScrollableTabBar from '../../Components/react-native-scrollable-tab-view/ScrollableTabBar';
 
-import { Info } from './Info';
+import { styles } from './carProfile.styles';
+import { Info } from './info/info.component';
 import { ShowCase } from './ShowCase';
 import { TechSpec } from './TechSpec';
 import { Overview } from './Overview';
-import { FitImage } from '../../Components/Image';
+import { SquareImage } from '../../Components/SquareImage';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setCarTimeline } from '../../Actions/timeline';
@@ -133,21 +134,25 @@ export class CarProfile extends Component<any, any> {
     }
 
     const userInfoComponent = (
-      <View style={styles.row}>
-        <View style={{ width: 100 }}>
-          <Image source={{ uri: image }} style={styles.photo} />
-        </View>
+      <View>
+        <View style={styles.infoWrapper}>
+          <View style={styles.imageWrapper}>
+            <SquareImage source={{ uri: image }} />
+          </View>
 
-        <Info ownerImage={browsingCar.ownerInfo.image}
-          ownerName={browsingCar.ownerInfo.name}
-          owned={owned}
-          carStats={browsingCar.carStats}
-          onSettingsPress={() => console.log("Settings")}
-          followed={followed}
-          onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
-          onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
-          verified={verified}
-          onVerifyPress={() => navigator.push({ id: 'verify' })} />
+          <Info owned={owned}
+            car={browsingCar}
+            onSettingsPress={() => console.log("Settings")}
+            followed={followed}
+            onFollowPress={() => dispatch(followCar(user.id, browsingCar.carInfo.id))}
+            onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
+            verified={verified}
+            onVerifyPress={() => navigator.push({ id: 'verify' })} />
+        </View>
+        <View style={styles.carModelWrapper}>
+          <Text style={styles.carName}>{car.carInfo.car.model}</Text>
+          <Text style={[styles.carName, styles.carYear]}> {car.carInfo.car.yearOfManufacture}</Text>
+        </View>
       </View>
     );
 
@@ -176,27 +181,3 @@ export class CarProfile extends Component<any, any> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  } as React.ViewStyle,
-  row: {
-    flexDirection: 'row'
-
-  } as React.ViewStyle,
-  photo: {
-    height: 100,
-    width: 100,
-    borderRadius: 50
-  },
-  underline: {
-    backgroundColor: 'green',
-    height: 0,
-  },
-  tabText: {
-    fontSize: 18,
-    fontWeight: '700',
-    // marginHorizontal: 10,
-  },
-});

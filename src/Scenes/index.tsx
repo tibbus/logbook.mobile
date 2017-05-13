@@ -3,7 +3,7 @@ export * from './SignIn/';
 export * from './Search/';
 export * from './Profile/';
 export * from './AddCar/';
-export * from './CarProfile/';
+export * from './CarProfile/carProfile.component';
 export * from './AddPost/';
 export * from './Feed/';
 export * from './VerifyCar/';

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import palette from '../../Styles/Themes/palette';
 import { StatsText } from '../../Components/Text';
+import textStyle from '../../Styles/text';
 
 export const Info = (props) => {
   const imageUrl = props.user.profileImg ? props.user.profileImg : 'http://www.lcfc.com/images/common/bg_player_profile_default_big.png';
@@ -17,7 +18,7 @@ export const Info = (props) => {
 
       <View style={styles.settingsContainer}>
         <Icon name='cog' style={styles.icon} />
-        <Text style={styles.captionText}>{`Settings`}</Text>
+        <Text style={textStyle.statsCaptionText}>{`Settings`}</Text>
       </View>
     </View>
 
@@ -35,15 +36,15 @@ const styles = StyleSheet.create({
   },
   profilePicture: {
     borderWidth: 1,
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     borderColor: 'white',
   },
   headline: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "700",
-    marginLeft: 20,
+    marginLeft: 15,
     flex: 8
   },
   infoContainer: {
