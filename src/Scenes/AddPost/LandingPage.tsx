@@ -52,9 +52,12 @@ export class LandingPage extends Component<any, any> {
   }
 
   componentDidMount() {
-    const cars = getCarOptions(this.props.cars.userCars);
-    const { id } = cars[0]
-    this.onSelectCar(id, cars[0])
+    
+    if(this.props.cars.userCars.length > 0) {
+      const cars = getCarOptions(this.props.cars.userCars);
+      const { id } = cars[0]
+      this.onSelectCar(id, cars[0])
+    }
   }
 
   onSelectCar(id, value) {
@@ -142,38 +145,62 @@ export class LandingPage extends Component<any, any> {
   }
 
   render() {
-    const { navigator, rootNav, cars, onPostClick } = this.props;
+    const { navigator, rootNav, cars, onPostClick, user } = this.props;
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={styles.headerButtonContainer}>
-            <TouchableHighlight onPress={() => rootNav.pop()}>
-              <Text style={styles.headerButtonText}>Cancel</Text>
-            </TouchableHighlight>
+    if(cars.userCars.length < 1) {
+       return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <View style={styles.headerButtonContainer}>
+              <TouchableHighlight onPress={() => rootNav.pop()}>
+                <Text style={styles.headerButtonText}>Back</Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.headerHeadingContainer}>
+              <Text style={styles.headerHeadingText}>ADD POST</Text>
+            </View>
+            <View style={styles.headerButtonContainer}>
+            </View>
           </View>
-          <View style={styles.headerHeadingContainer}>
-            <Text style={styles.headerHeadingText}>ADD POST</Text>
-          </View>
-          <View style={styles.headerButtonContainer}>
-            <TouchableHighlight onPress={() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty."))}>
-                <Text style={styles.headerButtonText}>Post</Text>
-            </TouchableHighlight>
+          <View style={styles.emptyGarageTextView}>
+            <Text style={styles.emptyGarageText}>Your garage is empty. Please add a car to your garage before adding a post.</Text>
           </View>
         </View>
-        {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
-        {getStatusView(true, (text) => { this.addPost.description = text }, "")}
-        <View style={styles.tagsView}>
-          {getTagsView(this.state.tagsDataSource)}
+      )
+    }
+    else {
+
+      return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <View style={styles.headerButtonContainer}>
+              <TouchableHighlight onPress={() => rootNav.pop()}>
+                <Text style={styles.headerButtonText}>Cancel</Text>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.headerHeadingContainer}>
+              <Text style={styles.headerHeadingText}>ADD POST</Text>
+            </View>
+            <View style={styles.headerButtonContainer}>
+              <TouchableHighlight onPress={() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty."))}>
+                  <Text style={styles.headerButtonText}>Post</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+          {getCarSelectionView(true, getCarOptions(cars.userCars), (id, value) => this.onSelectCar(id, value), this.addPost.car)}
+          {getStatusView(true, (text) => { this.addPost.description = text }, "", user.profileImg)}
+          <View style={styles.tagsView}>
+            {getTagsView(this.state.tagsDataSource)}
+          </View>
+          <View style={styles.emptyContainer}>
+            {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
+            {
+              this.addPost.canAddContent ? this.showMenuBar() : this.showPostButton(() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty.")))
+            }
+          </View>
         </View>
-        <View style={styles.emptyContainer}>
-          {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
-          {
-            this.addPost.canAddContent ? this.showMenuBar() : this.showPostButton(() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty.")))
-          }
-        </View>
-      </View>
-    )
+      )
+    }
   }
 }
 
@@ -293,4 +320,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
   } as React.ViewStyle,
+  emptyGarageTextView: {
+    flex: 5,
+    flexDirection: 'row',
+  } as React.ViewStyle,
+  emptyGarageText: {
+    flex:1,
+    flexDirection:'row'
+  } as React.ViewStyle
 })

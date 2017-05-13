@@ -36,7 +36,7 @@ export class ConfirmPage extends Component<any, any> {
   }
 
   render() {
-    const { navigator, rootNav, cars, onCancelClick, onPostClick, postDetails } = this.props;
+    const { navigator, rootNav, cars, onCancelClick, onPostClick, postDetails, user } = this.props;
 
     return (
       <View style={styles.container}>
@@ -53,7 +53,7 @@ export class ConfirmPage extends Component<any, any> {
           </View>
         </View>
         {getCarSelectionView(false, null, null, postDetails.car)}
-        {getStatusView(false, null, postDetails.description)}
+        {getStatusView(false, null, postDetails.description, user.profileImg)}
         <View style={styles.tagsView}>
           {getTagsView(this.state.tagsDataSource)}
         </View>
