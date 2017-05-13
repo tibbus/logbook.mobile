@@ -10,10 +10,10 @@ import {
 import palette from '../../Styles/Themes/palette';
 import screen from '../../Styles/Themes/screen';
 
-export const getStatusView = (editMode, updateStatus, status) => {
+export const getStatusView = (editMode, updateStatus, status, userProfileImage) => {
   return (
     <View style={styles.contentDescriptionContainer}>
-      <Image source={{ uri: 'https://maxcdn.icons8.com/iOS7/PNG/75/Users/user_male_circle_filled-75.png' }} style={styles.icon} />
+      <Image source={{ uri: userProfileImage }} style={styles.icon} />
       {
         editMode ? getStatusInput(updateStatus) : getStatusDisplay(status)
       }
@@ -30,7 +30,7 @@ const getStatusInput = (updateStatus) => {
       placeholderTextColor={palette.inactive}
       returnKeyType='done'
       maxLength={200}
-      multiline={true}
+      multiline={false}
       style={styles.statusInput} />
   )
 }
