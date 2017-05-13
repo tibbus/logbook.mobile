@@ -1,6 +1,6 @@
-import { getUser } from '../API/fetch'
+import { getUser as getAuthUserInfo } from '../API/fetch'
 import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar'
-import { getFollowCount, getGetStreamToken } from '../API/user'
+import { getFollowCount, getGetStreamToken, getUsers } from '../API/user'
 import { getUserFollowing } from '../API/GetStream'
 import { objKeysToDecap } from '../Utils'
 import {
@@ -16,16 +16,27 @@ import {
 } from './Types'
 
 export const setUserProfile = dispatch => {
-  getUser().then(userDetails => {
-    const user = {
-      ...userDetails,
-      //profile: objKeysToDecap(JSON.parse(userDetails.profile))
-    }
+  getAuthUserInfo().then(userDetails => {
 
-    dispatch({
-      type: SET_USER,
-      user
+    getUsers({}, { id: userDetails.id}).then(userInfo => {
+      const user = {
+        ...userDetails,
+        ...userInfo,
+        profileImg: userInfo.image,
+        coverImg: userInfo.coverImage
+      }
+
+      dispatch({
+        type: SET_USER,
+        user
+      })
     })
+    .catch((e) => {
+      console.log(e);
+    })
+  })
+  .catch((e) => {
+    console.log(e);
   })
 }
 
