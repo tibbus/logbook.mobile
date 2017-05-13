@@ -8,14 +8,11 @@ import {
   ListView,
   TouchableOpacity
 } from 'react-native';
+const Lightbox = require('react-native-lightbox');
 
-var Lightbox = require('react-native-lightbox');
-
-import { LBVideo } from '../../Components/Video';
-import { Timeline } from './Timeline';
-//importing styles
-import background from '../../Styles/Themes/background';
-import palette from '../../Styles/Themes/palette'
+import { LBVideo } from '../../../Components/Video';
+import { Timeline } from '../timeline/timeline.component';
+import { styles } from './overview.styles';
 
 const compareTimelineItems = (itemA, itemB) => {
   let itemAScore = 0;
@@ -64,7 +61,7 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <Lightbox><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo}/></Lightbox>
+    return <Lightbox><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo} /></Lightbox>
   }
 
   if (item.type === "Video") {
@@ -114,49 +111,3 @@ export class Overview extends Component<any, any> {
     )
   }
 }
-
-const styles = StyleSheet.create({
-
-  scrollView: {
-    flex: 1
-  },
-  container: {
-    height: 400,
-    backgroundColor: background.color,
-  },
-  headingContainer: {
-    flex:1,
-    flexDirection: 'row',
-    marginTop: 15,
-    marginBottom: 5
-  } as React.ViewStyle,
-  headingFirstTitle: {
-    flex:1.5,
-    flexDirection: 'row',
-    fontSize: 18,
-    fontWeight: '700',
-    color: palette.text,
-    paddingLeft: 20
-  } as React.ViewStyle,
-  headingSecondTitle: {
-    flex:1,
-    flexDirection: 'row',
-    fontSize: 14,
-    fontWeight: '400',
-    color: palette.inactive,
-    paddingRight: 10
-  } as React.ViewStyle,
-  featuredContainer: {
-    //height: 300
-  } as React.ViewStyle,
-  horizontalScrollView: {
-    //height: 300
-  },
-  photo: {  
-    height: 120, 
-    width: 120,
-    borderRadius: 5,
-    padding: 5,
-    margin: 3
-  },
-});

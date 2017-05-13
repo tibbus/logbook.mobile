@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { FitImage } from '../../Components/Image'
-import { LBVideo } from '../../Components/Video';
+import { FitImage } from '../../../Components/Image';
+import { LBVideo } from '../../../Components/Video';
+import { styles } from './showcase.styles';
 
 const galleryContent = (contentUri, type) => {
 
@@ -20,7 +21,7 @@ const galleryContent = (contentUri, type) => {
   }
 
   if (type === "Video") {
-    return <LBVideo key={contentUri} paused={true} uri={contentUri}/>;
+    return <LBVideo key={contentUri} paused={true} uri={contentUri} />;
   }
 }
 
@@ -113,28 +114,3 @@ export class ShowCase extends Component<any, any> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  scrollView: {
-  },
-  photo: {
-    height: 120,
-    width: 120,
-    borderRadius: 5,
-    padding: 5,
-    margin: 3
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  },
-  listImages: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  } as React.ViewStyle,
-  horizontalScrollView: {
-    height: 200,
-    flexDirection: 'row'
-  }
-});

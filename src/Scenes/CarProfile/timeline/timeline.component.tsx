@@ -6,17 +6,16 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { connect } from '../../Utils/connect';
+import { connect } from '../../../Utils/connect';
 
-import { pauseVideoAction, playVideoAction, setCarTimeline} from '../../Actions/timeline';
-import { deletePost } from '../../Actions/post';
-import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
-import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
-import { LoadingView } from '../../Components/LoadingView';
-import { getPost, PostMenu } from '../../Components/Post';
-import { Comments, CommentInput } from '../../Components/Comments';
-//importing styles
-import background from '../../Styles/Themes/background';
+import { pauseVideoAction, playVideoAction, setCarTimeline} from '../../../Actions/timeline';
+import { deletePost } from '../../../Actions/post';
+import { addComment, setTimelineComments, getTimelineComments } from '../../../Actions/comments';
+import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../../Actions/like';
+import { LoadingView } from '../../../Components/LoadingView';
+import { getPost, PostMenu } from '../../../Components/Post';
+import { Comments, CommentInput } from '../../../Components/Comments';
+import { styles } from './timeline.styles';
 
 const getTimeline = (timelines, carInfoIdArg) => {
   const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg);
@@ -148,32 +147,3 @@ export class Timeline extends Component<any, any> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  commentsSnapshot: {
-    backgroundColor: '#efefef'
-  },
-  modal: {
-    padding: 30,
-  },
-  container: {
-    backgroundColor: background.color,
-  },
-  posts: {
-    marginLeft: 15,
-    marginRight: 15,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  },
-  row: {
-    marginTop: 10,
-  }
-});
