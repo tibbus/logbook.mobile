@@ -6,6 +6,8 @@ import {
     ScrollView
 } from 'react-native';
 
+import { styles } from './techSpec.styles';
+
 const getTaxInfo = (car) => {
 
     if (car.tax) {
@@ -46,15 +48,3 @@ export class TechSpec extends Component<any, any> {
         );
     }
 }
-
-const styles = StyleSheet.create({
-
-    scrollView: {
-        flex:1
-    },
-    separator: {
-        flex: 1,
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#8E8E8E',
-    },
-});

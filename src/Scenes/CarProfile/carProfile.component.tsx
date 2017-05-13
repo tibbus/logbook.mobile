@@ -6,15 +6,15 @@ import ScrollableTabBar from '../../Components/react-native-scrollable-tab-view/
 
 import { styles } from './carProfile.styles';
 import { Info } from './info/info.component';
-import { ShowCase } from './ShowCase';
-import { TechSpec } from './TechSpec';
-import { Overview } from './Overview';
+import { Overview } from './overview/overview.component';
+import { Timeline } from './timeline/timeline.component';
+import { ShowCase } from './showcase/showcase.component';
+import { TechSpec } from './techSpec/techSpec.component';
 import { SquareImage } from '../../Components/SquareImage';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setCarTimeline } from '../../Actions/timeline';
 import { BackScene } from '../';
-import { Timeline } from './Timeline'
 
 import palette from '../../Styles/Themes/palette';
 import background from '../../Styles/Themes/background';
