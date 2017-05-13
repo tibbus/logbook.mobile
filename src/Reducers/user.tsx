@@ -10,6 +10,7 @@ import {
 } from '../Actions/Types'
 
 const initialState = {
+  id: 0,
   attemptingOIDC: false,
   authService: '',
   name: 'Guest',
@@ -18,7 +19,8 @@ const initialState = {
   coverImg: 'http://www.rssportscars.com/photos/potd/supercar-collection-p1mclaren/p1mclaren-car-collection.jpg',
   followCount: 0,
   carCount: 0,
-  follows: []
+  follows: [],
+  userType: ''
 }
 // follows array contains the id's of cars.
 
