@@ -11,12 +11,12 @@ export const BackScene = ({
   children = null,
   onBack,
   onAction = null,
-  style = null,
+  style,
   title,
   actionName = ''
 }) => (
   <View style={{flex: 1}}>
-    <View style={styles.statusBar}>
+    <View style={[styles.statusBar, style.statusBar]}>
       <TouchableHighlight style={[styles.button, { alignItems: 'flex-start', paddingLeft: 10 }]} onPress={onBack}>
         <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
       </TouchableHighlight>

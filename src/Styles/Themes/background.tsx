@@ -4,4 +4,5 @@ export default {
   //background colour at furthest away
   color: 'rgba(242,242,242,1)',
   secondary: 'rgba(247,247,248,1)',
+  carProfile: '#fffaf1'
 };

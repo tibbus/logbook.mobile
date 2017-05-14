@@ -135,7 +135,7 @@ const getCarProfileComponent = (props) => {
     }
 
     const userInfoComponent = (
-      <View>
+      <View style={{backgroundColor: background.carProfile}}>
         <View style={styles.infoWrapper}>
           <View style={styles.imageWrapper}>
             <SquareImage source={{ uri: image }} />
@@ -159,7 +159,7 @@ const getCarProfileComponent = (props) => {
     );
 
     return (
-      <BackScene onBack={() => back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
+      <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model} style={{statusBar: {backgroundColor: '#fffaf1'}}}>
         <View style={{ flex: 1 }}>
           <ScrollableTabView
             ref={(tabView) => {this.scrollableTabView = tabView}}
@@ -168,13 +168,13 @@ const getCarProfileComponent = (props) => {
             tabBarInactiveTextColor={palette.inactive}
             tabBarUnderlineStyle={styles.underline}
             tabBarTextStyle={styles.tabText}
-            tabBarBackgroundColor={background.color}
+            tabBarBackgroundColor={background.carProfile}
             style={{ flex: 1 }}
             aboveBarComponent={userInfoComponent}
             renderTabBar={() => <ScrollableTabBar />}>
             <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
             <Timeline tabLabel='TIMELINE' {...timelineProps} />
-            <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} style={{ flex: 1 }} />
+            <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
             <TechSpec tabLabel='SPEC' car={car} />
           </ScrollableTabView>
         </View>
