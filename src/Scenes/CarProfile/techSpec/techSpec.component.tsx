@@ -10,7 +10,7 @@ import { styles } from './techSpec.styles';
 
 const getTaxInfo = (car) => {
 
-    if (car.tax) {
+    if (car && car.tax) {
         return (
             <View>
                 <Text>Status : {car.tax.taxStatus}</Text>
