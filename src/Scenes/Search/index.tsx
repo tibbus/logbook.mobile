@@ -22,7 +22,7 @@ export class Search extends Component<any, any> {
             <SearchCars
                 onSubmit={searchTerm => dispatch(searchCars({ searchTerm }))}
                 search={search}
-                navigator={navigator} />
+                onViewCarProfile={carInfoId => navigator.push({id: 'car', passProps: {carInfoId: parseInt(carInfoId)}})} />
         );
     }
 }

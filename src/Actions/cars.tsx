@@ -40,15 +40,22 @@ export const getCar = (registration, onSuccess, onFailure) => {
 
 export const getCarById = (carInfoId) => {
     return dispatch => {
+        dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
         getCarByIdApi({}, { carInfoId })
             .then(carResponse => {
                 getCarOwnerByIdApi({}, { carInfoId })
                     .then(carOwnerResponse => {
                         dispatch(setBrowsingCar(carResponse.carInfo, carOwnerResponse))
+                        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
                     })
             })
             .catch(error => {
                 console.log(error);
+                dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
             })
     }
 }
@@ -64,11 +71,9 @@ const extractPostDetails = (post) => {
 
 export const setBrowsingCar = (carInfo, ownerInfo) => {
     return dispatch => {
-        dispatch({
-            type: SET_BROWSING_CAR,
-            carInfo: carInfo,
-            ownerInfo: ownerInfo
-        });
+        dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
+        dispatch({ type: SET_BROWSING_CAR, carInfo: carInfo, ownerInfo: ownerInfo });
+        dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'cars' });
     }
 }
 
