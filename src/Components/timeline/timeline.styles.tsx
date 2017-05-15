@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import background from '../../../Styles/Themes/background';
+import background from '../../Styles/Themes/background';
 
 export const styles = StyleSheet.create({
   commentsSnapshot: {
