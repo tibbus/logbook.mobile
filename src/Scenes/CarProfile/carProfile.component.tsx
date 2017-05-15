@@ -15,6 +15,7 @@ import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowC
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setCarTimeline } from '../../Actions/timeline';
 import { BackScene } from '../';
+import { LoadingView } from '../../Components/LoadingView';
 
 import palette from '../../Styles/Themes/palette';
 import background from '../../Styles/Themes/background';
@@ -24,7 +25,7 @@ const getTimeline = (timelines, carInfoIdArg) => {
   return timelineDetails ? timelineDetails.timeline : [];
 };
 
-const stateToProps = ({ user, cars, timelines }) => ({ user, cars, timelines });
+const stateToProps = ({ user, cars, timelines, loadingStatus }) => ({ user, cars, timelines, loadingStatus });
 
 @connect(stateToProps)
 export class CarProfile extends Component<any, any> {
@@ -82,36 +83,36 @@ export class CarProfile extends Component<any, any> {
     }
   }
 
-  back(navigator) {
-    navigator.pop()
-  }
-
   render() {
-    const { user, car, carInfoId, cars, navigator, dispatch, rootNav, timelines } = this.props;
+
+    return (
+       <LoadingView style={styles.container}
+          isLoading={this.props.loadingStatus.carsLoading}>
+            {getCarProfileComponent(this.props)}
+        </LoadingView>
+    );
+  }
+}
+
+const back = (navigator) => {
+    navigator.pop()
+}
+
+const getCarProfileComponent = (props) => {
+    const { user, car, carInfoId, cars, navigator, dispatch, rootNav, timelines } = props;
 
     let browsingCar;
     if (car) {
       browsingCar = cars.browsingCars.find(item => item.carInfo.id === car.carInfo.id)
-
-      if (!browsingCar) {
-        return (
-          <View>
-            <Text>Loading</Text>
-          </View>
-        );
-      }
     }
     else {
       browsingCar = cars.browsingCars.find(item => item.carInfo.id === carInfoId)
-
-      if (!browsingCar) {
-        return (
-          <View>
-            <Text>Loading</Text>
-          </View>
-        );
-      }
     }
+
+    if(!browsingCar) {
+      return null;
+    }
+
     const { image } = browsingCar.carInfo;
     const owned = !!cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
     let verified = false;
@@ -148,16 +149,17 @@ export class CarProfile extends Component<any, any> {
             onUnFollowPress={() => dispatch(unFollowCar(user.id, browsingCar.carInfo.id))}
             verified={verified}
             onVerifyPress={() => navigator.push({ id: 'verify' })} />
+            
         </View>
         <View style={styles.carModelWrapper}>
-          <Text style={styles.carName}>{car.carInfo.car.model}</Text>
-          <Text style={[styles.carName, styles.carYear]}> {car.carInfo.car.yearOfManufacture}</Text>
+          <Text style={styles.carName}>{browsingCar.carInfo.car.model}</Text>
+          <Text style={[styles.carName, styles.carYear]}> {browsingCar.carInfo.car.yearOfManufacture}</Text>
         </View>
       </View>
     );
 
     return (
-      <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
+      <BackScene onBack={() => back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
         <View style={{ flex: 1 }}>
           <ScrollableTabView
             ref={(tabView) => {this.scrollableTabView = tabView}}
@@ -169,8 +171,7 @@ export class CarProfile extends Component<any, any> {
             tabBarBackgroundColor={background.color}
             style={{ flex: 1 }}
             aboveBarComponent={userInfoComponent}
-            renderTabBar={() => <ScrollableTabBar />}
-          >
+            renderTabBar={() => <ScrollableTabBar />}>
             <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
             <Timeline tabLabel='TIMELINE' {...timelineProps} />
             <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} style={{ flex: 1 }} />
@@ -178,6 +179,5 @@ export class CarProfile extends Component<any, any> {
           </ScrollableTabView>
         </View>
       </BackScene>
-    );
-  }
+    )
 }

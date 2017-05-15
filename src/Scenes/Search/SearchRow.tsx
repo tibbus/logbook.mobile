@@ -40,19 +40,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const viewCar = (navigator, carInfoId) => {
-  navigator.push({
-    id: 'car',
-    passProps: {
-      carInfoId: parseInt(carInfoId),
-    }
-  })
-}
-
 const getSearchResultRowView = (props) => {
     const imageUrl = props.image ? props.image : 'http://www.carlotfinance.com/assets/img/car_profile_placeholder.jpg'
-    const carInfoId = props.carInfoId;
-    const navigator = props.navigator;
     return (
       <View style={styles.container}>
           <Image source={{ uri: imageUrl}} style={styles.photo} />
@@ -69,11 +58,9 @@ const getSearchResultRowView = (props) => {
 }
 
 export const SearchRow = (props) => {
-  const imageUrl = props.image ? props.image : 'http://www.carlotfinance.com/assets/img/car_profile_placeholder.jpg'
-  const carInfoId = props.carInfoId;
-  const navigator = props.navigator;
+  const { carInfoId, onViewCarProfile } = props;
   return (
-    <TouchableHighlight onPress={() => viewCar(navigator, carInfoId)}>
+    <TouchableHighlight onPress={() => onViewCarProfile(carInfoId)}>
       {getSearchResultRowView(props)}
     </TouchableHighlight>
 )};
