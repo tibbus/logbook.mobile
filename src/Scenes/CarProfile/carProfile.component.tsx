@@ -54,7 +54,7 @@ export class CarProfile extends Component<any, any> {
         dispatch(getCarById(carInfoId));
         getTimeline(timelines, carInfoId);
         if (!timeline.length) {
-          dispatch(setTimeline('car', car.carInfo.id));
+          dispatch(setTimeline('car', carInfoId));
         }
       }
     }
