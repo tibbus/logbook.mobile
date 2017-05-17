@@ -41,9 +41,13 @@ const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFoll
 const VerifyButton = (verified, owned, onVerify) => {
   if (verified === false && owned === true) {
     return (
-      ActionButton(onVerify, 'Verify')
-    )
+      <TouchableHighlight onPress={onVerify} style={styles.verifyWrapper}>
+        <Text style={styles.verifyText}>Verify</Text>
+      </TouchableHighlight>
+    );
   }
+
+  return null;
 }
 
 
@@ -59,8 +63,6 @@ export const Info = ({ owned, car, onSettingsPress, followed, onFollowPress, onU
       <Image source={{ uri: car.ownerInfo.image }} style={styles.photo} />
       <Text style={styles.ownerName}>{car.ownerInfo.name}</Text>
     </View>
-    <View style={styles.subContainer}>
       {VerifyButton(verified, owned, onVerifyPress)}
-    </View>
   </View>
 )

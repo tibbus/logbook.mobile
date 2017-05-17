@@ -7,7 +7,7 @@ export const getTimelineToken = fetcher(api + 'feeds/token', 'POST')
 
 const getOldTimeline = fetcher(api + 'timeline/{carInfoId}')
 
-export const getTimeline = (type, id) => {
+export const getTimeline = (type: string, id: string) => {
     console.log('get timeline')
     const promise = new Promise((resolve, reject) => {
         const body = { actorId: id, actorType: type }

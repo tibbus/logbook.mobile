@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles =  StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 6.5,
     marginHorizontal: 20
@@ -37,4 +37,16 @@ export const styles =  StyleSheet.create({
     width: 20,
     borderRadius: 10,
   },
+  verifyWrapper: {
+    alignItems: 'center',
+    backgroundColor: '#FAC112',
+    padding: 5,
+    marginTop: 10,
+    borderRadius: 2,
+    width: 162
+  },
+  verifyText: {
+    fontSize: 12,
+    fontWeight: '600'
+  }
 });

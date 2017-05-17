@@ -5,5 +5,5 @@ export * from './Profile/';
 export * from './AddCar/';
 export * from './CarProfile/carProfile.component';
 export * from './AddPost/';
-export * from './Feed/';
+export * from './Feed/feed.component';
 export * from './VerifyCar/';

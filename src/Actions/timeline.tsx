@@ -7,16 +7,18 @@ import {
   SET_LOADING_STATUS,
   UNSET_LOADING_STATUS
 } from './Types'
-import { getTimeline } from '../API/Timeline'
-import { createStatus } from '../API/Status'
-import { createImage } from '../API/Image'
-import { createVideo } from '../API/Video'
+import { getTimeline } from '../API/Timeline';
+import { createStatus } from '../API/Status';
+import { createImage } from '../API/Image';
+import { createVideo } from '../API/Video';
+import { dispatch } from '../store';
 
-const addTimelineAction = (carInfoId, timeline) => ({
-  carInfoId,
+const addTimelineAction = (actorType: string, actorId: string, timeline) => ({
+  actorType,
+  actorId,
   timeline,
   type: ADD_TIMELINE
-})
+});
 
 const addTimelineItemAction = (carInfoId, details, postType, pending = false) => ({
   carInfoId,
@@ -26,35 +28,33 @@ const addTimelineItemAction = (carInfoId, details, postType, pending = false) =>
     details
   },
   pending
-})
+});
 
 export const pauseVideoAction = (carInfoId, postId) => ({
   carInfoId, postId, type: PAUSE_TIMELINE_VIDEO
-})
+});
 
 export const playVideoAction = (carInfoId, postId) => ({
   carInfoId, postId, type: PLAY_TIMELINE_VIDEO
-})
+});
 
-export const setCarTimeline = ({
-  carInfoId
-}) => {
-  return dispatch => {
-    getTimeline('car', carInfoId)
+export const setTimeline = (actorType: string, id: string) => {
+  return () => {
+    getTimeline(actorType, id)
       .then(data => {
-        dispatch(addTimelineAction(carInfoId, data))
+        dispatch(addTimelineAction(actorType, id, data))
       })
       .catch(e => {
-        // TODO Handle timeline init failure
+        console.log('timeline failed', e);
       })
   }
-}
+};
 
-export const addCarTimelineStatus = (carInfoId, description, onSuccess, onFailure ) => {
+export const addCarTimelineStatus = (carInfoId, description, onSuccess, onFailure) => {
   const body = { description, topics: [] }
   const request = { body }
 
-  return dispatch => {
+  return () => {
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     dispatch(details => dispatch(addTimelineItemAction(carInfoId, body, 'Status', true)))
     createStatus(request, { carInfoId })
@@ -67,9 +67,9 @@ export const addCarTimelineStatus = (carInfoId, description, onSuccess, onFailur
         console.log(error);
         onFailure();
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
-      })
-  }
-}
+      });
+  };
+};
 
 const formatFiles = (mediaType, files) => {
   const formattedFiles = files.map((file) => {
@@ -78,10 +78,10 @@ const formatFiles = (mediaType, files) => {
     const type = `${mediaType}/${extLower}`
     const name = `${id}.${extLower}`
     return { uri, type, name }
-  })
+  });
 
   return formattedFiles;
-}
+};
 
 const fileRequest = (mediaType, location, description, files, tags) => ({
   body: {
@@ -90,7 +90,7 @@ const fileRequest = (mediaType, location, description, files, tags) => ({
     files: formatFiles(mediaType, files),
     topics: tags
   }
-})
+});
 
 export const addCarTimelinePost = (request, onSuccess, onFailure) => {
   if (request.postType === 'image') {
@@ -102,11 +102,11 @@ export const addCarTimelinePost = (request, onSuccess, onFailure) => {
   else {
     return addCarTimelineStatus(request.carInfoId, request.description, onSuccess, onFailure)
   }
-}
+};
 
 export const addCarTimelineImage = (postDetails, onSuccess, onFailure) => {
 
-  return dispatch => {
+  return () => {
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     // TODO handle image create error
     const { carInfoId, description, tags } = postDetails;
@@ -133,13 +133,12 @@ export const addCarTimelineImage = (postDetails, onSuccess, onFailure) => {
         })
         onFailure();
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
-      })
-  }
-}
+      });
+  };
+};
 
 export const addCarTimelineVideo = (postDetails, onSuccess, onFailure) => {
-
-  return dispatch => {
+  return () => {
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
     // TODO handle video create error
     const { carInfoId, description, tags } = postDetails;
@@ -166,7 +165,7 @@ export const addCarTimelineVideo = (postDetails, onSuccess, onFailure) => {
         })
         onFailure();
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
-      })
-  }
-}
+      });
+  };
+};
 

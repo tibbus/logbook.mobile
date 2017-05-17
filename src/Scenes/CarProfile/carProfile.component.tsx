@@ -7,13 +7,13 @@ import ScrollableTabBar from '../../Components/react-native-scrollable-tab-view/
 import { styles } from './carProfile.styles';
 import { Info } from './info/info.component';
 import { Overview } from './overview/overview.component';
-import { Timeline } from './timeline/timeline.component';
+import { CarTimeline } from './carTimeline/carTimeline.component';
 import { ShowCase } from './showcase/showcase.component';
 import { TechSpec } from './techSpec/techSpec.component';
-import { SquareImage } from '../../Components/SquareImage';
+import { FitImage } from '../../Components/FitImage/FitImage.component';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
-import { setCarTimeline } from '../../Actions/timeline';
+import { setTimeline } from '../../Actions/timeline';
 import { BackScene } from '../';
 import { LoadingView } from '../../Components/LoadingView';
 
@@ -46,7 +46,7 @@ export class CarProfile extends Component<any, any> {
       dispatch(setBrowsingCar(car.carInfo, ownerInfo));
       getTimeline(timelines, car.carInfo.id);
       if (!timeline.length) {
-        dispatch(setCarTimeline({ carInfoId: car.carInfo.id }));
+        dispatch(setTimeline('car', car.carInfo.id));
       }
     }
     else {
@@ -54,7 +54,7 @@ export class CarProfile extends Component<any, any> {
         dispatch(getCarById(carInfoId));
         getTimeline(timelines, carInfoId);
         if (!timeline.length) {
-          dispatch(setCarTimeline({ carInfoId: carInfoId }));
+          dispatch(setTimeline('car', car.carInfo.id));
         }
       }
     }
@@ -120,10 +120,10 @@ const getCarProfileComponent = (props) => {
       const car = cars.userCars.find(userCar => userCar.carInfo.id === browsingCar.carInfo.id);
       verified = car.verified;
     }
-    const followed = user.follows.includes(browsingCar.carInfo.id.toString())
-    const timelineProps = { car: browsingCar, user, navigator, dispatch, rootNav }
+    const followed = user.follows.includes(browsingCar.carInfo.id.toString());
+    const timelineProps = { type: 'car', car: browsingCar, user, navigator, rootNav };
 
-    const carTimelineItem = timelines.find(timelineItem => timelineItem.carInfoId === browsingCar.carInfo.id)
+    const carTimelineItem = timelines.find(item => item.actorType === 'car' && item.actorId === browsingCar.carInfo.id);
     let timeline = null;
     if (carTimelineItem) {
       timeline = carTimelineItem.timeline;
@@ -132,13 +132,13 @@ const getCarProfileComponent = (props) => {
     const overViewProps = {
       tabView: this.scrollableTabView,
       timeline: timeline,
-    }
+    };
 
     const userInfoComponent = (
-      <View>
+      <View style={{ backgroundColor: background.carProfile }}>
         <View style={styles.infoWrapper}>
           <View style={styles.imageWrapper}>
-            <SquareImage source={{ uri: image }} />
+            <FitImage source={{ uri: image }} round={true} />
           </View>
 
           <Info owned={owned}
@@ -159,22 +159,24 @@ const getCarProfileComponent = (props) => {
     );
 
     return (
-      <BackScene onBack={() => back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}>
+      <BackScene onBack={() => this.back(navigator)}
+        title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}
+        style={{ statusBar: { backgroundColor: background.carProfile } }}>
         <View style={{ flex: 1 }}>
           <ScrollableTabView
-            ref={(tabView) => {this.scrollableTabView = tabView}}
+            ref={(tabView) => { this.scrollableTabView = tabView }}
             initialPage={0}
             tabBarActiveTextColor={palette.primary}
             tabBarInactiveTextColor={palette.inactive}
             tabBarUnderlineStyle={styles.underline}
             tabBarTextStyle={styles.tabText}
-            tabBarBackgroundColor={background.color}
+            tabBarBackgroundColor={background.carProfile}
             style={{ flex: 1 }}
             aboveBarComponent={userInfoComponent}
             renderTabBar={() => <ScrollableTabBar />}>
             <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
-            <Timeline tabLabel='TIMELINE' {...timelineProps} />
-            <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} style={{ flex: 1 }} />
+            <CarTimeline tabLabel='TIMELINE' timelineProps={timelineProps} />
+            <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
             <TechSpec tabLabel='SPEC' car={car} />
           </ScrollableTabView>
         </View>

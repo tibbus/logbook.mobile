@@ -6,19 +6,23 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { connect } from '../../../Utils/connect';
+import { connect } from '../../Utils/connect';
+import { dispatch } from '../../store';
 
-import { pauseVideoAction, playVideoAction, setCarTimeline} from '../../../Actions/timeline';
-import { deletePost } from '../../../Actions/post';
-import { addComment, setTimelineComments, getTimelineComments } from '../../../Actions/comments';
-import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../../Actions/like';
-import { LoadingView } from '../../../Components/LoadingView';
-import { getPost, PostMenu } from '../../../Components/Post';
-import { Comments, CommentInput } from '../../../Components/Comments';
+import { pauseVideoAction, playVideoAction, setTimeline } from '../../Actions/timeline';
+import { deletePost } from '../../Actions/post';
+import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
+import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
+import { LoadingView } from '../../Components/LoadingView';
+import { Post } from '../../Components/Post/Post';
+import { PostMenu } from '../../Components/Post/PostMenu';
+import { Comments } from '../../Components/Comments/Comments.component';
+import { CommentInput } from '../../Components/Comments/CommentInput.component';
 import { styles } from './timeline.styles';
 
-const getTimeline = (timelines, carInfoIdArg) => {
-  const timelineDetails = timelines.find(({ carInfoId }) => carInfoId === carInfoIdArg);
+const getTimeline = (timelines, type, id) => {
+  const timelineDetails = timelines.find(({ actorType, actorId }) => actorType === type && actorId === id);
+
   return timelineDetails ? timelineDetails.timeline : [];
 };
 
@@ -33,16 +37,25 @@ export class Timeline extends Component<any, any> {
     super(props);
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-    const { car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
-    const { carInfo = {} }: { carInfo: any } = car;
+    const { type, car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
     const { user = {} }: { user: any } = this.props;
-    this.carInfoId = carInfo.id;
+
     this.userId = user.id;
+    let timeline;
 
-    const timeline = getTimeline(timelines, this.carInfoId);
+    if (type === 'car') {
+      this.carInfoId = this.props.car.carInfo.id;
+      timeline = getTimeline(timelines, type, this.carInfoId);
 
-    if (!timeline.length && this.carInfoId) {
-      dispatch(setCarTimeline({ carInfoId: this.carInfoId }));
+      if (!timeline.length && this.carInfoId) {
+        dispatch(setTimeline(type, this.carInfoId));
+      }
+    } else if (type === 'user') {
+      timeline = getTimeline(timelines, type, this.userId);
+
+      if (!timeline.length && this.userId) {
+        dispatch(setTimeline(type, this.userId));
+      }
     }
 
     if (!likes.length && this.userId) {
@@ -63,8 +76,14 @@ export class Timeline extends Component<any, any> {
     }*/
 
     if (timelines !== this.props.timelines) {
-      const { dispatch } = this.props;
-      const timeline = getTimeline(timelines, this.carInfoId);
+      const { type } = this.props;
+      let timeline;
+
+      if (type === 'car') {
+        timeline = getTimeline(timelines, type, this.carInfoId);
+      } else {
+        timeline = getTimeline(timelines, type, this.userId);
+      }
 
       // @TODO should not fetch comments for every action on the timeline
       timeline.forEach((timelineItem) => {
@@ -121,7 +140,7 @@ export class Timeline extends Component<any, any> {
 
     return (
       <View style={styles.row}>
-        {getPost(props)}
+        {Post(props)}
         <Comments comments={postComments} />
         <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
           dispatch(addComment(timelinePostId, userId, commentText))

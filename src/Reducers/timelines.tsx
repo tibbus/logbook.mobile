@@ -127,62 +127,63 @@ const timelineReducer = (state = [], action) => {
 }
 
 const videoMap = action => item => {
-  if (item.type !== 'Video') return item
+  if (item.type !== 'Video') return item;
 
   if (item.details.id === action.postId) {
-    return timelineItemReducer(item, action)
+    return timelineItemReducer(item, action);
   }
 
   if (item.paused) {
-    return item
+    return item;
   }
 
   return timelineItemReducer(item, { ...action, type: PAUSE_TIMELINE_VIDEO })
-}
+};
 
 const mapTimelines = (timelines, action, carInfoId) => timelines.map(timeline => {
   if (timeline.carInfoId === carInfoId) {
-    return timelineReducer(timeline, action)
+    return timelineReducer(timeline, action);
   }
-  return timeline
-})
+  return timeline;
+});
 
 export const timelines = (state = initialState, action) => {
-  const { carInfoId, type, timeline, item } = action
+  const { actorType, actorId, type, timeline, item } = action;
 
   switch (type) {
     case ADD_TIMELINE:
       return [
         ...state,
         {
-          carInfoId,
+          actorType,
+          actorId,
           timeline: timeline.map(modifier)
         }
-      ]
+      ];
 
     case ADD_TIMELINE_ITEM:
-      return mapTimelines(state, action, action.carInfoId)
+      return mapTimelines(state, action, action.carInfoId);
 
     case DELETE_TIMELINE_ITEM:
-      return mapTimelines(state, action, item.carInfoId)
+      return mapTimelines(state, action, item.carInfoId);
 
     case UPDATE_TIMELINE_ITEM:
-      return mapTimelines(state, action, item.details.carInfoId)
+      return mapTimelines(state, action, item.details.carInfoId);
 
     case PLAY_TIMELINE_VIDEO:
-      return mapTimelines(state, action, action.carInfoId)
+      return mapTimelines(state, action, action.carInfoId);
 
     case PAUSE_TIMELINE_VIDEO:
-      return mapTimelines(state, action, action.carInfoId)
+      return mapTimelines(state, action, action.carInfoId);
 
     case ADD_USER_LIKED_ITEM:
-      return mapTimelines(state, action, action.updatedItem.carInfoId)
+      return mapTimelines(state, action, action.updatedItem.carInfoId);
 
     case REMOVE_USER_LIKED_ITEM:
-      return mapTimelines(state, action, action.updatedItem.carInfoId)
+      return mapTimelines(state, action, action.updatedItem.carInfoId);
 
 
     default:
-      return state
+      return state;
   }
-}
+};
