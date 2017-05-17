@@ -1,18 +1,24 @@
 import { StyleSheet } from 'react-native';
 
+import palette from '../../Styles/Themes/palette';
+import background from '../../Styles/Themes/background';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1
-  } as React.ViewStyle,
+  },
   underline: {
-    backgroundColor: 'green',
-    height: 0,
+    backgroundColor: palette.primary,
+    height: 3,
   },
   tabText: {
     fontSize: 18,
     fontWeight: '700'
   },
   infoWrapper: {
+    backgroundColor: background.carProfile
+  },
+  subWrapper: {
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingTop: 10
@@ -22,7 +28,8 @@ export const styles = StyleSheet.create({
   },
   carModelWrapper: {
     flexDirection: 'row',
-    padding: 20
+    padding: 20,
+    paddingBottom: 0
   },
   carName: {
     fontSize: 23,

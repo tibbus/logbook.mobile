@@ -11,25 +11,25 @@ export const BackScene = ({
   children = null,
   onBack,
   onAction = null,
-  style = null,
+  style = { statusBar: {} },
   title,
   actionName = ''
 }) => (
-  <View style={{flex: 1}}>
-    <View style={styles.statusBar}>
-      <TouchableHighlight style={[styles.button, { alignItems: 'flex-start', paddingLeft: 10 }]} onPress={onBack}>
-        <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
-      </TouchableHighlight>
-      { title ? <View style={styles.title}><Text>{title}</Text></View> : <View style={styles.title}></View>}
-      {onAction ? (
-        <TouchableHighlight style={[styles.button, { alignItems: 'flex-end', paddingRight: 10 }]} onPress={onAction}>
-          <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' size={20} /></View>
+    <View style={{ flex: 1 }}>
+      <View style={[styles.statusBar, style.statusBar]}>
+        <TouchableHighlight style={[styles.button, { alignItems: 'flex-start', paddingLeft: 10 }]} onPress={onBack}>
+          <View style={styles.flexRow}><Icon name='arrow-back' size={20} /></View>
         </TouchableHighlight>
-      ) : <View style={styles.button} />}
+        {title ? <View style={styles.title}><Text>{title}</Text></View> : <View style={styles.title}></View>}
+        {onAction ? (
+          <TouchableHighlight style={[styles.button, { alignItems: 'flex-end', paddingRight: 10 }]} onPress={onAction}>
+            <View style={styles.flexRow}><Text>{actionName}</Text><Icon name='arrow-forward' size={20} /></View>
+          </TouchableHighlight>
+        ) : <View style={styles.button} />}
+      </View>
+      {children}
     </View>
-    {children}
-  </View>
-)
+  )
 
 const styles = StyleSheet.create({
   statusBar: {

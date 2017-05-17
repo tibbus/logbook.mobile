@@ -6,4 +6,5 @@ export default {
   inactive: 'rgba(176,173,173,1)',
   border: 'rgba(242,242,242,1)',
   text: 'rgba(0,0,0,1)', 
+  date: '#D3D3D3'
 };

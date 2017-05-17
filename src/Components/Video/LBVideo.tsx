@@ -1,14 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import Video from 'react-native-video'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import React, { Component, PropTypes } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import Video from 'react-native-video';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export class LBVideo extends Component<any,any> {
-  
+export class LBVideo extends Component<any, any> {
   static propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
@@ -18,33 +13,33 @@ export class LBVideo extends Component<any,any> {
   }
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       uri: props.uri,
       paused: props.paused,
       height: (props.height) ? props.height : 120,
-      width: (props.width) ? props.width : 170
+      width: (props.width) ? props.width : null
     }
   }
 
   render() {
-    const { uri } = this.state
+    const { uri } = this.state;
     return (
       <View>
-        <TouchableOpacity onPress={() => {this.setState({paused: !this.state.paused})}}>
+        <TouchableOpacity onPress={() => { this.setState({ paused: !this.state.paused }) }}>
           <Video
-            source={{uri}}
+            source={{ uri }}
             resizeMode='contain'
             paused={this.state.paused}
             repeat={Boolean(true)}
             controls={Boolean(true)}
-            style={[this.props.style, {height: this.state.height}, {width: this.state.width} ]} />
+            style={[this.props.style, { height: this.state.height }, { width: this.state.width }]} />
 
           <View style={styles.iconContainer}>{this.state.paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
 
@@ -64,6 +59,4 @@ const styles = StyleSheet.create({
     color: '#e0e0e0',
     backgroundColor: 0
   }
-})
-
-
+});
