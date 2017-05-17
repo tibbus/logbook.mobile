@@ -9,4 +9,5 @@ export const getUsers = fetcher(uriId);
 export const updateUser = fetcher(uriId, 'PUT');
 export const getUserByEmail = fetcher(uri + 'email/{email}');
 export const getFollowCount = fetcher(uriId + '/follows');
-export  const getGetStreamToken  =  fetcher(api  +  'feeds/token',  'POST')
+export const getGetStreamToken  =  fetcher(api  +  'feeds/token',  'POST')
+export const updateCoverImage = fetcher(uriId + '/coverimage', 'POST', true)

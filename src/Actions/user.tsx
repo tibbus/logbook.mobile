@@ -1,8 +1,9 @@
 import { getUser as getAuthUserInfo } from '../API/fetch'
 import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar'
-import { getFollowCount, getGetStreamToken, getUsers } from '../API/user'
+import { getFollowCount, getGetStreamToken, getUsers, updateCoverImage } from '../API/user'
 import { getUserFollowing } from '../API/GetStream'
 import { objKeysToDecap } from '../Utils'
+import { dispatch } from '../store'; 
 import {
   ADD_CAR,
   SET_USER,
@@ -12,7 +13,8 @@ import {
   SET_USER_FOLLOW_COUNT,
   SET_USER_CAR_COUNT,
   SET_USER_FOLLOWING,
-  USER_CAR_VERIFIED
+  USER_CAR_VERIFIED,
+  SET_USER_COVER_IMAGE
 } from './Types'
 
 export const setUserProfile = dispatch => {
@@ -149,4 +151,31 @@ export const getUserFollowingFeeds = (userId) => {
       .catch(args => console.log(args))
 
   }
+}
+
+export const updateUserCoverImage = (userId, coverImageRequest) => {
+
+  return () => {
+    updateCoverImage(fileRequest('image', coverImageRequest.files), { userId })
+    .then(response => {
+      dispatch({type: SET_USER_COVER_IMAGE, coverImage: response.coverImage })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+}
+
+const fileRequest = (mediaType, files) => ({
+  body: {
+    image: formatFiles(mediaType, files),
+  }
+})
+
+const formatFiles = (mediaType, file) => {
+    const { uri, extension = '', id } = file
+    const extLower = extension.toLowerCase()
+    const type = `${mediaType}/${extLower}`
+    const name = `${id}.${extLower}`
+    return { uri, type, name }
 }
