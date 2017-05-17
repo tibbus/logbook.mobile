@@ -4,13 +4,10 @@ import background from '../../Styles/Themes/background';
 
 export const styles = StyleSheet.create({
   commentsSnapshot: {
-    backgroundColor: '#efefef'
+    backgroundColor: '#ffffff'
   },
   modal: {
     padding: 30,
-  },
-  container: {
-    backgroundColor: background.color,
   },
   posts: {
     marginLeft: 15,

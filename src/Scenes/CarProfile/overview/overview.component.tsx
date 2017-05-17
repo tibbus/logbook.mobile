@@ -61,11 +61,11 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <Lightbox><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo} /></Lightbox>
+    return <Lightbox key={item.uri}><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo} /></Lightbox>
   }
 
   if (item.type === "Video") {
-    return <LBVideo key={item.uri} paused={true} uri={item.uri} style={styles.photo} />
+    return <LBVideo key={item.uri} paused={true} uri={item.uri} style={styles.photo} width={170}/>
   }
 }
 

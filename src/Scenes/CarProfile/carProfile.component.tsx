@@ -10,7 +10,7 @@ import { Overview } from './overview/overview.component';
 import { CarTimeline } from './carTimeline/carTimeline.component';
 import { ShowCase } from './showcase/showcase.component';
 import { TechSpec } from './techSpec/techSpec.component';
-import { SquareImage } from '../../Components/SquareImage';
+import { FitImage } from '../../Components/FitImage/FitImage.component';
 import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setTimeline } from '../../Actions/timeline';
@@ -138,7 +138,7 @@ const getCarProfileComponent = (props) => {
       <View style={{ backgroundColor: background.carProfile }}>
         <View style={styles.infoWrapper}>
           <View style={styles.imageWrapper}>
-            <SquareImage source={{ uri: image }} />
+            <FitImage source={{ uri: image }} round={true} />
           </View>
 
           <Info owned={owned}
@@ -159,7 +159,9 @@ const getCarProfileComponent = (props) => {
     );
 
     return (
-      <BackScene onBack={() => this.back(navigator)} title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model} style={{ statusBar: { backgroundColor: '#fffaf1' } }}>
+      <BackScene onBack={() => this.back(navigator)}
+        title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}
+        style={{ statusBar: { backgroundColor: background.carProfile } }}>
         <View style={{ flex: 1 }}>
           <ScrollableTabView
             ref={(tabView) => { this.scrollableTabView = tabView }}

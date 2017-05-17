@@ -14,8 +14,10 @@ import { deletePost } from '../../Actions/post';
 import { addComment, setTimelineComments, getTimelineComments } from '../../Actions/comments';
 import { getUserLikedPosts, likePost, unlikeTimelinePost } from '../../Actions/like';
 import { LoadingView } from '../../Components/LoadingView';
-import { getPost, PostMenu } from '../../Components/Post';
-import { Comments, CommentInput } from '../../Components/Comments';
+import { Post } from '../../Components/Post/Post';
+import { PostMenu } from '../../Components/Post/PostMenu';
+import { Comments } from '../../Components/Comments/Comments.component';
+import { CommentInput } from '../../Components/Comments/CommentInput.component';
 import { styles } from './timeline.styles';
 
 const getTimeline = (timelines, type, id) => {
@@ -48,7 +50,7 @@ export class Timeline extends Component<any, any> {
       if (!timeline.length && this.carInfoId) {
         dispatch(setTimeline(type, this.carInfoId));
       }
-    } else {
+    } else if (type === 'user') {
       timeline = getTimeline(timelines, type, this.userId);
 
       if (!timeline.length && this.userId) {
@@ -138,7 +140,7 @@ export class Timeline extends Component<any, any> {
 
     return (
       <View style={styles.row}>
-        {getPost(props)}
+        {Post(props)}
         <Comments comments={postComments} />
         <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
           dispatch(addComment(timelinePostId, userId, commentText))
