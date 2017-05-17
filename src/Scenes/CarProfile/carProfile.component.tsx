@@ -54,7 +54,7 @@ export class CarProfile extends Component<any, any> {
         dispatch(getCarById(carInfoId));
         getTimeline(timelines, carInfoId);
         if (!timeline.length) {
-          dispatch(setTimeline('car', car.carInfo.id));
+          dispatch(setTimeline('car', carInfoId));
         }
       }
     }
@@ -135,8 +135,8 @@ const getCarProfileComponent = (props) => {
   };
 
   const userInfoComponent = (
-    <View style={{ backgroundColor: background.carProfile }}>
-      <View style={styles.infoWrapper}>
+    <View style={styles.infoWrapper}>
+      <View style={styles.subWrapper}>
         <View style={styles.imageWrapper}>
           <FitImage source={{ uri: image }} round={true} />
         </View>

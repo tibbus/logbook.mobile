@@ -5,9 +5,8 @@ import background from '../../Styles/Themes/background';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: background.carProfile
-  } as React.ViewStyle,
+    flex: 1
+  },
   underline: {
     backgroundColor: palette.primary,
     height: 3,
@@ -17,6 +16,9 @@ export const styles = StyleSheet.create({
     fontWeight: '700'
   },
   infoWrapper: {
+    backgroundColor: background.carProfile
+  },
+  subWrapper: {
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingTop: 10
