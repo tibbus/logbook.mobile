@@ -156,7 +156,7 @@ export const getUserFollowingFeeds = (userId) => {
 export const updateUserCoverImage = (userId, coverImageRequest) => {
 
   return () => {
-    updateCoverImage(fileRequest('image', coverImageRequest.files), { userId })
+    updateCoverImage(fileRequest('image', coverImageRequest), { id:userId })
     .then(response => {
       dispatch({type: SET_USER_COVER_IMAGE, coverImage: response.coverImage })
     })
@@ -170,7 +170,7 @@ const fileRequest = (mediaType, files) => ({
   body: {
     image: formatFiles(mediaType, files),
   }
-})
+});
 
 const formatFiles = (mediaType, file) => {
     const { uri, extension = '', id } = file

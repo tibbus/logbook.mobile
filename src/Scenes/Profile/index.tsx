@@ -20,10 +20,10 @@ export class Profile extends Component<any, any> {
   }
 
   render() {
-    const { user, cars, navigator } = this.props;
+    const { user, cars, navigator, dispatch } = this.props;
     return (
       <ScrollView style={styles.scrollView}>
-        {<Main user={user} onCoverImageUpdate={(userId, coverImageRequest) => updateUserCoverImage(userId, coverImageRequest)}/>}
+        {<Main user={user} onCoverImageUpdate={(userId, coverImageRequest) => dispatch(updateUserCoverImage(userId, coverImageRequest))}/>}
         {<CarGarage cars={cars} user={user} navigator={navigator} />}
       </ScrollView>
     );
