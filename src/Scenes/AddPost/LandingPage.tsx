@@ -102,7 +102,7 @@ export class LandingPage extends Component<any, any> {
     const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video' };
     const title = type === 'image' ? 'Photos' : 'Videos'
     const titleLiveCapture = type === 'image' ? 'Take a photo...' : 'Take a video...'
-    const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
+    const config: any = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
 
     ImagePicker.showImagePicker(config, (response) => {
 

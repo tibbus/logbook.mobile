@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { MainNav } from './MainNav';
 import { SignIn } from '../'

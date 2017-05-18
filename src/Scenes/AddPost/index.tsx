@@ -7,9 +7,9 @@ import {
   TouchableHighlight,
   Image,
   View,
-  Navigator,
   Alert
 } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { LandingPage } from './LandingPage';
 import { ConfirmPage } from './ConfirmPage';

@@ -1,4 +1,4 @@
-package com.Logbook;
+package com.logbook;
 
 import com.facebook.react.ReactActivity;
 
