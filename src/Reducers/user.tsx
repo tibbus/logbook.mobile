@@ -6,7 +6,8 @@ import {
   SET_USER,
   SET_USER_FOLLOW_COUNT,
   SET_USER_CAR_COUNT,
-  SET_USER_FOLLOWING
+  SET_USER_FOLLOWING,
+  SET_USER_COVER_IMAGE
 } from '../Actions/Types'
 
 const initialState = {
@@ -25,7 +26,7 @@ const initialState = {
 // follows array contains the id's of cars.
 
 export const user = (state: any = initialState, action) => {
-  const { type, user, token, count, follows } = action
+  const { type, user, token, count, follows, coverImage } = action
 
   switch (type) {
     case INVALIDATE_USER:
@@ -75,6 +76,11 @@ export const user = (state: any = initialState, action) => {
       return {
         ...state,
         follows: follows
+      }
+    case SET_USER_COVER_IMAGE:
+      return {
+        ...state,
+        coverImg: coverImage
       }
     default:
       return state

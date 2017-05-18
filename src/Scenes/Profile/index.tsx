@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import { Main } from './Main';
 import { CarGarage } from './CarGarage';
-import { updateUserFollowCount, updateUserCars } from '../../Actions/user.js'
+import { updateUserFollowCount, updateUserCars, updateUserCoverImage } from '../../Actions/user.js'
 
 const stateToProps = ({ user, cars }) => ({ user, cars });
 
@@ -20,10 +20,10 @@ export class Profile extends Component<any, any> {
   }
 
   render() {
-    const { user, cars, navigator } = this.props;
+    const { user, cars, navigator, dispatch } = this.props;
     return (
       <ScrollView style={styles.scrollView}>
-        {<Main user={user} />}
+        {<Main user={user} onCoverImageUpdate={(userId, coverImageRequest) => dispatch(updateUserCoverImage(userId, coverImageRequest))}/>}
         {<CarGarage cars={cars} user={user} navigator={navigator} />}
       </ScrollView>
     );
