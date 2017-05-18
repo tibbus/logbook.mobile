@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { MainNavBar } from './MainNavBar'
 import { Search, Profile, AddCar, CarProfile, AddPost, Feed, VerifyCar } from '../';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
-import { View, Navigator, Alert, StyleSheet } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { RegNoForm } from './RegNoForm';
 import { ConfirmationDetails } from './ConfirmationDetails';

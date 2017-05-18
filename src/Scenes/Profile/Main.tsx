@@ -33,7 +33,7 @@ export class Main extends Component<any, any> {
     const options = { mediaType: 'photo' };
     const title = 'Photos';
     const titleLiveCapture = 'Take a photo...';
-    const config = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
+    const config: any = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
 
     ImagePicker.showImagePicker(config, (response) => {
 
