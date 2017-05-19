@@ -15,6 +15,8 @@
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <asl.h>
+#import <React/RCTLog.h>
 
 
 @implementation AppDelegate
@@ -46,8 +48,53 @@
   [self.window makeKeyAndVisible];
   
   [Fabric with:@[[Crashlytics class]]];
+  
+  //Setting logging levels.
+  //Reference: https://medium.com/delivery-com-engineering/add-crashlytics-to-your-react-native-ios-app-69a983a9062a
+  RCTSetLogThreshold(RCTLogLevelInfo);
+  RCTSetLogFunction(CrashlyticsReactLogFunction);
 
   return YES;
 }
+
+RCTLogFunction CrashlyticsReactLogFunction = ^(
+                                               RCTLogLevel level,
+                                               __unused RCTLogSource source,
+                                               NSString *fileName,
+                                               NSNumber *lineNumber,
+                                               NSString *message
+                                               )
+{
+  NSString *log = RCTFormatLog([NSDate date], level, fileName, lineNumber, message);
+  
+#ifdef DEBUG
+  fprintf(stderr, "%s\n", log.UTF8String);
+  fflush(stderr);
+#else
+  CLS_LOG(@"REACT LOG: %s", log.UTF8String);
+#endif
+  
+  int aslLevel;
+  switch(level) {
+    case RCTLogLevelTrace:
+      aslLevel = ASL_LEVEL_DEBUG;
+      break;
+    case RCTLogLevelInfo:
+      aslLevel = ASL_LEVEL_NOTICE;
+      break;
+    case RCTLogLevelWarning:
+      aslLevel = ASL_LEVEL_WARNING;
+      break;
+    case RCTLogLevelError:
+      aslLevel = ASL_LEVEL_ERR;
+      break;
+    case RCTLogLevelFatal:
+      aslLevel = ASL_LEVEL_CRIT;
+      break;
+  }
+  asl_log(NULL, NULL, aslLevel, "%s", message.UTF8String);
+  
+  
+};
 
 @end
