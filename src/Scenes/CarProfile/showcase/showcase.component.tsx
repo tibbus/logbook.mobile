@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { FitImage } from '../../../Components/Image';
+import { FitImage } from '../../../Components/FitImage/FitImage.component';
 import { LBVideo } from '../../../Components/Video';
 import { styles } from './showcase.styles';
 
@@ -17,7 +17,7 @@ const galleryContent = (contentUri, type) => {
 
   if (type === "Image") {
     // @TODO Image.resizeMode.contain replaced with fixed
-    return <FitImage key={contentUri} resizeMode={Image.resizeMode.contain} source={{ uri: contentUri }} style={styles.photo} />
+    return <FitImage key={contentUri} source={{ uri: contentUri }} style={styles.photo} />
   }
 
   if (type === "Video") {
@@ -93,10 +93,8 @@ export class ShowCase extends Component<any, any> {
     return (
       <View>
         <Text>Photos</Text>
-        <ListView
-          dataSource={this.state.imageDataSource}
+        <ListView dataSource={this.state.imageDataSource}
           renderRow={(data) => !data ? <Text>No Images</Text> : galleryContent(data, 'Image')}
-          renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
           enableEmptySections={true}
           contentContainerStyle={styles.listImages}
           scrollEnabled={false}

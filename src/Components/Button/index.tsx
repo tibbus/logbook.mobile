@@ -66,7 +66,7 @@ export const NextButton = (onPress, title) => (
 export const ActionButton = (onPress, title) => (
   <TouchableHighlight onPress={() => onPress()}>
     <View style={styles.nextButtonBorder}>
-      <View style={[styles.actionButton]}>
+      <View>
         <View style={styles.rowContainer}>
           <View style={[styles.columnContainer]}>
             <Text style={[styles.buttonText]}>{title}</Text>

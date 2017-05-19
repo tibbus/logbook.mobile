@@ -149,12 +149,10 @@ export class Timeline extends Component<any, any> {
 
   render() {
     return (
-      <LoadingView style={styles.container}
-        isLoading={false}>
+      <LoadingView isLoading={false}>
         <ListView
           contentContainerStyle={{ justifyContent: 'center' }}
           scrollEnabled={false}
-          style={styles.container}
           dataSource={this.state.dataSource}
           enableEmptySections={Boolean(true)}
           renderRow={this.renderRow.bind(this)} />

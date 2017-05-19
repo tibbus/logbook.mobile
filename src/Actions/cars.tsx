@@ -42,7 +42,7 @@ export const getCarById = (carInfoId) => {
     return dispatch => {
         dispatch({ type: SET_LOADING_STATUS, resourceName: 'cars' })
         getCarByIdApi({}, { carInfoId })
-            .then(carResponse => {
+            .then((carResponse: any) => {
                 getCarOwnerByIdApi({}, { carInfoId })
                     .then(carOwnerResponse => {
                         dispatch(setBrowsingCar(carResponse.carInfo, carOwnerResponse))
@@ -82,7 +82,7 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
         const takeLimit = getApiFetchLimit();
         if (contentType === "Images") {
             getCarImages({}, { carInfoId, skip, takeLimit })
-                .then(imagePosts => {
+                .then((imagePosts: any) => {
 
                     const posts = imagePosts.results.map(extractPostDetails);
                     dispatch({
@@ -101,7 +101,7 @@ export const getCarTimelineContent = (carInfoId, contentType, skip = 0) => {
 
         if (contentType === "Videos") {
             getCarVideos({}, { carInfoId, skip, takeLimit })
-                .then(videoPosts => {
+                .then((videoPosts: any) => {
                     const posts = videoPosts.results.map(extractPostDetails);
                     dispatch({
                         type: UPDATE_BROWSING_CAR_CONTENT,
@@ -173,7 +173,7 @@ export const getCarFollowersCount = (id) => {
 
     const body = { actorId: id, actorType: 'car' }
     getGetStreamToken({ body }, {})
-      .then(tokenResponse => {
+      .then((tokenResponse: any) => {
 
         getCarFollowers(tokenResponse.token, id)
           .then(carFollowersResponse => {

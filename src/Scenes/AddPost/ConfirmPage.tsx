@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import background from '../../Styles/Themes/background';
 import palette from '../../Styles/Themes/palette';
 
-import { FitImage } from '../../Components/Image';
 import { getTagsView } from './TagsView';
 import { getGalleryView } from './GalleryView';
 import { getStatusView } from './StatusView';
@@ -82,20 +81,20 @@ const styles = StyleSheet.create({
     backgroundColor: background.secondary,
     justifyContent: "space-around",
     alignItems: "center",
-  } as React.ViewStyle,
+  },
    headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
-  } as React.ViewStyle,
+  },
   headerButton: {
   },
   headerButtonText: {
     fontWeight: "600",
-  } as React.TextStyle,
+  },
   headerHeadingContainer: {
     alignItems: "center",
     justifyContent: "center",
-  } as React.ViewStyle,
+  },
   headerHeadingText: {
   },
     contentContainer: {
@@ -105,16 +104,16 @@ const styles = StyleSheet.create({
     // alignItems: 'center', 
     paddingVertical: 10,
     backgroundColor: background.color,
-  } as React.ViewStyle,
+  },
   tagsView: {
     flex: 1,
     flexDirection: 'row',
     marginTop: 60,
-  } as React.ViewStyle,
+  },
    emptyContainer: {
     flex: 3,
     backgroundColor: background.color,
-  } as React.ViewStyle,
+  },
   postActionButton: {
     flex: 1, 
     alignItems: 'center',
@@ -123,15 +122,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 30,
     marginHorizontal: 10
-  } as React.ViewStyle,
+  },
   postActionButtonText: {
     flex: 1,
     fontSize: 20,
     color: 'white'
-  } as React.ViewStyle,
+  },
   postActionButtonContainer: {
     paddingHorizontal: 10,
     borderRadius: 5,
-  } as React.ViewStyle,
+  },
 })
 

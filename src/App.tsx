@@ -1,4 +1,4 @@
-/// <reference path="../typings/react-native.d.ts" />
+
 
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';

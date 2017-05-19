@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   listImages: {
     flexDirection: 'row',
     flexWrap: 'wrap'
-  } as React.ViewStyle,
+  },
   horizontalScrollView: {
     height: 200,
     flexDirection: 'row'

@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     backgroundColor: background.component,
     borderTopWidth: 2,
     borderTopColor: background.color,
-  } as React.ViewStyle,
+  },
   containerEmpty: {
     flex: 1,
     flexDirection: 'column',
-  } as React.ViewStyle,
+  },
   text: {
     marginLeft: 20,
     fontSize: 15,
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 21,
     fontWeight: "700",
-  } as React.TextStyle,
+  },
   photo: {
     height: 70,
     width: 100,

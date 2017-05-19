@@ -11,14 +11,14 @@ export default StyleSheet.create({
   /* ====== General styles ====== */
   container: {
     flex: 1,
-  } as React.ViewStyle,
+  },
   columnContainer: {
     flex: 1,
     flexDirection: 'column',
-  } as React.ViewStyle,
+  },
   rowContainer: {
     flexDirection: 'row',
-  } as React.ViewStyle,
+  },
   buttonText: {
     fontWeight: "600",
     fontSize: 20,
@@ -70,12 +70,12 @@ export default StyleSheet.create({
   captionText: {
     fontSize: 14,
     fontWeight: '600',
-  } as React.TextStyle,
+  },
   captionButtonText: {
     fontSize: 12,
     fontWeight: '600',
     color: palette.primary,
-  } as React.TextStyle,
+  },
   captionButton: {
     paddingVertical: 8,
     paddingHorizontal: 15,
@@ -84,7 +84,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     backgroundColor: 'transparent',
     borderRadius: 3,
-  } as React.ViewStyle,
+  },
   /* ====== Next button styles ====== */
   nextButtonText: {
     color: palette.text,

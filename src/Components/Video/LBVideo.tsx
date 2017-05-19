@@ -53,10 +53,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  } as React.ViewStyle,
+  },
   icon: {
     fontSize: 90,
-    color: '#e0e0e0',
-    backgroundColor: 0
+    color: '#e0e0e0'
   }
 });

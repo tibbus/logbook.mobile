@@ -255,35 +255,35 @@ const validateInput = (postDetails, onSuccess, onFailure) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  } as React.ViewStyle,
+  },
   rowContainer: {
     flex: 1,
     flexDirection: 'row',
-  } as React.ViewStyle,
+  },
   emptyContainer: {
     flex: 3,
     backgroundColor: background.color,
-  } as React.ViewStyle,
+  },
   tagsView: {
     flex: 1,
     flexDirection: 'row',
     marginTop: 60,
-  } as React.ViewStyle,
+  },
   headerContainer: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: background.secondary,
     justifyContent: "space-around",
     alignItems: "center",
-  } as React.ViewStyle,
+  },
   headerHeadingContainer: {
     alignItems: "center",
     justifyContent: "center",
-  } as React.ViewStyle,
+  },
   headerButtonContainer: {
     alignItems: "center",
     justifyContent: "center",
-  } as React.ViewStyle,
+  },
   contentContainer: {
     // flex: 1,
     flexDirection: 'row',
@@ -291,17 +291,17 @@ const styles = StyleSheet.create({
     // alignItems: 'center', 
     paddingVertical: 30,
     backgroundColor: background.color,
-  } as React.ViewStyle,
+  },
   headerButtonText: {
     fontWeight: "600",
-  } as React.TextStyle,
+  },
   headerHeadingText: {
-  } as React.TextStyle,
+  },
   nextButtonText: {
     flex: 1,
     fontSize: 20,
     color: palette.secondary
-  } as React.ViewStyle,
+  },
   postActionButton: {
     flex: 1, 
     alignItems: 'center',
@@ -310,22 +310,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: 30,
     //marginHorizontal: 10
-  } as React.ViewStyle,
+  },
   postActionButtonText: {
     flex: 1,
     fontSize: 20,
     color: 'white'
-  } as React.ViewStyle,
+  },
   postActionButtonContainer: {
     paddingHorizontal: 10,
     borderRadius: 5,
-  } as React.ViewStyle,
+  },
   emptyGarageTextView: {
     flex: 5,
     flexDirection: 'row',
-  } as React.ViewStyle,
+  },
   emptyGarageText: {
     flex:1,
     flexDirection:'row'
-  } as React.ViewStyle
+  }
 })

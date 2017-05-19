@@ -32,7 +32,7 @@ export const getGalleryView = (galleryDataSource?, onAddMediaClick?, showAddMedi
 const galleryContent = (data) => {
 
   if (data.type === "image") {
-    return <Image key={data.uri} resizeMode={Image.resizeMode.contain} source={{ uri: data.uri }} style={styles.postPhoto} />
+    return <Image key={data.uri} resizeMode="contain" source={{ uri: data.uri }} style={styles.postPhoto} />
   }
 
   if (data.type === "video") {
@@ -79,15 +79,15 @@ const styles = StyleSheet.create({
         padding: 5,
         alignItems: 'center',
         justifyContent: 'center',
-  } as React.ViewStyle,
+  },
   addMediaIcon: {
         fontSize: 50,
         alignItems: 'center',
         justifyContent: 'center',
         color: pallete.secondary
-  } as React.ViewStyle,
+  },
   addMediaIconText: {
       fontSize: 11,
       color: pallete.secondary
-  } as React.ViewStyle,
+  },
 })

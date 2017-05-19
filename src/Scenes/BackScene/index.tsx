@@ -38,23 +38,23 @@ const styles = StyleSheet.create({
 
     height: 40,
     flexDirection: 'row'
-  } as React.ViewStyle,
+  },
   statusInner: {
     flex: 1
   },
   title: {
     flex: 1,
     alignItems: 'center'
-  } as React.ViewStyle,
+  },
   button: {
     alignItems: 'center',
     width: 70,
     paddingTop: 10,
     paddingBottom: 10
-  } as React.ViewStyle,
+  },
   flexRow: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
-  } as React.ViewStyle
+  }
 })

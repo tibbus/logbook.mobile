@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: "flex-start",
-  } as React.ViewStyle,
+  },
   subContainer: {
     paddingHorizontal: paddingHorizontal,
-  } as React.ViewStyle,
+  },
 });

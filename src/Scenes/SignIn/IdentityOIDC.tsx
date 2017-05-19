@@ -7,7 +7,8 @@ import {
   TouchableHighlight,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TextStyle
 } from 'react-native';
 import { BackScene } from '../';
 import { hashToObj } from '../../Utils';
@@ -136,14 +137,14 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: 'rgba(255, 255, 255, 1.0)',
     marginHorizontal: width/10 //35
-  } as React.TextStyle,
+  } as TextStyle,
   productLine: {
     fontSize: 20,
     fontWeight: "600",
     color: 'rgba(255, 255, 255, 0.6)',
     marginTop: height/70, //10
     marginHorizontal: width/10 //35
-  } as React.TextStyle,
+  } as TextStyle,
   messageLine: {
     flex: 3,
     fontSize: 14,

@@ -17,7 +17,7 @@ export class FitImage extends Component<any, any> {
     Image.getSize(this.props.source, (width, height) => {
       this.ratio = width / height;
       this.renderImage();
-    });
+    }, failure => console.log(`failed to load image, ${this.props.source}`));
   }
 
   public setSizes(event) {

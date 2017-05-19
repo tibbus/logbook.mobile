@@ -23,11 +23,9 @@ export class SearchCars extends Component<any, any> {
     return (
       <View style={styles.containerEmpty}>
         {/* <Text style={styles.subheading}>CARS</Text> */}
-        <ListView
-          style={styles.container}
+        <ListView style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(data) => <SearchRow {...data} onViewCarProfile={onViewCarProfile} />}
-          renderSeperator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
           renderHeader={() => <SearchHeader searchFunction={onSubmit} />}
           enableEmptySections={true}
         />

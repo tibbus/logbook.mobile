@@ -39,7 +39,7 @@ export const getSearchResult = (searchTerm) => {
 const executeRequest = (url, body?) => {
 
     const requestDetails = { method: 'POST', body: JSON.stringify(body), headers: { 'api-key': apiKey, 'Accept': 'application/json', 'Content-Type': 'application/json' } };
-    return global.fetch(url, requestDetails)
+    return fetch(url, requestDetails)
         .then(response => {
 
             if (response.ok) {

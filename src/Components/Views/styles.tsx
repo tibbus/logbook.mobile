@@ -12,10 +12,10 @@ export default StyleSheet.create({
     /* ====== General styles ====== */
     gradient: {
         flex: 1,
-    } as React.ViewStyle,
+    },
     gradientView: {
         flexDirection: 'column', 
         width: width, 
         height: height-tabBarHeight,
-    } as React.ViewStyle,
+    },
 });

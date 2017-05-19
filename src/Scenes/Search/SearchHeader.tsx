@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: background.component,
     flexDirection: 'column',
     //justifyContent: 'space-between',
-  } as React.ViewStyle,
+  },
   container: {
     //top: 0,
     flex: 1,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     //backgroundColor: 'red',
-  } as React.ViewStyle,
+  },
   input: {
     height: 50,
     flex: 1,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 40,
     paddingBottom: 15,
-  } as React.TextStyle,
+  },
 });
 
 export const SearchHeader = ({searchFunction}) => (

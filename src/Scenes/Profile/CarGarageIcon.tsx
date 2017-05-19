@@ -43,7 +43,7 @@ const photoHeight = 150;
 var styles = StyleSheet.create({
     captionButtonView: {
         flex: 1,
-    } as React.ViewStyle,
+    },
     carIconWrapper: {
         flexDirection: 'column',
         backgroundColor: '#eaeaea',
@@ -53,21 +53,21 @@ var styles = StyleSheet.create({
         marginRight: 30,
         alignItems: 'center',
         justifyContent: 'center',
-    } as React.ViewStyle,
+    },
     infoContainer: {
         marginRight: 20
     },
     carIcon: {
         fontSize: 50,
         color: pallete.primary
-    } as React.ViewStyle,
+    },
     carIconText: {
   			fontSize: 11,
         color: pallete.primary
-    } as React.ViewStyle,
+    },
     carInfoIcon: {
         flexDirection: 'row',
-    } as React.ViewStyle,
+    },
     image: {
         width: photoWidth,
         height: photoHeight,

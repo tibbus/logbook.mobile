@@ -4,7 +4,7 @@ import { dispatch } from '../store';
 
 export const getUserLikedPosts = (userId) => () => {
   getLikedPosts({}, { userId })
-    .then(retrievedPostIds => dispatch({
+    .then((retrievedPostIds: any) => dispatch({
       type: SET_USER_LIKED_ITEMS,
       likedItems: retrievedPostIds.likedItems
     })
@@ -20,7 +20,7 @@ export const likePost = (postId, postType, userId, carInfoId) => () => {
     'UserId': userId
   };
   likeItem({ body: likeBody })
-    .then(likedPost => {
+    .then((likedPost: any) => {
       dispatch({
         type: ADD_USER_LIKED_ITEM,
         updatedItem: { id: likedPost.id, postId: likedPost.postId, carInfoId: carInfoId }

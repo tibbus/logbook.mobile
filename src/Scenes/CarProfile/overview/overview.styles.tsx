@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     marginBottom: 5
-  } as React.ViewStyle,
+  },
   headingFirstTitle: {
     flex: 1.5,
     flexDirection: 'row',
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: palette.text,
     paddingLeft: 20
-  } as React.ViewStyle,
+  },
   headingSecondTitle: {
     flex: 1,
     flexDirection: 'row',
@@ -32,10 +32,10 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     color: palette.inactive,
     paddingRight: 10
-  } as React.ViewStyle,
+  },
   featuredContainer: {
     //height: 300
-  } as React.ViewStyle,
+  },
   horizontalScrollView: {
     //height: 300
   },

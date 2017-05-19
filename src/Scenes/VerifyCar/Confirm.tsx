@@ -95,15 +95,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: "flex-start",
-  } as React.ViewStyle,
+  },
   subContainer: {
     paddingHorizontal: paddingHorizontal,
-  } as React.ViewStyle,
+  },
   rowSubContainer: {
     flex: 2,
     alignItems: "flex-start",
     flexDirection: 'row'
-  } as React.ViewStyle,
+  },
   vinCaptionText: {
     //flex: 1,
     //height: 80,
