@@ -61,17 +61,17 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: "flex-start",
     //backgroundColor: palette.secondary
-  } as React.ViewStyle,
+  },
   subContainer: {
     paddingHorizontal: paddingHorizontal,
-  } as React.ViewStyle,
+  },
   underline: {
     height: textInputHeight,
     width: width - (2 * paddingHorizontal),
     borderBottomWidth: 2,
     borderColor: 'rgba(255, 255, 255, 0.1)',
     marginBottom: 20,
-  } as React.ViewStyle,
+  },
   textInput: {
     height: textInputHeight,
     //marginVertical: 30, 

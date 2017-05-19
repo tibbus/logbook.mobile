@@ -29,14 +29,12 @@ export class TechSpec extends Component<any, any> {
     render() {
         const { car } = this.props;
         return (
-            <View
-                automaticallyAdjustContentInsets={false}
-                style={styles.scrollView}>
+            <View style={styles.scrollView}>
                 <View style={{ height: 300 }}>
                     <Text>DVLA</Text>
                     {getTaxInfo(car)}
                 </View>
-                <View style={styles.seperator}></View>
+                <View style={styles.separator}></View>
                 <View style={{ height: 300 }}>
                     <Text>Details</Text>
                     <Text>Colour : {car.carInfo.colour}</Text>

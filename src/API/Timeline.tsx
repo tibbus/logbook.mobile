@@ -14,7 +14,7 @@ export const getTimeline = (type: string, id: string) => {
         const request = { body }
 
         getTimelineToken({ body }, {})
-            .then(tokenResponse => {
+            .then((tokenResponse: any) => {
                 console.log(tokenResponse)
 
                 //Call to timeline

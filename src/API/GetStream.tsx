@@ -31,7 +31,7 @@ export const getFeedData = (feedType, feedId, token) => {
 
     const url = getUrl(`${getStreamApi}feed/${feedType}/${feedId}/?limit=${fetchLimit}&api_key=${apiKey}`)
 
-    return global.fetch(url, getHeaders(token))
+    return fetch(url, getHeaders(token))
         .then(response => response.json())
         .then(jsonResponse => {
             const timelineTimes = jsonResponse.results.map((timelineObject) => {
@@ -53,7 +53,7 @@ export const getUserFollowing = (token, userId) => {
 
     const url = getUrl(`${getStreamApi}feed/user/${userId}/following/?api_key=${apiKey}`);
 
-    return global.fetch(url, getHeaders(token))
+    return fetch(url, getHeaders(token))
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(jsonResponse);
@@ -69,7 +69,7 @@ export const getCarFollowers = (token: string, carinfoId: string) => {
     const infoId = carinfoId;
     const url = getUrl(`${getStreamApi}feed/car/${infoId}/followers/?api_key=${apiKey}`)
 
-    return global.fetch(url, getHeaders(token))
+    return fetch(url, getHeaders(token))
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(jsonResponse);

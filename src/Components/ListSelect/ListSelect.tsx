@@ -3,7 +3,8 @@ import {
   ListView,
   StyleSheet,
   Text,
-  View
+  View,
+  TextStyle
 } from 'react-native'
 import { Option } from './Option'
 
@@ -66,5 +67,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     color: '#666'
-  } as React.TextStyle
+  } as TextStyle
 })

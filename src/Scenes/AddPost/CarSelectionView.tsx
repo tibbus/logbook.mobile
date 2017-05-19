@@ -16,7 +16,7 @@ import palette from '../../Styles/Themes/palette';
 
 export const getCarSelectionView = (editMode, carCollection, onSelectCar, selectedCar) => {
   return (
-    <View style={styles.carSelectorContainer}>
+    <View>
       {editMode ? getCarSelection(carCollection, onSelectCar, selectedCar) : displaySelectedCar(selectedCar)}
     </View>
   )
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingLeft: screen.paddingHorizontal,
     backgroundColor: 'white',
-  } as React.ViewStyle,
+  },
   selectedCarText: {
     fontSize: 15,
     fontWeight: "600",

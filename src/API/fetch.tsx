@@ -17,7 +17,7 @@ const customParams = (files, request) => {
   const { body } = request
   if (files) {
     const keys = Object.keys(body)
-    const formData = new global.FormData()
+    const formData = new FormData()
 
     keys.forEach(key => {
 
@@ -65,8 +65,7 @@ export const fetcher = (uri, method = 'GET', files = false, identity = false) =>
     }
   }
 
-  return global
-    .fetch(url, requestObject)
+  return fetch(url, requestObject)
     .then(response => {
       const type = response.headers.get('content-type');
 

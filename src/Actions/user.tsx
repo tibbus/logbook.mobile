@@ -1,9 +1,9 @@
-import { getUser as getAuthUserInfo } from '../API/fetch'
-import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar'
-import { getFollowCount, getGetStreamToken, getUsers, updateCoverImage } from '../API/user'
-import { getUserFollowing } from '../API/GetStream'
-import { objKeysToDecap } from '../Utils'
-import { dispatch } from '../store'; 
+import { getUser as getAuthUserInfo } from '../API/fetch';
+import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar';
+import { getFollowCount, getGetStreamToken, getUsers, updateCoverImage } from '../API/user';
+import { getUserFollowing } from '../API/GetStream';
+import { objKeysToDecap } from '../Utils';
+import { dispatch } from '../store';
 import {
   ADD_CAR,
   SET_USER,
@@ -18,9 +18,9 @@ import {
 } from './Types'
 
 export const setUserProfile = dispatch => {
-  getAuthUserInfo().then(userDetails => {
+  getAuthUserInfo().then((userDetails: any) => {
 
-    getUsers({}, { id: userDetails.id}).then(userInfo => {
+    getUsers({}, { id: userDetails.id }).then((userInfo: any) => {
       const user = {
         ...userDetails,
         ...userInfo,
@@ -33,20 +33,20 @@ export const setUserProfile = dispatch => {
         user
       })
     })
+      .catch((e) => {
+        console.log(e);
+      })
+  })
     .catch((e) => {
       console.log(e);
     })
-  })
-  .catch((e) => {
-    console.log(e);
-  })
 }
 
-export const updateUserCars = (userId = null,details = true) => {
+export const updateUserCars = (userId = null, details = true) => {
   return dispatch => {
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'updateUserCar' })
     getUserCars({}, { userId, details })
-      .then(userCars => {
+      .then((userCars: any) => {
         dispatch({ type: SET_USER_CARS, userCars });
         dispatch({ type: SET_USER_CAR_COUNT, count: userCars.length });
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'updateUserCar' });
@@ -86,8 +86,8 @@ export const verifyUserCar = (userId, carInfoId, vinNumbers, onSuccess, onFailur
       lastLetter: vinNumbers.last
     };
     dispatch({ type: SET_LOADING_STATUS, resourceName: 'verifyUserCar' })
-    verifyUserCarApi({body}, {userId, carInfoId})
-      .then(verifyResponse => {
+    verifyUserCarApi({ body }, { userId, carInfoId })
+      .then((verifyResponse: any) => {
         dispatch({
           type: USER_CAR_VERIFIED,
           verifyContent: {
@@ -112,7 +112,7 @@ export const updateUserFollowCount = (id) => {
 
     const body = { actorId: id, actorType: 'user' }
     getGetStreamToken({ body }, {})
-      .then(tokenResponse => {
+      .then((tokenResponse: any) => {
 
         getUserFollowing(tokenResponse.token, id)
           .then(userFollowingFeeds => {
@@ -136,7 +136,7 @@ export const getUserFollowingFeeds = (userId) => {
 
     const body = { actorId: userId, actorType: 'user' }
     getGetStreamToken({ body }, {})
-      .then(tokenResponse => {
+      .then((tokenResponse: any) => {
 
         getUserFollowing(tokenResponse.token, userId)
           .then(userFollowingFeeds => {
@@ -156,13 +156,13 @@ export const getUserFollowingFeeds = (userId) => {
 export const updateUserCoverImage = (userId, coverImageRequest) => {
 
   return () => {
-    updateCoverImage(fileRequest('image', coverImageRequest), { id:userId })
-    .then(response => {
-      dispatch({type: SET_USER_COVER_IMAGE, coverImage: response.coverImage })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    updateCoverImage(fileRequest('image', coverImageRequest), { id: userId })
+      .then((response: any) => {
+        dispatch({ type: SET_USER_COVER_IMAGE, coverImage: response.coverImage })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 
@@ -173,9 +173,9 @@ const fileRequest = (mediaType, files) => ({
 });
 
 const formatFiles = (mediaType, file) => {
-    const { uri, extension = '', id } = file
-    const extLower = extension.toLowerCase()
-    const type = `${mediaType}/${extLower}`
-    const name = `${id}.${extLower}`
-    return { uri, type, name }
+  const { uri, extension = '', id } = file
+  const extLower = extension.toLowerCase()
+  const type = `${mediaType}/${extLower}`
+  const name = `${id}.${extLower}`
+  return { uri, type, name }
 }
