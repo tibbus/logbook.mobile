@@ -38,17 +38,17 @@ export class Timeline extends Component<any, any> {
 
     // ignore rowHasChanged, let redux to decide
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => true });
-    const { type, car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
+    const { type, car, dispatch, timelines = [], comments = [], likes = [], requestPending } = this.props;
     const { user = {} }: { user: any } = this.props;
 
     this.userId = user.id;
-    let timeline;
+    let timeline = [];
 
     if (type === 'car') {
       this.carInfoId = this.props.car.carInfo.id;
       timeline = getTimeline(timelines, type, this.carInfoId);
 
-      if (!timeline.length && this.carInfoId) {
+      if (!timeline.length && this.carInfoId && !requestPending) {
         dispatch(setTimeline(type, this.carInfoId));
       }
     } else if (type === 'user') {
@@ -73,7 +73,7 @@ export class Timeline extends Component<any, any> {
     // @ TODO review how the logic works here with redux : update timelines/likes/comments
     if (timelines !== this.props.timelines || likes !== this.props.likes) {
       const { type } = this.props;
-      let timeline;
+      let timeline = [];
 
       if (type === 'car') {
         timeline = getTimeline(timelines, type, this.carInfoId);
@@ -103,7 +103,7 @@ export class Timeline extends Component<any, any> {
   }
 
   renderRow(post) {
-    const { user, carOwner, comments, dispatch, likes = [] } = this.props;
+    const { type, user, carOwner, comments, dispatch, likes = [] } = this.props;
     const { carInfoId } = post.activityData;
     const likedItem = likes.find(element => element.postId === post.activityData.id);
     const liked = !!likedItem;
@@ -112,8 +112,8 @@ export class Timeline extends Component<any, any> {
       // @TODO showStatusMenu not defined ??
       //onMenuPress: () => this.showStatusMenu(post),
       onVideoPress: this.playVideo.bind(this),
-      onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId)),
-      onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, carInfoId)),
+      onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId, type)),
+      onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, user.id, carInfoId, type)),
       carOwner,
       user,
       liked

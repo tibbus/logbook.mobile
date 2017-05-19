@@ -17,10 +17,10 @@ const initialState = []
 const modifier = timelineItem => {
   let { createdDate } = timelineItem.activityData
 
-  if(!createdDate) {
-    createdDate = new Date(); 
+  if (!createdDate) {
+    createdDate = new Date();
   }
-  
+
   const timeAgo = moment(new Date(createdDate)).from(moment())
 
   return {
@@ -32,14 +32,24 @@ const modifier = timelineItem => {
   }
 }
 
-const newTimelineItem = (timeline, carInfoId, { data, pending }) => ({
-  carInfoId,
-  timeline: [{ ...data, pending }].concat(
-    timeline
-      .filter(({ pending }) => !pending)
-      .map(modifier)
-  )
-})
+// @todo : review exactly what data should be here and in what Structure type
+const newTimelineItem = (timeline, { data, pending, carInfoId }) => {
+  const details = {
+    carData: {},
+    topics: [],
+    ...data.details,
+  };
+
+  return {
+    actorType: 'car',
+    actorId: carInfoId,
+    timeline: [{ type: data.type, activityData: details, pending, details, carData: {} }].concat(
+      timeline
+        .filter(({ pending }) => !pending)
+        .map(modifier)
+    )
+  };
+}
 
 interface CarInfo {
   type: any,
@@ -53,28 +63,29 @@ const itemMatch = (item1, { type, id, details = {} }: CarInfo) => (
 
 const removeTimelineItem = (action, state) => {
   const { item } = action
-  const { timeline, carInfoId } = state
+  const { timeline, actorId } = state
 
   return {
-    carInfoId,
+    actorId,
     timeline: timeline.filter(item1 => !itemMatch(item1, item))
   }
 }
 
 const timelineReducer = (state = [], action) => {
-  const { type, item } = action
-  const { timeline, carInfoId }: any = state
+  const { type, item } = action;
+  const { timeline, actorId, actorType }: any = state;
 
   switch (type) {
     case ADD_TIMELINE_ITEM:
-      return newTimelineItem(timeline, carInfoId, action)
+      return newTimelineItem(timeline, action);
 
     case DELETE_TIMELINE_ITEM:
       return removeTimelineItem(action, state)
 
     case UPDATE_TIMELINE_ITEM: {
       return {
-        carInfoId,
+        actorType,
+        actorId,
         timeline: timeline.map(item2 => {
           if (itemMatch(item2, item)) {
             return timelineItemReducer(item2, action)
@@ -85,9 +96,10 @@ const timelineReducer = (state = [], action) => {
       }
     }
 
-    case ADD_USER_LIKED_ITEM : {
+    case ADD_USER_LIKED_ITEM: {
       return {
-        carInfoId,
+        actorType,
+        actorId,
         timeline: timeline.map(item2 => {
           if (item2.activityData.id === action.updatedItem.postId) {
             return timelineItemReducer(item2, action)
@@ -97,9 +109,10 @@ const timelineReducer = (state = [], action) => {
       }
     }
 
-    case REMOVE_USER_LIKED_ITEM : {
+    case REMOVE_USER_LIKED_ITEM: {
       return {
-        carInfoId,
+        actorType,
+        actorId,
         timeline: timeline.map(item2 => {
           if (item2.activityData.id === action.updatedItem.postId) {
             return timelineItemReducer(item2, action)
@@ -111,13 +124,15 @@ const timelineReducer = (state = [], action) => {
 
     case PLAY_TIMELINE_VIDEO:
       return {
-        carInfoId,
+        actorType,
+        actorId,
         timeline: timeline.map(videoMap(action))
       }
 
     case PAUSE_TIMELINE_VIDEO:
       return {
-        carInfoId,
+        actorType,
+        actorId,
         timeline: timeline.map(videoMap(action))
       }
 
@@ -140,8 +155,8 @@ const videoMap = action => item => {
   return timelineItemReducer(item, { ...action, type: PAUSE_TIMELINE_VIDEO })
 };
 
-const mapTimelines = (timelines, action, carInfoId) => timelines.map(timeline => {
-  if (timeline.carInfoId === carInfoId) {
+const mapTimelines = (timelines, action, actorId, actorType) => timelines.map(timeline => {
+  if (timeline.actorId === actorId && timeline.actorType === actorType) {
     return timelineReducer(timeline, action);
   }
   return timeline;
@@ -162,25 +177,26 @@ export const timelines = (state = initialState, action) => {
       ];
 
     case ADD_TIMELINE_ITEM:
-      return mapTimelines(state, action, action.carInfoId);
+      return mapTimelines(state, action, action.carInfoId, 'car');
 
     case DELETE_TIMELINE_ITEM:
-      return mapTimelines(state, action, item.carInfoId);
+      return mapTimelines(state, action, actorId, actorType);
 
-    case UPDATE_TIMELINE_ITEM:
-      return mapTimelines(state, action, item.details.carInfoId);
+    // @todo : To be reviewed, doesn't look that are used anywhere
+    // case UPDATE_TIMELINE_ITEM:
+    //   return mapTimelines(state, action, item.details.actorId);
 
-    case PLAY_TIMELINE_VIDEO:
-      return mapTimelines(state, action, action.carInfoId);
+    // case PLAY_TIMELINE_VIDEO:
+    //   return mapTimelines(state, action, action.actorId);
 
-    case PAUSE_TIMELINE_VIDEO:
-      return mapTimelines(state, action, action.carInfoId);
+    // case PAUSE_TIMELINE_VIDEO:
+    //   return mapTimelines(state, action, action.actorId);
 
     case ADD_USER_LIKED_ITEM:
-      return mapTimelines(state, action, action.updatedItem.carInfoId);
+      return mapTimelines(state, action, action.updatedItem.actorId, action.updatedItem.actorType);
 
     case REMOVE_USER_LIKED_ITEM:
-      return mapTimelines(state, action, action.updatedItem.carInfoId);
+      return mapTimelines(state, action, action.updatedItem.actorId, action.updatedItem.actorType);
 
 
     default:
