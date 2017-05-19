@@ -13,6 +13,10 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -21,11 +25,14 @@
 
   
 #ifdef DEBUG
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
 #else
     jsCodeLocation = [CodePush bundleURL];
 #endif
-
+  
+  NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Logbook", @"UserAgent", nil];
+  [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Logbook"
                                                initialProperties:nil
@@ -37,6 +44,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [Fabric with:@[[Crashlytics class]]];
+
   return YES;
 }
 

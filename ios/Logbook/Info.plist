@@ -24,6 +24,20 @@
 	<string>1</string>
 	<key>CodePushDeploymentKey</key>
 	<string>6gAiJYR1xDokDWmG6Tdcp4xE_aNtEyAmtCsjG</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>d21a21c5a4da0e3457f451d1673c920fd78da86d</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
