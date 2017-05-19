@@ -1,42 +1,42 @@
 {
-	"name": "Logbook",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "npm run copy:assets && tsc -w",
-		"build": "npm run copy:assets && tsc",
-		"copy:assets": "mkdirp build && ncp src/Assets build/Assets",
-		"tsc": "tsc",
-		"ncp": "ncp",
-		"mkdirp": "mkdirp"
-	},
-	"dependencies": {
-		"@types/react": "15.0.17",
-		"@types/react-native": "0.44.2",
-		"babel-preset-react-native": "1.9.2",
-		"mkdirp": "0.5.1",
-		"moment": "2.18.1",
-		"ncp": "2.0.0",
-		"ramda": "0.23.0",
-		"react": "16.0.0-alpha.6",
-		"react-native": "0.44.0",
-		"react-native-code-push": "2.0.3-beta",
-		"react-native-deprecated-custom-components": "0.1.0",
-		"react-native-image-picker": "0.26.3",
-		"react-native-keyboard-aware-scroll-view": "0.2.9",
-		"react-native-lightbox": "0.6.0",
-		"react-native-linear-gradient": "2.0.0",
-		"react-native-modal-dropdown": "0.4.2",
-		"react-native-vector-icons": "4.1.1",
-		"react-native-video": "1.0.0",
-		"react-redux": "5.0.5",
-		"react-timer-mixin": "0.13.3",
-		"redux": "3.6.0",
-		"redux-thunk": "2.0.1",
-		"typescript": "2.3.2",
-		"underscore.string": "3.3.4"
-	},
-	"devDependencies": {
-		"remote-redux-devtools": "0.5.7"
-	}
+  "name": "Logbook",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "npm run copy:assets && tsc -w",
+    "build": "npm run copy:assets && tsc",
+    "copy:assets": "mkdirp build && ncp src/Assets build/Assets",
+    "tsc": "tsc",
+    "ncp": "ncp",
+    "mkdirp": "mkdirp"
+  },
+  "dependencies": {
+    "@types/react": "15.0.17",
+    "@types/react-native": "0.44.2",
+    "babel-preset-react-native": "1.9.2",
+    "mkdirp": "0.5.1",
+    "moment": "2.18.1",
+    "ncp": "2.0.0",
+    "ramda": "0.23.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.0",
+    "react-native-code-push": "^2.0.3-beta",
+    "react-native-deprecated-custom-components": "0.1.0",
+    "react-native-image-picker": "0.26.3",
+    "react-native-keyboard-aware-scroll-view": "0.2.9",
+    "react-native-lightbox": "0.6.0",
+    "react-native-linear-gradient": "2.0.0",
+    "react-native-modal-dropdown": "0.4.2",
+    "react-native-vector-icons": "4.1.1",
+    "react-native-video": "1.0.0",
+    "react-redux": "5.0.5",
+    "react-timer-mixin": "0.13.3",
+    "redux": "3.6.0",
+    "redux-thunk": "2.0.1",
+    "typescript": "2.3.2",
+    "underscore.string": "3.3.4"
+  },
+  "devDependencies": {
+    "remote-redux-devtools": "0.5.7"
+  }
 }
