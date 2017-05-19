@@ -51,15 +51,15 @@ export const setTimeline = (actorType: string, id: string) => {
 };
 
 export const addCarTimelineStatus = (carInfoId, description, onSuccess, onFailure) => {
-  const body = { description, topics: [] }
-  const request = { body }
+  const body = { description, topics: [] };
+  const request = { body };
 
   return () => {
-    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' })
-    dispatch(details => dispatch(addTimelineItemAction(carInfoId, body, 'Status', true)))
+    dispatch({ type: SET_LOADING_STATUS, resourceName: 'addPost' });
+
     createStatus(request, { carInfoId })
       .then(details => {
-        dispatch(addTimelineItemAction(carInfoId, details, 'Status'))
+        dispatch(addTimelineItemAction(carInfoId, details, 'Status'));
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'addPost' });
         onSuccess();
       })

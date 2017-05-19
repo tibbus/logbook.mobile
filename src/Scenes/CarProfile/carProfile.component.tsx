@@ -121,7 +121,7 @@ const getCarProfileComponent = (props) => {
     verified = car.verified;
   }
   const followed = user.follows.includes(browsingCar.carInfo.id.toString());
-  const timelineProps = { type: 'car', car: browsingCar, user, navigator, rootNav };
+  const timelineProps = { type: 'car', car: browsingCar, user, navigator, rootNav, requestPending: true };
 
   const carTimelineItem = timelines.find(item => item.actorType === 'car' && item.actorId === browsingCar.carInfo.id);
   let timeline = null;

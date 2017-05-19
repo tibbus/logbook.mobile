@@ -14,7 +14,8 @@ import { FitImage } from '../FitImage/FitImage.component';
 import { styles } from './Post.styles';
 
 const renderMedia = (type, data) => {
-  const { details, paused = true, onVideoPress } = data;
+  const { paused = true, onVideoPress } = data;
+  const details = data;
   const { contentUris } = details.activityData;
 
   switch (type) {
@@ -63,7 +64,10 @@ interface postData {
 }
 
 export const Post = (data: any = {}) => {
-  const { details = {}, pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress }: postData = data;
+  const {pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress }: postData = data;
+  // @todo : review exactly what data need to be here
+  const details = data;
+
   let profileImg = '';
   if (carOwner === undefined || carOwner.profileImg === undefined || carOwner.profileImg === "") {
     profileImg = 'https://maxcdn.icons8.com/iOS7/PNG/75/carOwners/carOwner_male_circle_filled-75.png';
