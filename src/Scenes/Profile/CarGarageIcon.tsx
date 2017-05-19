@@ -28,7 +28,7 @@ export class CarGarageIcon extends Component<any, any> {
                         </TouchableHighlight>
                     </View>
 
-                    <View style={{ width: photoWidth }}>
+                    <View style={styles.infoContainer}>
                         {CaptionButton(() => onPress, car.carInfo.car.make, car.carInfo.car.model)}
                     </View>
                 </View>
@@ -54,6 +54,9 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     } as React.ViewStyle,
+    infoContainer: {
+        marginRight: 20
+    },
     carIcon: {
         fontSize: 50,
         color: pallete.primary

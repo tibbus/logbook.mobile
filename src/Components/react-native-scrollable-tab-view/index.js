@@ -15,11 +15,11 @@ const {
   InteractionManager,
 } = ReactNative;
 const TimerMixin = require('react-timer-mixin');
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const SceneComponent = require('./SceneComponent');
 const DefaultTabBar = require('./DefaultTabBar');
 const ScrollableTabBar = require('./ScrollableTabBar');
-
 
 const ScrollableTabView = React.createClass({
   mixins: [TimerMixin,],
@@ -253,7 +253,7 @@ const ScrollableTabView = React.createClass({
     });
 
     if (this.contentScrollDistance >= this.aboveBarComponentHeight) {
-      this.contentView.scrollTo({ y: this.aboveBarComponentHeight, x: 0, animated: false });
+      this.contentView.scrollToPosition(0, this.aboveBarComponentHeight, false);
     }
   },
 
@@ -317,7 +317,7 @@ const ScrollableTabView = React.createClass({
       };
     }
 
-    return <ScrollView style={[styles.container, this.props.style,]}
+    return <KeyboardAwareScrollView style={[styles.container, this.props.style,]}
       onLayout={this._handleLayout}
       ref={contentView => this.contentView = contentView}
       scrollEnabled={!!this.props.aboveBarComponent}
@@ -327,7 +327,7 @@ const ScrollableTabView = React.createClass({
       {this.props.tabBarPosition === 'top' && this.renderTabBar(tabBarProps)}
       {this.renderScrollableContent()}
       {(this.props.tabBarPosition === 'bottom' || overlayTabs) && this.renderTabBar(tabBarProps)}
-    </ScrollView>;
+    </KeyboardAwareScrollView>;
   },
 });
 

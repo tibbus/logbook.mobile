@@ -36,7 +36,8 @@ export class Timeline extends Component<any, any> {
   constructor(props) {
     super(props);
 
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    // ignore rowHasChanged, let redux to decide
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => true });
     const { type, car, dispatch, timelines = [], comments = [], likes = [] } = this.props;
     const { user = {} }: { user: any } = this.props;
 
@@ -68,14 +69,9 @@ export class Timeline extends Component<any, any> {
     }
   }
 
-  componentWillReceiveProps({ car, timelines = [], likes = [] }) {
-    //Commenting to prevent ddos :D
-    /*if(likes !== this.props.likes) {
-      const { dispatch } = this.props;
-      dispatch(getUserLikedPosts(this.userId));
-    }*/
-
-    if (timelines !== this.props.timelines) {
+  componentWillReceiveProps({ car, timelines = [], likes = [], comments }) {
+    // @ TODO review how the logic works here with redux : update timelines/likes/comments
+    if (timelines !== this.props.timelines || likes !== this.props.likes) {
       const { type } = this.props;
       let timeline;
 
