@@ -17,7 +17,6 @@ export default StyleSheet.create({
     flexDirection: 'column',
   } as React.ViewStyle,
   rowContainer: {
-    flex: 1,
     flexDirection: 'row',
   } as React.ViewStyle,
   buttonText: {
