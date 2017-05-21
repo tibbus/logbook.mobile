@@ -71,7 +71,8 @@ export const fetcher = (uri, method = 'GET', files = false, identity = false) =>
 
       if (!response.ok) {
         throw new Error('Bad Response')
-      } else if (!type) {
+        //@ todo : for future reference check if we need the response for a DELETE, for now all DELETE's responses are empty
+      } else if (!type || method === 'DELETE') {
         return {};
       }
 
