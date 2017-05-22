@@ -1,6 +1,7 @@
 export default {
   //Colours of the theme colour paletee
   primary: 'rgba(0,0,255,1)',
+  primaryCancel: 'rgba(0,0,255,0.5)',
   secondary: 'rgba(250,193,18,1)',
   success: 'rgba(212,236,16,1)',
   inactive: 'rgba(176,173,173,1)',

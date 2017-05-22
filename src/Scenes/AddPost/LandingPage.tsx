@@ -153,7 +153,7 @@ export class LandingPage extends Component<any, any> {
           <View style={styles.headerContainer}>
             <View style={styles.headerButtonContainer}>
               <TouchableHighlight onPress={() => rootNav.pop()}>
-                <Text style={styles.headerButtonText}>Back</Text>
+                <Text style={styles.cancelButton}>Back</Text>
               </TouchableHighlight>
             </View>
             <View style={styles.headerHeadingContainer}>
@@ -175,7 +175,7 @@ export class LandingPage extends Component<any, any> {
           <View style={styles.headerContainer}>
             <View style={styles.headerButtonContainer}>
               <TouchableHighlight onPress={() => rootNav.pop()}>
-                <Text style={styles.headerButtonText}>Cancel</Text>
+                <Text style={styles.cancelButton}>Cancel</Text>
               </TouchableHighlight>
             </View>
             <View style={styles.headerHeadingContainer}>
@@ -183,7 +183,7 @@ export class LandingPage extends Component<any, any> {
             </View>
             <View style={styles.headerButtonContainer}>
               <TouchableHighlight onPress={() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty."))}>
-                  <Text style={styles.headerButtonText}>Post</Text>
+                  <Text style={styles.postButton}>Post</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -195,7 +195,7 @@ export class LandingPage extends Component<any, any> {
           <View style={styles.emptyContainer}>
             {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
             {
-              this.addPost.canAddContent ? this.showMenuBar() : this.showPostButton(() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty.")))
+              this.addPost.canAddContent ? this.showMenuBar() : null
             }
           </View>
         </View>
@@ -261,13 +261,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   emptyContainer: {
-    flex: 3,
+    flex: 2,
     backgroundColor: background.color,
   },
   tagsView: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 60,
+    marginTop: 30,
   },
   headerContainer: {
     flex: 1,
@@ -289,11 +289,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     // alignItems: 'center', 
-    paddingVertical: 30,
+    marginTop: 5,
     backgroundColor: background.color,
   },
-  headerButtonText: {
+  postButton: {
     fontWeight: "600",
+    color: palette.primary
+  },
+  cancelButton: {
+    color: palette.primaryCancel
   },
   headerHeadingText: {
   },

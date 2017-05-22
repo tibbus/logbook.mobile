@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     margin: 3
   },
   galleryContainer: {
-    flex: 1,
     flexDirection: 'row'
   },
   addMediaIconView: {

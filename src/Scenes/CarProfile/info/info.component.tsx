@@ -16,23 +16,24 @@ import { ActionButton } from '../../../Components/Button';
 
 const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFollowPress) => {
   if (owned) {
-    return (
+    return null;
+    /*return (
       <TouchableHighlight onPress={onSettingsPress}>
         <Text>Settings</Text>
       </TouchableHighlight>
-    )
+    )*/
   }
   else if (followed) {
     return (
-      <TouchableHighlight onPress={onUnFollowPress}>
-        <Text>UnFollow</Text>
+      <TouchableHighlight onPress={onUnFollowPress} style={[styles.buttonContainer, styles.unfollowContainer]}>
+        <Text style={[styles.buttonText, styles.unfollowText]}>Following</Text>
       </TouchableHighlight>
     )
   }
   else {
     return (
-      <TouchableHighlight onPress={onFollowPress}>
-        <Text>Follow</Text>
+      <TouchableHighlight onPress={onFollowPress} style={[styles.buttonContainer, styles.followContainer]}>
+        <Text style={[styles.buttonText, styles.followText]}>Follow</Text>
       </TouchableHighlight>
     )
   }
@@ -41,8 +42,8 @@ const ActionButtons = (owned, onSettingsPress, followed, onFollowPress, onUnFoll
 const VerifyButton = (verified, owned, onVerify) => {
   if (verified === false && owned === true) {
     return (
-      <TouchableHighlight onPress={onVerify} style={styles.verifyWrapper}>
-        <Text style={styles.verifyText}>Verify</Text>
+      <TouchableHighlight onPress={onVerify} style={[styles.buttonContainer, styles.verifyContainer]}>
+        <Text style={styles.buttonText}>Verify</Text>
       </TouchableHighlight>
     );
   }
@@ -58,11 +59,11 @@ export const Info = ({ owned, car, onSettingsPress, followed, onFollowPress, onU
       <StatsText count={car.carStats.mediaCount.count} caption="Media" />
       <StatsText count={car.carStats.followersCount.count} caption="Followers" />
     </View>
-    {/*{ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}*/}
     <View style={styles.subContainer}>
       <Image source={{ uri: car.ownerInfo.image }} style={styles.photo} />
       <Text style={styles.ownerName}>{car.ownerInfo.name}</Text>
     </View>
       {VerifyButton(verified, owned, onVerifyPress)}
+      {ActionButtons(owned, onSettingsPress, followed, onFollowPress, onUnFollowPress)}
   </View>
 )

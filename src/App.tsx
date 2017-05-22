@@ -18,4 +18,6 @@ export class App extends Component<any, any> {
   }
 }
 
+// You can enable warnings from here !!
+// Also warnings+logs of any type can be visualized on Simulator-->Debug-->System logs
 console.disableYellowBox = true;

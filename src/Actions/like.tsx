@@ -12,12 +12,12 @@ export const getUserLikedPosts = (userId) => () => {
     .catch((...args) => console.log(args));
 }
 
-export const likePost = (postId, postType, userId, carInfoId, actorType) => () => {
+export const likePost = (postId, userId, carInfoId, actorType) => () => {
   const actorId = actorType === 'car' ? carInfoId : userId;
 
   const likeBody = {
     'PostId': postId,
-    'PostType': postType,
+    'PostType': 'Timeline',
     'UserId': userId
   };
   likeItem({ body: likeBody })
@@ -34,7 +34,7 @@ export const unlikeTimelinePost = (id, postId, userId, carInfoId, actorType) => 
   const actorId = actorType === 'car' ? carInfoId : userId;
 
   unlikeTimelineItem({}, { id })
-    .then(unlikedPost => {
+    .then(() => {
       dispatch({
         type: REMOVE_USER_LIKED_ITEM,
         updatedItem: { id, postId, actorId, actorType }

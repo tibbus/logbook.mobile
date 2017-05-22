@@ -30,7 +30,7 @@ const getStatusInput = (updateStatus) => {
       placeholderTextColor={palette.inactive}
       returnKeyType='done'
       maxLength={200}
-      multiline={false}
+      multiline={true}
       style={styles.statusInput} />
   )
 }
@@ -43,7 +43,7 @@ const getStatusDisplay = (status) => {
 
 const styles = StyleSheet.create({
   contentDescriptionContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     paddingTop: 20,
     paddingBottom: 10,

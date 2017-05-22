@@ -32,11 +32,19 @@ const stateToProps = ({ timelines, comments, likes }) => ({ timelines, comments,
 export class Timeline extends Component<any, any> {
   private carInfoId: string;
   private userId: string;
+  private commentsRequested: boolean = false;
 
   constructor(props) {
     super(props);
 
-    // ignore rowHasChanged, let redux to decide
+    // @todo rowHasChanged is ignored because comments are NOT bound to timeline
+    // If the comments will change the row will NOT, but the comments are rendered inside renderRow
+    // this logic should be changed somehow
+    // Redux NOTES (bound means action will trigger a timeline CHANGE (r1 !== r2)):
+    // Likes:         NOT bound to timeline
+    // LikesCount:    bound to timeline
+    // Comments:      NOT bound to timeline
+    // CommentsCount: NOT bound to timeline
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => true });
     const { type, car, dispatch, timelines = [], comments = [], likes = [], requestPending } = this.props;
     const { user = {} }: { user: any } = this.props;
@@ -69,9 +77,12 @@ export class Timeline extends Component<any, any> {
     }
   }
 
-  componentWillReceiveProps({ car, timelines = [], likes = [], comments }) {
-    // @ TODO review how the logic works here with redux : update timelines/likes/comments
-    if (timelines !== this.props.timelines || likes !== this.props.likes) {
+  componentWillReceiveProps({ car, timelines = [], comments }) {
+    // @todo review how the logic works here with redux : update timelines/likes/comments
+    // We are not interested in likes CHANGE because timeline listen to likes
+    // but the timeline does NOT listen to comments CHANGE
+    if (timelines !== this.props.timelines || comments !== this.props.comments) {
+      console.log('CALLED CALLED CALLED CALLED CALLED')
       const { type } = this.props;
       let timeline = [];
 
@@ -81,15 +92,18 @@ export class Timeline extends Component<any, any> {
         timeline = getTimeline(timelines, type, this.userId);
       }
 
-      // @TODO should not fetch comments for every action on the timeline
-      timeline.forEach((timelineItem) => {
-        dispatch(setTimelineComments(timelineItem.activityData.id));
-        dispatch(getTimelineComments(timelineItem.activityData.id));
-      })
+      // @todo This should be moved to a SAGA side effect
+      if (!this.commentsRequested) {
+        this.commentsRequested = true;
+        timeline.forEach((timelineItem) => {
+          dispatch(setTimelineComments(timelineItem.activityData.id));
+          dispatch(getTimelineComments(timelineItem.activityData.id));
+        });
+      }
 
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(timeline)
-      })
+      });
     }
   }
 
@@ -112,12 +126,12 @@ export class Timeline extends Component<any, any> {
       // @TODO showStatusMenu not defined ??
       //onMenuPress: () => this.showStatusMenu(post),
       onVideoPress: this.playVideo.bind(this),
-      onLikePress: () => dispatch(likePost(post.activityData.id, 'Timeline', user.id, carInfoId, type)),
+      onLikePress: () => dispatch(likePost(post.activityData.id, user.id, carInfoId, type)),
       onUnlikePress: () => dispatch(unlikeTimelinePost(likedItem.id, likedItem.postId, user.id, carInfoId, type)),
       carOwner,
       user,
       liked
-    }
+    };
 
     const filteredComments = comments.find((timelinePostComments) => {
       return timelinePostComments.timelinePostId === post.activityData.id
@@ -140,9 +154,7 @@ export class Timeline extends Component<any, any> {
         <Comments comments={postComments} />
         <CommentInput props={props} onSubmitEditing={(timelinePostId, userId, commentText) => {
           dispatch(addComment(timelinePostId, userId, commentText))
-        }
-
-        } />
+        }} />
       </View>
     );
   }

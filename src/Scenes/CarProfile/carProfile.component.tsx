@@ -152,7 +152,7 @@ const getCarProfileComponent = (props) => {
 
       </View>
       <View style={styles.carModelWrapper}>
-        <Text style={styles.carName}>{browsingCar.carInfo.car.model}</Text>
+        <Text style={[styles.carName, styles.carModel]}>{browsingCar.carInfo.car.model}</Text>
         <Text style={[styles.carName, styles.carYear]}> {browsingCar.carInfo.car.yearOfManufacture}</Text>
       </View>
     </View>
