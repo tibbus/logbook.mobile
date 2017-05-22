@@ -67,6 +67,10 @@ export default StyleSheet.create({
     height: height / 20,
   },
   /* ====== Caption button styles ====== */
+  captionColumnContainer: {
+    width: 170,
+    paddingRight: 5
+  },
   captionText: {
     fontSize: 14,
     fontWeight: '600',

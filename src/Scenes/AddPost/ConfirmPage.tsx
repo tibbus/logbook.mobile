@@ -58,13 +58,6 @@ export class ConfirmPage extends Component<any, any> {
         </View>
         <View style={styles.emptyContainer}>
           {getGalleryView(this.state.contentDataSource, null, false)}
-          <View style={styles.contentContainer}>
-            <TouchableHighlight style={styles.postActionButton} onPress={() => onPostClick(postDetails)}>
-              <View style={styles.postActionButtonContainer}>
-                <Text style={styles.postActionButtonText}>Post</Text>
-              </View>
-            </TouchableHighlight>
-          </View>
         </View>
       </View>
     )

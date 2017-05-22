@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     flex: 3.5
   },
   carModelWrapper: {
+    flex: 1,
     flexDirection: 'row',
     padding: 20,
     paddingBottom: 0
@@ -35,7 +36,11 @@ export const styles = StyleSheet.create({
     fontSize: 23,
     fontWeight: '700'
   },
+  carModel: {
+    flexShrink: 1
+  },
   carYear: {
-    color: '#D0D0D0'
+    color: '#D0D0D0',
+    minWidth: 75
   }
 });
