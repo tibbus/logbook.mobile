@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from '../../Utils/connect';
-import { View, Image, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import ScrollableTabView from '../../Components/react-native-scrollable-tab-view/';
 import ScrollableTabBar from '../../Components/react-native-scrollable-tab-view/ScrollableTabBar';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { styles } from './carProfile.styles';
 import { Info } from './info/info.component';
 import { Overview } from './overview/overview.component';
@@ -11,11 +11,13 @@ import { CarTimeline } from './carTimeline/carTimeline.component';
 import { ShowCase } from './showcase/showcase.component';
 import { TechSpec } from './techSpec/techSpec.component';
 import { FitImage } from '../../Components/FitImage/FitImage.component';
-import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount } from '../../Actions/cars';
+import { getCarById, setBrowsingCar, getCarTimelineContent, followCar, unFollowCar, getCarFollowersCount, updateProfileImage } from '../../Actions/cars';
 import { getUserFollowingFeeds } from '../../Actions/user';
 import { setTimeline } from '../../Actions/timeline';
 import { BackScene } from '../';
 import { LoadingView } from '../../Components/LoadingView';
+import ImagePicker from 'react-native-image-picker';
+import { paramsToObj } from '../../Utils';
 
 import palette from '../../Styles/Themes/palette';
 import background from '../../Styles/Themes/background';
@@ -98,6 +100,14 @@ const back = (navigator) => {
   navigator.pop()
 }
 
+const getCameraIconComponent = (carInfoId, onProfileImageUpdate) => {
+  return (
+      <TouchableOpacity onPress={() => onCameraClick(carInfoId, onProfileImageUpdate)}>
+        <Icon name='camera' style={styles.icon} />
+      </TouchableOpacity>
+  )
+}
+
 const getCarProfileComponent = (props) => {
   const { user, car, carInfoId, cars, navigator, dispatch, rootNav, timelines } = props;
 
@@ -138,7 +148,11 @@ const getCarProfileComponent = (props) => {
     <View style={styles.infoWrapper}>
       <View style={styles.subWrapper}>
         <View style={styles.imageWrapper}>
-          <FitImage source={{ uri: image }} round={true} />
+          <FitImage style={styles.carProfileImage} source={{ uri: image }} round={true}>
+            <View style={styles.iconWrapper}>
+              { owned ? getCameraIconComponent(car.carInfo.id, (carInfoId, profileImageRequest) => dispatch(updateProfileImage(carInfoId, profileImageRequest))) : null}
+            </View>
+          </FitImage>
         </View>
 
         <Info owned={owned}
@@ -185,4 +199,58 @@ const getCarProfileComponent = (props) => {
       </View>
     </BackScene>
   );
+}
+
+const onCameraClick = (carInfoId, onProfileImageUpdate) => {
+    const options = { mediaType: 'photo' };
+    const title = 'Photos';
+    const titleLiveCapture = 'Take a photo...';
+    const config: any = {
+      ...options,
+      title,
+      chooseFromLibraryButtonTitle: 'Choose from Library...',
+      takePhotoButtonTitle: titleLiveCapture,
+      quality: 0.2
+    };
+
+    ImagePicker.showImagePicker(config, (response) => {
+      const { didCancel, error, data, uri = '', origURL = '' } = response;
+
+      if (!origURL && !uri) {
+        return;
+      } else if (didCancel) {
+        console.log(response);
+      } else if (error) {
+        console.log(response);
+      }
+
+      const params: any = getParams(origURL, uri);
+
+      if (!params) {
+        throw new Error('Error: Invalid file.');
+      }
+
+      const contentData = {
+        id: params.id,
+        extension: params.ext,
+        type: 'image',
+        uri: uri
+      };
+
+      onProfileImageUpdate(carInfoId, contentData);
+    });
+  }
+
+const getParams = (origURL, uri) => {
+  if (origURL) {
+    return paramsToObj(origURL)
+  }
+
+  // @TODO check how last keyword is working
+  const ext = uri.split('.').pop();
+  return {
+    ext,
+    id: 'anonymous',
+    uri
+  }
 }

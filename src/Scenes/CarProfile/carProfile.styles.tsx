@@ -42,5 +42,20 @@ export const styles = StyleSheet.create({
   carYear: {
     color: '#D0D0D0',
     minWidth: 75
+  },
+  iconWrapper: {
+    width:100,
+    backgroundColor: 'rgba(255,255,255, 0.7)', 
+    alignItems: 'center'
+  },
+  icon: {
+    fontSize: 18,
+    fontWeight: '200',
+    color: 'rgba(105,105,105, 0.5)',
+  },
+  carProfileImage: {
+    alignItems: 'center', 
+    justifyContent: 'flex-end', 
+    backgroundColor: background.carProfile
   }
 });

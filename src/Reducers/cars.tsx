@@ -9,7 +9,8 @@ import {
   USER_CAR_VERIFIED,
   ADD_TIMELINE,
   ADD_TIMELINE_ITEM,
-  DELETE_TIMELINE_ITEM
+  DELETE_TIMELINE_ITEM,
+  SET_CAR_PROFILE_IMAGE
 } from '../Actions/Types'
 
 /*
@@ -220,8 +221,19 @@ const updateCarPostCount = (state, carInfoId, operation) => {
 
 }
 
+const updateCarProfileImage = (state, carInfoId, image) => {
+  const car = state.userCars.find(userCar => userCar.carInfo.id === carInfoId);
+
+  if(car) {
+    car.carInfo.image = image;
+    return {...state};
+  }
+
+  return state;
+}
+
 export const cars = (state = initialState, action) => {
-  const { type, userCars, userCar, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent, carInfoId, timeline } = action
+  const { type, userCars, userCar, carInfo, ownerInfo, carContent, followContent, followersContent, verifyContent, carInfoId, timeline, image } = action
 
   switch (type) {
 
@@ -266,6 +278,9 @@ export const cars = (state = initialState, action) => {
     
     case DELETE_TIMELINE_ITEM:
       return updateCarPostCount(state, carInfoId, "REMOVE");
+
+    case SET_CAR_PROFILE_IMAGE:
+      return updateCarProfileImage(state, carInfoId, image);
 
     default:
       return state
