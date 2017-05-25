@@ -1,71 +1,75 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-picker';
 import { paramsToObj } from '../../Utils';
 
+import { FitImage } from '../../Components/FitImage/FitImage.component';
 import { Info } from './Info';
 
 const { width, height } = Dimensions.get("window");
 
 export class Main extends Component<any, any> {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
-    render() {
-        const { user, carCount, onCoverImageUpdate } = this.props;
+  render() {
+    const { user, carCount, onCoverImageUpdate } = this.props;
 
-        return (
-            <View style={styles.container}>
-                <Image style={styles.backdrop} source={{ uri: user.coverImg }}>
-                    <View style={{flex: 1}} />
-                    <TouchableOpacity onPress={() => this.onCameraClick(user.id, onCoverImageUpdate)}>
-                        <Icon name='camera' style={styles.icon} />
-                    </TouchableOpacity>
-                </Image>
-                <Info user={user} />
-            </View>
-        )
-    }
+    return (
+      <View style={styles.container}>
+        <FitImage style={styles.backdrop} source={{ uri: user.coverImg }}>
+          <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }} />
+            <TouchableOpacity onPress={() => this.onCameraClick(user.id, onCoverImageUpdate)}>
+              <Icon name='camera' style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        </FitImage>
+        <Info user={user} />
+      </View>
+    )
+  }
 
-    onCameraClick(userId, onCoverImageUpdate) {
+  onCameraClick(userId, onCoverImageUpdate) {
     const options = { mediaType: 'photo' };
     const title = 'Photos';
     const titleLiveCapture = 'Take a photo...';
-    const config: any = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
+    const config: any = {
+      ...options,
+      title,
+      chooseFromLibraryButtonTitle: 'Choose from Library...',
+      takePhotoButtonTitle: titleLiveCapture,
+      quality: 0.2
+    };
 
     ImagePicker.showImagePicker(config, (response) => {
-
       const { didCancel, error, data, uri = '', origURL = '' } = response;
-
-      if (didCancel) {
-        console.log(response);
-      }
-
-      if (error) {
-        console.log(response);
-      }
 
       if (!origURL && !uri) {
         return;
+      } else if (didCancel) {
+        console.log(response);
+      } else if (error) {
+        console.log(response);
       }
 
-      const params: any = getParams(origURL, uri)
+      const params: any = getParams(origURL, uri);
 
       if (!params) {
-        throw new Error('Error: Invalid file.')
+        throw new Error('Error: Invalid file.');
       }
 
       const contentData = {
         id: params.id,
         extension: params.ext,
-        type:'image',
+        type: 'image',
         uri: uri
-      }
+      };
 
       onCoverImageUpdate(userId, contentData);
-    })
+    });
   }
 }
 
@@ -86,17 +90,17 @@ const getParams = (origURL, uri) => {
 const coverPhotoHeight = 275;
 const profilePictureHeight = 50;
 const styles = StyleSheet.create({
-    container: {
-    },
-    backdrop: {
-        height: 250
-    },
-    icon: {
-        fontSize: 25,
-        fontWeight: '700',
-        padding: 30,
-        paddingBottom: 10,
-        color: '#696969',
-        alignSelf: 'flex-end'
-    },
+  container: {
+  },
+  backdrop: {
+    height: 250
+  },
+  icon: {
+    fontSize: 25,
+    fontWeight: '700',
+    padding: 30,
+    paddingBottom: 10,
+    color: '#696969',
+    alignSelf: 'flex-end'
+  },
 });

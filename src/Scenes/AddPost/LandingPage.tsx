@@ -52,8 +52,8 @@ export class LandingPage extends Component<any, any> {
   }
 
   componentDidMount() {
-    
-    if(this.props.cars.userCars.length > 0) {
+
+    if (this.props.cars.userCars.length > 0) {
       const cars = getCarOptions(this.props.cars.userCars);
       const { id } = cars[0]
       this.onSelectCar(id, cars[0])
@@ -102,7 +102,13 @@ export class LandingPage extends Component<any, any> {
     const options = type === 'image' ? { mediaType: 'photo' } : { mediaType: 'video' };
     const title = type === 'image' ? 'Photos' : 'Videos'
     const titleLiveCapture = type === 'image' ? 'Take a photo...' : 'Take a video...'
-    const config: any = { ...options, title, chooseFromLibraryButtonTitle: 'Choose from Library...', takePhotoButtonTitle: titleLiveCapture }
+    const config: any = {
+      ...options,
+      title,
+      chooseFromLibraryButtonTitle: 'Choose from Library...',
+      takePhotoButtonTitle: titleLiveCapture,
+      quality: 0.2
+    }
 
     ImagePicker.showImagePicker(config, (response) => {
 
@@ -147,8 +153,8 @@ export class LandingPage extends Component<any, any> {
   render() {
     const { navigator, rootNav, cars, onPostClick, user } = this.props;
 
-    if(cars.userCars.length < 1) {
-       return (
+    if (cars.userCars.length < 1) {
+      return (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
             <View style={styles.headerButtonContainer}>
@@ -183,7 +189,7 @@ export class LandingPage extends Component<any, any> {
             </View>
             <View style={styles.headerButtonContainer}>
               <TouchableHighlight onPress={() => validateInput(this.addPost, () => onPostClick(this.addPost), () => Alert.alert("Failed!", "The post cannot be empty."))}>
-                  <Text style={styles.postButton}>Post</Text>
+                <Text style={styles.postButton}>Post</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -236,15 +242,15 @@ const validateInput = (postDetails, onSuccess, onFailure) => {
 
   let valid = true;
 
-  if(!postDetails.carInfoId) {
+  if (!postDetails.carInfoId) {
     valid = false;
   }
 
-  if(!postDetails.description) {
+  if (!postDetails.description) {
     valid = false;
   }
 
-  if(valid) {
+  if (valid) {
     onSuccess();
   }
   else {
@@ -307,7 +313,7 @@ const styles = StyleSheet.create({
     color: palette.secondary
   },
   postActionButton: {
-    flex: 1, 
+    flex: 1,
     alignItems: 'center',
     paddingHorizontal: 10,
     backgroundColor: palette.primary,
@@ -329,7 +335,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   emptyGarageText: {
-    flex:1,
-    flexDirection:'row'
+    flex: 1,
+    flexDirection: 'row'
   }
 })

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Button,
-  Image,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -98,7 +97,7 @@ export const Post = (data: any = {}) => {
       {renderMedia(type, data)}
 
       <View style={styles.infoWrapper}>
-        <Image source={{ uri: details.carData.image }} style={styles.carPhoto} />
+        <FitImage source={{ uri: details.carData.image }} style={styles.carPhoto} />
         <Text numberOfLines={1} style={styles.carName}>{details.carData.make} {details.carData.model}</Text>
         <Text style={styles.date}>{timeAgo}</Text>
       </View>

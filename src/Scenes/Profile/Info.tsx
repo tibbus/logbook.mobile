@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { FitImage } from '../../Components/FitImage/FitImage.component';
 import palette from '../../Styles/Themes/palette';
 import { StatsText } from '../../Components/Text';
 import textStyle from '../../Styles/text';
@@ -23,7 +24,7 @@ export const Info = (props) => {
     </View>
 
     <View style={styles.nameContainer}>
-      <Image style={styles.profilePicture} source={{ uri: props.user.profileImg }} />
+      <FitImage style={styles.profilePicture} source={{ uri: props.user.profileImg }} />
       <Text style={styles.headline}>{props.user.name}</Text>
     </View>
   </View>

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Image, ViewStyle } from 'react-native';
+import CachedImage from 'react-native-cached-image';
 
 interface propTypes {
   round?: boolean,
@@ -65,10 +66,12 @@ export class FitImage extends Component<propTypes, any> {
 
   render() {
     return (
-      <Image source={this.props.source}
+      <CachedImage source={this.props.source}
         style={[this.getStyle(), this.props.style]}
         onLayout={event => this.setSizes(event)}
-      />
+      >
+        {this.props.children}
+      </CachedImage>
     );
   };
 }
