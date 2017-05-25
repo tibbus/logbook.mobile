@@ -167,6 +167,7 @@ const getCarProfileComponent = (props) => {
         <ScrollableTabView
           ref={(tabView) => { this.scrollableTabView = tabView }}
           initialPage={0}
+          locked={true}
           tabBarActiveTextColor={palette.primary}
           tabBarInactiveTextColor={palette.inactive}
           tabBarUnderlineStyle={styles.underline}

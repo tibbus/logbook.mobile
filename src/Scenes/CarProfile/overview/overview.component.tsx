@@ -8,9 +8,10 @@ import {
   ListView,
   TouchableOpacity
 } from 'react-native';
-const Lightbox = require('react-native-lightbox');
 
-import { LBVideo } from '../../../Components/Video';
+import { LBModal as Modal } from '../../../Components/Modal/Modal.component';
+import { LBVideo } from '../../../Components/Video/LBVideo.component';
+import { FitImage } from '../../../Components/FitImage/FitImage.component';
 import { Timeline } from '../../../Components/timeline/timeline.component';
 import { styles } from './overview.styles';
 
@@ -61,11 +62,15 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <Lightbox key={item.uri}><Image key={item.uri} source={{ uri: item.uri }} style={styles.photo} /></Lightbox>
+    return <Modal content={<FitImage key={item.uri} source={{ uri: item.uri }} />}>
+      <Image key={item.uri} source={{ uri: item.uri }} style={styles.media} />
+    </Modal>
   }
 
   if (item.type === "Video") {
-    return <LBVideo key={item.uri} paused={true} uri={item.uri} style={styles.photo} width={170}/>
+    return <Modal content={<LBVideo key={item.uri} paused={false} uri={item.uri} />}>
+      <LBVideo key={item.uri} paused={true} playable={false} uri={item.uri} style={[styles.media, styles.video]} />
+    </Modal>
   }
 }
 
@@ -80,8 +85,7 @@ export class Overview extends Component<any, any> {
     const uriInfo = getFeaturedItemContentUris(timeline);
 
     return (
-      <View
-        style={styles.scrollView}>
+      <View style={styles.scrollView}>
         <View>
           <View style={styles.headingContainer}>
             <Text style={styles.headingFirstTitle}>FEATURED</Text>
@@ -89,11 +93,10 @@ export class Overview extends Component<any, any> {
               <Text style={styles.headingSecondTitle}>View Showcase > </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.featuredContainer}>
+          <View>
             <ScrollView
               automaticallyAdjustContentInsets={false}
-              horizontal={true}
-              style={styles.horizontalScrollView}>
+              horizontal={true}>
               {
                 uriInfo.map((item) => featuredViewItem(item))
               }

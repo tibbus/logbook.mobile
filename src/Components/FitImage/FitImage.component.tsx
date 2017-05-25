@@ -1,16 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import { Image } from 'react-native';
+import { Image, ViewStyle } from 'react-native';
 
-export class FitImage extends Component<any, any> {
-  private ratio;
+interface propTypes {
+  round?: boolean,
+  fitToWidth?: boolean,
+  source,
+  style?: ViewStyle
+}
 
-  constructor(props) {
-    super(props);
+export class FitImage extends Component<propTypes, any> {
+  private ratio: number;
 
-    this.state = {
-      width: null,
-      height: null
-    };
+  static defaultProps = {
+    fitToWidth: true
+  }
+
+  state = {
+    width: null,
+    height: null
   }
 
   componentDidMount() {
@@ -22,6 +29,7 @@ export class FitImage extends Component<any, any> {
 
   public setSizes(event) {
     const { width, height } = event.nativeEvent.layout;
+
     this.state.width = width;
     this.state.height = height;
 

@@ -8,7 +8,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { LBVideo } from '../../Components/Video';
+import { LBVideo } from '../../Components/Video/LBVideo.component';
 
 import pallete from '../../Styles/Themes/palette';
 
@@ -37,7 +37,7 @@ const galleryContent = (data) => {
 
   if (data.type === "video") {
     // @TODO removed because undefined
-    return <LBVideo key={data.uri} paused={true} uri={data.uri} height={120} width={170}/>;
+    return <LBVideo key={data.uri} paused={true} uri={data.uri} style={{ height: 120, width: 170 }} />;
   }
 }
 
@@ -70,23 +70,23 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   addMediaIconWrapper: {
-        backgroundColor: '#eaeaea',
-        borderRadius: 5,
-        width: photoWidth,
-        height: photoHeight,
-        margin: 3,
-        padding: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
+    backgroundColor: '#eaeaea',
+    borderRadius: 5,
+    width: photoWidth,
+    height: photoHeight,
+    margin: 3,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   addMediaIcon: {
-        fontSize: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: pallete.secondary
+    fontSize: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: pallete.secondary
   },
   addMediaIconText: {
-      fontSize: 11,
-      color: pallete.secondary
+    fontSize: 11,
+    color: pallete.secondary
   },
 })

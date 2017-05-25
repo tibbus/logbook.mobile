@@ -33,17 +33,14 @@ export const styles = StyleSheet.create({
     color: palette.inactive,
     paddingRight: 10
   },
-  featuredContainer: {
-    //height: 300
-  },
-  horizontalScrollView: {
-    //height: 300
-  },
-  photo: {
+  media: {
     height: 120,
     width: 120,
     borderRadius: 5,
     padding: 5,
     margin: 3
   },
+  video: {
+    width: 150,
+  }
 });
