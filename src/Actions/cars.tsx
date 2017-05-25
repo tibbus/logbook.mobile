@@ -5,7 +5,8 @@ import {
     UPDATE_BROWSING_CAR_CONTENT,
     SET_BROWSING_CAR,
     FOLLOW_CAR,
-    SET_FOLLOWER_COUNT
+    SET_FOLLOWER_COUNT,
+    SET_CAR_PROFILE_IMAGE
 } from './Types'
 import {
     getCarByRegistration,
@@ -14,12 +15,14 @@ import {
     getCarImages,
     getCarVideos,
     followCar as followCarApi,
-    unFollowCar as unFollowCarApi
+    unFollowCar as unFollowCarApi,
+    updateProfileImage as updateProfileImageApi
 } from '../API/Car'
 import { getCarFollowers } from '../API/GetStream'
 import { getGetStreamToken } from '../API/user'
 import { getUserFollowingFeeds } from './user'
 import { getApiFetchLimit } from '../API/config'
+import { dispatch } from '../store';
 
 export const getCar = (registration, onSuccess, onFailure) => {
     return dispatch => {
@@ -195,3 +198,30 @@ export const getCarFollowersCount = (id) => {
     })
   }
 };
+
+export const updateProfileImage = (carInfoId, profileImageRequest) => {
+
+  return () => {
+    updateProfileImageApi(fileRequest('image', profileImageRequest), { id: carInfoId })
+      .then((response: any) => {
+        dispatch({ type: SET_CAR_PROFILE_IMAGE, carInfoId, image: response.image })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+}
+
+const fileRequest = (mediaType, files) => ({
+  body: {
+    image: formatFiles(mediaType, files),
+  }
+});
+
+const formatFiles = (mediaType, file) => {
+  const { uri, extension = '', id } = file
+  const extLower = extension.toLowerCase()
+  const type = `${mediaType}/${extLower}`
+  const name = `${id}.${extLower}`
+  return { uri, type, name }
+}
