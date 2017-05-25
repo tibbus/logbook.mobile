@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { LBVideo } from '../Video';
+import { LBVideo } from '../Video/LBVideo.component';
 import { FitImage } from '../FitImage/FitImage.component';
+import { LBModal as Modal } from '../Modal/Modal.component';
 import { styles } from './Post.styles';
 
 const renderMedia = (type, data) => {
@@ -20,10 +21,18 @@ const renderMedia = (type, data) => {
 
   switch (type) {
     case 'Image':
-      return contentUris.map(uri => <FitImage key={uri} source={{ uri }} fitToWidth={true} />);
+      return contentUris.map(uri => (
+        <Modal content={<FitImage key={uri} source={{ uri }} />}>
+          <FitImage key={uri} source={{ uri }} />
+        </Modal>
+      ));
 
     case 'Video':
-      return contentUris.map(uri => <LBVideo key={uri} paused={paused} uri={uri} height={250} />);
+      return contentUris.map(uri => (
+        <Modal content={<LBVideo key={uri} paused={false} uri={uri} />}>
+          <LBVideo key={uri} paused={true} playable={false} uri={uri} />
+        </Modal>
+      ));
 
     default:
       return null
@@ -64,7 +73,7 @@ interface postData {
 }
 
 export const Post = (data: any = {}) => {
-  const {pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress }: postData = data;
+  const { pending, onMenuPress, onLikePress, onUnlikePress, type, carOwner = {}, liked, isFeed, onViewCarPress }: postData = data;
   // @todo : review exactly what data need to be here
   const details = data;
 

@@ -82,7 +82,6 @@ export class Timeline extends Component<any, any> {
     // We are not interested in likes CHANGE because timeline listen to likes
     // but the timeline does NOT listen to comments CHANGE
     if (timelines !== this.props.timelines || comments !== this.props.comments) {
-      console.log('CALLED CALLED CALLED CALLED CALLED')
       const { type } = this.props;
       let timeline = [];
 
