@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Image,
   View,
   Text,
   ListView,
@@ -21,7 +20,7 @@ const galleryContent = (contentUri, type) => {
   if (type === "Image") {
     return (
       <Modal content={<FitImage key={contentUri} source={{ uri: contentUri }} />}>
-        <Image key={contentUri} source={{ uri: contentUri }} style={styles.photo} />
+        <FitImage key={contentUri} source={{ uri: contentUri }} style={styles.photo} />
       </Modal>
     );
   }
