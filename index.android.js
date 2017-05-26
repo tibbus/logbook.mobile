@@ -1,5 +1,11 @@
 import React from 'react'
 import { AppRegistry } from 'react-native'
-import { App } from './src/App'
+import codePush from 'react-native-code-push';
 
-AppRegistry.registerComponent('Logbook', () => App)
+import { App } from './build/App';
+
+//const codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
+const AppWithCodePush = codePush(App);
+AppRegistry.registerComponent('Logbook', () => AppWithCodePush)
+
+//AppRegistry.registerComponent('Logbook', () => App);
