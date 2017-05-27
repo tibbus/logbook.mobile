@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, ViewStyle } from 'react-native';
-import CachedImage from 'react-native-cached-image';
+import CachedImage, { ImageCacheProvider } from 'react-native-cached-image';
 
 interface propTypes {
   round?: boolean,
@@ -21,11 +21,19 @@ export class FitImage extends Component<propTypes, any> {
     height: null
   }
 
-  componentDidMount() {
-    Image.getSize(this.props.source, (width, height) => {
-      this.ratio = width / height;
-      this.renderImage();
-    }, failure => console.log(`failed to load image, ${this.props.source}`));
+  componentWillMount() {
+    ImageCacheProvider.getCachedImagePath(this.props.source.uri).then(localPath => {
+      Image.getSize(localPath, (width, height) => {
+        this.ratio = width / height;
+        this.renderImage();
+      }, failure => console.log(`failed to load image, ${this.props.source}`));
+    }).catch(error => {
+      Image.getSize(this.props.source, (width, height) => {
+        this.ratio = width / height;
+        this.renderImage();
+      }, failure => console.log(`failed to load image, ${this.props.source}`));
+    })
+
   }
 
   public setSizes(event) {

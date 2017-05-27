@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5
   },
   row: {
-    marginVertical: 20,
+    paddingVertical: 20,
+    backgroundColor: '#ffffff'
   }
 });
