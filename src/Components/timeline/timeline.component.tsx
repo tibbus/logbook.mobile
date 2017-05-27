@@ -141,7 +141,7 @@ export class Timeline extends Component<any, any> {
       postComments = filteredComments.comments.map((postComment) => {
         return {
           text: postComment.comment,
-          profileImg: 'https://mycarbiostolocal.blob.core.windows.net/default0/Image/01010001/4d47ecd5-c26a-474c-8001-4587e2365a19/DefaultProfileImage.jpg',
+          profileImg: postComment.authorImage,
           timeAgo: postComment.timeAgo
         };
       });
