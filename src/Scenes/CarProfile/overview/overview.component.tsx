@@ -4,7 +4,6 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   ListView,
   TouchableOpacity
 } from 'react-native';
@@ -62,14 +61,14 @@ const getFeaturedItemContentUris = (timeline) => {
 const featuredViewItem = (item) => {
 
   if (item.type === "Image") {
-    return <Modal content={<FitImage key={item.uri} source={{ uri: item.uri }} />}>
-      <Image key={item.uri} source={{ uri: item.uri }} style={styles.media} />
+    return <Modal key={item.uri} content={<FitImage source={{ uri: item.uri }} />}>
+      <FitImage source={{ uri: item.uri }} style={styles.media} />
     </Modal>
   }
 
   if (item.type === "Video") {
-    return <Modal content={<LBVideo key={item.uri} paused={false} uri={item.uri} />}>
-      <LBVideo key={item.uri} paused={true} playable={false} uri={item.uri} style={[styles.media, styles.video]} />
+    return <Modal key={item.uri} content={<LBVideo paused={false} uri={item.uri} />}>
+      <LBVideo paused={true} playable={false} uri={item.uri} style={[styles.media, styles.video]} />
     </Modal>
   }
 }

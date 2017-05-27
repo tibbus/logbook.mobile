@@ -24,11 +24,8 @@ const modifier = timelineItem => {
   const timeAgo = moment(new Date(createdDate)).from(moment())
 
   return {
-    ...timelineItem,
-    details: {
       ...timelineItem,
       timeAgo
-    }
   }
 }
 
@@ -58,7 +55,7 @@ interface CarInfo {
 }
 
 const itemMatch = (item1, { type, id, details = {} }: CarInfo) => (
-  item1.type === type && item1.details.id === (id || details.id)
+  item1.type === type && item1.id === (id || details.id)
 )
 
 const removeTimelineItem = (action, state) => {
@@ -144,7 +141,7 @@ const timelineReducer = (state = [], action) => {
 const videoMap = action => item => {
   if (item.type !== 'Video') return item;
 
-  if (item.details.id === action.postId) {
+  if (item.id === action.postId) {
     return timelineItemReducer(item, action);
   }
 

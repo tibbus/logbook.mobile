@@ -21,15 +21,15 @@ const renderMedia = (type, data) => {
   switch (type) {
     case 'Image':
       return contentUris.map(uri => (
-        <Modal content={<FitImage key={uri} source={{ uri }} />}>
+        <Modal key={uri} content={<FitImage source={{ uri }} />}>
           <FitImage key={uri} source={{ uri }} />
         </Modal>
       ));
 
     case 'Video':
       return contentUris.map(uri => (
-        <Modal content={<LBVideo key={uri} paused={false} uri={uri} />}>
-          <LBVideo key={uri} paused={true} playable={false} uri={uri} />
+        <Modal key={uri} content={<LBVideo paused={false} uri={uri} />}>
+          <LBVideo paused={true} playable={false} uri={uri} />
         </Modal>
       ));
 

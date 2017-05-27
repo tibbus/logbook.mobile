@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Image, ViewStyle } from 'react-native';
 import CachedImage from 'react-native-cached-image';
 
