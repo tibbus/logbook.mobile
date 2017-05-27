@@ -144,7 +144,7 @@ const getCarProfileComponent = (props) => {
     timeline: timeline,
   };
 
-  const userInfoComponent = (
+  const userInfoComponent = () => (
     <View style={styles.infoWrapper}>
       <View style={styles.subWrapper}>
         <View style={styles.imageWrapper}>
@@ -177,7 +177,7 @@ const getCarProfileComponent = (props) => {
       title={browsingCar.carInfo.car.make + " " + browsingCar.carInfo.car.model}
       style={{ statusBar: { backgroundColor: background.carProfile } }}>
 
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <ScrollableTabView
           ref={(tabView) => { this.scrollableTabView = tabView }}
           initialPage={0}
@@ -194,7 +194,7 @@ const getCarProfileComponent = (props) => {
           <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
           <CarTimeline tabLabel='TIMELINE' timelineProps={timelineProps} />
           <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
-          <TechSpec tabLabel='SPEC' car={car} />
+          <TechSpec tabLabel='SPECS' car={car} />
         </ScrollableTabView>
       </View>
     </BackScene>

@@ -5,7 +5,8 @@ import background from '../../Styles/Themes/background';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: background.carProfile
   },
   underline: {
     backgroundColor: palette.primary,
@@ -44,8 +45,8 @@ export const styles = StyleSheet.create({
     minWidth: 75
   },
   iconWrapper: {
-    width:100,
-    backgroundColor: 'rgba(255,255,255, 0.7)', 
+    width: 100,
+    backgroundColor: 'rgba(255,255,255, 0.7)',
     alignItems: 'center'
   },
   icon: {
@@ -54,8 +55,8 @@ export const styles = StyleSheet.create({
     color: 'rgba(105,105,105, 0.5)',
   },
   carProfileImage: {
-    alignItems: 'center', 
-    justifyContent: 'flex-end', 
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     backgroundColor: background.carProfile
   }
 });

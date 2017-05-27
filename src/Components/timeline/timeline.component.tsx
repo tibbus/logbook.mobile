@@ -107,10 +107,9 @@ export class Timeline extends Component<any, any> {
   }
 
   playVideo(post) {
-    const { dispatch } = this.props
-    const { details, paused = true } = post
-    const { carInfoId, id } = details
-    const action = paused ? playVideoAction : pauseVideoAction
+    const { dispatch } = this.props;
+    const { details, paused = true, carInfoId, id } = post;
+    const action = paused ? playVideoAction : pauseVideoAction;
 
     dispatch(action(carInfoId, id))
   }

@@ -19,16 +19,16 @@ const galleryContent = (contentUri, type) => {
 
   if (type === "Image") {
     return (
-      <Modal content={<FitImage key={contentUri} source={{ uri: contentUri }} />}>
-        <FitImage key={contentUri} source={{ uri: contentUri }} style={styles.photo} />
+      <Modal key={contentUri} content={<FitImage source={{ uri: contentUri }} />}>
+        <FitImage source={{ uri: contentUri }} style={styles.photo} />
       </Modal>
     );
   }
 
   if (type === "Video") {
     return (
-      <Modal content={<LBVideo key={contentUri} paused={false} uri={contentUri} />}>
-        <LBVideo key={contentUri} paused={true} playable={false} uri={contentUri} style={styles.video} />
+      <Modal key={contentUri} content={<LBVideo key={contentUri} paused={false} uri={contentUri} />}>
+        <LBVideo paused={true} playable={false} uri={contentUri} style={styles.video} />
       </Modal>
     );
   }
