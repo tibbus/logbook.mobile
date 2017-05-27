@@ -64,8 +64,7 @@ const ScrollableTabView = React.createClass({
       currentPage: this.props.initialPage,
       scrollValue: new Animated.Value(this.props.initialPage),
       containerWidth: Dimensions.get('window').width,
-      sceneKeys: this.newSceneKeys({ currentPage: this.props.initialPage, }),
-      aboveBarComponent: this._getAboveBarComponent()
+      sceneKeys: this.newSceneKeys({ currentPage: this.props.initialPage, })
     };
   },
 
@@ -76,12 +75,6 @@ const ScrollableTabView = React.createClass({
 
     if (props.page >= 0 && props.page !== this.state.currentPage) {
       this.goToPage(props.page);
-    }
-
-    if (props.aboveBarComponent !== this.props.aboveBarComponent) {
-      this.setState({
-        aboveBarComponent: this._getAboveBarComponent()
-      });
     }
   },
 
@@ -277,12 +270,6 @@ const ScrollableTabView = React.createClass({
     return React.Children.map(children, (child) => child);
   },
 
-  _getAboveBarComponent() {
-    return React.cloneElement(this.props.aboveBarComponent, {
-      onLayout: event => { this.aboveBarComponentHeight = event.nativeEvent.layout.height }
-    });
-  },
-
   render() {
     let overlayTabs = (this.props.tabBarPosition === 'overlayTop' || this.props.tabBarPosition === 'overlayBottom');
     let tabBarProps = {
@@ -316,6 +303,7 @@ const ScrollableTabView = React.createClass({
         [this.props.tabBarPosition === 'overlayTop' ? 'top' : 'bottom']: 0,
       };
     }
+    const AboveBarComponent = this.props.aboveBarComponent || (() => null);
 
     return <KeyboardAwareScrollView style={[styles.container, this.props.style,]}
       onLayout={this._handleLayout}
@@ -323,7 +311,8 @@ const ScrollableTabView = React.createClass({
       scrollEnabled={!!this.props.aboveBarComponent}
       onMomentumScrollEnd={event => { this.contentScrollDistance = event.nativeEvent.contentOffset.y }}
       stickyHeaderIndices={this.props.aboveBarComponent ? [1] : []}>
-      {this.state.aboveBarComponent}
+
+      <AboveBarComponent onLayout={event => this.aboveBarComponentHeight = event.nativeEvent.layout.height} />
       {this.props.tabBarPosition === 'top' && this.renderTabBar(tabBarProps)}
       {this.renderScrollableContent()}
       {(this.props.tabBarPosition === 'bottom' || overlayTabs) && this.renderTabBar(tabBarProps)}

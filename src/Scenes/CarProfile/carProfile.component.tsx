@@ -144,7 +144,7 @@ const getCarProfileComponent = (props) => {
     timeline: timeline,
   };
 
-  const userInfoComponent = (
+  const userInfoComponent = () => (
     <View style={styles.infoWrapper}>
       <View style={styles.subWrapper}>
         <View style={styles.imageWrapper}>
