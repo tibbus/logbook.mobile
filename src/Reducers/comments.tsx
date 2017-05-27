@@ -15,6 +15,7 @@ const transformComment = (comment) => {
   return {
     id: comment.id,
     authorUserId: comment.authorUserId,
+    authorImage: comment.authorImage,
     recipientUserId: comment.recipientUserId,
     comment: comment.comment,
     timeAgo: getTimeAgo(comment.createdDate)
