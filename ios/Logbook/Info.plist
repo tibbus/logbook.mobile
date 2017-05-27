@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>CodePushDeploymentKey</key>
-	<string>KjfLYmP7nzrp226ThGK7sRCUeV0qEyAmtCsjG</string>
+	<string>$(CODEPUSH_KEY)</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -55,8 +55,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Upload videos/photos to timeline</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Upload videos with sound to timeline</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Upload photos to timeline</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -84,11 +90,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Upload photos to timeline</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Upload videos/photos to timeline</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Upload videos with sound to timeline</string>
 </dict>
 </plist>
