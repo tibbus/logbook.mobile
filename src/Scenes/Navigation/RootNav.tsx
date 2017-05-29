@@ -3,6 +3,7 @@ import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { MainNav } from './MainNav';
 import { SignIn } from '../'
+import { Invite } from '../Invite/'
 import { connect } from '../../Utils/connect';
 
 const configureScene = ({ sceneConfig, id }: any = {}) => {
@@ -27,8 +28,10 @@ export class RootNav extends Component<any, any> {
     switch (routeId) {
       case 'main':
         return (<MainNav navigator={navigator} />);
-      default:
+      case 'signin':
         return (<SignIn navigator={navigator} user={user} dispatch={dispatch} />);
+      default:
+        return (<Invite navigator={navigator} />)
     }
   }
 
@@ -42,5 +45,4 @@ export class RootNav extends Component<any, any> {
       />
     )
   }
-
 }

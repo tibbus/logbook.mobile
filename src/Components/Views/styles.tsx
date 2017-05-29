@@ -16,6 +16,5 @@ export default StyleSheet.create({
     gradientView: {
         flexDirection: 'column', 
         width: width, 
-        height: height-tabBarHeight,
     },
 });
