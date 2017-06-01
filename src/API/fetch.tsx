@@ -46,24 +46,42 @@ const customParams = (files, request) => {
   }
 }
 
-export const fetcher = (uri, method = 'GET', files = false, identity = false) => (request = {}, uriParams?) => {
+export const fetcher = (uri, method = 'GET', files = false, identity = false, requireAuth = true) => (request = {}, uriParams?) => {
   const { user }: any = store.getState()
-  const { token = {}, id } = user
-  const { tokenType, accessToken }: any = token
-  const Authorization = `${tokenType} ${accessToken}`
-  const { headers = {} }: any = request;
+
+  let token = {}, id, Authorization;
+  
+  if(requireAuth) {
+
+    token = user.token;
+    id = user.id;
+    let { tokenType, accessToken }: any = token;
+    Authorization = `${tokenType} ${accessToken}`
+  }
+
+  let { headers = {} }: any = request;
   const url = getUrl(uri, Object.assign({}, uriParams, { userId: id }), identity)
 
   const { body, customHeaders } = customParams(files, request)
-  const requestObject = {
-    method,
-    body,
-    headers: {
-      ...customHeaders,
+
+  headers = {
+    ...customHeaders,
+    ...headers
+  };
+
+  if(requireAuth) {
+    headers = {
       ...headers,
       Authorization
     }
   }
+
+  const requestObject = {
+    method,
+    body,
+    headers
+  }
+
 
   return fetch(url, requestObject)
     .then(response => {

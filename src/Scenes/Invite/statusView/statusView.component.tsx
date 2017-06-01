@@ -31,7 +31,7 @@ import palette from '../../../Styles/Themes/palette';
                 <Text style={{ fontSize: 20, fontWeight: "600", color: 'rgba(255, 255, 255, 1)'}}>Invite Accepted</Text>
             </View>
             <View style={{marginTop: 10, flex: 1.5}}>
-                <TouchableHighlight style={{backgroundColor: palette.primary, flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center'}} onPress={() => console.log("Test")}>
+                <TouchableHighlight style={{backgroundColor: palette.primary, flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center'}} onPress={onPress}>
                     <Text style={{ fontSize: 20, fontWeight: "600", color: 'rgba(255, 255, 255, 1)'}}>Continue to Logbook</Text>
                 </TouchableHighlight>
             </View>
@@ -46,6 +46,7 @@ export class StatusView extends Component<any, any> {
   }
 
   render() {
+      const { onContinuePress, invitePending } = this.props;
     return (
         <View style={styles.container}>
             <Image
@@ -57,7 +58,7 @@ export class StatusView extends Component<any, any> {
                     <Text style={styles.productName}>Logbook</Text>
                     <Text style={styles.productLine}>All your car stuff, in one place</Text>
                     <View style={styles.container}/>
-                    {getActionButtons(false, () => console.log())}
+                    {getActionButtons(invitePending, onContinuePress)}
                     <View style={styles.container}/>
                         <Text style={styles.messageLine}>A crafted experience for you made possible by connecting your social media accounts</Text>
                     </View>

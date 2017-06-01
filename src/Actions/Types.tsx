@@ -64,3 +64,7 @@ export const RESET_POST = 'RESET_POST'
 
 //Feed
 export const ADD_FEED_ITEM = 'ADD_FEED_ITEM'
+
+//Invite
+export const SET_INVITE = 'SET_INVITE'
+export const SET_INVITE_STATUS = 'SET_INVITE_STATUS'

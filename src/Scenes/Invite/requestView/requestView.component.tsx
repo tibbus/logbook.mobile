@@ -15,6 +15,7 @@ export class RequestView extends Component<any, any> {
   }
 
   render() {
+      const { onRequestInvitePress } = this.props;
     return (
         <View style={styles.container}>
         <Image
@@ -27,7 +28,7 @@ export class RequestView extends Component<any, any> {
                 <Text style={styles.productLine}>All your car stuff, in one place</Text>
                 <View style={styles.container}/>
                 <View style={{marginTop: 10, flex: 1.5}}>
-                    <TouchableHighlight style={{backgroundColor: palette.primary, flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center'}} onPress={() => console.log("Test")}>
+                    <TouchableHighlight style={{backgroundColor: palette.primary, flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center'}} onPress={onRequestInvitePress}>
                         <Text style={{ fontSize: 20, fontWeight: "600", color: 'rgba(255, 255, 255, 1)'}}>Request Invite</Text>
                     </TouchableHighlight>
                 </View>

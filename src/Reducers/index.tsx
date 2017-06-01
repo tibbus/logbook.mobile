@@ -6,3 +6,4 @@ export * from './search';
 export * from './comments';
 export * from './likes';
 export * from './post';
+export * from './invites';
