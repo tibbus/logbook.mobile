@@ -8,9 +8,10 @@ import { RequestView } from './requestView/requestView.component';
 import { StatusView } from './statusview/statusview.component';
 
 import { submitInvite, getInviteStatus } from '../../Actions/invite'
+import { LoadingView } from '../../Components/LoadingView';
 
 
-const stateToProps = ({ invites }) => ({ invites });
+const stateToProps = ({ invites, loadingStatus }) => ({ invites, loadingStatus });
 
 @connect(stateToProps)
 export class Invite extends Component<any, any> {
@@ -40,15 +41,21 @@ export class Invite extends Component<any, any> {
         )
       case 'requestForm':
         return (
-          <RequestForm postInviteRequest={(inviteDetails) => dispatch(submitInvite(
-            inviteDetails,
-            (inviteReference) => onSuccess(inviteReference, navigator), 
-            () => Alert.alert("UnSuccessful", "Your invite request failed.")))}/>
+          <LoadingView style={{flex:1}}
+            isLoading={this.props.loadingStatus.invitesLoading}>
+            <RequestForm postInviteRequest={(inviteDetails) => dispatch(submitInvite(
+              inviteDetails,
+              (inviteReference) => onSuccess(inviteReference, navigator), 
+              () => Alert.alert("UnSuccessful", "Your invite request failed.")))}/>
+            </LoadingView>
         )
 
       case 'statusView':
         return (
-            <StatusView invitePending={invitePending} onContinuePress={() => rootNav.push({id:'signin'})}/>
+           <LoadingView style={{flex:1}}
+            isLoading={this.props.loadingStatus.invitesLoading}>
+              <StatusView invitePending={invitePending} onContinuePress={() => onContinuePress(rootNav)}/>
+          </LoadingView>
         )
 
       default:
@@ -73,6 +80,17 @@ const onSuccess = (inviteItem, navigator) => {
 
     AsyncStorage.setItem('inviteReference', JSON.stringify(inviteItem));
     navigator.push({id:'statusView'});
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const onContinuePress = (navigator) => {
+    try {
+
+    AsyncStorage.setItem('inviteAccepted', JSON.stringify('true'));
+    navigator.push({id:'signin'});
 
   } catch (error) {
     console.log(error);

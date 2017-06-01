@@ -27,8 +27,8 @@ export class RequestView extends Component<any, any> {
                 <Text style={styles.productName}>Logbook</Text>
                 <Text style={styles.productLine}>All your car stuff, in one place</Text>
                 <View style={styles.container}/>
-                <View style={{marginTop: 10, flex: 1.5}}>
-                    <TouchableHighlight style={{backgroundColor: palette.primary, flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center'}} onPress={onRequestInvitePress}>
+                <View style={{marginTop: 60, paddingVertical: 10, backgroundColor: palette.primary, margin: 20, alignItems: 'center', justifyContent: 'center'}}>
+                    <TouchableHighlight onPress={onRequestInvitePress}>
                         <Text style={{ fontSize: 20, fontWeight: "600", color: 'rgba(255, 255, 255, 1)'}}>Request Invite</Text>
                     </TouchableHighlight>
                 </View>

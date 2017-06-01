@@ -10,6 +10,7 @@ const initialState = {
   updatingUserCar: false,
   profileLoading: false,
   addPostLoading: false,
+  invitesLoading: false
 }
 
 const setLoading = (state, resourceName, status) => {
@@ -24,6 +25,8 @@ const setLoading = (state, resourceName, status) => {
       return { ...state, addPostLoading: status }
     case 'addPost':
       return { ...state, addPostLoading: status }
+    case 'invites':
+      return { ...state, invitesLoading: status}
     default:
       return state
   }

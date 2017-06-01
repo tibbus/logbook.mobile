@@ -26,8 +26,8 @@ export class RequestForm extends Component<any, any> {
     var regNoLimit = 9;
     const { postInviteRequest } = this.props
     return (
-      <KeyboardAwareScrollViewTyped style={{ flex: 1 }}>
-        <GradientView fullScreen={true}>
+      <GradientView fullScreen={true}>
+        <KeyboardAwareScrollViewTyped>
           <View style={styles.container}>
             <View style={styles.subContainer}>
               <View style={{ marginTop: 40 }}>
@@ -86,15 +86,15 @@ export class RequestForm extends Component<any, any> {
                 </View>
               </View>
               
-              <View style={{marginTop: 10, flex: 0.8}}>
-                <TouchableHighlight style={{backgroundColor: palette.primaryBlack, flex: 1, marginVertical: 20, alignItems: 'center', justifyContent: 'center'}} onPress={() => validateInput(this.inviteDetails, postInviteRequest(this.inviteDetails), () => Alert.alert("Failed!", "The invite request could not be submitted."))}>
+              <View style={{marginTop: 10, paddingVertical: 10, flex: 1.5, alignItems: 'center', justifyContent: 'center', marginVertical: 20, backgroundColor: palette.primaryBlack}}>
+                <TouchableHighlight onPress={() => validateInput(this.inviteDetails, postInviteRequest(this.inviteDetails), () => Alert.alert("Failed!", "The invite request could not be submitted."))}>
                     <Text style={{ fontSize: 20, fontWeight: "600", color: 'rgba(255, 255, 255, 1)'}}>Request Invite</Text>
                 </TouchableHighlight>
               </View>
             </View>
           </View>
-        </GradientView>
-      </KeyboardAwareScrollViewTyped>
+        </KeyboardAwareScrollViewTyped>
+      </GradientView>
     )
   }
 }
