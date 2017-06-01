@@ -37,7 +37,7 @@ const galleryContent = (data) => {
 
   if (data.type === "video") {
     // @TODO removed because undefined
-    return <LBVideo key={data.uri} paused={true} uri={data.uri} style={{ height: 120, width: 170 }} />;
+    return <LBVideo key={data.uri} paused={true} source={{ uri: data.uri }} style={{ height: 120, width: 170 }} />;
   }
 }
 

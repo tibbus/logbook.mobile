@@ -67,8 +67,8 @@ const featuredViewItem = (item) => {
   }
 
   if (item.type === "Video") {
-    return <Modal key={item.uri} content={<LBVideo paused={false} uri={item.uri} />}>
-      <LBVideo paused={true} playable={false} uri={item.uri} style={[styles.media, styles.video]} />
+    return <Modal key={item.uri} content={<LBVideo paused={false} source={{ uri: item.uri }} />}>
+      <LBVideo paused={true} playable={false} source={{ uri: item.uri }} style={[styles.media, styles.video]} />
     </Modal>
   }
 }

@@ -28,8 +28,8 @@ const renderMedia = (type, data) => {
 
     case 'Video':
       return contentUris.map(uri => (
-        <Modal key={uri} content={<LBVideo paused={false} uri={uri} />}>
-          <LBVideo paused={true} playable={false} uri={uri} />
+        <Modal key={uri} content={<LBVideo paused={false} source={{uri}} />}>
+          <LBVideo paused={true} playable={false} source={{uri}} />
         </Modal>
       ));
 

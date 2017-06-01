@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { Modal, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Modal, Text, TouchableOpacity, View, ViewStyle, Image, ModalProperties  } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { styles } from './Modal.styles';
+import { getNativeProps } from '../../Utils';
 
-interface propTypes {
-  content,
+interface Proptypes extends ModalProperties {
+  content: React.ReactNode,
   style?: ViewStyle
 }
 
-export class LBModal extends Component<propTypes, any> {
+export class LBModal extends Component<Proptypes, any> {
+  static defaultProps = {
+    animationType: 'slide'
+  }
+
   state = {
     modalVisible: false
   }
@@ -22,10 +27,14 @@ export class LBModal extends Component<propTypes, any> {
     this.setState({ modalVisible: false });
   }
 
+  public getModalProps() {
+    return getNativeProps(this.props, ['content', 'style']);
+  }
+
   render() {
     return (
       <View>
-        <Modal animationType={"slide"} transparent={false} visible={this.state.modalVisible}>
+        <Modal {...this.getModalProps() } visible={this.state.modalVisible}>
           <View style={styles.modalContainer}>
             <TouchableOpacity style={styles.closeButton} onPress={this.pressClose}>
               <Icon name="md-close" style={styles.closeIcon} />

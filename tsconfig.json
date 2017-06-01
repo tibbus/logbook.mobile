@@ -16,6 +16,10 @@
         "types": [
             "react",
             "react-native"
+        ],
+        "lib": [
+            "dom",
+            "es7"
         ]
     },
     "include": [
