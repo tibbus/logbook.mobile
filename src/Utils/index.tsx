@@ -65,3 +65,15 @@ export const replaceParams = (str, obj = {}, modifier = param => param) => {
   const keys = Object.keys(obj)
   return helper(str, keys)
 }
+
+export const getNativeProps = (props, excluded: string[]) => {
+  const nativeProps = {};
+
+  for (let key in props) {
+    if (!excluded.includes(key)) {
+      nativeProps[key] = props[key];
+    }
+  }
+
+  return nativeProps;
+}

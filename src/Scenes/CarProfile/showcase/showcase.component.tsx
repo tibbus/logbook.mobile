@@ -27,8 +27,8 @@ const galleryContent = (contentUri, type) => {
 
   if (type === "Video") {
     return (
-      <Modal key={contentUri} content={<LBVideo key={contentUri} paused={false} uri={contentUri} />}>
-        <LBVideo paused={true} playable={false} uri={contentUri} style={styles.video} />
+      <Modal key={contentUri} content={<LBVideo key={contentUri} paused={false} source={{ uri: contentUri }} />}>
+        <LBVideo paused={true} playable={false} source={{ uri: contentUri }} style={styles.video} />
       </Modal>
     );
   }

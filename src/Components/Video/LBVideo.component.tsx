@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, View, ViewStyle, Dimensions } from 'react-native';
-import Video from 'react-native-video';
+import { StyleSheet, TouchableOpacity, View, ViewStyle, Dimensions, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Video from 'react-native-video';
 
-interface propTypes {
-  uri: string,
-  paused?: boolean,
-  style?: ViewStyle,
-  playable?: boolean
-}
+import { LBVideoProps } from './LBVideo.props';
+import { styles } from './LBVideo.styles';
+import { getNativeProps } from '../../Utils/';
 
-export class LBVideo extends Component<propTypes, any> {
+export class LBVideo extends Component<LBVideoProps, any> {
   static defaultProps = {
     style: {},
-    playable: true
+    playable: true,
+    resizeMode: 'cover',
+    repeat: true
   }
+
+  private maxHeight: number = Dimensions.get('window').height - 120;
 
   constructor(props) {
     super(props);
@@ -22,7 +23,6 @@ export class LBVideo extends Component<propTypes, any> {
     const style = StyleSheet.flatten(props.style);
 
     this.state = {
-      uri: props.uri,
       paused: props.paused,
       height: style.height,
       width: style.width
@@ -44,50 +44,65 @@ export class LBVideo extends Component<propTypes, any> {
 
     // If the height is not passed it, then fit Height to the Width ratio
     if (!style.height) {
+      const heightToRatio = width < height ? this.state.width / ratio : this.state.width * ratio;
+      const newHeight = heightToRatio > this.maxHeight ? this.maxHeight : heightToRatio;
+
       this.setState({
-        height: this.state.width / ratio
+        height: newHeight
       });
+    }
+
+    // onLoad event middleware
+    if (this.props.onLoad) {
+      this.props.onLoad(event);
     }
   }
 
   public onLayout = event => {
-    this.state.width = event.nativeEvent.layout.width;
+    const style = StyleSheet.flatten(this.props.style);
+    if (!style.width) {
+      this.state.width = event.nativeEvent.layout.width;
+    }
+  }
+
+  public renderPlayButton() {
+    if (!this.state.paused) {
+      return null;
+    }
+
+    if (this.props.playIcon) {
+      return this.props.playIcon;
+    } else {
+      return (
+        <View style={styles.buttonContainer}>
+          <View style={styles.iconContainer}></View>
+          <Icon name='play-arrow' style={styles.icon} />
+        </View>
+      );
+    }
+  }
+
+  public getVideoProps() {
+    return getNativeProps(this.props, ['source', 'paused', 'onLoad', 'style']);
   }
 
   render() {
     const VideoContainer = this.props.playable ? TouchableOpacity : View;
 
     return (
-      <View>
-        <VideoContainer activeOpacity={0.9} onPress={this.onVideoPress} onLayout={this.onLayout}>
-          <Video
-            source={{ uri: this.state.uri }}
-            paused={this.state.paused}
-            repeat={Boolean(true)}
-            onLoad={this.onVideoLoad}
-            controls={Boolean(true)}
-            style={[this.props.style, { height: this.state.height, width: this.state.width }]} />
+      <VideoContainer activeOpacity={0.9}
+        onPress={this.onVideoPress}
+        onLayout={this.onLayout}
+        style={[this.props.style, { height: this.state.height, width: this.state.width }]}
+      >
+        <Video {...this.getVideoProps() }
+          source={this.props.source}
+          paused={this.state.paused}
+          onLoad={this.onVideoLoad}
+          style={{ height: this.state.height, width: this.state.width }} />
 
-          <View style={styles.iconContainer}>{this.state.paused ? (<Icon name='play-circle-filled' style={styles.icon} />) : null}</View>
-        </VideoContainer>
-      </View>
+        {this.renderPlayButton()}
+      </VideoContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  icon: {
-    fontSize: 90,
-    color: '#e0e0e0'
-  }
-});
