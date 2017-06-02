@@ -40,16 +40,17 @@ export const playVideoAction = (carInfoId, postId) => ({
 });
 
 export const setTimeline = (actorType: string, id: string) => {
+
   return () => {
     getTimeline(actorType, id)
-      .then(data => {
+      .then((data: any) => {
 
         let carInfoIds = [...new Set(data.map(item => item.activityData.carInfoId))]
         let ids = "";
         carInfoIds.forEach(carInfoId => ids += "ids="+carInfoId+"&");
         ids = ids.slice(0,-1);
         getCarProfileImageByIds({}, {ids})
-        .then(response => {
+        .then((response: any) => {
 
           response.carProfileImages.forEach(carProfileImage => {
             data.forEach(item => {
