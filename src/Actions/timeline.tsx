@@ -11,6 +11,7 @@ import { getTimeline } from '../API/Timeline';
 import { createStatus } from '../API/Status';
 import { createImage } from '../API/Image';
 import { createVideo } from '../API/Video';
+import { getCarProfileImageByIds } from '../API/Car'
 import { dispatch } from '../store';
 
 const addTimelineAction = (actorType: string, actorId: string, timeline) => ({
@@ -42,7 +43,31 @@ export const setTimeline = (actorType: string, id: string) => {
   return () => {
     getTimeline(actorType, id)
       .then(data => {
-        dispatch(addTimelineAction(actorType, id, data))
+
+        let carInfoIds = [...new Set(data.map(item => item.activityData.carInfoId))]
+        let ids = "";
+        carInfoIds.forEach(carInfoId => ids += "ids="+carInfoId+"&");
+        ids = ids.slice(0,-1);
+        getCarProfileImageByIds({}, {ids})
+        .then(response => {
+
+          response.carProfileImages.forEach(carProfileImage => {
+            data.forEach(item => {
+              if(item.activityData.carInfoId === carProfileImage.id) {
+                item.carData.image = carProfileImage.image;
+              }
+            })
+          })
+
+          console.log(response);
+          dispatch(addTimelineAction(actorType, id, data))
+
+        })
+        .catch(error => {
+
+          console.log('Car profile image request failed.')
+
+        })
       })
       .catch(e => {
         console.log('timeline failed', e);
