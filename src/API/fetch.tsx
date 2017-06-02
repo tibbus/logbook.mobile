@@ -7,7 +7,7 @@ const getUrl = (uri, uriParams = {}, identity = false) => {
   const env = identity ? getIdentityEnvironment() : getEnvironment()
 
   if (uriParams) {
-    return env + replaceParams(uri, uriParams, encodeURIComponent)
+    return env + replaceParams(uri, uriParams)
   }
 
   return env + uri
