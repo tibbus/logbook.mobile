@@ -48,7 +48,7 @@ export class Confirm extends Component<any, any> {
                   maxLength={1}
                   multiline={false}
                   style={styles.vinInput}
-                  onSubmitEditing={() => this.refs["secondNumber"].focus()}
+                  onSubmitEditing={() => (this.refs["secondNumber"] as any).focus()}
                   autoFocus={true} 
                   />
               </View>
@@ -62,7 +62,7 @@ export class Confirm extends Component<any, any> {
                   maxLength={1}
                   multiline={false}
                   style={styles.vinInput}
-                  onSubmitEditing={() => this.refs["lastNumber"].focus()} 
+                  onSubmitEditing={() => (this.refs["lastNumber"] as any).focus()} 
                   />
               </View>
               <View style={styles.subContainer}>
