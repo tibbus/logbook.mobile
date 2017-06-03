@@ -128,7 +128,6 @@ export const followCar = (userId, carInfoId) => {
     return dispatch => {
         followCarApi({}, { userId, carInfoId })
             .then(data => {
-                dispatch(getUserFollowingFeeds(userId))
                 dispatch({
                     type: FOLLOW_CAR,
                     followContent: {
@@ -136,9 +135,10 @@ export const followCar = (userId, carInfoId) => {
                         following: true
                     }
                 });
+                dispatch(getUserFollowingFeeds(userId))
             })
             .catch(error => {
-
+                console.log(error);
             })
     }
 }
@@ -147,7 +147,6 @@ export const unFollowCar = (userId, carInfoId) => {
     return dispatch => {
         unFollowCarApi({}, { userId, carInfoId })
             .then(data => {
-                dispatch(getUserFollowingFeeds(userId))
                 dispatch({
                     type: FOLLOW_CAR,
                     followContent: {
@@ -155,9 +154,10 @@ export const unFollowCar = (userId, carInfoId) => {
                         following: false
                     }
                 });
+                dispatch(getUserFollowingFeeds(userId))
             })
             .catch(error => {
-
+                console.log()
             })
     }
 }
