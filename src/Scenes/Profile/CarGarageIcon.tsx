@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableHighlight, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { capitalize } from 'underscore.string';
 
-import { CaptionButton } from '../../Components/Button';
+import captionStyles from '../../Components/Button/styles';
 import pallete from '../../Styles/Themes/palette';
 
 export class CarGarageIcon extends Component<any, any> {
@@ -12,26 +13,24 @@ export class CarGarageIcon extends Component<any, any> {
         if (!car) {
             return (
                 <TouchableHighlight style={styles.carIconWrapper} onPress={onPress}>
-                  <View>
-                    <Icon name='plus' style={styles.carIcon} />
-                    <Text style={styles.carIconText}>Add Car</Text>
-                  </View>
+                    <View>
+                        <Icon name='plus' style={styles.carIcon} />
+                        <Text style={styles.carIconText}>Add Car</Text>
+                    </View>
                 </TouchableHighlight>
             );
         }
         else {
             return (
-                <View>
+                <TouchableHighlight onPress={onPress}>
                     <View>
-                        <TouchableHighlight onPress={onPress}>
-                            <Image source={{ uri: car.carInfo.image }} style={styles.image} />
-                        </TouchableHighlight>
+                        <Image source={{ uri: car.carInfo.image }} style={styles.image} />
+                        <Text lineBreakMode="tail" numberOfLines={1} style={captionStyles.captionText}>
+                            {capitalize(car.carInfo.car.make)} {capitalize(car.carInfo.car.model)}
+                        </Text>
+                        <Text style={captionStyles.captionText}>12 Followers</Text>
                     </View>
-
-                    <View style={styles.infoContainer}>
-                        {CaptionButton(() => onPress, car.carInfo.car.make, car.carInfo.car.model)}
-                    </View>
-                </View>
+                </TouchableHighlight>
             );
         }
     }
@@ -62,7 +61,7 @@ var styles = StyleSheet.create({
         color: pallete.primary
     },
     carIconText: {
-  			fontSize: 11,
+        fontSize: 11,
         color: pallete.primary
     },
     carInfoIcon: {

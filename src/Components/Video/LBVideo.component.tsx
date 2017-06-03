@@ -15,12 +15,13 @@ export class LBVideo extends Component<LBVideoProps, any> {
     repeat: true
   }
 
-  private maxHeight: number = Dimensions.get('window').height - 120;
+  private maxHeight
 
   constructor(props) {
     super(props);
 
     const style = StyleSheet.flatten(props.style);
+    this.maxHeight = style.maxHeight || Dimensions.get('window').height - 120;
 
     this.state = {
       paused: props.paused,

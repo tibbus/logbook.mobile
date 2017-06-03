@@ -20,7 +20,7 @@ const galleryContent = (contentUri, type) => {
   if (type === "Image") {
     return (
       <Modal key={contentUri} content={<FitImage source={{ uri: contentUri }} />}>
-        <FitImage source={{ uri: contentUri }} style={styles.photo} />
+        <FitImage source={{ uri: contentUri }} style={styles.media} />
       </Modal>
     );
   }
@@ -28,7 +28,7 @@ const galleryContent = (contentUri, type) => {
   if (type === "Video") {
     return (
       <Modal key={contentUri} content={<LBVideo key={contentUri} paused={false} source={{ uri: contentUri }} />}>
-        <LBVideo paused={true} playable={false} source={{ uri: contentUri }} style={styles.video} />
+        <LBVideo paused={true} playable={false} source={{ uri: contentUri }} style={styles.media} />
       </Modal>
     );
   }
@@ -82,14 +82,12 @@ export class ShowCase extends Component<any, any> {
     return (
       <View>
         <Text style={styles.mediaText}>Videos</Text>
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          horizontal={true}
-          style={styles.horizontalScrollView}>
-          {
-            this.videos.map((video) => galleryContent(video, 'Video'))
-          }
-        </ScrollView>
+        <ListView dataSource={this.state.videoDataSource}
+          renderRow={(data) => !data ? <Text>No Videos</Text> : galleryContent(data, 'Video')}
+          enableEmptySections={true}
+          contentContainerStyle={styles.imagesContainer}
+          scrollEnabled={false}
+        />
       </View>
     );
   }

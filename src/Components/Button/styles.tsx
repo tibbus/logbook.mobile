@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   Dimensions,
+  TextStyle
 } from 'react-native';
 import palette from '../../Styles/Themes/palette';
 

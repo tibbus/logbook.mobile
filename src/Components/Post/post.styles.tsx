@@ -16,6 +16,9 @@ export const styles = StyleSheet.create({
     width: 20,
     borderRadius: 10
   },
+  video: {
+    maxHeight: 300
+  },
   description: {
     fontSize: 20,
     padding: 20,
