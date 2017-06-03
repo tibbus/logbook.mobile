@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   media: {
     height: 120,
     width: 120,
-    borderRadius: 5,
+    //borderRadius: 5,
     padding: 5,
     margin: 3
   },
