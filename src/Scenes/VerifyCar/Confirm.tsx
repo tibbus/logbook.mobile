@@ -41,26 +41,34 @@ export class Confirm extends Component<any, any> {
               <View style={styles.subContainer}>
                 <Text style={styles.vinCaptionText}>1st:</Text>
                 <TextInput
+                  ref="firstNumber"
                   onChangeText={(text) => { this.vinNumbers.first = text }}
                   placeholderTextColor={palette.inactive}
                   returnKeyType='done'
                   maxLength={1}
                   multiline={false}
-                  style={styles.vinInput} />
+                  style={styles.vinInput}
+                  onSubmitEditing={() => this.refs["secondNumber"].focus()}
+                  autoFocus={true} 
+                  />
               </View>
               <View style={styles.subContainer}>
                 <Text style={styles.vinCaptionText}>2nd:</Text>
                 <TextInput
+                  ref="secondNumber"
                   onChangeText={(text) => { this.vinNumbers.second = text }}
                   placeholderTextColor={palette.inactive}
                   returnKeyType='done'
                   maxLength={1}
                   multiline={false}
-                  style={styles.vinInput} />
+                  style={styles.vinInput}
+                  onSubmitEditing={() => this.refs["lastNumber"].focus()} 
+                  />
               </View>
               <View style={styles.subContainer}>
                 <Text style={styles.vinCaptionText}>17th:</Text>
                 <TextInput
+                  ref="lastNumber"
                   onChangeText={(text) => { this.vinNumbers.last = text }}
                   placeholderTextColor={palette.inactive}
                   returnKeyType='done'
