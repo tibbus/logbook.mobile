@@ -36,20 +36,6 @@ export const GoogleButton = (onPress) => (
   </TouchableHighlight>
 )
 
-export const CaptionButton = (onPress, carMake, carModel) => (
-  <TouchableHighlight onPress={() => onPress()}>
-    <View style={[styles.rowContainer]}>
-      <View style={[styles.columnContainer, styles.captionColumnContainer]}>
-        <Text lineBreakMode="tail" numberOfLines={1} style={[styles.container, styles.captionText]}>
-          {capitalize(carMake, true) + ' ' + capitalize(carModel, true)}
-        </Text>
-        <Text style={[styles.container, styles.captionText]}>{"12 Followers"}</Text>
-      </View>
-      <Text style={[styles.captionButton, styles.captionButtonText]}>Edit Car</Text>
-    </View>
-  </TouchableHighlight>
-)
-
 export const NextButton = (onPress, title) => (
   <TouchableHighlight onPress={() => onPress()}>
     <View style={styles.nextButtonBorder}>

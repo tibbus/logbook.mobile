@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
-  photo: {
+  media: {
     borderWidth: 1,
     borderColor: 'white',
     height: 100,

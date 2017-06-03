@@ -67,16 +67,13 @@ export const fetcher = (uri, method = 'GET', files = false, identity = false) =>
 
   return fetch(url, requestObject)
     .then(response => {
-      const type = response.headers.get('content-type');
-
       if (!response.ok) {
         throw new Error('Bad Response')
-        //@ todo : for future reference check if we need the response for a DELETE, for now all DELETE's responses are empty
-      } else if (!type || method === 'DELETE') {
-        return {};
       }
 
-      return response.json();
+      // Allow empty body response
+      // @todo : should be fixed on the BE to never send an empty response
+      return response.text().then(text => text ? JSON.parse(text) : {});
     });
 }
 
