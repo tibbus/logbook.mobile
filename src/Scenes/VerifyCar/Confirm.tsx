@@ -34,6 +34,8 @@ export class Confirm extends Component<any, any> {
               </View>
               <View style={{ marginTop: 30 }}>
                 <Text style={textStyle.paragraphWhite}>To verify ownership we'd like the following characters from your VIN No.</Text>
+              </View>
+              <View style={{ marginTop: 20 }}>
                 <Text style={textStyle.paragraphWhite}>"Where to find your VIN</Text>
               </View>
             </View>
@@ -110,25 +112,23 @@ const styles = StyleSheet.create({
   rowSubContainer: {
     flex: 2,
     alignItems: "flex-start",
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 20,
   },
   vinCaptionText: {
-    //flex: 1,
-    //height: 80,
     fontSize: 20,
-    //lineHeight: 200,
     color: 'white',
     marginTop: 10,
+    width:60,
+    textAlign: "center"
   },
   vinInput: {
-    //flex: 1,
-    height: 80,
+    height: 50,
     fontSize: 20,
-    lineHeight: 100,
     color: 'white',
-    marginTop: 10,
-    borderColor: 'black',
-    borderWidth: 2
-    // backgroundColor: 'black'
+    marginVertical: 10,
+    borderColor: 'white',
+    borderWidth: 2,
+    textAlign: "center"
   }
 });
