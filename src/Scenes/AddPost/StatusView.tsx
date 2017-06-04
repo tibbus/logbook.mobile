@@ -43,10 +43,10 @@ const getStatusDisplay = (status) => {
 
 const styles = StyleSheet.create({
   contentDescriptionContainer: {
-    flex: 2,
+    flex: 1.3,
     flexDirection: 'column',
-    paddingTop: 20,
-    paddingBottom: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
     paddingHorizontal: screen.paddingHorizontal,
   },
   icon: {
@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     borderRadius: screen.addPostProfileDimensions / 2,
   },
   statusInput: {
-    flex: 1,
-    height: 80,
-    fontSize: 20,
+    flex: 0.8,
+    //height: 80,
+    fontSize: 14,
     lineHeight: 200,
     color: 'black',
-    marginTop: 10,
+    marginTop: 10
     // backgroundColor: 'black'
   },
   statusDisplay: {

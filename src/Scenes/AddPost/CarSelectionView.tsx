@@ -59,7 +59,7 @@ const { width, height } = Dimensions.get("window");
 const photoWidth = 30;
 const styles = StyleSheet.create({
   selectedCarView: {
-    flex: 1,
+    flex: 0.7,
     flexDirection: 'column',
     justifyContent: "center",
   },

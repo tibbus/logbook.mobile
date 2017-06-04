@@ -271,12 +271,12 @@ const styles = StyleSheet.create({
     backgroundColor: background.color,
   },
   tagsView: {
-    flex: 1,
+    flex: 0.5,
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: 10,
   },
   headerContainer: {
-    flex: 1,
+    flex: 0.4,
     flexDirection: 'row',
     backgroundColor: background.secondary,
     justifyContent: "space-around",
