@@ -79,9 +79,6 @@ export class MainNavBar extends Component<any, any> {
           <Icon name='home' style={styles.icon} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('away')}>
-          <Icon name='bell-o' style={styles.icon} />
-        </TouchableHighlight>
-        <TouchableHighlight style={bgColour('away')}>
           <Icon name='plus-square-o' style={styles.icon} onPress={this.gotoAddPost.bind(this)} />
         </TouchableHighlight>
         <TouchableHighlight style={bgColour('search')} onPress={this.gotoSearch.bind(this)}>
