@@ -3,20 +3,20 @@ import {
   StyleSheet,
   View,
   ListView,
-  Image,
   Text,
   TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { LBVideo } from '../../Components/Video/LBVideo.component';
+import { FitImage } from '../../Components/FitImage/FitImage.component';
 
 import pallete from '../../Styles/Themes/palette';
 
-export const getGalleryView = (galleryDataSource?, onAddMediaClick?, showAddMediaButton = true) => {
+export const getGalleryView = (mediaType?, galleryDataSource?, onAddMediaClick?, showAddMediaButton = true) => {
   return (
     <View style={styles.galleryContainer}>
       {
-        (galleryDataSource.getRowCount() > 0 && galleryDataSource.getRowCount() < 3 && showAddMediaButton) ? showAddMedia(onAddMediaClick) : null
+        (galleryDataSource.getRowCount() > 0 && galleryDataSource.getRowCount() < 3 && showAddMediaButton) ? showAddMedia(onAddMediaClick, mediaType) : null
       }
       <ListView
         horizontal={true}
@@ -32,7 +32,7 @@ export const getGalleryView = (galleryDataSource?, onAddMediaClick?, showAddMedi
 const galleryContent = (data) => {
 
   if (data.type === "image") {
-    return <Image key={data.uri} resizeMode="contain" source={{ uri: data.uri }} style={styles.postPhoto} />
+    return <FitImage key={data.uri} source={{ uri: data.uri }} style={styles.postPhoto} />
   }
 
   if (data.type === "video") {
@@ -41,12 +41,12 @@ const galleryContent = (data) => {
   }
 }
 
-const showAddMedia = (onAddMediaClick) => {
+const showAddMedia = (onAddMediaClick, mediaType) => {
   return (
     <TouchableHighlight style={styles.addMediaIconWrapper} onPress={onAddMediaClick}>
       <View style={styles.addMediaIconView}>
         <Icon name='plus-circle' style={styles.addMediaIcon} />
-        <Text style={styles.addMediaIconText}>Add Media</Text>
+        <Text style={styles.addMediaIconText}>{mediaType === "image" ? "Add Photo" : "Add Video"}</Text>
       </View>
     </TouchableHighlight>
   )
@@ -57,9 +57,8 @@ const photoHeight = 120;
 
 const styles = StyleSheet.create({
   postPhoto: {
-    height: photoWidth,
-    width: photoHeight,
-    borderRadius: 5,
+    height: photoWidth / 1.2,
+    width: photoHeight / 1.2,
     padding: 5,
     margin: 3
   },
@@ -71,9 +70,8 @@ const styles = StyleSheet.create({
   },
   addMediaIconWrapper: {
     backgroundColor: '#eaeaea',
-    borderRadius: 5,
-    width: photoWidth,
-    height: photoHeight,
+    width: photoWidth / 1.2,
+    height: photoHeight / 1.2,
     margin: 3,
     padding: 5,
     alignItems: 'center',

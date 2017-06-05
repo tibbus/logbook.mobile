@@ -24,14 +24,13 @@ export const getStatusView = (editMode, updateStatus, status, userProfileImage) 
 
 const getStatusInput = (updateStatus) => {
   return (
-    <TextInput
-      onChangeText={(text) => updateStatus(text)}
-      placeholder="What's new with car term today? Feeling like cruising? Thing? Or something?"
-      placeholderTextColor={palette.inactive}
-      returnKeyType='done'
-      maxLength={200}
-      multiline={true}
-      style={styles.statusInput} />
+      <TextInput
+        onChangeText={(text) => updateStatus(text)}
+        placeholder="What's new with your car today?"
+        placeholderTextColor={palette.inactive}
+        returnKeyType='done'
+        maxLength={200}
+        style={styles.statusInput} />
   )
 }
 
@@ -43,7 +42,7 @@ const getStatusDisplay = (status) => {
 
 const styles = StyleSheet.create({
   contentDescriptionContainer: {
-    flex: 1.3,
+    flex: 0.7,
     flexDirection: 'column',
     paddingTop: 10,
     paddingBottom: 5,
@@ -56,12 +55,10 @@ const styles = StyleSheet.create({
   },
   statusInput: {
     flex: 0.8,
-    //height: 80,
     fontSize: 14,
     lineHeight: 200,
     color: 'black',
     marginTop: 10
-    // backgroundColor: 'black'
   },
   statusDisplay: {
     flex:1,
