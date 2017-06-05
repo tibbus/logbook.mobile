@@ -199,7 +199,7 @@ export class LandingPage extends Component<any, any> {
             {getTagsView(this.state.tagsDataSource)}
           </View>
           <View style={styles.emptyContainer}>
-            {getGalleryView(this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
+            {getGalleryView(this.addPost.postType, this.state.contentDataSource, () => this.onGalleryPress(this.addPost.postType))}
             {
               this.addPost.canAddContent ? this.showMenuBar() : null
             }
