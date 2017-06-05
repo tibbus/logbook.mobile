@@ -32,7 +32,7 @@ export const getGalleryView = (mediaType?, galleryDataSource?, onAddMediaClick?,
 const galleryContent = (data) => {
 
   if (data.type === "image") {
-    return <FitImage key={data.uri} resizeMode="contain" source={{ uri: data.uri }} style={styles.postPhoto} />
+    return <FitImage key={data.uri} source={{ uri: data.uri }} style={styles.postPhoto} />
   }
 
   if (data.type === "video") {
@@ -57,9 +57,8 @@ const photoHeight = 120;
 
 const styles = StyleSheet.create({
   postPhoto: {
-    height: photoWidth,
-    width: photoHeight,
-    borderRadius: 5,
+    height: photoWidth / 1.2,
+    width: photoHeight / 1.2,
     padding: 5,
     margin: 3
   },
