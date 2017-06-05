@@ -46,7 +46,7 @@ export class RequestForm extends Component<any, any> {
                     returnKeyType='next'
                     maxLength={100}
                     onChangeText={(text) => { this.inviteDetails.fullName = text }}
-                    onSubmitEditing={() => this.refs["email"].focus()}
+                    onSubmitEditing={() => (this.refs["email"] as any).focus()}
                     autoCorrect={false}
                     autoFocus={true}
                     />
@@ -65,7 +65,7 @@ export class RequestForm extends Component<any, any> {
                     keyboardType='email-address'
                     maxLength={100}
                     onChangeText={(text) => {this.inviteDetails.email = text}}
-                    onSubmitEditing={() => this.refs["regNo"].focus()}
+                    onSubmitEditing={() => (this.refs["regNo"] as any).focus()}
                     autoCapitalize="none"
                     />
                 </View>
