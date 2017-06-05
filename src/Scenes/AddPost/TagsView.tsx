@@ -35,7 +35,7 @@ export const getTagsView = (tagsDataSource) => {
 
 const styles = StyleSheet.create({
   tagsContainer: {
-    flex: 1,
+    flex: 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     // paddingBottom: 10,
   },
   scrollView: {
-    flex: 1,
+    flex: 0.5,
   },
   horizontalScrollView: {
     // paddingBottom: 10,
