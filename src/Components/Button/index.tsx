@@ -65,6 +65,20 @@ export const ActionButton = (onPress, title) => (
   </TouchableHighlight>
 )
 
+export const PrimaryActionButton = (onPress, title) => (
+  <TouchableHighlight onPress={() => onPress()}>
+    <View style={styles.nextButtonBorder}>
+      <View style={styles.primaryActionButton}>
+        <View style={styles.rowContainer}>
+          <View style={[styles.columnContainer]}>
+            <Text style={[styles.primaryActionButtonText]}>{title}</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </TouchableHighlight>
+)
+
 export const IconButton = (onPress, iconName) => (
   <TouchableHighlight onPress={() => onPress()}>
     <Icon style={styles.iconButton} name={iconName}></Icon>

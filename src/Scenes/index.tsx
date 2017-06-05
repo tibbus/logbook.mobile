@@ -7,3 +7,4 @@ export * from './CarProfile/carProfile.component';
 export * from './AddPost/';
 export * from './Feed/feed.component';
 export * from './VerifyCar/';
+export * from './Invite/';

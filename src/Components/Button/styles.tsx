@@ -118,6 +118,16 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     marginHorizontal: 30,
   },
+
+  /* ====== Primary Action button styles ====== */
+  primaryActionButtonText: {
+    color: palette.text,
+  },
+  primaryActionButton: {
+    color: palette.primary,
+    //backgroundColor: 'transparent',
+    marginHorizontal: 30,
+  },
   /* ====== Icon button styles ====== */
   iconButton: {
     fontSize: 25,
