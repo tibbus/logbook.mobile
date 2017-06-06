@@ -28,8 +28,8 @@ const renderMedia = (type, data) => {
 
     case 'Video':
       return contentUris.map(uri => (
-        <Modal key={uri} content={<LBVideo paused={false} source={{uri}} />}>
-          <LBVideo paused={true} playable={false} source={{uri}} style={styles.video}/>
+        <Modal key={uri} content={<LBVideo paused={false} source={{ uri }} />}>
+          <LBVideo paused={true} playable={false} source={{ uri }} style={styles.video} />
         </Modal>
       ));
 
@@ -101,9 +101,11 @@ export const Post = (data: any = {}) => {
         <Text numberOfLines={1} style={styles.carName}>{details.carData.make} {details.carData.model}</Text>
         <Text style={styles.date}>{timeAgo}</Text>
       </View>
-      <Text style={styles.description}>{description}</Text>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        {renderLikes(liked, onLikePress, onUnlikePress, likeCount)}
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.description}>{description}</Text>
+        <View style={styles.likesContainer}>
+          {renderLikes(liked, onLikePress, onUnlikePress, likeCount)}
+        </View>
       </View>
     </View>
   );
