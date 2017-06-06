@@ -54,7 +54,7 @@ export class Invite extends Component<any, any> {
         return (
            <LoadingView style={{flex:1}}
             isLoading={this.props.loadingStatus.invitesLoading}>
-              <StatusView invitePending={invitePending} onContinuePress={() => onContinuePress(rootNav)}/>
+              <StatusView invitePending={invitePending} getInviteStatus={() => dispatch(getInviteStatus(invites[0].inviteReference))} onContinuePress={() => onContinuePress(rootNav)}/>
           </LoadingView>
         )
 
