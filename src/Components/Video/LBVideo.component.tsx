@@ -94,13 +94,12 @@ export class LBVideo extends Component<LBVideoProps, any> {
       <VideoContainer activeOpacity={0.9}
         onPress={this.onVideoPress}
         onLayout={this.onLayout}
-        style={[this.props.style, { height: this.state.height, width: this.state.width }]}
       >
         <Video {...this.getVideoProps() }
           source={this.props.source}
           paused={this.state.paused}
           onLoad={this.onVideoLoad}
-          style={{ height: this.state.height, width: this.state.width }} />
+          style={[this.props.style, { height: this.state.height, width: this.state.width }]} />
 
         {this.renderPlayButton()}
       </VideoContainer>

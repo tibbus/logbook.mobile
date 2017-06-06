@@ -5,9 +5,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { Timeline } from '../../Components/timeline/timeline.component';
 
-// @TODO : remove this when they fix typings in the lib/ PR opended
-const KeyboardAwareScrollViewTyped: any = KeyboardAwareScrollView;
-
 const stateToProps = ({ user }) => ({ user });
 @connect(stateToProps)
 export class Feed extends Component<any, any> {
@@ -17,9 +14,9 @@ export class Feed extends Component<any, any> {
 
   render() {
     return (
-      <KeyboardAwareScrollViewTyped style={{ flex: 1 }}>
+      <KeyboardAwareScrollView style={{ flex: 1 }}>
         <Timeline {...this.props} type="user" />
-      </KeyboardAwareScrollViewTyped>
+      </KeyboardAwareScrollView>
     );
   }
 }

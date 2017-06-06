@@ -19,7 +19,13 @@ export const styles = StyleSheet.create({
   video: {
     maxHeight: 300
   },
+  descriptionContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
   description: {
+    flexGrow: 1,
+    flexShrink: 1,
     fontSize: 20,
     padding: 20,
     paddingTop: 10
@@ -39,9 +45,13 @@ export const styles = StyleSheet.create({
   likesRow: {
     alignItems: 'flex-end'
   },
+  likesContainer: {
+    flexGrow: 1,
+    alignItems: 'flex-end'
+  },
   likesWrapper: {
-    marginRight: 35,
-    marginBottom: 15,
+    marginRight: 20,
+    marginVertical: 12,
     flexDirection: 'row'
   },
   likesCount: {

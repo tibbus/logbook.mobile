@@ -269,6 +269,16 @@ const ScrollableTabView = React.createClass({
     return React.Children.map(children, (child) => child);
   },
 
+  renderAboveBarComponent() {
+    if (!this.props.aboveBarComponent) {
+      return null;
+    }
+
+    return React.cloneElement(this.props.aboveBarComponent, {
+      onLayout: event => this.aboveBarComponentHeight = event.nativeEvent.layout.height
+    });
+  },
+
   render() {
     let overlayTabs = (this.props.tabBarPosition === 'overlayTop' || this.props.tabBarPosition === 'overlayBottom');
     let tabBarProps = {
@@ -302,16 +312,15 @@ const ScrollableTabView = React.createClass({
         [this.props.tabBarPosition === 'overlayTop' ? 'top' : 'bottom']: 0,
       };
     }
-    const AboveBarComponent = this.props.aboveBarComponent || (() => null);
 
     return <KeyboardAwareScrollView style={[styles.container, this.props.style,]}
       onLayout={this._handleLayout}
       ref={contentView => this.contentView = contentView}
       scrollEnabled={!!this.props.aboveBarComponent}
-      onMomentumScrollEnd={event => { this.contentScrollDistance = event.nativeEvent.contentOffset.y }}
+      onMomentumScrollEnd={event => this.contentScrollDistance = event.nativeEvent.contentOffset.y}
       stickyHeaderIndices={this.props.aboveBarComponent ? [1] : []}>
 
-      <AboveBarComponent onLayout={event => this.aboveBarComponentHeight = event.nativeEvent.layout.height} />
+      {this.renderAboveBarComponent()}
       {this.props.tabBarPosition === 'top' && this.renderTabBar(tabBarProps)}
       {this.renderScrollableContent()}
       {(this.props.tabBarPosition === 'bottom' || overlayTabs) && this.renderTabBar(tabBarProps)}

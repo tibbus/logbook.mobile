@@ -144,7 +144,7 @@ const getCarProfileComponent = (props) => {
     timeline: timeline,
   };
 
-  const userInfoComponent = () => (
+  const userInfoComponent = (
     <View style={styles.infoWrapper}>
       <View style={styles.subWrapper}>
         <View style={styles.imageWrapper}>
@@ -194,7 +194,7 @@ const getCarProfileComponent = (props) => {
           <Overview tabLabel='OVERVIEW' {...overViewProps} timelineProps={timelineProps} />
           <CarTimeline tabLabel='TIMELINE' timelineProps={timelineProps} />
           <ShowCase tabLabel='SHOWCASE' carImages={browsingCar.carImages.content} carVideos={browsingCar.carVideos.content} />
-          <TechSpec tabLabel='SPECS' car={car} />
+          <TechSpec tabLabel='SPECS' car={browsingCar} />
         </ScrollableTabView>
       </View>
     </BackScene>
