@@ -3,7 +3,8 @@ import {
   Image,
   View,
   TouchableHighlight,
-  Text
+  Text,
+  AppState
 } from 'react-native';
 import { ActionButton } from '../../../Components/Button';
 import { styles } from './statusView.styles'
@@ -43,6 +44,17 @@ import palette from '../../../Styles/Themes/palette';
 export class StatusView extends Component<any, any> {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+      AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  handleAppStateChange= (appState) => {
+    if(appState === 'active') {
+        const { getInviteStatus } = this.props;
+        getInviteStatus();
+    }
   }
 
   render() {
