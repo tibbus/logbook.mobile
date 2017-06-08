@@ -28,7 +28,7 @@ export class CarGarageIcon extends Component<any, any> {
                         <Text lineBreakMode="tail" numberOfLines={1} style={captionStyles.captionText}>
                             {capitalize(car.carInfo.car.make)} {capitalize(car.carInfo.car.model)}
                         </Text>
-                        <Text style={captionStyles.captionText}>12 Followers</Text>
+                        <Text style={captionStyles.captionText}>{car.carStats ? car.carStats.followersCount.count : 0} Followers</Text>
                     </View>
                 </TouchableHighlight>
             );

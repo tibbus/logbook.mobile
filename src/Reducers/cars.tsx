@@ -35,16 +35,31 @@ const updateUserCarVerifiedStatus = (state, verifyContent) => {
 
 const updateCarFollowersCount = (state, followersContent) => {
   const car = state.browsingCars.find(browsingCar => browsingCar.carInfo.id === followersContent.carInfoId);
+  const userCar = state.userCars.find(userCar => userCar.carInfo.id === followersContent.carInfoId);
 
-  if (followersContent.count) {
-    car.carStats.followersCount.count = followersContent.count;
+  if(car) {
+    if (followersContent.count) {
+      car.carStats.followersCount.count = followersContent.count;
+    }
+
+    if (followersContent.loadPending !== undefined) {
+      car.carStats.followersCount.loadPending = followersContent.loadPending;
+    }
   }
 
-  if (followersContent.loadPending !== undefined) {
-    car.carStats.followersCount.loadPending = followersContent.loadPending;
+  if(userCar) {
+    if (followersContent.count) {
+      userCar.carStats = { followersCount: { count: followersContent.count, loadPending: false}};
+    }
   }
 
-  return { ...state }
+  if(car || userCar) {
+      return { ...state }
+  }
+  else {
+    return state;
+  }
+
 }
 
 const setBrowsingCar = (state, carInfo, ownerInfo) => {
@@ -206,9 +221,6 @@ export const cars = (state = initialState, action) => {
 
     case FOLLOW_CAR:
       return updateCarFollowFlag(state, followContent);
-
-    case SET_FOLLOWER_COUNT:
-      return updateCarFollowersCount(state, followersContent);
 
     case SET_FOLLOWER_COUNT:
       return updateCarFollowersCount(state, followersContent);

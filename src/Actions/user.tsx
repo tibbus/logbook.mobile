@@ -2,6 +2,7 @@ import { getUser as getAuthUserInfo } from '../API/fetch';
 import { confirmUserCar, getUserCars, verifyUserCar as verifyUserCarApi } from '../API/UserCar';
 import { getFollowCount, getGetStreamToken, getUsers, updateCoverImage } from '../API/user';
 import { getUserFollowing } from '../API/GetStream';
+import { getCarFollowersCount } from './cars';
 import { objKeysToDecap } from '../Utils';
 import { dispatch } from '../store';
 import {
@@ -48,6 +49,9 @@ export const updateUserCars = (userId = null, details = true) => {
     getUserCars({}, { userId, details })
       .then((userCars: any) => {
         dispatch({ type: SET_USER_CARS, userCars });
+        userCars.forEach(userCar => {
+          dispatch(getCarFollowersCount(userCar.carInfo.id));
+        });
         dispatch({ type: SET_USER_CAR_COUNT, count: userCars.length });
         dispatch({ type: UNSET_LOADING_STATUS, resourceName: 'updateUserCar' });
       })
