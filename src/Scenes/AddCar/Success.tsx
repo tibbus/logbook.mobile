@@ -31,7 +31,7 @@ export class Success extends Component<any, any> {
           </View>
         </View>
         <View style={{ marginBottom: 20 }}>
-          {NextButton(() => console.log("complete"), "Add your car photo")}
+          {NextButton(() => navigator.push({ id: 'completeProfile' }), "Add your car photo")}
           {NextButton(() => rootNav.push({ id: 'profile' }), "View Profile")}
         </View>
       </GradientView>
