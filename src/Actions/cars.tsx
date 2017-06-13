@@ -199,15 +199,21 @@ export const getCarFollowersCount = (id) => {
   }
 };
 
-export const updateProfileImage = (carInfoId, profileImageRequest) => {
+export const updateProfileImage = (carInfoId, profileImageRequest, onSuccess = null, onFailure = null) => {
 
   return () => {
     updateProfileImageApi(fileRequest('image', profileImageRequest), { id: carInfoId })
       .then((response: any) => {
         dispatch({ type: SET_CAR_PROFILE_IMAGE, carInfoId, image: response.image })
+        if(onSuccess) {
+            onSuccess();
+        }
       })
       .catch(error => {
         console.log(error)
+        if(onFailure) {
+            onFailure();
+        }
       })
   }
 }

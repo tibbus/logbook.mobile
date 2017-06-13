@@ -5,10 +5,12 @@ import { Navigator } from 'react-native-deprecated-custom-components';
 
 import { RegNoForm } from './RegNoForm';
 import { ConfirmationDetails } from './ConfirmationDetails';
+import { CarProfileImage } from './CarProfileImage';
 import { Success } from './Success';
 import { getCar } from '../../Actions/cars';
 import { addUserCar } from '../../Actions/user';
 import { LoadingView } from '../../Components/LoadingView';
+import { updateProfileImage } from '../../Actions/cars';
 
 const stateToProps = ({ user, cars, loadingStatus }) => ({ user, cars, loadingStatus });
 
@@ -22,7 +24,8 @@ export class AddCar extends Component<any, any> {
   renderScene(route, navigator) {
     const { id } = route;
     const { dispatch, cars } = this.props;
-    const props = { navigator, userId: this.props.user.id, carToConfirm: this.props.cars.carToConfirm, loadingStatus: this.props.loadingStatus, rootNav: this.props.navigator };
+    const rootNav = this.props.navigator;
+    const props = { navigator, userId: this.props.user.id, carToConfirm: this.props.cars.carToConfirm, loadingStatus: this.props.loadingStatus, rootNav: rootNav };
     switch (id) {
       case 'addRegNo':
         return (
@@ -53,6 +56,15 @@ export class AddCar extends Component<any, any> {
 
       case 'success':
         return (<Success {...props} />)
+      
+      case 'completeProfile':
+        return (<CarProfileImage carInfoId={this.props.cars.carToConfirm.id} 
+          onProfileImageUpdate={
+            (carInfoId, profileImageRequest) => dispatch(updateProfileImage(
+              carInfoId, 
+              profileImageRequest, 
+              () => rootNav.push({ id: 'profile'}),
+              () => Alert.alert("Failed!", "Failed to upload the car profile picture!")))}/>)
 
       default:
         return (
@@ -61,7 +73,7 @@ export class AddCar extends Component<any, any> {
             <RegNoForm carRegSubmit={regNo => {
               dispatch(getCar(
                 regNo,
-                () => navigator.push({ id: 'confirmCar' }),
+                () => navigator.push({ id: 'addRegNo' }),
                 () => Alert.alert("Failed!", "No car is registered to the entered registration number!")));
             }} {...props} />
           </LoadingView>
